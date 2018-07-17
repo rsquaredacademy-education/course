@@ -1,3 +1,13 @@
-baseURL = "http://example.org/"
+theme = "hugo-theme-learn"
+baseURL = "/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Data Science with R"
+relativeurls = true
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[params]
+  # Change default color scheme with a variant one. Can be "red", "blue", "green".
+themeVariant = "blue"
