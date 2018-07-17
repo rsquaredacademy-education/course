@@ -3,13 +3,60 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/r-and-rstudio/</loc>
+  </url>
+  
+  <url>
+    <loc>/git-and-github/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-wrangling/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/</loc>
+  </url>
+  
+  <url>
+    <loc>/databases-and-sql/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/introduction/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-wrangling/introduction/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/databases-and-sql/introduction/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/git-and-github/introduction/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/r-and-rstudio/introduction/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/welcome/introduction/welcome/</loc>
   </url>
   
   <url>
