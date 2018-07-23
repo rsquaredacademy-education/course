@@ -11,7 +11,7 @@ This theme is a partial porting of the [Learn theme](http://learn.getgrav.org/) 
 {{% notice tip %}}Learn theme works with a _page tree structure_ to organize content : All contents are pages, which belong to other pages. 
 {{% /notice %}}
 
-## Main features
+## Curriculum
 
 * Introduction to R & RStudio
 * Introduction to Git & GitHub

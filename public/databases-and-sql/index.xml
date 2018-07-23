@@ -21,5 +21,38 @@ When you click the Knit button a document will be generated that includes both c
 </description>
     </item>
     
+    <item>
+      <title>DBI</title>
+      <link>/databases-and-sql/installation/welcome/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/databases-and-sql/installation/welcome/</guid>
+      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+</description>
+    </item>
+    
+    <item>
+      <title>Data Extraction with dbplyr</title>
+      <link>/databases-and-sql/quick-tour/welcome/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/databases-and-sql/quick-tour/welcome/</guid>
+      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+</description>
+    </item>
+    
+    <item>
+      <title>SQL for Data Science</title>
+      <link>/databases-and-sql/r-package-system/welcome/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/databases-and-sql/r-package-system/welcome/</guid>
+      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+</description>
+    </item>
+    
   </channel>
 </rss>

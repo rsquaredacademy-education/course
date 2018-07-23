@@ -9,4 +9,12 @@ chapter: true
 
 # R & RStudio
 
-Discover what this Hugo theme is all about and the core-concepts behind it.
+In this module, you will 
+
+- Install R
+- Install RStudio
+- Quick tour of RStudio
+- Explore R package system
+- Learn to get help in R
+- Explore variables & data types
+

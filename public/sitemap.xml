@@ -7,35 +7,6 @@
   </url>
   
   <url>
-    <loc>/r-and-rstudio/</loc>
-  </url>
-  
-  <url>
-    <loc>/git-and-github/</loc>
-  </url>
-  
-  <url>
-    <loc>/data-wrangling/</loc>
-  </url>
-  
-  <url>
-    <loc>/data-visualization/</loc>
-  </url>
-  
-  <url>
-    <loc>/databases-and-sql/</loc>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-  </url>
-  
-  <url>
     <loc>/data-visualization/introduction/welcome/</loc>
   </url>
   
@@ -53,6 +24,151 @@
   
   <url>
     <loc>/r-and-rstudio/introduction/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/databases-and-sql/installation/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-wrangling/installation/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/git-and-github/installation/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/r-and-rstudio/installation/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/installation/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/r-and-rstudio/</loc>
+  </url>
+  
+  <url>
+    <loc>/databases-and-sql/quick-tour/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-wrangling/quick-tour/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/quick-tour/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/git-and-github/quick-tour/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/git-and-github/</loc>
+  </url>
+  
+  <url>
+    <loc>/r-and-rstudio/quick-tour/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/r-package-system/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-wrangling/</loc>
+  </url>
+  
+  <url>
+    <loc>/git-and-github/r-package-system/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-wrangling/r-package-system/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/r-and-rstudio/r-package-system/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/databases-and-sql/r-package-system/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/axis-and-labels/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/git-and-github/getting-help/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-wrangling/getting-help/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/r-and-rstudio/getting-help/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-wrangling/variables-and-data-types/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/databases-and-sql/</loc>
+  </url>
+  
+  <url>
+    <loc>/git-and-github/variables-and-data-types/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/text-annotations/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/r-and-rstudio/variables-and-data-types/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/git-and-github/commands/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/guides/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-wrangling/commands/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/legends/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/facets/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/data-visualization/themes/welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
   </url>
   
   <url>
