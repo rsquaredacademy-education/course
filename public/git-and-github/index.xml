@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git &amp; GitHub on Data Science with R</title>
-    <link>/git-and-github/</link>
+    <link>https://learn.rsquaredacademy.com/git-and-github/</link>
     <description>Recent content in Git &amp; GitHub on Data Science with R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     
-	<atom:link href="/git-and-github/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://learn.rsquaredacademy.com/git-and-github/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Introduction</title>
-      <link>/git-and-github/introduction/welcome/</link>
+      <link>https://learn.rsquaredacademy.com/git-and-github/introduction/welcome/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/git-and-github/introduction/welcome/</guid>
+      <guid>https://learn.rsquaredacademy.com/git-and-github/introduction/welcome/</guid>
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 </description>
@@ -23,10 +23,10 @@ When you click the Knit button a document will be generated that includes both c
     
     <item>
       <title>Installation</title>
-      <link>/git-and-github/installation/welcome/</link>
+      <link>https://learn.rsquaredacademy.com/git-and-github/installation/welcome/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/git-and-github/installation/welcome/</guid>
+      <guid>https://learn.rsquaredacademy.com/git-and-github/installation/welcome/</guid>
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 </description>
@@ -34,10 +34,10 @@ When you click the Knit button a document will be generated that includes both c
     
     <item>
       <title>Getting Your Feet Wet</title>
-      <link>/git-and-github/quick-tour/welcome/</link>
+      <link>https://learn.rsquaredacademy.com/git-and-github/quick-tour/welcome/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/git-and-github/quick-tour/welcome/</guid>
+      <guid>https://learn.rsquaredacademy.com/git-and-github/quick-tour/welcome/</guid>
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 </description>
@@ -45,10 +45,10 @@ When you click the Knit button a document will be generated that includes both c
     
     <item>
       <title>GitHub Quick Tour</title>
-      <link>/git-and-github/r-package-system/welcome/</link>
+      <link>https://learn.rsquaredacademy.com/git-and-github/r-package-system/welcome/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/git-and-github/r-package-system/welcome/</guid>
+      <guid>https://learn.rsquaredacademy.com/git-and-github/r-package-system/welcome/</guid>
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 </description>
@@ -56,10 +56,10 @@ When you click the Knit button a document will be generated that includes both c
     
     <item>
       <title>Configure RStudio</title>
-      <link>/git-and-github/getting-help/welcome/</link>
+      <link>https://learn.rsquaredacademy.com/git-and-github/getting-help/welcome/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/git-and-github/getting-help/welcome/</guid>
+      <guid>https://learn.rsquaredacademy.com/git-and-github/getting-help/welcome/</guid>
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 </description>
@@ -67,10 +67,10 @@ When you click the Knit button a document will be generated that includes both c
     
     <item>
       <title>Repositories</title>
-      <link>/git-and-github/variables-and-data-types/welcome/</link>
+      <link>https://learn.rsquaredacademy.com/git-and-github/variables-and-data-types/welcome/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/git-and-github/variables-and-data-types/welcome/</guid>
+      <guid>https://learn.rsquaredacademy.com/git-and-github/variables-and-data-types/welcome/</guid>
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 </description>
@@ -78,10 +78,10 @@ When you click the Knit button a document will be generated that includes both c
     
     <item>
       <title>Command Line</title>
-      <link>/git-and-github/commands/welcome/</link>
+      <link>https://learn.rsquaredacademy.com/git-and-github/commands/welcome/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/git-and-github/commands/welcome/</guid>
+      <guid>https://learn.rsquaredacademy.com/git-and-github/commands/welcome/</guid>
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 </description>
