@@ -4,12 +4,10 @@ title: "Data Science with R"
 
 # Data Science with R
 
-[Hugo-theme-learn](http://github.com/matcornic/hugo-theme-learn) is a theme for [Hugo](https://gohugo.io/), a fast and modern static website engine written in Go. Where Hugo is often used for blogs, this multilingual-ready theme is **fully designed for documentation**.
+Welcome to the free and open source data science course offered by [Rsquared Academy](https://www.rsquaredacademy). Here you can
+explore our flagship course, Data Science with R, absolutely free. The course is developed on 
+[GitHub](https://www.github.com/rsquaredacademy.com/course), rendered using [Hugo-theme-learn](http://github.com/matcornic/hugo-theme-learn) and [blogdown](https://bookdown.org/yihui/blogdown/) and deployed on [Netlify](https://www.netlify.com/). 
 
-This theme is a partial porting of the [Learn theme](http://learn.getgrav.org/) of [Grav](https://getgrav.org/), a modern flat-file CMS written in PHP.
-
-{{% notice tip %}}Learn theme works with a _page tree structure_ to organize content : All contents are pages, which belong to other pages. 
-{{% /notice %}}
 
 ## Curriculum
 
@@ -20,19 +18,25 @@ This theme is a partial porting of the [Learn theme](http://learn.getgrav.org/) 
 * Data Visualization with R
 * Introduction to RMarkdown
 * Databases & SQL
+* Descriptive & Inferential Statistics
+* Linear Regression
+* Logistic Regression
+* Decision Tree
+* Cluster Analysis
+* Market Basket & RFM Analysis
 
-![Screenshot](https://github.com/matcornic/hugo-theme-learn/raw/master/images/screenshot.png?width=40pc&classes=shadow)
+## Course Logistics
 
-## Contribute to this documentation
-Feel free to update this content, just click the **Edit this page** link displayed on top right of each page, and pullrequest it
+The course includes:
 
-{{% notice info %}}
-Your modification will be deployed automatically when merged.
-{{% /notice %}}
+- interactive tutorials built using [learnr](https://rstudio.github.io/learnr/index.html)
+- interactive web apps built using [shiny](https://shiny.rstudio.com/)
+- slides built using [revealjs](https://github.com/rstudio/revealjs)
+- video demos
+- quiz 
+- assignments
+- code & data sets
 
-## Documentation website
-This current documentation has been statically generated with Hugo with a simple command : `hugo -t hugo-theme-learn` -- source code is [available here at GitHub](https://github.com/matcornic/hugo-theme-learn)
+## Feedback
 
-{{% notice note %}}
-Automatically published and hosted thanks to [Netlify](https://www.netlify.com/). Read more about [Automated HUGO deployments with Netlify](https://www.netlify.com/blog/2015/07/30/hosting-hugo-on-netlifyinsanely-fast-deploys/)
-{{% /notice %}}
+Please send your feedback or suggestions to feedback@rsquaredacademy.com or file an issue in the GitHub [repo](https://www.github.com/rsquaredacademy.com/course).
