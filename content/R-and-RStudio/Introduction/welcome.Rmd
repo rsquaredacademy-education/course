@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 weight: 5
-output: md_document
+output: html_document
 chapter: true
 pre: "<b>1. </b>"
 ---
