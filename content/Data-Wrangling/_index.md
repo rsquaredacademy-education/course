@@ -1,7 +1,7 @@
 ---
 title: Data Wrangling
 weight: 20
-pre: "<b>4. </b>"
+pre: "<b>3. </b>"
 chapter: true
 ---
 

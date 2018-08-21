@@ -1,7 +1,7 @@
 ---
 title: Git & GitHub
 weight: 15
-pre: "<b>3. </b>"
+pre: "<b>2. </b>"
 chapter: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Data Visualization
 weight: 25
-pre: "<b>5. </b>"
+pre: "<b>4. </b>"
 chapter: true
 ---
 

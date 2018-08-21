@@ -1,7 +1,7 @@
 ---
 title: Databases & SQL
 weight: 30
-pre: "<b>6. </b>"
+pre: "<b>5. </b>"
 chapter: true
 ---
 

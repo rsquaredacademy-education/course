@@ -1,7 +1,7 @@
 ---
 title: R & RStudio
 weight: 10
-pre: "<b>2. </b>"
+pre: "<b>1. </b>"
 chapter: true
 ---
 
