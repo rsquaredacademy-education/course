@@ -1,7 +1,6 @@
 baseURL = "https://learn.rsquaredacademy.com/"
 languageCode = "en-US"
 defaultContentLanguage = "en"
-googleAnalytics = "UA-57270671-19"
 title = "Data Science with R"
 theme = "hugo-theme-learn"
 metaDataFormat = "yaml"
@@ -13,6 +12,7 @@ home = [ "HTML", "RSS", "JSON"]
 
 [params]
 # Change default color scheme with a variant one. Can be "red", "blue", "green".
+googleAnalytics = "UA-57270671-19"
 editURL = "https://github.com/rsquaredacademy/course/"
 description = "Data Science with R"
 author = "Aravind Hebbali"

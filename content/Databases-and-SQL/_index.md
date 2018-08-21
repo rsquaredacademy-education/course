@@ -5,8 +5,12 @@ pre: "<b>6. </b>"
 chapter: true
 ---
 
-### Chapter 6
+### Chapter 5
 
-# Basics
+# Databases & SQL
 
-Discover what this Hugo theme is all about and the core-concepts behind it.
+In this module, you will 
+
+- connect to database form R
+- master sql for data science
+- query data using dplyr

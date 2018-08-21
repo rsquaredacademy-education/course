@@ -5,8 +5,19 @@ pre: "<b>4. </b>"
 chapter: true
 ---
 
-### Chapter 4
+### Chapter 3
 
-# Basics
+# Data Wrangling
 
-Discover what this Hugo theme is all about and the core-concepts behind it.
+In this module, you will
+
+- learn to 
+    - import data into R
+    - grammar of data manipulation
+    - manipulate strings 
+    - handle date/time in R
+    - analyse categorical data
+- explore tibbles; an alternative to data.frames
+- use pipes to write readable code
+
+ 

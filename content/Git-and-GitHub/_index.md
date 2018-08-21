@@ -5,8 +5,21 @@ pre: "<b>3. </b>"
 chapter: true
 ---
 
-### Chapter 3
+### Chapter 2
 
-# Basics
+# Git & GitHub
 
-Discover what this Hugo theme is all about and the core-concepts behind it.
+In this module, you will 
+
+- learn
+    - what is version control?
+    - what is Git?
+    - what is GitHub?
+    - the basics of command line/terminal/bash
+    - basic git commands
+- create an account on GitHub
+- install & configure Git
+- configure RStudio
+- connect to GitHub from RStudio
+- explore GitHub features
+
