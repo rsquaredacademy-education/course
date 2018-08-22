@@ -11,4 +11,4 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-Check out the plot [here](/R-and-RStudio/Introduction/welcome.md)
+Check out the plot [here](/R-and-RStudio/Introduction/welcome.html)
