@@ -1,80 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>R &amp; RStudio on Data Science with R</title>
-    <link>https://learn.rsquaredacademy.com/r-and-rstudio/</link>
-    <description>Recent content in R &amp; RStudio on Data Science with R</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    
-	<atom:link href="https://learn.rsquaredacademy.com/r-and-rstudio/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Introduction</title>
-      <link>https://learn.rsquaredacademy.com/r-and-rstudio/introduction/welcome/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://learn.rsquaredacademy.com/r-and-rstudio/introduction/welcome/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-</description>
-    </item>
-    
-    <item>
-      <title>Installation</title>
-      <link>https://learn.rsquaredacademy.com/r-and-rstudio/installation/welcome/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://learn.rsquaredacademy.com/r-and-rstudio/installation/welcome/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-</description>
-    </item>
-    
-    <item>
-      <title>Quick Tour</title>
-      <link>https://learn.rsquaredacademy.com/r-and-rstudio/quick-tour/welcome/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://learn.rsquaredacademy.com/r-and-rstudio/quick-tour/welcome/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-</description>
-    </item>
-    
-    <item>
-      <title>R Packages</title>
-      <link>https://learn.rsquaredacademy.com/r-and-rstudio/r-package-system/welcome/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://learn.rsquaredacademy.com/r-and-rstudio/r-package-system/welcome/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-</description>
-    </item>
-    
-    <item>
-      <title>Getting Help</title>
-      <link>https://learn.rsquaredacademy.com/r-and-rstudio/getting-help/welcome/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://learn.rsquaredacademy.com/r-and-rstudio/getting-help/welcome/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-</description>
-    </item>
-    
-    <item>
-      <title>Variables &amp; Data Types</title>
-      <link>https://learn.rsquaredacademy.com/r-and-rstudio/variables-and-data-types/welcome/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://learn.rsquaredacademy.com/r-and-rstudio/variables-and-data-types/welcome/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-</description>
-    </item>
-    
-  </channel>
-</rss>
