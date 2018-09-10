@@ -2,7 +2,7 @@
 title: "Categorical Data Analysis"
 weight: 35
 chapter: true
-pre: "<b>. </b>"
+pre: "<b>7. </b>"
 ---
 
 ## Categorical Data Analysis
