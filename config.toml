@@ -13,7 +13,7 @@ home = [ "HTML", "RSS", "JSON"]
 # Change default color scheme with a variant one. Can be "red", "blue", "green".
 googleAnalytics = "UA-57270671-19"
 editURL = "https://github.com/rsquaredacademy/course/"
-description = "Data Science with R"
+description = "Open source data science course"
 author = "Aravind Hebbali"
 showVisitedLinks = true
 themeVariant = "blue"
