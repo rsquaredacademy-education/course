@@ -13,10 +13,17 @@ home = [ "HTML", "RSS", "JSON"]
 # Change default color scheme with a variant one. Can be "red", "blue", "green".
 googleAnalytics = "UA-57270671-19"
 editURL = "https://github.com/rsquaredacademy/course/"
-description = "Open source data science course"
+description = "Free & open source interactive online data science course. Includes data wrangling, data visualization & SQL basics."
 author = "Aravind Hebbali"
 showVisitedLinks = true
 themeVariant = "blue"
+
+[params.logo]
+    url = "hex_trainr.png"
+    width = 50
+    height = 50
+    alt = "Rsquared Academy"
+
 
 highlightjsVersion = "9.11.0"
 highlightjsCDN = "//cdn.bootcss.com"
