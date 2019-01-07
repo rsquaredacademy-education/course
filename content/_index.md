@@ -12,12 +12,12 @@ explore our flagship course, Data Science with R, absolutely free. The course is
 ## Curriculum
 
 * Introduction to R & RStudio
-* Introduction to Git & GitHub
 * Importing Data into R
 * Data Wrangling with R
 * Data Visualization with R
 * Introduction to RMarkdown
 * Databases & SQL
+* Introduction to Git & GitHub
 * Descriptive & Inferential Statistics
 * Linear Regression
 * Logistic Regression
