@@ -43,11 +43,17 @@ weight = 11
 
 [[Languages.en.menu.shortcuts]]
 name = "<i class='fa fa-fw fa-cube'></i> Shiny Apps"
-identifier = "hugodoc"
+identifier = "apps"
 url = "https://apps.rsquaredacademy.com/"
 weight = 20
 
 [[Languages.en.menu.shortcuts]]
+name = "<i class='fa fa-fw fa-book'></i> e-books"
+identifier = "ebooks"
+url = "https://ebooks.rsquaredacademy.com/"
+weight = 30
+
+[[Languages.en.menu.shortcuts]]
 name = "<i class='fa fa-fw fa-rss'></i> Blog"
 url = "https://blog.rsquaredacademy.com/"
-weight = 30
+weight = 40
