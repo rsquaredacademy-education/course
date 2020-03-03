@@ -27,7 +27,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     twitterAuthor = "@rsquaredacademy"
 
     [params.logo]
-    url = "logo.jpg"
+    url = "logo.jpeg"
     width = 50
     height = 50
     alt = "Rsquared Academy"
