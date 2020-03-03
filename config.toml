@@ -1,6 +1,6 @@
-baseurl = "https://blog.aravindhebbali.com/"
+baseurl = "https://learn.rsquaredacademy.com/"
 languageCode = "en-us"
-title = "Aravind's Blog | R | Economics | Finance"
+title = "Rsquared Academy - Learn Data Science"
 theme = "hugo-lithium-theme"
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
@@ -13,24 +13,24 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "/"
     weight = 1
 [[menu.main]]
-    name = "Projects"
-    url = "https://github.com/aravindhebbali"   
+    name = "Explore Online Courses"
+    url = "https://rsquared-academy.thinkific.com"   
     weight = 2
 [[menu.main]]
-    name = "About"
-    url = "https://www.aravindhebbali.com/"
+    name = "Free Tutorials"
+    url = "https://tutorials.rsquaredacademy.com/"
     weight = 3
 
 [params]
-    description = "Personal blog of Aravind Hebbali, built through Hugo and blogdown."
-    keywords = "aravind"
-    twitterAuthor = "@hebbaliaravind"
+    description = "Rsquared Academy - Learn Data Science"
+    keywords = "data, science, r, python, data visualization, data wrangling, machine learning, data science, statistics"
+    twitterAuthor = "@rsquaredacademy"
 
     [params.logo]
     url = "logo.jpg"
     width = 50
     height = 50
-    alt = "Aravind Hebbali"
+    alt = "Rsquared Academy"
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.11.0"
