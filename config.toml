@@ -2,6 +2,7 @@ baseurl = "https://learn.rsquaredacademy.com/"
 languageCode = "en-us"
 title = "Rsquared Academy - Learn Data Science"
 theme = "hugo-lithium-theme"
+googleAnalytics = "UA-57270671-32"
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
@@ -25,12 +26,16 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     description = "Rsquared Academy - Learn Data Science"
     keywords = "data, science, r, python, data visualization, data wrangling, machine learning, data science, statistics"
     twitterAuthor = "@rsquaredacademy"
+    favicon = "favicon.ico"
 
     [params.logo]
     url = "logo.jpeg"
     width = 50
     height = 50
     alt = "Rsquared Academy"
+
+    [params.icon]
+    url = "favicon.ico"
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.11.0"
