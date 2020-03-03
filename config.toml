@@ -1,59 +1,42 @@
-baseURL = "https://learn.rsquaredacademy.com/"
-languageCode = "en-US"
-defaultContentLanguage = "en"
-googleAnalytics = "UA-57270671-19"
-title = "Data Science with R"
-theme = "hugo-theme-learn"
-metaDataFormat = "yaml"
+baseurl = "https://blog.aravindhebbali.com/"
+languageCode = "en-us"
+title = "Aravind's Blog | R | Economics | Finance"
+theme = "hugo-lithium-theme"
+disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-[outputs]
-home = [ "HTML", "RSS", "JSON"]
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+[[menu.main]]
+    name = "Projects"
+    url = "https://github.com/aravindhebbali"   
+    weight = 2
+[[menu.main]]
+    name = "About"
+    url = "https://www.aravindhebbali.com/"
+    weight = 3
 
 [params]
-# Change default color scheme with a variant one. Can be "red", "blue", "green".
-editURL = "https://github.com/rsquaredacademy/course/"
-description = "Free & open source interactive online data science course. Includes data wrangling, data visualization & SQL basics."
-author = "Aravind Hebbali"
-showVisitedLinks = true
-themeVariant = "blue"
+    description = "Personal blog of Aravind Hebbali, built through Hugo and blogdown."
+    keywords = "aravind"
+    twitterAuthor = "@hebbaliaravind"
 
-[params.logo]
-    url = "hex_trainr.png"
+    [params.logo]
+    url = "logo.jpg"
     width = 50
     height = 50
-    alt = "Rsquared Academy"
+    alt = "Aravind Hebbali"
 
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.11.0"
+    highlightjsCDN = "//cdn.bootcss.com"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
 
-highlightjsVersion = "9.11.0"
-highlightjsCDN = "//cdn.bootcss.com"
-highlightjsLang = ["r", "yaml"]
-highlightjsTheme = "github"
-
-[[Languages.en.menu.shortcuts]] 
-name = "<i class='fa fa-fw fa-github'></i> Github"
-identifier = "ds"
-url = "https://github.com/rsquaredacademy/course/"
-weight = 10
-
-[[Languages.en.menu.shortcuts]]
-name = "<i class='fa fa-fw fa-code'></i> R Packages"
-url = "https://pkgs.rsquaredacademy.com"
-weight = 11
-
-[[Languages.en.menu.shortcuts]]
-name = "<i class='fa fa-fw fa-cube'></i> Shiny Apps"
-identifier = "apps"
-url = "https://apps.rsquaredacademy.com/"
-weight = 20
-
-[[Languages.en.menu.shortcuts]]
-name = "<i class='fa fa-fw fa-book'></i> e-books"
-identifier = "ebooks"
-url = "https://ebooks.rsquaredacademy.com/"
-weight = 30
-
-[[Languages.en.menu.shortcuts]]
-name = "<i class='fa fa-fw fa-rss'></i> Blog"
-url = "https://blog.rsquaredacademy.com/"
-weight = 40
+    MathJaxCDN = "//cdn.bootcss.com"
+    MathJaxVersion = "2.7.1"
