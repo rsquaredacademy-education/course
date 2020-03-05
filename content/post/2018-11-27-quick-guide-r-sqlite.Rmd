@@ -24,13 +24,7 @@ library(RSQLite)
 
 ### Introduction
 
-This is the first post in the series **R & Databases**. You can find the links to the other two posts of this series below:
-
-- [Data Wrangling with dbplyr](https://rsquaredacademy.github.io/blog/post/data-wrangling-with-dbplyr)
-- [SQL for Data Science - Part 1](https://rsquaredacademy.github.io/blog/post/sql-for-data-science-part-1)
-- [SQL for Data Science - Part 2](https://rsquaredacademy.github.io/blog/post/sql-for-data-science-part-2)
-
-In this post, we will learn to:
+In this tutorial, we will learn to:
 
 - connect to a SQLite database from R
 - display database information
@@ -49,16 +43,16 @@ In this post, we will learn to:
 
 ### Libraries, Code & Data
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 - [DBI](http://rstats-db.github.io/DBI/)
 - [RSQLite](https://rstats-db.github.io/RSQLite/)
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/7d99eb52a0e44cd1f87c8689cf1a307d).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/7d99eb52a0e44cd1f87c8689cf1a307d).
 
 #### Connection
 
-The first step is to connect to a database. In this post, we will connect to an in memory
+The first step is to connect to a database. In this tutorial, we will connect to an in memory
 SQLite databse using `dbConnect()`.
 
 ```{r lite1}

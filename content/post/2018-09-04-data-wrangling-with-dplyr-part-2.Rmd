@@ -13,8 +13,8 @@ tags:
 
 ## Introduction
 
-In the previous post we learnt about dplyr verbs and used them to compute 
-average order value for an online retail company data. In this post, we will 
+In the previous tutorial we learnt about dplyr verbs and used them to compute 
+average order value for an online retail company data. In this tutorial, we will 
 learn to combine tables using different `*_join` functions provided in dplyr. 
 
 ## Libraries, Code & Data

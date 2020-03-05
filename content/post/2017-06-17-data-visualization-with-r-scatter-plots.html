@@ -16,21 +16,21 @@ tags:
 
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
-<p>This is the third post in the series <strong>Data Visualization With R</strong>. In the previous post, we learned how to add title, subtitle and axis labels. We also learned how to modify the range of the axis. In this post, we will learn how to create scatter plots.
+<p>This is the third tutorial in the series <strong>Data Visualization With R</strong>. In the previous tutorial, we learned how to add title, subtitle and axis labels. We also learned how to modify the range of the axis. In this tutorial, we will learn how to create scatter plots.
 - adding color to the points
 - modify shape of the points
 - modify size of the points</p>
 </div>
 <div id="libraries-code-data" class="section level3">
 <h3>Libraries, Code &amp; Data</h3>
-<p>All the data sets used in this post can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/f5cd1315826bd44466a15444456ea61d">here</a>.</p>
+<p>All the data sets used in this tutorial can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/f5cd1315826bd44466a15444456ea61d">here</a>.</p>
 </div>
 <div id="basic-plot" class="section level3">
 <h3>Basic Plot</h3>
-<p>Let us recreate the plot that we had created in the first post by using the <code>mtcars</code> data set. We will use the <code>disp</code> (displacement) and <code>mpg</code> (miles per gallon) variables. <code>disp</code> will be on the X axis and <code>mpg</code> will be on the Y axis.</p>
+<p>Let us recreate the plot that we had created in the first tutorial by using the <code>mtcars</code> data set. We will use the <code>disp</code> (displacement) and <code>mpg</code> (miles per gallon) variables. <code>disp</code> will be on the X axis and <code>mpg</code> will be on the Y axis.</p>
 <pre class="r"><code>plot(mtcars$disp, mtcars$mpg)</code></pre>
 <p><img src="/post/2017-06-17-data-visualization-with-r-scatter-plots_files/figure-html/scatter1-1.png" width="480" style="display: block; margin: auto;" /></p>
-<p>We have created a very basic plot and any one looking at it for the first time will get confused with the axis labels <code>mtcars$disp</code> and <code>mtcars$mpg</code>. Let us put into practice what we learnt in the second post, and add a title to the plot, and make the axis labels more meaningful.</p>
+<p>We have created a very basic plot and any one looking at it for the first time will get confused with the axis labels <code>mtcars$disp</code> and <code>mtcars$mpg</code>. Let us put into practice what we learnt in the second tutorial, and add a title to the plot, and make the axis labels more meaningful.</p>
 <pre class="r"><code>plot(mtcars$disp, mtcars$mpg,
      main = &#39;Displacement vs Miles Per Gallon&#39;,
      xlab = &#39;Displacement&#39;, ylab = &#39;Miles Per Gallon&#39;)</code></pre>
@@ -80,7 +80,7 @@ plot(mtcars$disp, mtcars$mpg, pch = 5, col = factor(mtcars$cyl))</code></pre>
 </div>
 <div id="summary" class="section level3">
 <h3>Summary</h3>
-<p>In this post, we learned how to</p>
+<p>In this tutorial, we learned how to</p>
 <ul>
 <li>create scatter plots</li>
 <li>add color to the points</li>

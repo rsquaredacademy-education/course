@@ -15,9 +15,9 @@ tags:
 
 <hr>
 
-This is the 19th post in the series **Elegant Data Visualization with ggplot2**. 
-In the previous post, we learnt to modify the title, label and bar of a legend. 
-In this post, we will learn about faceting i.e. combining plots.
+This is the 19th tutorial in the series **Elegant Data Visualization with ggplot2**. 
+In the previous tutorial, we learnt to modify the title, label and bar of a legend. 
+In this tutorial, we will learn about faceting i.e. combining plots.
 
 ```{r facet, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(ggplot2)
@@ -30,12 +30,12 @@ library(readr)
 
 <hr>
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 - [readr](http://readr.tidyverse.org/)
 - [ggplot2](http://ggplot2.tidyverse.org/)
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/733381d6b5773e1007a097aeca0f8f4d).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/733381d6b5773e1007a097aeca0f8f4d).
 
 <br>
 
@@ -249,7 +249,7 @@ ggplot(mtcars, aes(disp, mpg)) +
 
 <hr>
 
-In this post, we learnt to create sub plots using:
+In this tutorial, we learnt to create sub plots using:
 
 - `facet_grid()`
 - `facet_wrap()`
@@ -260,6 +260,6 @@ In this post, we learnt to create sub plots using:
 
 <hr>
 
-In the next post, we will learn to modify the theme of a plot.
+In the next tutorial, we will learn to modify the theme of a plot.
 
 <br>

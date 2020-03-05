@@ -10,7 +10,7 @@ tags:
 
 ## Introduction
 
-In the previous post, we learnt about the basic data types in R. IN this post, we will:
+In this tutorial, we will:
 
 - understand the concept of vectors
 - learn to create vectors of different data types

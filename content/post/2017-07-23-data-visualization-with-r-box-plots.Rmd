@@ -15,7 +15,7 @@ tags:
 
 ### Introduction
 
-This is the sixth post in the series **Data Visualization With R**. In the previous post, we learnt how to build bar plots. In this post, we will learn to
+This is the sixth tutorial in the series **Data Visualization With R**. In the previous tutorial, we learnt how to build bar plots. In this tutorial, we will learn to
 
 - create univariate/multivariate box plots
 - interpret box plots
@@ -27,7 +27,7 @@ This is the sixth post in the series **Data Visualization With R**. In the previ
 
 ### Libraries, Code & Data
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/d5e49b7903a54bd02d77ae2057f05d4a).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/d5e49b7903a54bd02d77ae2057f05d4a).
 
 ### Box Plot
 
@@ -190,7 +190,7 @@ Since the notches overlap, there is no strong evidence that the medians differ.
 
 ### Putting it all together
 
-We will end this post by adding a title and axis labels to the box plot. 
+We will end this tutorial by adding a title and axis labels to the box plot. 
 
 ```{r box17, fig.align='center', fig.width=5, fig.height=5}
 boxplot(mtcars$mpg ~ mtcars$cyl, range = 1, outline = TRUE, 
@@ -202,7 +202,7 @@ boxplot(mtcars$mpg ~ mtcars$cyl, range = 1, outline = TRUE,
 
 ### Summary
 
-In this post, we learnt how to create box plots. Specifically, we learnt to:
+In this tutorial, we learnt how to create box plots. Specifically, we learnt to:
 
 - create univariate/multivariate box plots
 - interpret box plots

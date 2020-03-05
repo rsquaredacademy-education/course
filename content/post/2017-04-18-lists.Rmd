@@ -10,7 +10,7 @@ tags:
 
 ## Introduction
 
-In the previous post, we learnt about matrices. In this post, we will learn about lists. Lists are very useful as they are heterogeneous i.e. they can contain different data types. If you remember, vectors and matrices are homogeneous i.e. they can contain only one type of data. If you include different data types, they will all be coerced to the same type. With lists, it is different. We learnt how to create lists briefly in the previous post while naming the rows and columns of a matrix. In this post, we will delve deeper into lists.
+In this tutorial, we will learn about lists. Lists are very useful as they are heterogeneous i.e. they can contain different data types. If you remember, vectors and matrices are homogeneous i.e. they can contain only one type of data. If you include different data types, they will all be coerced to the same type. With lists, it is different. We learnt how to create lists briefly in the previous tutorial while naming the rows and columns of a matrix. In this tutorial, we will delve deeper into lists.
 
 - how to create lists
 - access list elements

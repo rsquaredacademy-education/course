@@ -16,9 +16,9 @@ tags:
 
 <hr>
 
-This is the 18th post in the series **Elegant Data Visualization with ggplot2**. 
-In the previous post, we learnt how to modify the legend of plot when `alpha` 
-is mapped to a categorical variable. In this post, we will learn to modify legend
+This is the 18th tutorial in the series **Elegant Data Visualization with ggplot2**. 
+In the previous tutorial, we learnt how to modify the legend of plot when `alpha` 
+is mapped to a categorical variable. In this tutorial, we will learn to modify legend
 
 - title
 - label
@@ -41,12 +41,12 @@ library(readr)
 
 <hr>
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 - [readr](http://readr.tidyverse.org/)
 - [ggplot2](http://ggplot2.tidyverse.org/)
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/a77a836e7e06c61c28ba7db3a69e1510).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/a77a836e7e06c61c28ba7db3a69e1510).
 
 <br>
 
@@ -384,7 +384,7 @@ ggplot(mtcars) +
 
 <hr>
 
-In this post, we will learn to modify legend
+In this tutorial, we will learn to modify legend
 
 - title
 - label
@@ -396,6 +396,6 @@ In this post, we will learn to modify legend
 
 <hr>
 
-In the next post, we will learn faceting.
+In the next tutorial, we will learn faceting.
 
 <br>

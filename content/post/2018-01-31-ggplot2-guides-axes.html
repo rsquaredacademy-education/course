@@ -15,8 +15,8 @@ tags:
 
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
-<p>This is the twelfth post in the series <strong>Elegant Data Visualization with
-ggplot2</strong>. In the previous post, we learnt to build histograms. Now that we
+<p>This is the twelfth tutorial in the series <strong>Elegant Data Visualization with
+ggplot2</strong>. In the previous tutorial, we learnt to build histograms. Now that we
 have learnt to build different plots, let us look at different ways to modify
 the axis. Along the way, we will also explore the <code>scale_*()</code> family of functions.</p>
 <p>Modify X and Y axis</p>
@@ -45,12 +45,12 @@ following functions:</p>
 </div>
 <div id="libraries-code-data" class="section level3">
 <h3>Libraries, Code &amp; Data</h3>
-<p>We will use the following libraries in this post:</p>
+<p>We will use the following libraries in this tutorial:</p>
 <ul>
 <li><a href="http://readr.tidyverse.org/">readr</a></li>
 <li><a href="http://ggplot2.tidyverse.org/">ggplot2</a></li>
 </ul>
-<p>All the data sets used in this post can be found <a href="https://github.com/rsquaredacademy/datasets">here</a>
+<p>All the data sets used in this tutorial can be found <a href="https://github.com/rsquaredacademy/datasets">here</a>
 and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/096bc745c18a9ba47b99260978189920">here</a>.</p>
 <p><br></p>
 </div>
@@ -67,13 +67,13 @@ the following arguments:</p>
 <li>position</li>
 </ul>
 <p><br></p>
-<p>Let us continue with the scatter plot we have used in previous posts.</p>
+<p>Let us continue with the scatter plot we have used in previous tutorials.</p>
 <pre class="r"><code>ggplot(mtcars) +
   geom_point(aes(disp, mpg))</code></pre>
 <p><img src="/post/2018-01-31-ggplot2-guides-axes_files/figure-html/guide2-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><br></p>
 <p>The <code>name</code> argument is used to modify the X axis label. In the below example,
-we change the X axis label to <code>'Displacement'</code>. In previous posts, we
+we change the X axis label to <code>'Displacement'</code>. In previous tutorials, we
 have used <code>xlab()</code> to work with the X axis label.</p>
 <pre class="r"><code>ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
@@ -189,7 +189,7 @@ and <code>scale_y_discrete()</code> can be used to modify them. They take the fo
 </div>
 <div id="summary" class="section level3">
 <h3>Summary</h3>
-<p>In this post, we learnt to modify</p>
+<p>In this tutorial, we learnt to modify</p>
 <ul>
 <li>title</li>
 <li>labels</li>
@@ -201,5 +201,5 @@ and <code>scale_y_discrete()</code> can be used to modify them. They take the fo
 </div>
 <div id="up-next.." class="section level3">
 <h3>Up Next..</h3>
-<p>In the next post, we will learn to modify the legend when <code>color</code> is mapped to a variable.</p>
+<p>In the next tutorial, we will learn to modify the legend when <code>color</code> is mapped to a variable.</p>
 </div>

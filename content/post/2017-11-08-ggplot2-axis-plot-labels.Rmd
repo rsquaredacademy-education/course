@@ -13,8 +13,8 @@ tags:
 
 ### Introduction
 
-This is the fifth post in the series **Elegant Data Visualization with 
-ggplot2**. In the previous post, we learnt about aesthetics. In this post, we 
+This is the fifth tutorial in the series **Elegant Data Visualization with 
+ggplot2**. In the previous tutorial, we learnt about aesthetics. In this tutorial, we 
 will learn to:
 
 - add title and subtitle to the plot
@@ -325,7 +325,7 @@ ggplot(mtcars) +
 
 ### Summary
 
-In this post, we learnt to:
+In this tutorial, we learnt to:
 
 - add title and subtitle to the plot
 - modify axis labels
@@ -337,4 +337,4 @@ In this post, we learnt to:
 
 ### Up Next..
 
-In the next post, we will learn to add text annotations to plots.
+In the next tutorial, we will learn to add text annotations to plots.

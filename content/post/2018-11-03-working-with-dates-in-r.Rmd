@@ -14,7 +14,7 @@ tags:
 
 ## Introduction
 
- In this post, we will learn to work with date/time data in R using [lubridate]( http://lubridate.tidyverse.org/), an R package that makes it easy to work with dates and time. 
+ In this tutorial, we will learn to work with date/time data in R using [lubridate]( http://lubridate.tidyverse.org/), an R package that makes it easy to work with dates and time. 
  Let us begin by installing and loading the pacakge.
  
 ## Libraries, Code & Data
@@ -154,7 +154,7 @@ transact %>%
 
 ## Compute days over due
 
-How many of the invoices were settled post the due date? We can find this by:
+How many of the invoices were settled tutorial the due date? We can find this by:
 
 - subtracting the due date from the payment date
 - counting the number of rows where delay < 0 

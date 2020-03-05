@@ -14,7 +14,7 @@ tags:
 
 ## Introduction
 
-In this post, we will learn to work with categorical/qualitative data in R 
+In this tutorial, we will learn to work with categorical/qualitative data in R 
 using [forcats](https://forcats.tidyverse.org). Let us begin by installing 
 and loading forcats and a set of other pacakges we will be using.
 

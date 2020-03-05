@@ -13,9 +13,9 @@ categories:
 
 ## Introduction
 
-This is the second post in the series **Importing Data into R**. In the 
-previous post, we explored reading data from flat/delimited files. In this 
-post, we will:
+This is the second tutorial in the series **Importing Data into R**. In the 
+previous tutorial, we explored reading data from flat/delimited files. In this 
+tutorial, we will:
 
 - list sheets in an excel file
 - read data from an excel sheet

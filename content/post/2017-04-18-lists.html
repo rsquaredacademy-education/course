@@ -12,7 +12,7 @@ tags:
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>In the previous post, we learnt about matrices. In this post, we will learn about lists. Lists are very useful as they are heterogeneous i.e. they can contain different data types. If you remember, vectors and matrices are homogeneous i.e. they can contain only one type of data. If you include different data types, they will all be coerced to the same type. With lists, it is different. We learnt how to create lists briefly in the previous post while naming the rows and columns of a matrix. In this post, we will delve deeper into lists.</p>
+<p>In this tutorial, we will learn about lists. Lists are very useful as they are heterogeneous i.e. they can contain different data types. If you remember, vectors and matrices are homogeneous i.e. they can contain only one type of data. If you include different data types, they will all be coerced to the same type. With lists, it is different. We learnt how to create lists briefly in the previous tutorial while naming the rows and columns of a matrix. In this tutorial, we will delve deeper into lists.</p>
 <ul>
 <li>how to create lists</li>
 <li>access list elements</li>
@@ -170,15 +170,15 @@ as.list(mat)</code></pre>
 <p>Use <code>unlist()</code> to coerce a list to vector.</p>
 <pre class="r"><code># unlist
 unlist(l)</code></pre>
-<pre><code>##  vect11  vect12  vect13  vect14  vect15  vect16  vect17  vect18  vect19 
-##     &quot;1&quot;     &quot;2&quot;     &quot;3&quot;     &quot;4&quot;     &quot;5&quot;     &quot;6&quot;     &quot;7&quot;     &quot;8&quot;     &quot;9&quot; 
-## vect110  vect21  vect22  vect23  vect31  vect32    mat1    mat2    mat3 
-##    &quot;10&quot;  &quot;Jack&quot;  &quot;John&quot;  &quot;Jill&quot;  &quot;TRUE&quot; &quot;FALSE&quot;     &quot;1&quot;     &quot;2&quot;     &quot;3&quot; 
-##    mat4    mat5    mat6    mat7    mat8    mat9 
-##     &quot;4&quot;     &quot;5&quot;     &quot;6&quot;     &quot;7&quot;     &quot;8&quot;     &quot;9&quot;</code></pre>
+<pre><code>##  vect11  vect12  vect13  vect14  vect15  vect16  vect17  vect18  vect19 vect110 
+##     &quot;1&quot;     &quot;2&quot;     &quot;3&quot;     &quot;4&quot;     &quot;5&quot;     &quot;6&quot;     &quot;7&quot;     &quot;8&quot;     &quot;9&quot;    &quot;10&quot; 
+##  vect21  vect22  vect23  vect31  vect32    mat1    mat2    mat3    mat4    mat5 
+##  &quot;Jack&quot;  &quot;John&quot;  &quot;Jill&quot;  &quot;TRUE&quot; &quot;FALSE&quot;     &quot;1&quot;     &quot;2&quot;     &quot;3&quot;     &quot;4&quot;     &quot;5&quot; 
+##    mat6    mat7    mat8    mat9 
+##     &quot;6&quot;     &quot;7&quot;     &quot;8&quot;     &quot;9&quot;</code></pre>
 <pre class="r"><code># remove names
 unlist(l, use.names = FALSE)</code></pre>
-<pre><code>##  [1] &quot;1&quot;     &quot;2&quot;     &quot;3&quot;     &quot;4&quot;     &quot;5&quot;     &quot;6&quot;     &quot;7&quot;     &quot;8&quot;    
-##  [9] &quot;9&quot;     &quot;10&quot;    &quot;Jack&quot;  &quot;John&quot;  &quot;Jill&quot;  &quot;TRUE&quot;  &quot;FALSE&quot; &quot;1&quot;    
-## [17] &quot;2&quot;     &quot;3&quot;     &quot;4&quot;     &quot;5&quot;     &quot;6&quot;     &quot;7&quot;     &quot;8&quot;     &quot;9&quot;</code></pre>
+<pre><code>##  [1] &quot;1&quot;     &quot;2&quot;     &quot;3&quot;     &quot;4&quot;     &quot;5&quot;     &quot;6&quot;     &quot;7&quot;     &quot;8&quot;     &quot;9&quot;    
+## [10] &quot;10&quot;    &quot;Jack&quot;  &quot;John&quot;  &quot;Jill&quot;  &quot;TRUE&quot;  &quot;FALSE&quot; &quot;1&quot;     &quot;2&quot;     &quot;3&quot;    
+## [19] &quot;4&quot;     &quot;5&quot;     &quot;6&quot;     &quot;7&quot;     &quot;8&quot;     &quot;9&quot;</code></pre>
 </div>

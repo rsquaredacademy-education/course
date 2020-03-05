@@ -16,7 +16,7 @@ tags:
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>In this post, we will learn to work with date/time data in R using <a href="http://lubridate.tidyverse.org/">lubridate</a>, an R package that makes it easy to work with dates and time.
+<p>In this tutorial, we will learn to work with date/time data in R using <a href="http://lubridate.tidyverse.org/">lubridate</a>, an R package that makes it easy to work with dates and time.
 Let us begin by installing and loading the pacakge.</p>
 </div>
 <div id="libraries-code-data" class="section level2">
@@ -49,9 +49,9 @@ calculations in R.</p>
 or pm. <code>now()</code> returns the date time as well as the time zone whereas <code>today()</code>
 will return only the current date. <code>am()</code> and <code>pm()</code> return <code>TRUE</code> or <code>FALSE</code>.</p>
 <pre class="r"><code>now()</code></pre>
-<pre><code>## [1] &quot;2019-01-08 13:43:56 IST&quot;</code></pre>
+<pre><code>## [1] &quot;2020-03-05 17:43:26 IST&quot;</code></pre>
 <pre class="r"><code>today()</code></pre>
-<pre><code>## [1] &quot;2019-01-08&quot;</code></pre>
+<pre><code>## [1] &quot;2020-03-05&quot;</code></pre>
 <pre class="r"><code>am(now())  </code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>pm(now())</code></pre>
@@ -155,7 +155,7 @@ date of invoice from the date of payment.</p>
   )</code></pre>
 <pre><code>## # A tibble: 2,466 x 4
 ##    Invoice    Due        Payment    days_to_pay
-##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;time&gt;     
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;drtn&gt;     
 ##  1 2013-01-02 2013-02-01 2013-01-15 13 days    
 ##  2 2013-01-26 2013-02-25 2013-03-03 36 days    
 ##  3 2013-07-03 2013-08-02 2013-07-08  5 days    
@@ -170,7 +170,7 @@ date of invoice from the date of payment.</p>
 </div>
 <div id="compute-days-over-due" class="section level2">
 <h2>Compute days over due</h2>
-<p>How many of the invoices were settled post the due date? We can find this by:</p>
+<p>How many of the invoices were settled tutorial the due date? We can find this by:</p>
 <ul>
 <li>subtracting the due date from the payment date</li>
 <li>counting the number of rows where delay &lt; 0</li>

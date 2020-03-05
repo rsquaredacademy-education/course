@@ -15,9 +15,9 @@ tags:
 
 <hr>
 
-This is the 14th post in the series **Elegant Data Visualization with ggplot2**. 
-In the previous post, we learnt how to modify the legend of plots when 
-aesthetics are mapped to variables. In this post, we will continue to explore 
+This is the 14th tutorial in the series **Elegant Data Visualization with ggplot2**. 
+In the previous tutorial, we learnt how to modify the legend of plots when 
+aesthetics are mapped to variables. In this tutorial, we will continue to explore 
 different ways to modify/customize the legend of plots.
 
 
@@ -42,12 +42,12 @@ when `fill` is mapped to categorical variables:
 
 <hr>
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 - [readr](http://readr.tidyverse.org/)
 - [ggplot2](http://ggplot2.tidyverse.org/)
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/ef2b665173cf7cfe17093f3dcb052035).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/ef2b665173cf7cfe17093f3dcb052035).
 
 <br>
 
@@ -181,7 +181,7 @@ ggplot(mtcars) +
 
 <hr>
 
-In this post, we learnt to modify the following aspects of legends: 
+In this tutorial, we learnt to modify the following aspects of legends: 
 
 - title
 - breaks
@@ -195,7 +195,7 @@ In this post, we learnt to modify the following aspects of legends:
 
 <hr>
 
-In the next post, we will learn to modify the legend when `shape` is mapped to categorical variables.
+In the next tutorial, we will learn to modify the legend when `shape` is mapped to categorical variables.
 
 <br>
 

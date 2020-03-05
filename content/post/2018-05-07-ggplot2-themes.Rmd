@@ -15,8 +15,8 @@ tags:
 
 <hr>
 
-This is the last post in the series **Elegant Data Visualization with ggplot2**. 
-In the previous post, we learnt to combine multiple plots. In this post, we 
+This is the last tutorial in the series **Elegant Data Visualization with ggplot2**. 
+In the previous tutorial, we learnt to combine multiple plots. In this tutorial, we 
 will learn to modify the appearance of all non data components of the plot such 
 as:
 
@@ -34,12 +34,12 @@ as:
 
 <hr>
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 - [readr](http://readr.tidyverse.org/)
 - [ggplot2](http://ggplot2.tidyverse.org/)
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/a6722c54610578ddcadaeeaf1df7cbf3).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/a6722c54610578ddcadaeeaf1df7cbf3).
 
 <br>
 
@@ -274,7 +274,7 @@ ggplot(mtcars) +
 
 <hr>
 
-In this post, we learnt to modify the appearance of all non data components 
+In this tutorial, we learnt to modify the appearance of all non data components 
 of a plot and about the different themes available in ggplot2. This brings us 
 to the end of the series **Elegant Data Visualization with ggplot2**.
 

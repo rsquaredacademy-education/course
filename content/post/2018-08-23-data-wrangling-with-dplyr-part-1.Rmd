@@ -15,7 +15,7 @@ tags:
 According to  a [survey](http://visit.crowdflower.com/rs/416-ZBE-142/images/CrowdFlower_DataScienceReport_2016.pdf) by [CrowdFlower](https://www.crowdflower.com/), data scientists spend most of their 
 time cleaning and manipulating data rather than mining or modeling them for 
 insights. As such, it becomes important to have tools that make data 
-manipulation faster and easier. In today's post, we introduce you to 
+manipulation faster and easier. In today's tutorial, we introduce you to 
 [dplyr](http://dplyr.tidyverse.org/), a grammar of data manipulation.
 
 ```{r img1, echo=FALSE, out.width="70%", fig.align="center"}

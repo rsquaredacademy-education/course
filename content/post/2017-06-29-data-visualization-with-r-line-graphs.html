@@ -16,7 +16,7 @@ tags:
 
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
-<p>This is the fourth post in the series <strong>Data Visualization With R</strong>. In the previous post, we learnt how to build scatter plots. In this post, we will build line graphs. To be more specific we will learn to</p>
+<p>This is the fourth tutorial in the series <strong>Data Visualization With R</strong>. In the previous tutorial, we learnt how to build scatter plots. In this tutorial, we will build line graphs. To be more specific we will learn to</p>
 <ul>
 <li>create line plots</li>
 <li>add color to lines</li>
@@ -29,11 +29,11 @@ tags:
 </div>
 <div id="libraries-code-data" class="section level3">
 <h3>Libraries, Code &amp; Data</h3>
-<p>All the data sets used in this post can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/ea80f20e798e25b3adfc9ff1e87ed311">here</a>.</p>
+<p>All the data sets used in this tutorial can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/ea80f20e798e25b3adfc9ff1e87ed311">here</a>.</p>
 </div>
 <div id="line-graph" class="section level3">
 <h3>Line Graph</h3>
-<p>To build a line graph, we will learn a new argument in the <code>plot()</code> function called <code>type</code>. It allows us to specify the symbol that must be used to represent the data. Let us begin by building a simple line graph. We will use the <code>AirPassengers</code> data set in this post. Before we begin to build the plot, let us take a quick look at the data in order to understand what we are plotting.</p>
+<p>To build a line graph, we will learn a new argument in the <code>plot()</code> function called <code>type</code>. It allows us to specify the symbol that must be used to represent the data. Let us begin by building a simple line graph. We will use the <code>AirPassengers</code> data set in this tutorial. Before we begin to build the plot, let us take a quick look at the data in order to understand what we are plotting.</p>
 <pre class="r"><code>head(AirPassengers)</code></pre>
 <pre><code>## [1] 112 118 132 129 121 135</code></pre>
 <p>In order to build a line plot, we will set the <code>type</code> argument in the <code>plot()</code> function to <strong>l</strong> (line). There are other values which <code>type</code> takes but we will explore them later.</p>
@@ -87,7 +87,7 @@ plot(data, type = &#39;l&#39;)</code></pre>
 </div>
 <div id="enhance-points" class="section level3">
 <h3>Enhance Points</h3>
-<p>We can enhance the points in the line plot in the same way as we enhanced the points in the scatter plot in this previous <a href="https://rsquaredacademy.github.io/post/data-visualization-with-r-scatter-plots/">post</a>. Let us look at an example:</p>
+<p>We can enhance the points in the line plot in the same way as we enhanced the points in the scatter plot in this previous tutorial. Let us look at an example:</p>
 <pre class="r"><code>plot(data, type = &#39;b&#39;, pch = 23, col = &#39;red&#39;, cex = 1.5)</code></pre>
 <p><img src="/post/2017-06-29-data-visualization-with-r-line-graphs_files/figure-html/line12-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>We have used the <code>pch</code>, <code>col</code> and <code>cex</code> arguments to modify the shape, color and size of the points. One drawback of the above method is that the color of the line and the points will be the same. What if we want them to have different colors? The solution is as follows:</p>
@@ -117,7 +117,7 @@ lines(data2, type = &quot;b&quot;, col = &quot;red&quot;)</code></pre>
 </div>
 <div id="putting-it-all-together" class="section level3">
 <h3>Putting it all together…</h3>
-<p>Finally let us enhance the plot by adding a title and modifying the axis labels which we learnt in this first <a href="https://rsquaredacademy.github.io/post/data-visualization-with-r-title-and-axis-labels/">post</a> of the series.</p>
+<p>Finally let us enhance the plot by adding a title and modifying the axis labels which we learnt in this first tutorial of the series.</p>
 <pre class="r"><code>plot(data1, type = &quot;b&quot;, col = &quot;blue&quot;, 
      ylim = c(5, 9), main = &#39;Line Graph&#39;,
      xlab = &#39;Index&#39;, ylab = &#39;Data&#39;)
@@ -126,7 +126,7 @@ lines(data2, type = &quot;b&quot;, col = &quot;red&quot;)</code></pre>
 </div>
 <div id="summary" class="section level3">
 <h3>Summary</h3>
-<p>In this post, we learnt how to</p>
+<p>In this tutorial, we learnt how to</p>
 <ul>
 <li>create line plots</li>
 <li>modify appearance of the line</li>

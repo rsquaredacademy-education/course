@@ -20,7 +20,7 @@ tags:
 <blockquote>
 <p>Source: <a href="https://tibble.tidyverse.org/" class="uri">https://tibble.tidyverse.org/</a></p>
 </blockquote>
-<p>In this post, we will explore tibbles. To be more precise, we will learn:</p>
+<p>In this tutorial, we will explore tibbles. To be more precise, we will learn:</p>
 <ul>
 <li>how tibbles are different from data frames?</li>
 <li>how to create tibbles?</li>
@@ -53,16 +53,16 @@ library(dplyr)</code></pre>
 <pre><code>## # A tibble: 26 x 3
 ##    x         y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1 a         1    14
-##  2 b         2    92
-##  3 c         3    98
-##  4 d         4    31
-##  5 e         5    47
-##  6 f         6    48
-##  7 g         7    75
-##  8 h         8    43
-##  9 i         9    85
-## 10 j        10    32
+##  1 a         1    15
+##  2 b         2     1
+##  3 c         3    33
+##  4 d         4    54
+##  5 e         5    96
+##  6 f         6    43
+##  7 g         7    98
+##  8 h         8    75
+##  9 i         9    72
+## 10 j        10    25
 ## # ... with 16 more rows</code></pre>
 <p>We mentioned the column names followed by the data. If you do not specify the
 column names, <code>tibble()</code> will supply them. Ensure that the length of each column
@@ -82,16 +82,16 @@ you need to set <code>stringsAsFactors</code> to <code>FALSE</code>.</p>
 <pre><code>## # A tibble: 26 x 3
 ##    x         y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1 a         1    10
-##  2 b         2    14
-##  3 c         3    65
-##  4 d         4    92
-##  5 e         5    87
-##  6 f         6    42
-##  7 g         7    89
-##  8 h         8    15
-##  9 i         9    76
-## 10 j        10     7
+##  1 a         1    74
+##  2 b         2    35
+##  3 c         3    45
+##  4 d         4    59
+##  5 e         5    12
+##  6 f         6    29
+##  7 g         7    22
+##  8 h         8    41
+##  9 i         9    68
+## 10 j        10    47
 ## # ... with 16 more rows</code></pre>
 <ul>
 <li>never adjusts variable names</li>
@@ -117,12 +117,12 @@ tibble(x, y, z)</code></pre>
 ##        x y     z    
 ##    &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;
 ##  1     1 a     TRUE 
-##  2     2 a     TRUE 
-##  3     3 a     TRUE 
-##  4     4 a     FALSE
-##  5     5 a     FALSE
+##  2     2 a     FALSE
+##  3     3 a     FALSE
+##  4     4 a     TRUE 
+##  5     5 a     TRUE 
 ##  6     6 a     FALSE
-##  7     7 a     FALSE
+##  7     7 a     TRUE 
 ##  8     8 a     TRUE 
 ##  9     9 a     TRUE 
 ## 10    10 a     FALSE
@@ -328,17 +328,17 @@ column_to_rownames(mtcars_tbl)</code></pre>
 <pre class="r"><code>glimpse(mtcars)</code></pre>
 <pre><code>## Observations: 32
 ## Variables: 11
-## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19....
-## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, ...
-## $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 1...
-## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, ...
-## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.9...
-## $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3...
-## $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 2...
-## $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, ...
-## $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, ...
-## $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, ...
-## $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, ...</code></pre>
+## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17...
+## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4,...
+## $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8,...
+## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, ...
+## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3....
+## $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150,...
+## $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90,...
+## $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,...
+## $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0,...
+## $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3,...
+## $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1,...</code></pre>
 </div>
 <div id="check-column" class="section level2">
 <h2>Check Column</h2>

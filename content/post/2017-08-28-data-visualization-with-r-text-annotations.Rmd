@@ -16,14 +16,14 @@ tags:
 
 ### Introduction
 
-This is the ninth post in the series **Data Visualization With R**. In the previous post, we learnt how to add legend to a plot. In this post, we will learn to add text annotations. There are occassions when you want to display additional information in a plot. This is usually achieved by adding text either inside the plot or on the margins. For example, you might want to label a line/bar or add formulas to better communicate what is shown in the plot. The idea is to use the available space within/outside the plot to provide additional information that can be useful to the end users. We will learn to add text inside as well as on the margins of the plot. This is accomplished using the following two functions:
+This is the ninth tutorial in the series **Data Visualization With R**. In the previous tutorial, we learnt how to add legend to a plot. In this tutorial, we will learn to add text annotations. There are occassions when you want to display additional information in a plot. This is usually achieved by adding text either inside the plot or on the margins. For example, you might want to label a line/bar or add formulas to better communicate what is shown in the plot. The idea is to use the available space within/outside the plot to provide additional information that can be useful to the end users. We will learn to add text inside as well as on the margins of the plot. This is accomplished using the following two functions:
 
 - `text()` : add text inside the plot
 - `mtext()` : add text on the margins of the plot
 
 ### Libraries, Code & Data
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/7a445b32ca3a6e1f75e7d4bbf66cb702).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/7a445b32ca3a6e1f75e7d4bbf66cb702).
 
 ### Syntax
 
@@ -235,7 +235,7 @@ for (i in values) {
 ```
 ### Summary
 
-In this post, we learnt how to add text annotations to a plot. Specifically, we learnt to:
+In this tutorial, we learnt how to add text annotations to a plot. Specifically, we learnt to:
 
 - add text inside the plot
 - add text on the margins of the plot
@@ -244,5 +244,5 @@ In this post, we learnt how to add text annotations to a plot. Specifically, we 
 
 ### Up Next..
 
-In the next post, we will learn how to combine multiple plots into a single frame. 
+In the next tutorial, we will learn how to combine multiple plots into a single frame. 
 

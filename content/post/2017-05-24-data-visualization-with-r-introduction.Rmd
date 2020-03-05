@@ -14,7 +14,7 @@ tags:
 
 ### Introduction
 
-This is the first post of the series **Data Visualization With R**. The objective of the series is to provide a gentle introduction to working with base graphics in R. We will come up with a similar series using [ggplot2](https://ggplot2.tidyverse.org/index.html) shortly. 
+This is the first tutorial of the series **Data Visualization With R**. The objective of the series is to provide a gentle introduction to working with base graphics in R. We will come up with a similar series using [ggplot2](https://ggplot2.tidyverse.org/index.html) shortly. 
 
 - what is data visualization
 - why visualize data
@@ -26,7 +26,7 @@ This is the first post of the series **Data Visualization With R**. The objectiv
 
 ### Libraries, Code & Data
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/3690e9217c72644a9e9bada0df709426).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/3690e9217c72644a9e9bada0df709426).
 
 ### What is data visualization?
 
@@ -131,5 +131,5 @@ plot(as.factor(mtcars$cyl), mtcars$mpg)
 
 ### Summary
 
-In this first post, we have explored the `plot()` function to understand the different types of plots it can create based on the input types. Before we begin to build different plots such as bar plots, box plots, scatter plots or line plots, we will quickly learn how to add title and labels to a plot. 
+In this first tutorial, we have explored the `plot()` function to understand the different types of plots it can create based on the input types. Before we begin to build different plots such as bar plots, box plots, scatter plots or line plots, we will quickly learn how to add title and labels to a plot. 
 

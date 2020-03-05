@@ -20,13 +20,7 @@ knitr::opts_chunk$set(R.options=list(max.print=50))
 
 ### Introduction
 
-This is the third post in the series **R & Databases**. You can find the links to the other two posts of this series below:
-
-- [Quick Guide: R & SQLite](https://blog.rsquaredacademy.com/quick-guide-r-sqlite/)
-- [Data Wrangling with dbplyr](https://blog.rsquaredacademy.com/data-wrangling-with-dbplyr/)
-- [SQL for Data Science - Part 2](https://blog.rsquaredacademy.com/sql-for-data-science-part-2/)
-
-In this post, we will learn to:
+In this tutorial, we will learn to:
 
 - select 
     - single column
@@ -44,13 +38,13 @@ In this post, we will learn to:
 
 ### Libraries, Code & Data
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 - [DBI](http://readr.tidyverse.org/)
 - [RSQLite](https://rstats-db.github.io/RSQLite/)
 - [dbplyr](http://dbplyr.tidyverse.org/)
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/f44774d9c6e115c08d5e2e693380a00f).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/f44774d9c6e115c08d5e2e693380a00f).
 
 ### Set Up
 
@@ -249,7 +243,7 @@ dbGetQuery(con, "SELECT *
 
 ### Summary
 
-In this post we learnt to 
+In this tutorial we learnt to 
 
 - select 
     - single column
@@ -266,7 +260,7 @@ In this post we learnt to
 
 ### Up Next..
 
-In the next post, we will learn advanced SQL commands.
+In the next tutorial, we will learn advanced SQL commands.
 
 
 

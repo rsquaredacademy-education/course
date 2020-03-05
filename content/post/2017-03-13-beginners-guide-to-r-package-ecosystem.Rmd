@@ -14,11 +14,11 @@ tags:
 
 ## Introduction
 
-In the previous post,  we learnt about getting help in R. In this post, we will learn about R packages. Packages are fundamental to R. There are approximately 15000 packages available on [CRAN](https://cran.r-project.org/) or the Comprehensive R Archive Network.
+In this tutorial, we will learn about R packages. Packages are fundamental to R. There are approximately 15000 packages available on [CRAN](https://cran.r-project.org/) or the Comprehensive R Archive Network.
 
 Packages are available for different [topics](https://cran.r-project.org/web/views/). You should always look for a package before writing code from scratch. In case you have written your own codes for a new analysis or topic, do share it with the R community by converting the code into a package. You can learn more about building R packages from [R Packages](https://r-pkgs.had.co.nz/), a book written by [Hadley Wickham](https://hadley.nz/).
 
-In this post, we will learn to:
+In this tutorial, we will learn to:
 
 - install R packages from 
     - CRAN

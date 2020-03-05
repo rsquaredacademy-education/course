@@ -10,7 +10,7 @@ tags:
 
 ## Introduction
 
-In the previous post, we learnt about dataframes. In this post, we will learn about factors.
+In this tutorial, we will learn about factors.
 
 - create factors
 - order levels
@@ -37,4 +37,4 @@ nlevels(devices)
 levels(devices)
 ```
 
-We will learn more about factors in a later post.
+We will learn more about factors in a later tutorial.

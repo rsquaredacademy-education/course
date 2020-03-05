@@ -17,7 +17,7 @@ knitr::include_graphics("/img/help_banner.png")
 
 ## Introduction
 
-In this post, we will learn about the different methods of getting help in R. 
+In this tutorial, we will learn about the different methods of getting help in R. 
 Often, we get stuck while doing some analysis as either we do not know the 
 correct function to use or its syntax. It is important for anyone who is new 
 to R to know the right place to look for help. There are two ways to look for 

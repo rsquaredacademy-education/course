@@ -10,7 +10,7 @@ tags:
 
 ## Introduction
 
-In the previous post, we learnt how to create variables in R. In this post, we will learn about the following data types:
+In this tutorial, we will learn about the following data types:
 
 - numeric/double
 - integer

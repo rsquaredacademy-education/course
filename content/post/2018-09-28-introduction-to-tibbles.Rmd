@@ -16,7 +16,7 @@ tags:
 
 > Source: https://tibble.tidyverse.org/
 
-In this post, we will explore tibbles. To be more precise, we will learn:
+In this tutorial, we will explore tibbles. To be more precise, we will learn:
 
 - how tibbles are different from data frames?
 - how to create tibbles?

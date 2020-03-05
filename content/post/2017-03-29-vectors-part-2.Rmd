@@ -10,7 +10,7 @@ tags:
 
 ## Introduction
 
-In the previous post, we learnt to create vectors of different data types. In this post, we will learn to
+In this tutorial, we will learn to
 
 - coerce different data types
 - perform simple operations on vectors

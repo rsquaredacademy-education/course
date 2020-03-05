@@ -34,7 +34,7 @@ If you are using [tidyverse](https://www.tidyverse.org/), magrittr will be autom
 
 ## Libraries, Code & Data
 
-We will use the following packages in this post:
+We will use the following packages in this tutorial:
 
 - [magrittr](http://magrittr.tidyverse.org/) 
 - [readr](http://readr.tidyverse.org/) 

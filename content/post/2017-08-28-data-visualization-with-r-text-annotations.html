@@ -18,7 +18,7 @@ tags:
 
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
-<p>This is the ninth post in the series <strong>Data Visualization With R</strong>. In the previous post, we learnt how to add legend to a plot. In this post, we will learn to add text annotations. There are occassions when you want to display additional information in a plot. This is usually achieved by adding text either inside the plot or on the margins. For example, you might want to label a line/bar or add formulas to better communicate what is shown in the plot. The idea is to use the available space within/outside the plot to provide additional information that can be useful to the end users. We will learn to add text inside as well as on the margins of the plot. This is accomplished using the following two functions:</p>
+<p>This is the ninth tutorial in the series <strong>Data Visualization With R</strong>. In the previous tutorial, we learnt how to add legend to a plot. In this tutorial, we will learn to add text annotations. There are occassions when you want to display additional information in a plot. This is usually achieved by adding text either inside the plot or on the margins. For example, you might want to label a line/bar or add formulas to better communicate what is shown in the plot. The idea is to use the available space within/outside the plot to provide additional information that can be useful to the end users. We will learn to add text inside as well as on the margins of the plot. This is accomplished using the following two functions:</p>
 <ul>
 <li><code>text()</code> : add text inside the plot</li>
 <li><code>mtext()</code> : add text on the margins of the plot</li>
@@ -26,7 +26,7 @@ tags:
 </div>
 <div id="libraries-code-data" class="section level3">
 <h3>Libraries, Code &amp; Data</h3>
-<p>All the data sets used in this post can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/7a445b32ca3a6e1f75e7d4bbf66cb702">here</a>.</p>
+<p>All the data sets used in this tutorial can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/7a445b32ca3a6e1f75e7d4bbf66cb702">here</a>.</p>
 </div>
 <div id="syntax" class="section level3">
 <h3>Syntax</h3>
@@ -77,8 +77,8 @@ text(x = 340, y = 30, labels = &#39;Sample Text&#39;, col = &#39;red&#39;, font 
 text(x = 340, y = 30, labels = &#39;Sample Text&#39;, col = &#39;red&#39;, family = &#39;mono&#39;)</code></pre>
 <p><img src="/post/2017-08-28-data-visualization-with-r-text-annotations_files/figure-html/text6-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>The below plot depicts the appearance of the text for different values of the <code>family</code> argument:</p>
-<pre><code>## Warning in text.default(x = 340, y = 30, labels = &quot;Sample Text&quot;, col =
-## &quot;red&quot;, : font family not found in Windows font database</code></pre>
+<pre><code>## Warning in text.default(x = 340, y = 30, labels = &quot;Sample Text&quot;, col = &quot;red&quot;, :
+## font family not found in Windows font database</code></pre>
 <p><img src="/post/2017-08-28-data-visualization-with-r-text-annotations_files/figure-html/text7-1.png" width="1440" style="display: block; margin: auto;" /></p>
 </div>
 <div id="font-size" class="section level3">
@@ -133,7 +133,7 @@ mtext(&#39;Sample Text&#39;, adj = 1)</code></pre>
 <p>The below plot displays the appearance of the text when different values are supplied to the <code>adj</code> argument:</p>
 <p><img src="/post/2017-08-28-data-visualization-with-r-text-annotations_files/figure-html/mtext9-1.png" width="1440" style="display: block; margin: auto;" />
 ### Summary</p>
-<p>In this post, we learnt how to add text annotations to a plot. Specifically, we learnt to:</p>
+<p>In this tutorial, we learnt how to add text annotations to a plot. Specifically, we learnt to:</p>
 <ul>
 <li>add text inside the plot</li>
 <li>add text on the margins of the plot</li>
@@ -143,5 +143,5 @@ mtext(&#39;Sample Text&#39;, adj = 1)</code></pre>
 </div>
 <div id="up-next.." class="section level3">
 <h3>Up Next..</h3>
-<p>In the next post, we will learn how to combine multiple plots into a single frame.</p>
+<p>In the next tutorial, we will learn how to combine multiple plots into a single frame.</p>
 </div>

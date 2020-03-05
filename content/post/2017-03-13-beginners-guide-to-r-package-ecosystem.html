@@ -16,9 +16,9 @@ tags:
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>In the previous post, we learnt about getting help in R. In this post, we will learn about R packages. Packages are fundamental to R. There are approximately 15000 packages available on <a href="https://cran.r-project.org/">CRAN</a> or the Comprehensive R Archive Network.</p>
+<p>In this tutorial, we will learn about R packages. Packages are fundamental to R. There are approximately 15000 packages available on <a href="https://cran.r-project.org/">CRAN</a> or the Comprehensive R Archive Network.</p>
 <p>Packages are available for different <a href="https://cran.r-project.org/web/views/">topics</a>. You should always look for a package before writing code from scratch. In case you have written your own codes for a new analysis or topic, do share it with the R community by converting the code into a package. You can learn more about building R packages from <a href="https://r-pkgs.had.co.nz/">R Packages</a>, a book written by <a href="https://hadley.nz/">Hadley Wickham</a>.</p>
-<p>In this post, we will learn to:</p>
+<p>In this tutorial, we will learn to:</p>
 <ul>
 <li>install R packages from
 <ul>
@@ -97,8 +97,7 @@ biocLite(&#39;GenomicFeatures&#39;)</code></pre>
 <h2>Library Paths</h2>
 <p>Library is a directory that contains all installed packages. Usually there will be more than one R library in your systme. You can find the location of the libraries using <code>.libPaths()</code>.</p>
 <pre class="r"><code>.libPaths()</code></pre>
-<pre><code>## [1] &quot;C:/Users/HP/Documents/R/win-library&quot;
-## [2] &quot;C:/Program Files/R/R-3.5.1/library&quot;</code></pre>
+<pre><code>## [1] &quot;C:/Users/HP/Documents/R/win-library&quot; &quot;C:/Program Files/R/R-3.6.2/library&quot;</code></pre>
 <p>You can use <code>lib.loc</code> when you want to install, load, update and remove packages from a particular library.</p>
 <div id="install" class="section level5">
 <h5>Install</h5>

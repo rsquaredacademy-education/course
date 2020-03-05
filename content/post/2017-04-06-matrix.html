@@ -12,7 +12,7 @@ tags:
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>In the previous post, we learnt to index/subset vectors. In this post, we will learn to create matrices. A matrix is a regular array of data elements, arranged in rows and columns. Matrices in R are homogeneous i.e. they can hold a single type of data. Matrix elements are indexed by specifying the row and column index and the elements of a matrix can filled either by row or column. In the first section, we look at various ways of creating matrices in R.</p>
+<p>In this tutorial, we will learn to create matrices. A matrix is a regular array of data elements, arranged in rows and columns. Matrices in R are homogeneous i.e. they can hold a single type of data. Matrix elements are indexed by specifying the row and column index and the elements of a matrix can filled either by row or column. In the first section, we look at various ways of creating matrices in R.</p>
 </div>
 <div id="creating-matrix" class="section level2">
 <h2>Creating Matrix</h2>
@@ -31,14 +31,14 @@ mat</code></pre>
 <p>In the above example, we created a matrix of 3 rows where the data elements are filled by columns. We need to specify either the
 number of <code>rows</code> or <code>columns</code> and R will automatically compute the other. The number of data elements should be equal to the product of the rows and columns, else R will return a warning.</p>
 <pre class="r"><code>matrix(data = 1:9, nrow = 2, byrow = FALSE)</code></pre>
-<pre><code>## Warning in matrix(data = 1:9, nrow = 2, byrow = FALSE): data length [9] is
-## not a sub-multiple or multiple of the number of rows [2]</code></pre>
+<pre><code>## Warning in matrix(data = 1:9, nrow = 2, byrow = FALSE): data length [9] is not a
+## sub-multiple or multiple of the number of rows [2]</code></pre>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    1    3    5    7    9
 ## [2,]    2    4    6    8    1</code></pre>
 <pre class="r"><code>matrix(data = 1:10, nrow = 3, byrow = FALSE)</code></pre>
-<pre><code>## Warning in matrix(data = 1:10, nrow = 3, byrow = FALSE): data length [10]
-## is not a sub-multiple or multiple of the number of rows [3]</code></pre>
+<pre><code>## Warning in matrix(data = 1:10, nrow = 3, byrow = FALSE): data length [10] is not
+## a sub-multiple or multiple of the number of rows [3]</code></pre>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    4    7   10
 ## [2,]    2    5    8    1
@@ -84,7 +84,7 @@ columns must be even</p></li>
 </div>
 <div id="row-column-names" class="section level2">
 <h2>Row &amp; Column Names</h2>
-<p>You can specify names for the rows and columns of a matrix. To do so, we need to use <code>list</code>. Lists can contain other data structures such as vectors, matrices and even other lists. They are heterogeneous i.e. they can contain different data types. We will learn more about lists in a future post, for the time being let us learn how to create a basic list using the <code>list()</code> function:</p>
+<p>You can specify names for the rows and columns of a matrix. To do so, we need to use <code>list</code>. Lists can contain other data structures such as vectors, matrices and even other lists. They are heterogeneous i.e. they can contain different data types. We will learn more about lists in a future tutorial, for the time being let us learn how to create a basic list using the <code>list()</code> function:</p>
 <pre class="r"><code># character vector
 first_name &lt;-   c(&quot;John&quot;, &quot;Jill&quot;, &quot;Jack&quot;)
 

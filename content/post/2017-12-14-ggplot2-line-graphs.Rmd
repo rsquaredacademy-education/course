@@ -14,9 +14,9 @@ tags:
 
 ### Introduction
 
-This is the 8th post in the series **Elegant Data Visualization with 
-ggplot2**. In the previous post, we learnt to build scatter plots. In this 
-post, we will learn to:
+This is the 8th tutorial in the series **Elegant Data Visualization with 
+ggplot2**. In the previous tutorial, we learnt to build scatter plots. In this 
+tutorial, we will learn to:
 
 - build 
     - simple line chart
@@ -37,12 +37,12 @@ library(tidyr)
 
 ### Libraries, Code & Data
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 - [readr](http://readr.tidyverse.org/)
 - [ggplot2](http://ggplot2.tidyverse.org/)
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) 
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) 
 and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/84b3204eee81d6e804f10a73900809b5).
 
 <br>
@@ -207,7 +207,7 @@ inside `aes()`.
 
 ### Summary
 
-In this post, we learnt to:
+In this tutorial, we learnt to:
 
 - build 
     - simple line chart
@@ -222,6 +222,6 @@ In this post, we learnt to:
 
 ### Up Next..
 
-In the next post, we will learn to build bar plots.
+In the next tutorial, we will learn to build bar plots.
 
 <br>

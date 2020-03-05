@@ -12,7 +12,7 @@ tags:
 
 ## Introduction
 
-In the previous post, we learnt about lists. In this post, we will learn about `dataframe`.
+In this tutorial, we will learn about `dataframe`.
 
 - create dataframe
 - select columns 
@@ -91,5 +91,5 @@ If you have observed carefully, the column `names` has been coerced to type fact
 students <- data.frame(name, age, graduate, stringsAsFactors = FALSE)
 ```
 
-We will learn about wrangling dataframes in a different post.
+We will learn about wrangling dataframes in a different tutorial.
 

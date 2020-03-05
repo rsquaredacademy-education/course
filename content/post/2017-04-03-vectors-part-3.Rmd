@@ -10,11 +10,11 @@ tags:
 
 ## Introduction
 
-In the previous post, we learnt to perform simple operations on vector and handle missing values. In this post, we will learn to index/subset vectors.
+In this tutorial, we will learn to index/subset vectors.
 
 ## Index Vectors
 
-One of the most important steps in data analysis is selecting a subset of data from a bigger data set. Indexing helps in retrieving values individually or a set of values that meet a specific criteria. In this post, we look at various ways of indexing/subsetting vectors.
+One of the most important steps in data analysis is selecting a subset of data from a bigger data set. Indexing helps in retrieving values individually or a set of values that meet a specific criteria. In this tutorial, we look at various ways of indexing/subsetting vectors.
 
 ## Index Operator
 

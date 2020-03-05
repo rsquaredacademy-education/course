@@ -18,13 +18,7 @@ tags:
 
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
-<p>This is the first post in the series <strong>R &amp; Databases</strong>. You can find the links to the other two posts of this series below:</p>
-<ul>
-<li><a href="https://rsquaredacademy.github.io/blog/post/data-wrangling-with-dbplyr">Data Wrangling with dbplyr</a></li>
-<li><a href="https://rsquaredacademy.github.io/blog/post/sql-for-data-science-part-1">SQL for Data Science - Part 1</a></li>
-<li><a href="https://rsquaredacademy.github.io/blog/post/sql-for-data-science-part-2">SQL for Data Science - Part 2</a></li>
-</ul>
-<p>In this post, we will learn to:</p>
+<p>In this tutorial, we will learn to:</p>
 <ul>
 <li>connect to a SQLite database from R</li>
 <li>display database information</li>
@@ -45,15 +39,15 @@ tags:
 </div>
 <div id="libraries-code-data" class="section level3">
 <h3>Libraries, Code &amp; Data</h3>
-<p>We will use the following libraries in this post:</p>
+<p>We will use the following libraries in this tutorial:</p>
 <ul>
 <li><a href="http://rstats-db.github.io/DBI/">DBI</a></li>
 <li><a href="https://rstats-db.github.io/RSQLite/">RSQLite</a></li>
 </ul>
-<p>All the data sets used in this post can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/7d99eb52a0e44cd1f87c8689cf1a307d">here</a>.</p>
+<p>All the data sets used in this tutorial can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/7d99eb52a0e44cd1f87c8689cf1a307d">here</a>.</p>
 <div id="connection" class="section level4">
 <h4>Connection</h4>
-<p>The first step is to connect to a database. In this post, we will connect to an in memory
+<p>The first step is to connect to a database. In this tutorial, we will connect to an in memory
 SQLite databse using <code>dbConnect()</code>.</p>
 <pre class="r"><code>con &lt;- dbConnect(RSQLite::SQLite(), &quot;:memory:&quot;)</code></pre>
 </div>
@@ -269,11 +263,11 @@ dbWriteTable(con, &quot;trial&quot;, trial2, overwrite = TRUE)</code></pre>
 <p>Let us see if the <strong>trial</strong> table has been overwritten.</p>
 <pre class="r"><code>dbGetQuery(con, &quot;select * from trial limit 5&quot;)</code></pre>
 <pre><code>##    x y
-## 1 81 k
-## 2 83 l
-## 3 86 m
-## 4 58 n
-## 5 73 o</code></pre>
+## 1 26 k
+## 2 95 l
+## 3 30 m
+## 4 40 n
+## 5 96 o</code></pre>
 </div>
 <div id="append-data" class="section level4">
 <h4>Append Data</h4>
@@ -285,27 +279,27 @@ trial3 &lt;- tibble::tibble(x, y)
 dbWriteTable(con, &quot;trial&quot;, trial3, append = TRUE)</code></pre>
 <p>Let us quickly check if the new data has been appended to the <strong>trial</strong> table.</p>
 <pre class="r"><code>dbReadTable(con, &quot;trial&quot;)</code></pre>
-<pre><code>##     x y
-## 1  81 k
-## 2  83 l
-## 3  86 m
-## 4  58 n
-## 5  73 o
-## 6  43 p
-## 7  98 q
-## 8  38 r
-## 9  14 s
-## 10 66 t
-## 11 36 e
-## 12 41 f
-## 13 94 g
-## 14 85 h
-## 15 62 i
-## 16 30 j
-## 17 20 k
-## 18 96 l
-## 19 11 m
-## 20 40 n</code></pre>
+<pre><code>##      x y
+## 1   26 k
+## 2   95 l
+## 3   30 m
+## 4   40 n
+## 5   96 o
+## 6   87 p
+## 7   65 q
+## 8   76 r
+## 9  100 s
+## 10  93 t
+## 11  76 e
+## 12  24 f
+## 13  82 g
+## 14  73 h
+## 15  85 i
+## 16  33 j
+## 17  86 k
+## 18  75 l
+## 19  16 m
+## 20  12 n</code></pre>
 <p>We can also use <code>sqlAppendTable()</code> to append data to an existing table.</p>
 <pre class="r"><code>sqlAppendTable(con, &quot;ecom&quot;, head(ecom))</code></pre>
 <pre><code>## Warning: Do not rely on the default value of the row.names argument for

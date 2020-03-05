@@ -14,10 +14,10 @@ tags:
 
 ### Introduction
 
-This is the second post in the series **Elegant Data Visualization with 
-ggplot2**. In the previous post, we understood the concept of grammar of 
+This is the second tutorial in the series **Elegant Data Visualization with 
+ggplot2**. In the previous tutorial, we understood the concept of grammar of 
 graphics and even built a bar plot step by step while exploring the different 
-components of a plot/chart. In this post, we will learn to quickly build a set 
+components of a plot/chart. In this tutorial, we will learn to quickly build a set 
 of plots that are routinely used to explore data using `qplot()`. It can be 
 used to quickly create plots but also has certain limitations. Nevertheless, if 
 you want to quickly explore data using a single function, `qplot()` is your friend.
@@ -31,12 +31,12 @@ library(dplyr)
 
 ### Libraries, Code & Data
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 - [readr](http://readr.tidyverse.org/)
 - [ggplot2](http://ggplot2.tidyverse.org/)
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) 
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) 
 and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/3b25fa07c60d44d561819d2c6ab77978).
 
 <br>
@@ -170,12 +170,12 @@ qplot(mpg, data = mtcars, bins = 5)
 
 ### Summary
 
-In this post, we learnt to quickly create plots using the `qplot()` function. While useful, it has limitations and can be used only to quickly visualize data. 
+In this tutorial, we learnt to quickly create plots using the `qplot()` function. While useful, it has limitations and can be used only to quickly visualize data. 
 
 <br>
 
 ### Up Next..
 
-In the next post, we will create the same set of plots but using **geoms**. 
+In the next tutorial, we will create the same set of plots but using **geoms**. 
 
 <br>

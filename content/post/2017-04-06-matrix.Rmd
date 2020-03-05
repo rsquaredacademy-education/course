@@ -10,7 +10,7 @@ tags:
 
 ## Introduction
 
-In the previous post, we learnt to index/subset vectors. In this post, we will learn to create matrices. A matrix is a regular array of data elements, arranged in rows and columns. Matrices in R are homogeneous i.e. they can hold a single type of data. Matrix elements are indexed by specifying the row and column index and the elements of a matrix can filled either by row or column. In the first section, we look at various ways of creating matrices in R.
+In this tutorial, we will learn to create matrices. A matrix is a regular array of data elements, arranged in rows and columns. Matrices in R are homogeneous i.e. they can hold a single type of data. Matrix elements are indexed by specifying the row and column index and the elements of a matrix can filled either by row or column. In the first section, we look at various ways of creating matrices in R.
 
 ## Creating Matrix
 
@@ -72,7 +72,7 @@ matrix(data = 1:10, ncol = 5)
 
 ## Row & Column Names
 
-You can specify names for the rows and columns of a matrix. To do so, we need to use `list`. Lists can contain other data structures such as vectors, matrices and even other lists. They are heterogeneous i.e. they can contain different data types.	We will learn more about lists in a future post, for the time being let us learn how to create a basic list using the `list()` function:
+You can specify names for the rows and columns of a matrix. To do so, we need to use `list`. Lists can contain other data structures such as vectors, matrices and even other lists. They are heterogeneous i.e. they can contain different data types.	We will learn more about lists in a future tutorial, for the time being let us learn how to create a basic list using the `list()` function:
 
 ```{r mat8}
 # character vector

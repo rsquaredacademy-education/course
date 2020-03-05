@@ -13,9 +13,9 @@ tags:
 
 ### Introduction
 
-This is the 15th post in the series **Elegant Data Visualization with ggplot2**. 
-In the previous post, we learnt how to modify the legend of plots when 
-aesthetics are mapped to variables..In this post, we will learn to modify the 
+This is the 15th tutorial in the series **Elegant Data Visualization with ggplot2**. 
+In the previous tutorial, we learnt how to modify the legend of plots when 
+aesthetics are mapped to variables..In this tutorial, we will learn to modify the 
 following using `scale_shape_manual` when `shape` is mapped to categorical 
 variables:
 
@@ -36,12 +36,12 @@ library(readr)
 
 <hr>
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 - [readr](http://readr.tidyverse.org/)
 - [ggplot2](http://ggplot2.tidyverse.org/)
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/446c78bd5cb4a6cb546bd440bc357140).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/446c78bd5cb4a6cb546bd440bc357140).
 
 <br>
 
@@ -186,7 +186,7 @@ ggplot(mtcars) +
 
 <hr>
 
-In this post, we learnt to modify the following aspects of legends: 
+In this tutorial, we learnt to modify the following aspects of legends: 
 
 - title
 - breaks
@@ -200,6 +200,6 @@ In this post, we learnt to modify the following aspects of legends:
 
 <hr>
 
-In the next post, we will learn how to modify the legend when `size` is mapped to variables.
+In the next tutorial, we will learn how to modify the legend when `size` is mapped to variables.
 
 <br>

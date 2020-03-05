@@ -16,13 +16,7 @@ tags:
 
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
-<p>This is the fourth post in the series <strong>R &amp; Databases</strong>. You can find the links to the other two posts of this series below:</p>
-<ul>
-<li><a href="https://blog.rsquaredacademy.com/quick-guide-r-sqlite/">Quick Guide: R &amp; SQLite</a></li>
-<li><a href="https://blog.rsquaredacademy.com/data-wrangling-with-dbplyr/">Data Wrangling with dbplyr</a></li>
-<li><a href="https://blog.rsquaredacademy.com/sql-for-data-science-part-1/">SQL for Data Science - Part 1</a></li>
-</ul>
-<p>In this post, we will learn to</p>
+<p>In this tutorial, we will learn to</p>
 <ul>
 <li>aggregate data</li>
 <li>order data</li>
@@ -31,13 +25,13 @@ tags:
 </div>
 <div id="libraries-code-data" class="section level3">
 <h3>Libraries, Code &amp; Data</h3>
-<p>We will use the following libraries in this post:</p>
+<p>We will use the following libraries in this tutorial:</p>
 <ul>
 <li><a href="http://readr.tidyverse.org/">DBI</a></li>
 <li><a href="https://rstats-db.github.io/RSQLite/">RSQLite</a></li>
 <li><a href="http://dbplyr.tidyverse.org/">dbplyr</a></li>
 </ul>
-<p>All the data sets used in this post can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/691dba8e13873c648bfdb91aba65d4d7">here</a>.</p>
+<p>All the data sets used in this tutorial can be found <a href="https://github.com/rsquaredacademy/datasets">here</a> and code can be downloaded from <a href="https://gist.github.com/rsquaredacademy/691dba8e13873c648bfdb91aba65d4d7">here</a>.</p>
 <div id="set-up" class="section level4">
 <h4>Set Up</h4>
 <pre class="r"><code>ecom &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv&#39;)
@@ -116,45 +110,45 @@ few examples:</p>
 <pre class="r"><code>dbGetQuery(con, &quot;SELECT * 
                  FROM ecom 
                  ORDER BY country&quot;)</code></pre>
-<pre><code>##        id referrer device bouncers n_visit n_pages duration
-## 1     232   social laptop        0       8       2       60
-## 2     299    yahoo laptop        0      10      18      180
-## 3     570   social laptop        1       2       1      274
-## 4     677   direct tablet        1      10       1      682
-##                               country purchase order_items order_value
-## 1                         Afghanistan        0           0           0
-## 2                         Afghanistan        0           0           0
-## 3                         Afghanistan        0           0           0
-## 4                         Afghanistan        0           0           0
-##  [ reached getOption(&quot;max.print&quot;) -- omitted 996 rows ]</code></pre>
+<pre><code>##    id referrer device bouncers n_visit n_pages duration     country purchase
+## 1 232   social laptop        0       8       2       60 Afghanistan        0
+## 2 299    yahoo laptop        0      10      18      180 Afghanistan        0
+## 3 570   social laptop        1       2       1      274 Afghanistan        0
+## 4 677   direct tablet        1      10       1      682 Afghanistan        0
+##   order_items order_value
+## 1           0           0
+## 2           0           0
+## 3           0           0
+## 4           0           0
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 996 rows ]</code></pre>
 <pre class="r"><code>dbGetQuery(con, &quot;SELECT *  
                  FROM ecom 
                  ORDER BY duration&quot;)</code></pre>
-<pre><code>##        id referrer device bouncers n_visit n_pages duration
-## 1     236    yahoo tablet        1       5       1       10
-## 2     615   social laptop        1       1       1       10
-## 3     392    yahoo laptop        0       0       1       12
-## 4     688   social mobile        1       2       1       12
-##                               country purchase order_items order_value
-## 1                              Poland        0           0           0
-## 2                             Finland        0           0           0
-## 3                           Indonesia        0           0           0
-## 4                            Botswana        0           0           0
-##  [ reached getOption(&quot;max.print&quot;) -- omitted 996 rows ]</code></pre>
+<pre><code>##    id referrer device bouncers n_visit n_pages duration   country purchase
+## 1 236    yahoo tablet        1       5       1       10    Poland        0
+## 2 615   social laptop        1       1       1       10   Finland        0
+## 3 392    yahoo laptop        0       0       1       12 Indonesia        0
+## 4 688   social mobile        1       2       1       12  Botswana        0
+##   order_items order_value
+## 1           0           0
+## 2           0           0
+## 3           0           0
+## 4           0           0
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 996 rows ]</code></pre>
 <pre class="r"><code>dbGetQuery(con, &quot;SELECT * 
                  FROM ecom 
                  ORDER BY n_visit DESC&quot;)</code></pre>
-<pre><code>##        id referrer device bouncers n_visit n_pages duration
-## 1       1   google laptop        1      10       1      693
-## 2       7    yahoo mobile        1      10       1       75
-## 3       8   direct mobile        1      10       1      908
-## 4      29   google mobile        1      10       1      338
-##                               country purchase order_items order_value
-## 1                      Czech Republic        0           0           0
-## 2                          Bangladesh        0           0           0
-## 3                           Indonesia        0           0           0
-## 4                              Russia        0           0           0
-##  [ reached getOption(&quot;max.print&quot;) -- omitted 996 rows ]</code></pre>
+<pre><code>##   id referrer device bouncers n_visit n_pages duration        country purchase
+## 1  1   google laptop        1      10       1      693 Czech Republic        0
+## 2  7    yahoo mobile        1      10       1       75     Bangladesh        0
+## 3  8   direct mobile        1      10       1      908      Indonesia        0
+## 4 29   google mobile        1      10       1      338         Russia        0
+##   order_items order_value
+## 1           0           0
+## 2           0           0
+## 3           0           0
+## 4           0           0
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 996 rows ]</code></pre>
 </div>
 <div id="group-by" class="section level4">
 <h4>Group By</h4>
@@ -180,7 +174,7 @@ few examples:</p>
 </div>
 <div id="summary" class="section level3">
 <h3>Summary</h3>
-<p>In this post, we learnt to</p>
+<p>In this tutorial, we learnt to</p>
 <ul>
 <li>aggregate data</li>
 <li>order data</li>

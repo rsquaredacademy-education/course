@@ -12,8 +12,8 @@ tags:
 
 ## Introduction
 
-In the previous [post](https://blog.aravindhebbali.com/2017/12/25/data-wrangling-with-dplyr-part-2/), 
-we learnt to combine tables using dplyr. In this post, we will explore a set of 
+In the previous [tutorial](https://blog.aravindhebbali.com/2017/12/25/data-wrangling-with-dplyr-part-2/), 
+we learnt to combine tables using dplyr. In this tutorial, we will explore a set of 
 helper functions in order to:
 
 - extract unique rows 
@@ -193,7 +193,7 @@ sample_frac(ecom, size = 0.7)
 
 ## Data Extraction
 
-In the first [post](https://blog.aravindhebbali.com/2017/12/25/data-wrangling-with-dplyr-part-1/),
+In the first [tutorial](https://blog.aravindhebbali.com/2017/12/25/data-wrangling-with-dplyr-part-1/),
 we had observed that dplyr verbs always returned a tibble. What if you want to
 extract a specific column or a bunch of rows but not as a tibble? 
 

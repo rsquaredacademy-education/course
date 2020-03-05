@@ -15,7 +15,7 @@ slug: data-visualization-with-r-legends
 
 ### Introduction
 
-This is the eighth post in the series **Data Visualisation With R**. In the previous post, we learnt to build histograms. In this post, we will learn how to:
+This is the eighth tutorial in the series **Data Visualisation With R**. In the previous tutorial, we learnt to build histograms. In this tutorial, we will learn how to:
 
 - position the legend within the plot
 - modify the layout using `ncol` and `horiz` arguments
@@ -29,7 +29,7 @@ Since we have looked at a line graph in the above example, we will learn how to 
 
 ### Libraries, Code & Data
 
-All the data sets used in this post can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/0036a9cc1ca779965f45c38af260dcdc).
+All the data sets used in this tutorial can be found [here](https://github.com/rsquaredacademy/datasets) and code can be downloaded from [here](https://gist.github.com/rsquaredacademy/0036a9cc1ca779965f45c38af260dcdc).
 
 ### Data
 
@@ -392,7 +392,7 @@ legend(x = 2012, y = 0, legend = c('india', 'china'),
 
 ### Summary
 
-In this post, we learnt to add legend to a plot using the `legend()` function. Specifically, we learnt to
+In this tutorial, we learnt to add legend to a plot using the `legend()` function. Specifically, we learnt to
 
 - position the legend within the plot
 - modify the layout using `ncol` and `horiz` arguments
