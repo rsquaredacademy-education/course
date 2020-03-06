@@ -1,0 +1,120 @@
+---
+title: "Regular Expressions - Introduction"
+author: Aravind Hebbali
+twitterImg: /img/regex_cover_image.png
+description: "Beginners guide to regular expressions in R"
+date: '2019-05-27'
+slug: regular-expression-intro
+categories:
+  - regex
+tags:
+  - regex
+---
+
+
+
+<p><img src="/img/regex_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this post, we will learn about using regular expressions in R. While it is
+aimed at absolute beginners, we hope experienced users will find it useful as
+well. The post is broadly divided into 3 sections. In the first section, we
+will introduce the pattern matching functions such as <code>grep</code>, <code>grepl</code> etc. in
+base R as we will be using them in the rest of the post. Once the reader is
+comfortable with the above mentioned pattern matching functions, we will
+learn about regular expressions while exploring the names of R packages by
+probing the following:</p>
+<ul>
+<li>how many package names include the letter <code>r</code>?</li>
+<li>how many package names begin or end with the letter <code>r</code>?</li>
+<li>how many package names include the words <code>data</code> or <code>plot</code>?</li>
+</ul>
+<p>In the final section, we will go through 4 case studies including simple email
+validation. If you plan to try the case studies, please do not skip any of the
+topics in the second section.</p>
+<div id="what" class="section level3">
+<h3>What</h3>
+<p><img src="/img/regex_what.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="why" class="section level3">
+<h3>Why</h3>
+<p>Regular expressions can be used for:</p>
+<ul>
+<li>search</li>
+<li>replace</li>
+<li>validation</li>
+<li>extraction</li>
+</ul>
+<p><img src="/img/regex_why.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="use-cases" class="section level3">
+<h3>Use Cases</h3>
+<p>Regular expressions have applications in a wide range of areas. We list some of
+the most popular ones below:</p>
+<ul>
+<li>email validation</li>
+<li>password validation</li>
+<li>date validation</li>
+<li>phone number validation</li>
+<li>search and replace in text editors</li>
+<li>web scraping</li>
+</ul>
+<p><img src="/img/regex_use_case_blog.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="learning" class="section level2">
+<h2>Learning</h2>
+<p>The below steps offer advice on the best way to learn or use regular expressions:</p>
+<ul>
+<li>describe the pattern in layman terms</li>
+<li>break down the pattern into individual components<br />
+</li>
+<li>match each component to a regular expression</li>
+<li>build incrementally</li>
+<li>test</li>
+</ul>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this post:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/regex/regex.html" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/regular-expressions-in-r" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/356612" target="_blank">RStudio Cloud</a></li>
+</ul>
+<hr>
+<p><a href="https://www.rsquaredacademy.com/" target="_blank"><img src="/img/ad.png" width="100%" alt="course ad" style="text-decoration: none;"></a></p>
+<hr>
+</div>
+<div id="libraries" class="section level2">
+<h2>Libraries</h2>
+<p>We will use the following libraries in this post:</p>
+<pre class="r"><code>library(dplyr)
+library(readr)</code></pre>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>We will use two data sets in this post. The first one is a list of all R
+packages on CRAN and is present in the <code>package_names.csv</code> file, and the
+second one, <code>top_downloads</code>, is the most downloaded packages from the
+<a href="https://cran.rstudio.com/" target="_blank">RStudio CRAN mirror</a>
+in the first week of May 2019, and extracted using the
+<a href="https://cranlogs.r-pkg.org/#rpackage" target="_blank">cranlogs</a> pacakge.</p>
+<div id="r-packages-data" class="section level3">
+<h3>R Packages Data</h3>
+<pre class="r"><code>read_csv(&quot;package_names.csv&quot;) %&gt;%
+  pull(1) -&gt; r_packages </code></pre>
+</div>
+<div id="top-r-packages" class="section level3">
+<h3>Top R Packages</h3>
+<pre class="r"><code>top_downloads &lt;- c(&quot;devtools&quot;, &quot;rlang&quot;, &quot;dplyr&quot;, &quot;Rcpp&quot;, &quot;tibble&quot;,    
+                   &quot;ggplot2&quot;, &quot;glue&quot;, &quot;pillar&quot;, &quot;cli&quot;, &quot;data.table&quot;)
+
+top_downloads</code></pre>
+<pre><code>##  [1] &quot;devtools&quot;   &quot;rlang&quot;      &quot;dplyr&quot;      &quot;Rcpp&quot;       &quot;tibble&quot;    
+##  [6] &quot;ggplot2&quot;    &quot;glue&quot;       &quot;pillar&quot;     &quot;cli&quot;        &quot;data.table&quot;</code></pre>
+<p>If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
+or reach out to us at <a href="mailto:feedback@rsquaredacademy.com" class="email">feedback@rsquaredacademy.com</a>.</p>
+</div>
+</div>

@@ -1,0 +1,209 @@
+---
+title: "Regular Expressions - Case Studies"
+author: Aravind Hebbali
+twitterImg: /img/regex_cover_image.png
+description: "Beginners guide to regular expressions in R"
+date: '2019-05-27'
+slug: regular-expression-case-studies
+categories:
+  - regex
+tags:
+  - regex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r regex_cover_image, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cover_image.png")
+```
+
+```{r install, eval=TRUE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(readr)
+```
+
+
+## Introduction
+
+In this post, we will learn about using regular expressions in R. While it is 
+aimed at absolute beginners, we hope experienced users will find it useful as 
+well. The post is broadly divided into 3 sections. In the first section, we 
+will introduce the pattern matching functions such as `grep`, `grepl` etc. in 
+base R as we will be using them in the rest of the post. Once the reader is 
+comfortable with the above mentioned pattern matching functions, we will 
+learn about regular expressions while exploring the names of R packages by 
+probing the following:
+
+- how many package names include the letter `r`?
+- how many package names begin or end with the letter `r`?
+- how many package names include the words `data` or `plot`?
+
+In the final section, we will go through 4 case studies including simple email
+validation. If you plan to try the case studies, please do not skip any of the
+topics in the second section. 
+
+## Case Studies
+
+Now that we have understood the basics of regular expressions, it is time for 
+some practical application. The case studies in this section include validating 
+the following:
+
+- blood group
+- email id
+- PAN number
+- GST number
+
+Note, the regular expressions used here are not robust as compared to those 
+used in real world applications. Our aim is to demonstrate a general strategy
+to used while dealing with regular expressions. 
+
+### Blood Group
+
+According to Wikipedia, a blood group or type is a classification of blood based 
+on the presence and absence of antibodies and inherited antigenic substances on 
+the surface of red blood cells (RBCs).
+
+```{r regex_bg_validation, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cs_blood_groups.png")
+```
+
+The below table defines the matching pattern for blood group and maps them to
+regular expressions. 
+
+- it must begin with `A`, `B`, `AB` or `O`
+- it must end with `+` or `-`
+
+```{r regex_bg_table, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cs_bg_table.png")
+```
+
+Let us test the regular expression with some examples.
+
+```{r blood_group}
+blood_pattern <- "^(A|B|AB|O)[-|+]$"
+blood_sample <- c("A+", "C-", "AB+")
+grep(x = blood_sample, pattern = blood_pattern, value = TRUE)
+```
+
+### email id
+
+Nowadays email is ubiquitous. We use it for everything from communication to 
+registration for online services. Wherever you go, you will be asked for email 
+id. You might even be denied a few services if you do not use email. At the same
+time, it is important to validate a email address. You might have seen a message
+similar to the below one when you misspell or enter a wrong email id. Regular
+expressions are used to validate email address and in this case study we will 
+attempt to do the same.
+
+```{r regex_email_validation, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cs_email.png")
+```
+
+First, we will create some basic rules for simple email validation:
+
+- it must begin with a letter
+- the id may include letters, numbers and special characters
+- must include only one @ and dot
+- the id must be to the left of @
+- the domain name should be between @ and dot
+- the domain extension should be after dot and must include only letters
+
+In the below table, we map the above rules to general expression.
+
+```{r regex_email_table, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cs_email_table.png")
+```
+
+Let us now test the regular expression with some dummy email ids.
+
+```{r email_validation}
+email_pattern <- "^[a-zA-Z0-9\\!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\\.[a-z]"
+emails <- c("test9+_A@test.com", "test@test..com", "test-test.com")
+grep(x = emails, pattern = email_pattern, value = TRUE)
+```
+
+### PAN Number Validation
+
+PAN (Permanent Account Number) is an identification number assigned to all 
+taxpayers in India. PAN is an electronic system through which, all tax related 
+information for a person/company is recorded against a single PAN number.
+
+#### Structure
+
+- must include only 10 characters
+- the first 5 characters are letters
+- the next 4 characters are numerals
+- the last character is a letter
+
+```{r regex_pan_validation_1, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cs_pan_1.png")
+```
+
+- the first 3 characters are a sequence from AAA to ZZZ
+- the 4th character indicates the status of the tax payer and shold be one of
+A, B, C, F, G, H, L, J, P, T or E
+- the 5th character is the first character of the last/surname of the card holder
+- the 6th to 10th character is a sequnce from 0001 to 9999
+- the last character is a letter
+
+```{r regex_pan_validation_2, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cs_pan_2.png")
+```
+
+In the below table, we map the pattern to regular expression.
+
+```{r regex_pan_table, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cs_pan_table.png")
+```
+
+Let us test the regular expression with some dummy PAN numbers.
+
+```{r pan_validation}
+pan_pattern <- "^[A-Z]{3}(A|B|C|F|G|H|L|J|P|T|E)[A-Z][0-9]{4}[A-Z]"
+my_pan <- c("AJKNT3865H", "AJKNT38655", "A2KNT3865H", "AJKDT3865H")
+grep(x = my_pan, pattern = pan_pattern, value = TRUE)
+```
+
+### GST Number Validation
+
+In simple words, Goods and Service Tax (GST) is an indirect tax levied on the 
+supply of goods and services. This law has replaced many indirect tax laws that 
+previously existed in India. GST identification number is assigned to every
+GST registed dealer.
+
+```{r regex_gst_validation, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cs_gst.png")
+```
+
+#### Structure
+
+Below is the format break down of GST identification number:
+
+- it must include 15 characters only
+- the first 2 characters represent the state code and is a sequence from 01 to 35
+- the next 10 characters are the PAN number of the entity
+- the 13th character is the entity code and is between 1 and 9
+- the 14th character is a default alphabet, **Z**
+- the 15th character is a random single number or alphabet
+
+In the below table, we map the pattern to regular expression.
+
+```{r regex_gst_table, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cs_gst_table.png")
+```
+
+Let us test the regular expression with some dummy GST numbers.
+
+```{r gst_validation}
+gst_pattern <- "[0-3][1-5][A-Z]{3}(A|B|C|F|G|H|L|J|P|T|E)[A-Z][0-9]{4}[A-Z][1-9]Z[0-9A-Z]"
+sample_gst <- c("22AAAAA0000A1Z5", "22AAAAA0000A1Z", "42AAAAA0000A1Z5",
+                "38AAAAA0000A1Z5", "22AAAAA0000A0Z5", "22AAAAA0000A1X5",
+                "22AAAAA0000A1Z$")
+grep(x = sample_gst, pattern = gst_pattern, value = TRUE)
+```
+
+If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
+or reach out to us at feedback@rsquaredacademy.com.

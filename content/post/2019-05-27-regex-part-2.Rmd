@@ -1,0 +1,228 @@
+---
+title: "Regular Expressions - Pattern Matching"
+author: Aravind Hebbali
+twitterImg: /img/regex_cover_image.png
+description: "Beginners guide to regular expressions in R"
+date: '2019-05-27'
+slug: regular-expression-pattern-matching-functions
+categories:
+  - regex
+tags:
+  - regex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r regex_cover_image, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cover_image.png")
+```
+
+## Introduction
+
+In this post, we will learn about using regular expressions in R. While it is 
+aimed at absolute beginners, we hope experienced users will find it useful as 
+well. The post is broadly divided into 3 sections. In the first section, we 
+will introduce the pattern matching functions such as `grep`, `grepl` etc. in 
+base R as we will be using them in the rest of the post. Once the reader is 
+comfortable with the above mentioned pattern matching functions, we will 
+learn about regular expressions while exploring the names of R packages by 
+probing the following:
+
+- how many package names include the letter `r`?
+- how many package names begin or end with the letter `r`?
+- how many package names include the words `data` or `plot`?
+
+In the final section, we will go through 4 case studies including simple email
+validation. If you plan to try the case studies, please do not skip any of the
+topics in the second section. 
+
+## Pattern Matching Functions
+
+Before we get into the nitty gritty of regular expressions, let us explore a
+few functions from base R for pattern matching. We will learn about using
+regular expressions with the stringr package in an upcoming post.
+
+```{r regex_base_functions, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_base_functions.png")
+```
+
+```{r install, eval=TRUE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(readr)
+```
+
+
+## grep
+
+The first function we will learn is `grep()`. It can be used to find elements
+that match a given pattern in a character vector. It will return the elements
+or the index of the elements based on your specification. In the below example, 
+`grep()` returns the index of the elements that match the given pattern. 
+
+```{r grep_index, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_grep_index_canva.png")
+```
+
+```{r top_downloads, echo=FALSE}
+top_downloads <- c("devtools", "rlang", "dplyr", "Rcpp", "tibble",    
+                   "ggplot2", "glue", "pillar", "cli", "data.table")
+
+top_downloads
+```
+
+
+```{r grep_code}
+grep(x = top_downloads, pattern = "r")
+```
+
+Now let us look at the inputs:
+
+- `pattern`
+- `x`
+- `ignore.case`
+- `value`
+- `invert`
+
+
+## grep - Value
+
+If you want `grep()` to return the element instead of the index, set the
+`value` argument to `TRUE`. The default is `FALSE`. In the below example, 
+`grep()` returns the elements and not their index.
+
+```{r grep_value, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_grep_value_canva.png")
+```
+
+```{r grep_value_code}
+grep(x = top_downloads, pattern = "r", value = TRUE)
+```
+
+## grep - Ignore Case
+
+If you have carefully observed the previous examples, have you noticed that
+the pattern `r` did not match the element `Rcpp` i.e. regular expressions are
+case sensitive. The `ignore.case` argument will ignore case while matching the
+pattern as shown below.
+
+```{r grep_ignore_case, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_grep_ignore_case_canva.png")
+```
+
+```{r grep_ignore_case_code}
+grep(x = top_downloads, pattern = "r", value = TRUE, ignore.case = TRUE)
+grep(x = top_downloads, pattern = "R", value = TRUE)
+grep(x = top_downloads, pattern = "R", value = TRUE, ignore.case = TRUE)
+```
+
+## grep - Invert
+
+In some cases, you may want to retrieve elements that do not match the pattern
+specified. The `invert` argument will return the elements that do not match
+the pattern. In the below example, the elements returned do not match the 
+pattern specified by us.
+
+```{r grep_invert, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_grep_invert_canva.png")
+```
+
+```{r grep_invert_code}
+grep(x = top_downloads, pattern = "r", value = TRUE, invert = TRUE)
+grep(x = top_downloads, pattern = "r", value = TRUE, 
+     invert = TRUE, ignore.case = TRUE)
+```
+
+## grepl
+
+`grepl()` will return only logical values. If the elements match the pattern
+specified, it will return `TRUE` else `FALSE`.
+
+```{r grepl, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_grepl_canva.png")
+```
+
+```{r grepl_code}
+grepl(x = top_downloads, pattern = "r")
+```
+
+### Ignore Case
+
+To ignore the case, use the `ignore.case` argument and set it to `TRUE`.
+
+```{r grepl_ignore_case, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_grepl_ignore_case_canva.png")
+```
+
+```{r grepl_ignore_case_code}
+grepl(x = top_downloads, pattern = "r", ignore.case = TRUE)
+```
+
+The next 3 functions that we explore differ from the above 2 in the format of 
+and amount of details in the results. They all return the following additional 
+details:
+
+- the starting position of the first match
+- the length of the matched text
+- whether the match position and length are in chracter or bytes 
+
+### regexpr
+
+```{r regexpr}
+rr_pkgs <- c("purrr", "olsrr", "blorr")
+regexpr("r", rr_pkgs)
+```
+
+### gregexpr
+
+```{r gregexpr}
+gregexpr("r", rr_pkgs)
+```
+
+### regexec
+
+```{r regexec}
+regexec("r", rr_pkgs)
+```
+
+<hr>
+
+<p>
+<a href="https://www.youtube.com/user/rsquaredin/" target="_blank"><img src="/img/ad_youtube.png" width="100%" alt="youtube ad" style="text-decoration: none;"></a>
+</p>
+
+<hr>
+
+## sub
+
+`sub()` will perform replacement of the first match. In the below example, 
+you can observe that only the first match of `r` is replaced by `s` while
+the rest remain the same. 
+
+```{r sub, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_sub_canva.png")
+```
+
+```{r sub_code}
+rr_pkgs <- c("purrr", "olsrr", "blorr")
+sub(x = rr_pkgs, pattern = "r", replacement = "s")
+```
+
+## gsub
+
+`gsub()` will perform replacement of all the matches. In the below example, 
+all the `s` are replaced by `r`. Compare the below output with the output from
+`sub()` to understand the difference between them.
+
+```{r gsub, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_gsub_canva.png")
+```
+
+```{r gsub_code}
+gsub(x = rr_pkgs, pattern = "r", replacement = "s")
+```
+
+If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
+or reach out to us at feedback@rsquaredacademy.com.

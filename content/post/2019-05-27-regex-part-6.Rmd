@@ -1,0 +1,291 @@
+---
+title: "Regular Expressions - Sequences"
+author: Aravind Hebbali
+twitterImg: /img/regex_cover_image.png
+description: "Beginners guide to regular expressions in R"
+date: '2019-05-27'
+slug: regular-expression-sequences
+categories:
+  - regex
+tags:
+  - regex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r regex_cover_image, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cover_image.png")
+```
+
+```{r install, eval=TRUE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(readr)
+```
+
+
+## Introduction
+
+In this post, we will learn about using regular expressions in R. While it is 
+aimed at absolute beginners, we hope experienced users will find it useful as 
+well. The post is broadly divided into 3 sections. In the first section, we 
+will introduce the pattern matching functions such as `grep`, `grepl` etc. in 
+base R as we will be using them in the rest of the post. Once the reader is 
+comfortable with the above mentioned pattern matching functions, we will 
+learn about regular expressions while exploring the names of R packages by 
+probing the following:
+
+- how many package names include the letter `r`?
+- how many package names begin or end with the letter `r`?
+- how many package names include the words `data` or `plot`?
+
+In the final section, we will go through 4 case studies including simple email
+validation. If you plan to try the case studies, please do not skip any of the
+topics in the second section. 
+
+## Sequences
+
+```{r regex_sequences, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_sequences.png")
+```
+
+#### Digit Character
+
+`\\d` matches any digit character. Let us use it to find package names that 
+include a digit.
+
+```{r sequence_digit, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_match_digit.png")
+```
+
+```{r top_downloads, echo=FALSE}
+top_downloads <- c("devtools", "rlang", "dplyr", "Rcpp", "tibble",    
+                   "ggplot2", "glue", "pillar", "cli", "data.table")
+
+top_downloads
+```
+
+```{r read_data, echo=FALSE, message=FALSE}
+read_csv("package_names.csv") %>%
+  pull(1) -> r_packages 
+```
+
+```{r digit_code}
+grep(x = r_packages, pattern = "\\d", value = TRUE)[1:50]
+
+# invert
+grep(x = r_packages, pattern = "\\d", value = TRUE, invert = TRUE)[1:50]
+```
+
+In the next few examples, we will not use R package names data, instead we will 
+use dummy data of Invoice IDs and see if they conform to certain rules such as:
+
+- they should include letters and numbers
+- they should not include symbols
+- they should not include space or tab
+
+#### Non Digit Character
+
+`\\D` matches any non-digit character. Let us use it to remove invoice ids that
+include only numbers and no letters.
+
+```{r sequence_non_digit, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_match_non_digit.png")
+```
+
+As you can see below, thre are 3 invoice ids that did not conform to the rules 
+and have been removed. Only those invoice ids that have both letter and numbers
+have been returned.
+
+```{r non_digit_code}
+invoice_id <- c("R536365", "R536472", "R536671", "536915", "R536125", "R536287",
+                "536741", "R536893", "R536521", "536999")
+grep(x = invoice_id, pattern = "\\D", value = TRUE)
+
+# invert
+grep(x = invoice_id, pattern = "\\D", value = TRUE, invert = TRUE)
+```
+
+#### White Space Character
+
+`\\s` matches any white space character such as space or tab. Let us use it to
+detect invoice ids that include any white space (space or tab).
+
+```{r sequence_space, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_match_space.png")
+```
+
+As you can see below, there are 4 invoice ids that include white space 
+character.
+
+```{r space_code}
+grep(x = c("R536365", "R 536472", "R536671", "R536915", "R53 6125", "R536287",
+           "536741", "R5368  93", "R536521", "536 999"), 
+     pattern = "\\s", value = TRUE)
+
+grep(x = c("R536365", "R 536472", "R536671", "R536915", "R53 6125", "R536287",
+           "536741", "R5368  93", "R536521", "536 999"), 
+     pattern = "\\s", value = TRUE, invert = TRUE)
+```
+
+#### Non White Space Character
+
+`\\S` matches any non white space character. Let us use it to remove any 
+invoice ids which are blank or missing.
+
+```{r sequence_non_space, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_match_non_space.png")
+```
+
+As you can see below, two invoice ids which were blank have been removed. If you
+observe carefully, it does not remove any invoice ids which have a white space
+character present, it only removes those which are completely blank i.e. those
+which include only space or tab.
+
+```{r non_space_code}
+grep(x = c("R536365", "R 536472", " ", "R536915", "R53 6125", "R536287",
+           " ", "R5368  93", "R536521", "536 999"), 
+     pattern = "\\S", value = TRUE)
+
+# invert
+grep(x = c("R536365", "R 536472", " ", "R536915", "R53 6125", "R536287",
+           " ", "R5368  93", "R536521", "536 999"), 
+     pattern = "\\S", value = TRUE, invert = TRUE)
+```
+
+#### Word Character
+
+`\\w` matches any word character i.e. alphanumeric. It includes the following:
+
+- a to z
+- A to Z
+- 0 to 9
+- underscore(_)
+
+```{r sequence_word, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_match_word.png")
+```
+
+Let us use it to remove those invoice ids which include only symbols or special
+characters. Again, you can see that it does not remove those ids which include
+both word characters and symbols as it will match any string that includes 
+word characters.
+
+```{r word_code}
+grep(x = c("R536365", "%+$!#@?", "R536671", "R536915", "$%+#!@?", "R5362@87",
+           "53+67$41", "R536893", "@$+%#!", "536#999"), 
+     pattern = "\\w", value = TRUE)
+
+# invert
+grep(x = c("R536365", "%+$!#@?", "R536671", "R536915", "$%+#!@?", "R5362@87",
+           "53+67$41", "R536893", "@$+%#!", "536#999"), 
+     pattern = "\\w", value = TRUE, invert = TRUE)
+```
+
+#### Non Word Character
+
+`\\W` matches any non-word character i.e. symbols. It includes everything that
+is not a word character.
+
+```{r sequence_non_word, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_match_non_word.png")
+```
+
+Let us use it to detect invoice ids that include any non-word character. As you
+can see only 4 ids do not include non-word characters.
+
+```{r non_word_code}
+grep(x = c("R536365", "%+$!#@?", "R536671", "R536915", "$%+#!@?", "R5362@87",
+           "53+67$41", "R536893", "@$+%#!", "536#999"), 
+     pattern = "\\W", value = TRUE)
+
+# invert
+grep(x = c("R536365", "%+$!#@?", "R536671", "R536915", "$%+#!@?", "R5362@87",
+           "53+67$41", "R536893", "@$+%#!", "536#999"), 
+     pattern = "\\W", value = TRUE, invert = TRUE)
+```
+
+## Word Boundary
+
+`\\b` and `\\B` are similar to caret and dollar symbol. They match at a position
+called word boundary. Now, what is a word boundary? The following 3 positions
+qualify as word boundaries:
+
+- before the first character in the string
+- after the last character in the string
+- between two characters in the string
+
+In the first 2 cases, the character must be a word character whereas in the 
+last case, one should be a word character and another non-word character. Sounds
+confusing? It will be clear once we go through a few examples.
+
+Let us say we are looking for package names beginning with the string `stat`. 
+In this case, we can prefix `stat` with `\\b`. 
+
+```{r word_boundary_1, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_word_boundary_1.png")
+```
+
+```{r boundary_code_2}
+grep(x = r_packages, pattern = "\\bstat", value = TRUE) 
+```
+
+Suffix `\\b` to `stat` to look at all package names that end with the string 
+`stat`.
+
+```{r word_boundary_2, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_word_boundary_2.png")
+```
+
+If you observe the output, you can find package names that do not end with 
+the string `stat`. `spatstat.data`, `spatstat.local` and `spatstat.utils` do not
+end with `stat` but satisfy the third condition mentioned aboved for word 
+boundaries. They are between 2 characters where `t` is a word character and dot
+is a non-word character.
+
+```{r boundary_code_3}
+grep(x = r_packages, pattern = "stat\\b", value = TRUE)
+```
+
+Do package names include the string `stat` either at the end or in the middle 
+but not at the beginning? Prefix `stat` with `\\B` to find the answer.
+
+```{r word_boundary_3, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_word_boundary_3.png")
+```
+
+```{r boundary_code_4}
+grep(x = r_packages, pattern = "\\Bstat", value = TRUE)
+```
+
+Are there packages whose names include the string `stat` either at the 
+beginning or in the middle but not at the end. Suffix `\\B` to `stat` to 
+answer this question.
+
+```{r word_boundary_4, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_word_boundary_4.png")
+```
+
+```{r boundary_code_5}
+grep(x = r_packages, pattern = "stat\\B", value = TRUE)
+```
+
+Prefix and suffix `\\B` to `stat` to look at package names that include the 
+string `stat` but neither in the beginning nor in the end. 
+
+```{r word_boundary_5, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_word_boundary_5.png")
+```
+
+In the below output, you can observe that the string `stat` must be between
+two word characters. Those examples we showed in the case of `\\b` where it 
+was surrounded by a dot do not hold here.
+
+```{r boundary_code_6}
+grep(x = r_packages, pattern = "\\Bstat\\B", value = TRUE)
+```
+
+If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
+or reach out to us at feedback@rsquaredacademy.com.

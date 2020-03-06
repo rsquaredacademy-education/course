@@ -1,0 +1,294 @@
+---
+title: "Regular Expressions - Sequences"
+author: Aravind Hebbali
+twitterImg: /img/regex_cover_image.png
+description: "Beginners guide to regular expressions in R"
+date: '2019-05-27'
+slug: regular-expression-sequences
+categories:
+  - regex
+tags:
+  - regex
+---
+
+
+
+<p><img src="/img/regex_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>library(dplyr)
+library(readr)</code></pre>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this post, we will learn about using regular expressions in R. While it is
+aimed at absolute beginners, we hope experienced users will find it useful as
+well. The post is broadly divided into 3 sections. In the first section, we
+will introduce the pattern matching functions such as <code>grep</code>, <code>grepl</code> etc. in
+base R as we will be using them in the rest of the post. Once the reader is
+comfortable with the above mentioned pattern matching functions, we will
+learn about regular expressions while exploring the names of R packages by
+probing the following:</p>
+<ul>
+<li>how many package names include the letter <code>r</code>?</li>
+<li>how many package names begin or end with the letter <code>r</code>?</li>
+<li>how many package names include the words <code>data</code> or <code>plot</code>?</li>
+</ul>
+<p>In the final section, we will go through 4 case studies including simple email
+validation. If you plan to try the case studies, please do not skip any of the
+topics in the second section.</p>
+</div>
+<div id="sequences" class="section level2">
+<h2>Sequences</h2>
+<p><img src="/img/regex_sequences.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="digit-character" class="section level4">
+<h4>Digit Character</h4>
+<p><code>\\d</code> matches any digit character. Let us use it to find package names that
+include a digit.</p>
+<p><img src="/img/regex_match_digit.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre><code>##  [1] &quot;devtools&quot;   &quot;rlang&quot;      &quot;dplyr&quot;      &quot;Rcpp&quot;       &quot;tibble&quot;    
+##  [6] &quot;ggplot2&quot;    &quot;glue&quot;       &quot;pillar&quot;     &quot;cli&quot;        &quot;data.table&quot;</code></pre>
+<pre class="r"><code>grep(x = r_packages, pattern = &quot;\\d&quot;, value = TRUE)[1:50]</code></pre>
+<pre><code>##  [1] &quot;A3&quot;              &quot;ABCp2&quot;           &quot;abf2&quot;            &quot;Ac3net&quot;         
+##  [5] &quot;acm4r&quot;           &quot;ade4&quot;            &quot;ade4TkGUI&quot;       &quot;AdvDif4&quot;        
+##  [9] &quot;ALA4R&quot;           &quot;alphashape3d&quot;    &quot;alr3&quot;            &quot;alr4&quot;           
+## [13] &quot;ANN2&quot;            &quot;aods3&quot;           &quot;aplore3&quot;         &quot;APML0&quot;          
+## [17] &quot;aprean3&quot;         &quot;AR1seg&quot;          &quot;arena2r&quot;         &quot;arf3DS4&quot;        
+## [21] &quot;argon2&quot;          &quot;ARTP2&quot;           &quot;aster2&quot;          &quot;auth0&quot;          
+## [25] &quot;aws.ec2metadata&quot; &quot;aws.s3&quot;          &quot;B2Z&quot;             &quot;b6e6rl&quot;         
+## [29] &quot;base2grob&quot;       &quot;base64&quot;          &quot;base64enc&quot;       &quot;base64url&quot;      
+## [33] &quot;BaTFLED3D&quot;       &quot;BayClone2&quot;       &quot;BayesS5&quot;         &quot;bc3net&quot;         
+## [37] &quot;BCC1997&quot;         &quot;BDP2&quot;            &quot;BEQI2&quot;           &quot;BHH2&quot;           
+## [41] &quot;bikeshare14&quot;     &quot;bio3d&quot;           &quot;biomod2&quot;         &quot;Bios2cor&quot;       
+## [45] &quot;bios2mds&quot;        &quot;biostat3&quot;        &quot;bipartiteD3&quot;     &quot;bit64&quot;          
+## [49] &quot;Bolstad2&quot;        &quot;BradleyTerry2&quot;</code></pre>
+<pre class="r"><code># invert
+grep(x = r_packages, pattern = &quot;\\d&quot;, value = TRUE, invert = TRUE)[1:50]</code></pre>
+<pre><code>##  [1] &quot;abbyyR&quot;             &quot;abc&quot;                &quot;abc.data&quot;          
+##  [4] &quot;ABC.RAP&quot;            &quot;ABCanalysis&quot;        &quot;abcdeFBA&quot;          
+##  [7] &quot;ABCoptim&quot;           &quot;abcrf&quot;              &quot;abctools&quot;          
+## [10] &quot;abd&quot;                &quot;abe&quot;                &quot;ABHgenotypeR&quot;      
+## [13] &quot;abind&quot;              &quot;abjutils&quot;           &quot;abn&quot;               
+## [16] &quot;abnormality&quot;        &quot;abodOutlier&quot;        &quot;ABPS&quot;              
+## [19] &quot;AbsFilterGSEA&quot;      &quot;AbSim&quot;              &quot;abstractr&quot;         
+## [22] &quot;abtest&quot;             &quot;abundant&quot;           &quot;ACA&quot;               
+## [25] &quot;acc&quot;                &quot;accelerometry&quot;      &quot;accelmissing&quot;      
+## [28] &quot;AcceptanceSampling&quot; &quot;ACCLMA&quot;             &quot;accrual&quot;           
+## [31] &quot;accrued&quot;            &quot;accSDA&quot;             &quot;ACD&quot;               
+## [34] &quot;ACDm&quot;               &quot;acebayes&quot;           &quot;acepack&quot;           
+## [37] &quot;ACEt&quot;               &quot;acid&quot;               &quot;ACMEeqtl&quot;          
+## [40] &quot;acmeR&quot;              &quot;ACNE&quot;               &quot;acnr&quot;              
+## [43] &quot;acopula&quot;            &quot;AcousticNDLCodeR&quot;   &quot;acp&quot;               
+## [46] &quot;aCRM&quot;               &quot;AcrossTic&quot;          &quot;acrt&quot;              
+## [49] &quot;acs&quot;                &quot;ACSNMineR&quot;</code></pre>
+<p>In the next few examples, we will not use R package names data, instead we will
+use dummy data of Invoice IDs and see if they conform to certain rules such as:</p>
+<ul>
+<li>they should include letters and numbers</li>
+<li>they should not include symbols</li>
+<li>they should not include space or tab</li>
+</ul>
+</div>
+<div id="non-digit-character" class="section level4">
+<h4>Non Digit Character</h4>
+<p><code>\\D</code> matches any non-digit character. Let us use it to remove invoice ids that
+include only numbers and no letters.</p>
+<p><img src="/img/regex_match_non_digit.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>As you can see below, thre are 3 invoice ids that did not conform to the rules
+and have been removed. Only those invoice ids that have both letter and numbers
+have been returned.</p>
+<pre class="r"><code>invoice_id &lt;- c(&quot;R536365&quot;, &quot;R536472&quot;, &quot;R536671&quot;, &quot;536915&quot;, &quot;R536125&quot;, &quot;R536287&quot;,
+                &quot;536741&quot;, &quot;R536893&quot;, &quot;R536521&quot;, &quot;536999&quot;)
+grep(x = invoice_id, pattern = &quot;\\D&quot;, value = TRUE)</code></pre>
+<pre><code>## [1] &quot;R536365&quot; &quot;R536472&quot; &quot;R536671&quot; &quot;R536125&quot; &quot;R536287&quot; &quot;R536893&quot; &quot;R536521&quot;</code></pre>
+<pre class="r"><code># invert
+grep(x = invoice_id, pattern = &quot;\\D&quot;, value = TRUE, invert = TRUE)</code></pre>
+<pre><code>## [1] &quot;536915&quot; &quot;536741&quot; &quot;536999&quot;</code></pre>
+</div>
+<div id="white-space-character" class="section level4">
+<h4>White Space Character</h4>
+<p><code>\\s</code> matches any white space character such as space or tab. Let us use it to
+detect invoice ids that include any white space (space or tab).</p>
+<p><img src="/img/regex_match_space.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>As you can see below, there are 4 invoice ids that include white space
+character.</p>
+<pre class="r"><code>grep(x = c(&quot;R536365&quot;, &quot;R 536472&quot;, &quot;R536671&quot;, &quot;R536915&quot;, &quot;R53 6125&quot;, &quot;R536287&quot;,
+           &quot;536741&quot;, &quot;R5368  93&quot;, &quot;R536521&quot;, &quot;536 999&quot;), 
+     pattern = &quot;\\s&quot;, value = TRUE)</code></pre>
+<pre><code>## [1] &quot;R 536472&quot;  &quot;R53 6125&quot;  &quot;R5368  93&quot; &quot;536 999&quot;</code></pre>
+<pre class="r"><code>grep(x = c(&quot;R536365&quot;, &quot;R 536472&quot;, &quot;R536671&quot;, &quot;R536915&quot;, &quot;R53 6125&quot;, &quot;R536287&quot;,
+           &quot;536741&quot;, &quot;R5368  93&quot;, &quot;R536521&quot;, &quot;536 999&quot;), 
+     pattern = &quot;\\s&quot;, value = TRUE, invert = TRUE)</code></pre>
+<pre><code>## [1] &quot;R536365&quot; &quot;R536671&quot; &quot;R536915&quot; &quot;R536287&quot; &quot;536741&quot;  &quot;R536521&quot;</code></pre>
+</div>
+<div id="non-white-space-character" class="section level4">
+<h4>Non White Space Character</h4>
+<p><code>\\S</code> matches any non white space character. Let us use it to remove any
+invoice ids which are blank or missing.</p>
+<p><img src="/img/regex_match_non_space.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>As you can see below, two invoice ids which were blank have been removed. If you
+observe carefully, it does not remove any invoice ids which have a white space
+character present, it only removes those which are completely blank i.e. those
+which include only space or tab.</p>
+<pre class="r"><code>grep(x = c(&quot;R536365&quot;, &quot;R 536472&quot;, &quot; &quot;, &quot;R536915&quot;, &quot;R53 6125&quot;, &quot;R536287&quot;,
+           &quot; &quot;, &quot;R5368  93&quot;, &quot;R536521&quot;, &quot;536 999&quot;), 
+     pattern = &quot;\\S&quot;, value = TRUE)</code></pre>
+<pre><code>## [1] &quot;R536365&quot;   &quot;R 536472&quot;  &quot;R536915&quot;   &quot;R53 6125&quot;  &quot;R536287&quot;   &quot;R5368  93&quot;
+## [7] &quot;R536521&quot;   &quot;536 999&quot;</code></pre>
+<pre class="r"><code># invert
+grep(x = c(&quot;R536365&quot;, &quot;R 536472&quot;, &quot; &quot;, &quot;R536915&quot;, &quot;R53 6125&quot;, &quot;R536287&quot;,
+           &quot; &quot;, &quot;R5368  93&quot;, &quot;R536521&quot;, &quot;536 999&quot;), 
+     pattern = &quot;\\S&quot;, value = TRUE, invert = TRUE)</code></pre>
+<pre><code>## [1] &quot; &quot; &quot; &quot;</code></pre>
+</div>
+<div id="word-character" class="section level4">
+<h4>Word Character</h4>
+<p><code>\\w</code> matches any word character i.e. alphanumeric. It includes the following:</p>
+<ul>
+<li>a to z</li>
+<li>A to Z</li>
+<li>0 to 9</li>
+<li>underscore(_)</li>
+</ul>
+<p><img src="/img/regex_match_word.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Let us use it to remove those invoice ids which include only symbols or special
+characters. Again, you can see that it does not remove those ids which include
+both word characters and symbols as it will match any string that includes
+word characters.</p>
+<pre class="r"><code>grep(x = c(&quot;R536365&quot;, &quot;%+$!#@?&quot;, &quot;R536671&quot;, &quot;R536915&quot;, &quot;$%+#!@?&quot;, &quot;R5362@87&quot;,
+           &quot;53+67$41&quot;, &quot;R536893&quot;, &quot;@$+%#!&quot;, &quot;536#999&quot;), 
+     pattern = &quot;\\w&quot;, value = TRUE)</code></pre>
+<pre><code>## [1] &quot;R536365&quot;  &quot;R536671&quot;  &quot;R536915&quot;  &quot;R5362@87&quot; &quot;53+67$41&quot; &quot;R536893&quot;  &quot;536#999&quot;</code></pre>
+<pre class="r"><code># invert
+grep(x = c(&quot;R536365&quot;, &quot;%+$!#@?&quot;, &quot;R536671&quot;, &quot;R536915&quot;, &quot;$%+#!@?&quot;, &quot;R5362@87&quot;,
+           &quot;53+67$41&quot;, &quot;R536893&quot;, &quot;@$+%#!&quot;, &quot;536#999&quot;), 
+     pattern = &quot;\\w&quot;, value = TRUE, invert = TRUE)</code></pre>
+<pre><code>## [1] &quot;%+$!#@?&quot; &quot;$%+#!@?&quot; &quot;@$+%#!&quot;</code></pre>
+</div>
+<div id="non-word-character" class="section level4">
+<h4>Non Word Character</h4>
+<p><code>\\W</code> matches any non-word character i.e. symbols. It includes everything that
+is not a word character.</p>
+<p><img src="/img/regex_match_non_word.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Let us use it to detect invoice ids that include any non-word character. As you
+can see only 4 ids do not include non-word characters.</p>
+<pre class="r"><code>grep(x = c(&quot;R536365&quot;, &quot;%+$!#@?&quot;, &quot;R536671&quot;, &quot;R536915&quot;, &quot;$%+#!@?&quot;, &quot;R5362@87&quot;,
+           &quot;53+67$41&quot;, &quot;R536893&quot;, &quot;@$+%#!&quot;, &quot;536#999&quot;), 
+     pattern = &quot;\\W&quot;, value = TRUE)</code></pre>
+<pre><code>## [1] &quot;%+$!#@?&quot;  &quot;$%+#!@?&quot;  &quot;R5362@87&quot; &quot;53+67$41&quot; &quot;@$+%#!&quot;   &quot;536#999&quot;</code></pre>
+<pre class="r"><code># invert
+grep(x = c(&quot;R536365&quot;, &quot;%+$!#@?&quot;, &quot;R536671&quot;, &quot;R536915&quot;, &quot;$%+#!@?&quot;, &quot;R5362@87&quot;,
+           &quot;53+67$41&quot;, &quot;R536893&quot;, &quot;@$+%#!&quot;, &quot;536#999&quot;), 
+     pattern = &quot;\\W&quot;, value = TRUE, invert = TRUE)</code></pre>
+<pre><code>## [1] &quot;R536365&quot; &quot;R536671&quot; &quot;R536915&quot; &quot;R536893&quot;</code></pre>
+</div>
+</div>
+<div id="word-boundary" class="section level2">
+<h2>Word Boundary</h2>
+<p><code>\\b</code> and <code>\\B</code> are similar to caret and dollar symbol. They match at a position
+called word boundary. Now, what is a word boundary? The following 3 positions
+qualify as word boundaries:</p>
+<ul>
+<li>before the first character in the string</li>
+<li>after the last character in the string</li>
+<li>between two characters in the string</li>
+</ul>
+<p>In the first 2 cases, the character must be a word character whereas in the
+last case, one should be a word character and another non-word character. Sounds
+confusing? It will be clear once we go through a few examples.</p>
+<p>Let us say we are looking for package names beginning with the string <code>stat</code>.
+In this case, we can prefix <code>stat</code> with <code>\\b</code>.</p>
+<p><img src="/img/regex_word_boundary_1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>grep(x = r_packages, pattern = &quot;\\bstat&quot;, value = TRUE) </code></pre>
+<pre><code>##  [1] &quot;haplo.stats&quot;    &quot;statar&quot;         &quot;statcheck&quot;      &quot;statebins&quot;     
+##  [5] &quot;states&quot;         &quot;statGraph&quot;      &quot;stationery&quot;     &quot;statip&quot;        
+##  [9] &quot;statmod&quot;        &quot;statnet&quot;        &quot;statnet.common&quot; &quot;statnetWeb&quot;    
+## [13] &quot;statprograms&quot;   &quot;statquotes&quot;     &quot;stats19&quot;        &quot;statsDK&quot;       
+## [17] &quot;statsr&quot;         &quot;statVisual&quot;</code></pre>
+<p>Suffix <code>\\b</code> to <code>stat</code> to look at all package names that end with the string
+<code>stat</code>.</p>
+<p><img src="/img/regex_word_boundary_2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>If you observe the output, you can find package names that do not end with
+the string <code>stat</code>. <code>spatstat.data</code>, <code>spatstat.local</code> and <code>spatstat.utils</code> do not
+end with <code>stat</code> but satisfy the third condition mentioned aboved for word
+boundaries. They are between 2 characters where <code>t</code> is a word character and dot
+is a non-word character.</p>
+<pre class="r"><code>grep(x = r_packages, pattern = &quot;stat\\b&quot;, value = TRUE)</code></pre>
+<pre><code>##  [1] &quot;Blendstat&quot;          &quot;costat&quot;             &quot;dstat&quot;             
+##  [4] &quot;eurostat&quot;           &quot;gstat&quot;              &quot;hierfstat&quot;         
+##  [7] &quot;jsonstat&quot;           &quot;lawstat&quot;            &quot;lestat&quot;            
+## [10] &quot;lfstat&quot;             &quot;LS2Wstat&quot;           &quot;maxstat&quot;           
+## [13] &quot;mdsstat&quot;            &quot;mistat&quot;             &quot;poolfstat&quot;         
+## [16] &quot;Pstat&quot;              &quot;RcmdrPlugin.lfstat&quot; &quot;rfacebookstat&quot;     
+## [19] &quot;Rilostat&quot;           &quot;rjstat&quot;             &quot;RMTstat&quot;           
+## [22] &quot;sgeostat&quot;           &quot;spatstat&quot;           &quot;spatstat.data&quot;     
+## [25] &quot;spatstat.local&quot;     &quot;spatstat.utils&quot;     &quot;volleystat&quot;</code></pre>
+<p>Do package names include the string <code>stat</code> either at the end or in the middle
+but not at the beginning? Prefix <code>stat</code> with <code>\\B</code> to find the answer.</p>
+<p><img src="/img/regex_word_boundary_3.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>grep(x = r_packages, pattern = &quot;\\Bstat&quot;, value = TRUE)</code></pre>
+<pre><code>##  [1] &quot;bigstatsr&quot;          &quot;biostat3&quot;           &quot;Blendstat&quot;         
+##  [4] &quot;compstatr&quot;          &quot;costat&quot;             &quot;cumstats&quot;          
+##  [7] &quot;curstatCI&quot;          &quot;CytobankAPIstats&quot;   &quot;dbstats&quot;           
+## [10] &quot;descstatsr&quot;         &quot;DistatisR&quot;          &quot;dlstats&quot;           
+## [13] &quot;dostats&quot;            &quot;dstat&quot;              &quot;estatapi&quot;          
+## [16] &quot;eurostat&quot;           &quot;freestats&quot;          &quot;geostatsp&quot;         
+## [19] &quot;gestate&quot;            &quot;getmstatistic&quot;      &quot;ggstatsplot&quot;       
+## [22] &quot;groupedstats&quot;       &quot;gstat&quot;              &quot;hierfstat&quot;         
+## [25] &quot;hydrostats&quot;         &quot;jsonstat&quot;           &quot;labstatR&quot;          
+## [28] &quot;labstats&quot;           &quot;lawstat&quot;            &quot;learnstats&quot;        
+## [31] &quot;lestat&quot;             &quot;lfstat&quot;             &quot;LS2Wstat&quot;          
+## [34] &quot;maxstat&quot;            &quot;mdsstat&quot;            &quot;mistat&quot;            
+## [37] &quot;mlbstats&quot;           &quot;mstate&quot;             &quot;multistate&quot;        
+## [40] &quot;multistateutils&quot;    &quot;ohtadstats&quot;         &quot;orderstats&quot;        
+## [43] &quot;p3state.msm&quot;        &quot;poolfstat&quot;          &quot;PRISMAstatement&quot;   
+## [46] &quot;Pstat&quot;              &quot;raustats&quot;           &quot;RcmdrPlugin.lfstat&quot;
+## [49] &quot;readstata13&quot;        &quot;realestateDK&quot;       &quot;restatapi&quot;         
+## [52] &quot;rfacebookstat&quot;      &quot;Rilostat&quot;           &quot;rjstat&quot;            
+## [55] &quot;RMTstat&quot;            &quot;rstatscn&quot;           &quot;runstats&quot;          
+## [58] &quot;scanstatistics&quot;     &quot;sgeostat&quot;           &quot;sjstats&quot;           
+## [61] &quot;spatstat&quot;           &quot;spatstat.data&quot;      &quot;spatstat.local&quot;    
+## [64] &quot;spatstat.utils&quot;     &quot;TDAstats&quot;           &quot;tidystats&quot;         
+## [67] &quot;tigerstats&quot;         &quot;tradestatistics&quot;    &quot;unsystation&quot;       
+## [70] &quot;USGSstates2k&quot;       &quot;volleystat&quot;         &quot;wbstats&quot;</code></pre>
+<p>Are there packages whose names include the string <code>stat</code> either at the
+beginning or in the middle but not at the end. Suffix <code>\\B</code> to <code>stat</code> to
+answer this question.</p>
+<p><img src="/img/regex_word_boundary_4.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>grep(x = r_packages, pattern = &quot;stat\\B&quot;, value = TRUE)</code></pre>
+<pre><code>##  [1] &quot;bigstatsr&quot;        &quot;biostat3&quot;         &quot;compstatr&quot;        &quot;cumstats&quot;        
+##  [5] &quot;curstatCI&quot;        &quot;CytobankAPIstats&quot; &quot;dbstats&quot;          &quot;descstatsr&quot;      
+##  [9] &quot;DistatisR&quot;        &quot;dlstats&quot;          &quot;dostats&quot;          &quot;estatapi&quot;        
+## [13] &quot;freestats&quot;        &quot;geostatsp&quot;        &quot;gestate&quot;          &quot;getmstatistic&quot;   
+## [17] &quot;ggstatsplot&quot;      &quot;groupedstats&quot;     &quot;haplo.stats&quot;      &quot;hydrostats&quot;      
+## [21] &quot;labstatR&quot;         &quot;labstats&quot;         &quot;learnstats&quot;       &quot;mlbstats&quot;        
+## [25] &quot;mstate&quot;           &quot;multistate&quot;       &quot;multistateutils&quot;  &quot;ohtadstats&quot;      
+## [29] &quot;orderstats&quot;       &quot;p3state.msm&quot;      &quot;PRISMAstatement&quot;  &quot;raustats&quot;        
+## [33] &quot;readstata13&quot;      &quot;realestateDK&quot;     &quot;restatapi&quot;        &quot;rstatscn&quot;        
+## [37] &quot;runstats&quot;         &quot;scanstatistics&quot;   &quot;sjstats&quot;          &quot;statar&quot;          
+## [41] &quot;statcheck&quot;        &quot;statebins&quot;        &quot;states&quot;           &quot;statGraph&quot;       
+## [45] &quot;stationery&quot;       &quot;statip&quot;           &quot;statmod&quot;          &quot;statnet&quot;         
+## [49] &quot;statnet.common&quot;   &quot;statnetWeb&quot;       &quot;statprograms&quot;     &quot;statquotes&quot;      
+## [53] &quot;stats19&quot;          &quot;statsDK&quot;          &quot;statsr&quot;           &quot;statVisual&quot;      
+## [57] &quot;TDAstats&quot;         &quot;tidystats&quot;        &quot;tigerstats&quot;       &quot;tradestatistics&quot; 
+## [61] &quot;unsystation&quot;      &quot;USGSstates2k&quot;     &quot;wbstats&quot;</code></pre>
+<p>Prefix and suffix <code>\\B</code> to <code>stat</code> to look at package names that include the
+string <code>stat</code> but neither in the beginning nor in the end.</p>
+<p><img src="/img/regex_word_boundary_5.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>In the below output, you can observe that the string <code>stat</code> must be between
+two word characters. Those examples we showed in the case of <code>\\b</code> where it
+was surrounded by a dot do not hold here.</p>
+<pre class="r"><code>grep(x = r_packages, pattern = &quot;\\Bstat\\B&quot;, value = TRUE)</code></pre>
+<pre><code>##  [1] &quot;bigstatsr&quot;        &quot;biostat3&quot;         &quot;compstatr&quot;        &quot;cumstats&quot;        
+##  [5] &quot;curstatCI&quot;        &quot;CytobankAPIstats&quot; &quot;dbstats&quot;          &quot;descstatsr&quot;      
+##  [9] &quot;DistatisR&quot;        &quot;dlstats&quot;          &quot;dostats&quot;          &quot;estatapi&quot;        
+## [13] &quot;freestats&quot;        &quot;geostatsp&quot;        &quot;gestate&quot;          &quot;getmstatistic&quot;   
+## [17] &quot;ggstatsplot&quot;      &quot;groupedstats&quot;     &quot;hydrostats&quot;       &quot;labstatR&quot;        
+## [21] &quot;labstats&quot;         &quot;learnstats&quot;       &quot;mlbstats&quot;         &quot;mstate&quot;          
+## [25] &quot;multistate&quot;       &quot;multistateutils&quot;  &quot;ohtadstats&quot;       &quot;orderstats&quot;      
+## [29] &quot;p3state.msm&quot;      &quot;PRISMAstatement&quot;  &quot;raustats&quot;         &quot;readstata13&quot;     
+## [33] &quot;realestateDK&quot;     &quot;restatapi&quot;        &quot;rstatscn&quot;         &quot;runstats&quot;        
+## [37] &quot;scanstatistics&quot;   &quot;sjstats&quot;          &quot;TDAstats&quot;         &quot;tidystats&quot;       
+## [41] &quot;tigerstats&quot;       &quot;tradestatistics&quot;  &quot;unsystation&quot;      &quot;USGSstates2k&quot;    
+## [45] &quot;wbstats&quot;</code></pre>
+<p>If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
+or reach out to us at <a href="mailto:feedback@rsquaredacademy.com" class="email">feedback@rsquaredacademy.com</a>.</p>
+</div>

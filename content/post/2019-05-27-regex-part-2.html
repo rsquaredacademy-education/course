@@ -1,0 +1,224 @@
+---
+title: "Regular Expressions - Pattern Matching"
+author: Aravind Hebbali
+twitterImg: /img/regex_cover_image.png
+description: "Beginners guide to regular expressions in R"
+date: '2019-05-27'
+slug: regular-expression-pattern-matching-functions
+categories:
+  - regex
+tags:
+  - regex
+---
+
+
+
+<p><img src="/img/regex_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this post, we will learn about using regular expressions in R. While it is
+aimed at absolute beginners, we hope experienced users will find it useful as
+well. The post is broadly divided into 3 sections. In the first section, we
+will introduce the pattern matching functions such as <code>grep</code>, <code>grepl</code> etc. in
+base R as we will be using them in the rest of the post. Once the reader is
+comfortable with the above mentioned pattern matching functions, we will
+learn about regular expressions while exploring the names of R packages by
+probing the following:</p>
+<ul>
+<li>how many package names include the letter <code>r</code>?</li>
+<li>how many package names begin or end with the letter <code>r</code>?</li>
+<li>how many package names include the words <code>data</code> or <code>plot</code>?</li>
+</ul>
+<p>In the final section, we will go through 4 case studies including simple email
+validation. If you plan to try the case studies, please do not skip any of the
+topics in the second section.</p>
+</div>
+<div id="pattern-matching-functions" class="section level2">
+<h2>Pattern Matching Functions</h2>
+<p>Before we get into the nitty gritty of regular expressions, let us explore a
+few functions from base R for pattern matching. We will learn about using
+regular expressions with the stringr package in an upcoming post.</p>
+<p><img src="/img/regex_base_functions.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>library(dplyr)
+library(readr)</code></pre>
+</div>
+<div id="grep" class="section level2">
+<h2>grep</h2>
+<p>The first function we will learn is <code>grep()</code>. It can be used to find elements
+that match a given pattern in a character vector. It will return the elements
+or the index of the elements based on your specification. In the below example,
+<code>grep()</code> returns the index of the elements that match the given pattern.</p>
+<p><img src="/img/regex_grep_index_canva.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre><code>##  [1] &quot;devtools&quot;   &quot;rlang&quot;      &quot;dplyr&quot;      &quot;Rcpp&quot;       &quot;tibble&quot;    
+##  [6] &quot;ggplot2&quot;    &quot;glue&quot;       &quot;pillar&quot;     &quot;cli&quot;        &quot;data.table&quot;</code></pre>
+<pre class="r"><code>grep(x = top_downloads, pattern = &quot;r&quot;)</code></pre>
+<pre><code>## [1] 2 3 8</code></pre>
+<p>Now let us look at the inputs:</p>
+<ul>
+<li><code>pattern</code></li>
+<li><code>x</code></li>
+<li><code>ignore.case</code></li>
+<li><code>value</code></li>
+<li><code>invert</code></li>
+</ul>
+</div>
+<div id="grep---value" class="section level2">
+<h2>grep - Value</h2>
+<p>If you want <code>grep()</code> to return the element instead of the index, set the
+<code>value</code> argument to <code>TRUE</code>. The default is <code>FALSE</code>. In the below example,
+<code>grep()</code> returns the elements and not their index.</p>
+<p><img src="/img/regex_grep_value_canva.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>grep(x = top_downloads, pattern = &quot;r&quot;, value = TRUE)</code></pre>
+<pre><code>## [1] &quot;rlang&quot;  &quot;dplyr&quot;  &quot;pillar&quot;</code></pre>
+</div>
+<div id="grep---ignore-case" class="section level2">
+<h2>grep - Ignore Case</h2>
+<p>If you have carefully observed the previous examples, have you noticed that
+the pattern <code>r</code> did not match the element <code>Rcpp</code> i.e. regular expressions are
+case sensitive. The <code>ignore.case</code> argument will ignore case while matching the
+pattern as shown below.</p>
+<p><img src="/img/regex_grep_ignore_case_canva.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>grep(x = top_downloads, pattern = &quot;r&quot;, value = TRUE, ignore.case = TRUE)</code></pre>
+<pre><code>## [1] &quot;rlang&quot;  &quot;dplyr&quot;  &quot;Rcpp&quot;   &quot;pillar&quot;</code></pre>
+<pre class="r"><code>grep(x = top_downloads, pattern = &quot;R&quot;, value = TRUE)</code></pre>
+<pre><code>## [1] &quot;Rcpp&quot;</code></pre>
+<pre class="r"><code>grep(x = top_downloads, pattern = &quot;R&quot;, value = TRUE, ignore.case = TRUE)</code></pre>
+<pre><code>## [1] &quot;rlang&quot;  &quot;dplyr&quot;  &quot;Rcpp&quot;   &quot;pillar&quot;</code></pre>
+</div>
+<div id="grep---invert" class="section level2">
+<h2>grep - Invert</h2>
+<p>In some cases, you may want to retrieve elements that do not match the pattern
+specified. The <code>invert</code> argument will return the elements that do not match
+the pattern. In the below example, the elements returned do not match the
+pattern specified by us.</p>
+<p><img src="/img/regex_grep_invert_canva.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>grep(x = top_downloads, pattern = &quot;r&quot;, value = TRUE, invert = TRUE)</code></pre>
+<pre><code>## [1] &quot;devtools&quot;   &quot;Rcpp&quot;       &quot;tibble&quot;     &quot;ggplot2&quot;    &quot;glue&quot;      
+## [6] &quot;cli&quot;        &quot;data.table&quot;</code></pre>
+<pre class="r"><code>grep(x = top_downloads, pattern = &quot;r&quot;, value = TRUE, 
+     invert = TRUE, ignore.case = TRUE)</code></pre>
+<pre><code>## [1] &quot;devtools&quot;   &quot;tibble&quot;     &quot;ggplot2&quot;    &quot;glue&quot;       &quot;cli&quot;       
+## [6] &quot;data.table&quot;</code></pre>
+</div>
+<div id="grepl" class="section level2">
+<h2>grepl</h2>
+<p><code>grepl()</code> will return only logical values. If the elements match the pattern
+specified, it will return <code>TRUE</code> else <code>FALSE</code>.</p>
+<p><img src="/img/regex_grepl_canva.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>grepl(x = top_downloads, pattern = &quot;r&quot;)</code></pre>
+<pre><code>##  [1] FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<div id="ignore-case" class="section level3">
+<h3>Ignore Case</h3>
+<p>To ignore the case, use the <code>ignore.case</code> argument and set it to <code>TRUE</code>.</p>
+<p><img src="/img/regex_grepl_ignore_case_canva.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>grepl(x = top_downloads, pattern = &quot;r&quot;, ignore.case = TRUE)</code></pre>
+<pre><code>##  [1] FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<p>The next 3 functions that we explore differ from the above 2 in the format of
+and amount of details in the results. They all return the following additional
+details:</p>
+<ul>
+<li>the starting position of the first match</li>
+<li>the length of the matched text</li>
+<li>whether the match position and length are in chracter or bytes</li>
+</ul>
+</div>
+<div id="regexpr" class="section level3">
+<h3>regexpr</h3>
+<pre class="r"><code>rr_pkgs &lt;- c(&quot;purrr&quot;, &quot;olsrr&quot;, &quot;blorr&quot;)
+regexpr(&quot;r&quot;, rr_pkgs)</code></pre>
+<pre><code>## [1] 3 4 4
+## attr(,&quot;match.length&quot;)
+## [1] 1 1 1
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE</code></pre>
+</div>
+<div id="gregexpr" class="section level3">
+<h3>gregexpr</h3>
+<pre class="r"><code>gregexpr(&quot;r&quot;, rr_pkgs)</code></pre>
+<pre><code>## [[1]]
+## [1] 3 4 5
+## attr(,&quot;match.length&quot;)
+## [1] 1 1 1
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE
+## 
+## [[2]]
+## [1] 4 5
+## attr(,&quot;match.length&quot;)
+## [1] 1 1
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE
+## 
+## [[3]]
+## [1] 4 5
+## attr(,&quot;match.length&quot;)
+## [1] 1 1
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE</code></pre>
+</div>
+<div id="regexec" class="section level3">
+<h3>regexec</h3>
+<pre class="r"><code>regexec(&quot;r&quot;, rr_pkgs)</code></pre>
+<pre><code>## [[1]]
+## [1] 3
+## attr(,&quot;match.length&quot;)
+## [1] 1
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE
+## 
+## [[2]]
+## [1] 4
+## attr(,&quot;match.length&quot;)
+## [1] 1
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE
+## 
+## [[3]]
+## [1] 4
+## attr(,&quot;match.length&quot;)
+## [1] 1
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE</code></pre>
+<hr>
+<p>
+<a href="https://www.youtube.com/user/rsquaredin/" target="_blank"><img src="/img/ad_youtube.png" width="100%" alt="youtube ad" style="text-decoration: none;"></a>
+</p>
+<hr>
+</div>
+</div>
+<div id="sub" class="section level2">
+<h2>sub</h2>
+<p><code>sub()</code> will perform replacement of the first match. In the below example,
+you can observe that only the first match of <code>r</code> is replaced by <code>s</code> while
+the rest remain the same.</p>
+<p><img src="/img/regex_sub_canva.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>rr_pkgs &lt;- c(&quot;purrr&quot;, &quot;olsrr&quot;, &quot;blorr&quot;)
+sub(x = rr_pkgs, pattern = &quot;r&quot;, replacement = &quot;s&quot;)</code></pre>
+<pre><code>## [1] &quot;pusrr&quot; &quot;olssr&quot; &quot;blosr&quot;</code></pre>
+</div>
+<div id="gsub" class="section level2">
+<h2>gsub</h2>
+<p><code>gsub()</code> will perform replacement of all the matches. In the below example,
+all the <code>s</code> are replaced by <code>r</code>. Compare the below output with the output from
+<code>sub()</code> to understand the difference between them.</p>
+<p><img src="/img/regex_gsub_canva.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>gsub(x = rr_pkgs, pattern = &quot;r&quot;, replacement = &quot;s&quot;)</code></pre>
+<pre><code>## [1] &quot;pusss&quot; &quot;olsss&quot; &quot;bloss&quot;</code></pre>
+<p>If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
+or reach out to us at <a href="mailto:feedback@rsquaredacademy.com" class="email">feedback@rsquaredacademy.com</a>.</p>
+</div>
