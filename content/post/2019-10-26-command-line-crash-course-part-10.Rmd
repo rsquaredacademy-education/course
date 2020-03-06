@@ -1,0 +1,136 @@
+---
+title: "Command Line - Execute R from the Shell"
+author: Aravind Hebbali
+twitterImg: /img/cline_cover_image.png
+description: "Getting Started with the Command Line"
+date: '2019-10-26'
+slug: command-line-execute-R-from-the-shell
+categories:
+  - bash
+tags:
+  - bash
+  - shell
+  - terminal
+  - cli
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libs, echo=FALSE, message=FALSE, warning=FALSE}
+options(kableExtra.html.bsTable = TRUE)
+library(knitr)
+library(kableExtra)
+library(magrittr)
+```
+
+```{r cover_image, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_cover_image.png")
+```
+
+In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
+We have created a [RStudio Cloud Project](https://rstudio.cloud/project/518720) to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R & RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on
+
+- exploring R release names
+- mapping shell commands to R functions
+- RStudio Terminal
+- executing shell commands from R using `system2()` or `processx::run()`
+- execute shell commands in RMarkdown
+- execute R scripts in the shell 
+
+If you want a deeper understanding of using command line for data science, we suggest you read [Data Science at the Command Line](https://www.datascienceatthecommandline.com/). [Software Carpentry](https://software-carpentry.org/) too has a lesson on [shell](https://swcarpentry.github.io/shell-novice/). We have listed more references at the end of the tutorial for the benefit of the readers.
+
+## Resources {#resources}
+
+Below are the links to all the resources related to this post:
+
+- <a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/518720" target="_blank">RStudio Cloud</a>
+
+You can try our **free online course** [**Command Line Basics for R Users**](https://rsquared-academy.thinkific.com/courses/command-line-basics-for-r-users) if you prefer to learn through self paced online courses or our [**ebook**](https://bash-intro.rsquaredacademy.com) if you like to read the tutorial in a book format.
+
+## R in the Shell {#rinshell}
+
+In this section, we will learn to execute R commands and scripts in the command line using:
+
+- `R -e`
+- `Rscript -e`
+- `R CMD BATCH`
+
+The `-e` option allows us to specify R expression(s). `R -e` will launch R and then execute the code specified within quotes. Use semi-colon to execute multiple expressions as shown below. You will be able to run the below commands only if you are able to launch R from the command line. Windows users need to ensure that R is added to the path environment.
+
+```{sh c118a}
+R -e "head(mtcars); tail(mtcars)"
+```
+
+`Rscript -e` will run code without launching R.
+
+```{sh c119a}
+Rscript -e "head(mtcars)"
+```
+
+We can use `Rscript` to execute a R script as well. In the below example, we execute the code in `analysis.R` file. 
+
+```{sh c120a}
+Rscript analysis.R
+```
+
+If you are more interested, try the [littler](https://cran.r-project.org/package=littler) package as well.
+
+### What we have not covered...
+
+- shell scripting
+- editing files
+- file permissions
+- user information
+- pipes
+- awk
+- sed
+
+## Summary {#summary}
+
+- Shell is a text based application for viewing, handling and manipulating files
+- It is also known by the following names
+  - CLI (Command Line Inteface)
+  - Terminal
+  - Bash (Bourne Again Shell)
+- Use `system2()` and `processx::run()` in R to execute shell commands
+- Use `Rscript -e` or `R -e` to execute R scripts from the command line
+- RStudio includes a Terminal (from version 1.1.383)
+- Execute commands from shell script in RStudio using Ctrl + Enter
+- RMarkdown supports `bash`, `sh` and `awk` 
+
+## References & Further Readings {#references}
+
+- https://tldr.sh/
+- https://blog.rstudio.com/2017/08/11/rstudio-v1-1-preview-terminal/
+- https://support.rstudio.com/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal
+- https://bookdown.org/yihui/rmarkdown/language-engines.html#shell-scripts
+- https://github.com/kirillseva/tldrrr
+- https://fs.r-lib.org/articles/function-comparisons.html
+- https://livefreeordichotomize.com/2017/09/28/r-release-names/
+- https://stackoverflow.com/questions/13478375/is-there-any-authoritative-documentation-on-r-release-nicknames
+- http://www2.imm.dtu.dk/courses/02333/cygwin_tutorial/index.html
+- https://tutorial.djangogirls.org/en/intro_to_command_line/
+- https://ss64.com/
+- https://www.learnenough.com/command-line-tutorial
+
+## Feedback
+
+If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source 
+repository</a> or reach out to us at support@rsquaredacademy.com.
+
+<!-- clean up folder structure -->
+ 
+```{r r99, echo=FALSE}
+system2("rm", c("-r", "J:/R/courses/course/content/post/cline"))
+```
+
+```{bash c99, echo=FALSE}
+cp -r /mnt/j/R/courses/live/command-line-basics/bash-tutorial /mnt/j/R/courses/course/content/post/cline
+``` 
+
+ 

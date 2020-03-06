@@ -1,0 +1,623 @@
+---
+title: "Command Line - Navigating File System"
+author: Aravind Hebbali
+twitterImg: /img/cline_cover_image.png
+description: "Getting Started with the Command Line"
+date: '2019-10-26'
+slug: command-line-navigating-file-system
+categories:
+  - bash
+tags:
+  - bash
+  - shell
+  - terminal
+  - cli
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/bsTable/bootstrapTable.min.css" rel="stylesheet" />
+
+
+<p><img src="/img/cline_cover_image.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
+We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud Project</a> to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R &amp; RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on</p>
+<ul>
+<li>exploring R release names</li>
+<li>mapping shell commands to R functions</li>
+<li>RStudio Terminal</li>
+<li>executing shell commands from R using <code>system2()</code> or <code>processx::run()</code></li>
+<li>execute shell commands in RMarkdown</li>
+<li>execute R scripts in the shell</li>
+</ul>
+<p>If you want a deeper understanding of using command line for data science, we suggest you read <a href="https://www.datascienceatthecommandline.com/">Data Science at the Command Line</a>. <a href="https://software-carpentry.org/">Software Carpentry</a> too has a lesson on <a href="https://swcarpentry.github.io/shell-novice/">shell</a>. We have listed more references at the end of the tutorial for the benefit of the readers.</p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this post:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/518720" target="_blank">RStudio Cloud</a></li>
+</ul>
+<p>You can try our <strong>free online course</strong> <a href="https://rsquared-academy.thinkific.com/courses/command-line-basics-for-r-users"><strong>Command Line Basics for R Users</strong></a> if you prefer to learn through self paced online courses or our <a href="https://bash-intro.rsquaredacademy.com"><strong>ebook</strong></a> if you like to read the tutorial in a book format.</p>
+</div>
+<div id="navigate" class="section level2">
+<h2>Navigating File System</h2>
+{{% youtube "yn0sVrEM8AA" %}}
+<p>In this section, we will learn commands that will help us</p>
+<ul>
+<li>navigate between different folders/directories</li>
+<li>return current working directory</li>
+<li>list all the files &amp; folders in a directory</li>
+<li>create and delete directories</li>
+</ul>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Command
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>pwd</code>
+</td>
+<td style="text-align:left;">
+Print working directory
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ls</code>
+</td>
+<td style="text-align:left;">
+List directory contents
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>cd</code>
+</td>
+<td style="text-align:left;">
+Change current working directory
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>mkdir</code>
+</td>
+<td style="text-align:left;">
+Create directory
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>rmdir</code>
+</td>
+<td style="text-align:left;">
+Remove/delete directory
+</td>
+</tr>
+</tbody>
+</table>
+<p><code>pwd</code> displays the name of the <strong>p</strong>resent <strong>w</strong>orking <strong>d</strong>irectory.</p>
+<pre class="bash"><code>pwd</code></pre>
+<pre><code>## /mnt/j/R/courses/course/content/post/cline</code></pre>
+<p><code>ls</code> displays information about files and directories in the current directory along with their associated metadata such as</p>
+<ul>
+<li>size</li>
+<li>ownership</li>
+<li>modification date</li>
+</ul>
+<p>With no options, it will list the files and directories in the current directory, sorted alphabetically.</p>
+<pre class="bash"><code>ls</code></pre>
+<pre><code>## analysis.R
+## bash.R
+## bash.Rmd
+## bash.sh
+## imports_blorr.txt
+## imports_olsrr.txt
+## lorem-ipsum.txt
+## main_project.zip
+## myfiles
+## mypackage
+## myproject
+## myproject1
+## myproject2
+## myproject3
+## myproject4
+## package_names.txt
+## pkg_names.txt
+## r
+## release_names.tar
+## release_names.tar.gz
+## release_names.txt
+## release_names_18.txt
+## release_names_19.txt
+## sept_15.csv.gz
+## urls.txt
+## zip_example.zip</code></pre>
+<p><code>cd</code> (<strong>c</strong>hange <strong>d</strong>irectory) changes the current working directory. It is among the most used commands as it allows the user to move around the file system.</p>
+<pre class="bash"><code>cd r
+pwd</code></pre>
+<pre><code>## /mnt/j/R/courses/course/content/post/cline/r</code></pre>
+<p><code>mkdir</code> will create new directory. It will allow you to set file mode (permissions associated with the directory) i.e. who can open/modify/delete the directory.</p>
+<pre class="bash"><code>mkdir rfiles
+ls</code></pre>
+<pre><code>## analysis.R
+## bash.R
+## bash.Rmd
+## bash.sh
+## imports_blorr.txt
+## imports_olsrr.txt
+## lorem-ipsum.txt
+## main_project.zip
+## myfiles
+## mypackage
+## myproject
+## myproject1
+## myproject2
+## myproject3
+## myproject4
+## package_names.txt
+## pkg_names.txt
+## r
+## release_names.tar
+## release_names.tar.gz
+## release_names.txt
+## release_names_18.txt
+## release_names_19.txt
+## rfiles
+## sept_15.csv.gz
+## urls.txt
+## zip_example.zip</code></pre>
+<p><code>rmdir</code> will remove empty directories from the file system. It can be used to remove multiple empty directories as well. If the directory is not empty, <code>rmdir</code> will not remove it and instead display a warning that the directory is not empty.</p>
+<pre class="bash"><code>rmdir rfiles
+ls</code></pre>
+<pre><code>## analysis.R
+## bash.R
+## bash.Rmd
+## bash.sh
+## imports_blorr.txt
+## imports_olsrr.txt
+## lorem-ipsum.txt
+## main_project.zip
+## myfiles
+## mypackage
+## myproject
+## myproject1
+## myproject2
+## myproject3
+## myproject4
+## package_names.txt
+## pkg_names.txt
+## r
+## release_names.tar
+## release_names.tar.gz
+## release_names.txt
+## release_names_18.txt
+## release_names_19.txt
+## sept_15.csv.gz
+## urls.txt
+## zip_example.zip</code></pre>
+<div id="change-working-directory" class="section level3">
+<h3>Change Working Directory</h3>
+<p>Let us focus a bit more on changing working directory. The below table shows commands for changing working directory to</p>
+<ul>
+<li>up one level</li>
+<li>previous working directory</li>
+<li>home directory</li>
+<li>and root directory</li>
+</ul>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Command
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>cd .</code>
+</td>
+<td style="text-align:left;">
+Navigate into directory
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>cd ..</code>
+</td>
+<td style="text-align:left;">
+Go up one level
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>cd -</code>
+</td>
+<td style="text-align:left;">
+Go to previous working directory
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>cd ~</code>
+</td>
+<td style="text-align:left;">
+Change directory to home directory
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>cd /</code>
+</td>
+<td style="text-align:left;">
+Change directory to root directory
+</td>
+</tr>
+</tbody>
+</table>
+<p>All files and directories stem from one main directory, the root directory. All the other directories in the system are sub-directories of the root directory and the root directory has no parent directory. It is represented by a single slash (<code>/</code>). <code>cd /</code> will change the current working directory to the root directory. In RStudio Cloud, use <code>cd</code> and <code>cd ..</code> to navigate back to the current working directory. If you get confused, close the terminal and relaunch it.</p>
+<pre class="bash"><code>cd /
+pwd</code></pre>
+<pre><code>## /</code></pre>
+<p>The parent directory i.e. the directory one level up from the current directory which contains the directory we are in now is represented by two dots (<code>..</code>). <code>cd ..</code> will change us into the parent directory of the current directory.</p>
+<pre class="bash"><code>cd ..
+pwd</code></pre>
+<pre><code>## /mnt/j/R/courses/course/content/post</code></pre>
+<p>The home directory is the directory we are placed in, by default, when we launch a new terminal session. It is represented by the tilde (<code>~</code>). In RStudio Cloud, use <code>cd</code> and <code>cd ..</code> to navigate back to the current working directory. If you get confused, close the terminal and relaunch it.</p>
+<pre class="bash"><code>cd ~
+pwd</code></pre>
+<pre><code>## /home/aravind</code></pre>
+<p>To change into the previous working directory, use <code>cd -</code>.</p>
+<pre class="bash"><code>cd -
+pwd</code></pre>
+<pre><code>## /mnt/j/R/courses/course/content/post
+## /mnt/j/R/courses/course/content/post</code></pre>
+<p>The current working directory is represented by a single dot (<code>.</code>). <code>cd .</code> will change us into the current directory i.e. it will do nothing.</p>
+</div>
+<div id="list-directory-contents" class="section level3">
+<h3>List Directory Contents</h3>
+<p><code>ls</code> will list the contents of a directory. Using different arguments, we can</p>
+<ul>
+<li>list hidden files</li>
+<li>view file permissions, ownership, size &amp; modification date</li>
+<li>sort by size &amp; modification date</li>
+</ul>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Command
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>ls</code>
+</td>
+<td style="text-align:left;">
+List directory contents
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ls -l</code>
+</td>
+<td style="text-align:left;">
+List files one per line
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ls -a</code>
+</td>
+<td style="text-align:left;">
+List all files including hidden files
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ls -la</code>
+</td>
+<td style="text-align:left;">
+Display file permissions, ownership, size &amp; modification date
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ls -lh</code>
+</td>
+<td style="text-align:left;">
+Long format list with size displayed in human readable format
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ls -lS</code>
+</td>
+<td style="text-align:left;">
+Long format list sorted by size
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ls -ltr</code>
+</td>
+<td style="text-align:left;">
+Long format list sorted by modification date
+</td>
+</tr>
+</tbody>
+</table>
+<div id="list-files-one-per-line" class="section level4">
+<h4>List files one per line</h4>
+<pre class="bash"><code>ls -l</code></pre>
+<pre><code>## total 31108
+## -rwxrwxrwx 1 aravind aravind       12 Mar  6 17:14 analysis.R
+## -rwxrwxrwx 1 aravind aravind      430 Mar  6 17:14 bash.R
+## -rwxrwxrwx 1 aravind aravind      145 Mar  6 17:14 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind    16242 Mar  6 17:14 bash.sh
+## -rwxrwxrwx 1 aravind aravind       35 Mar  6 17:14 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind       34 Mar  6 17:14 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind    39501 Mar  6 17:14 lorem-ipsum.txt
+## -rwxrwxrwx 1 aravind aravind     9291 Mar  6 17:14 main_project.zip
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myfiles
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 mypackage
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject1
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject2
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject3
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject4
+## -rwxrwxrwx 1 aravind aravind     1498 Mar  6 17:14 package_names.txt
+## -rwxrwxrwx 1 aravind aravind     1082 Mar  6 17:14 pkg_names.txt
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 r
+## -rwxrwxrwx 1 aravind aravind    10240 Mar  6 17:14 release_names.tar
+## -rwxrwxrwx 1 aravind aravind      632 Mar  6 17:14 release_names.tar.gz
+## -rwxrwxrwx 1 aravind aravind      546 Mar  6 17:14 release_names.txt
+## -rwxrwxrwx 1 aravind aravind       65 Mar  6 17:14 release_names_18.txt
+## -rwxrwxrwx 1 aravind aravind       53 Mar  6 17:14 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind 31754998 Mar  6 17:14 sept_15.csv.gz
+## -rwxrwxrwx 1 aravind aravind      157 Mar  6 17:14 urls.txt
+## -rwxrwxrwx 1 aravind aravind     4398 Mar  6 17:14 zip_example.zip</code></pre>
+</div>
+<div id="list-all-files-including-hidden-files" class="section level4">
+<h4>List all files including hidden files</h4>
+<pre class="bash"><code>ls -a</code></pre>
+<pre><code>## .
+## ..
+## analysis.R
+## bash.R
+## bash.Rmd
+## bash.sh
+## imports_blorr.txt
+## imports_olsrr.txt
+## lorem-ipsum.txt
+## main_project.zip
+## myfiles
+## mypackage
+## myproject
+## myproject1
+## myproject2
+## myproject3
+## myproject4
+## package_names.txt
+## pkg_names.txt
+## r
+## release_names.tar
+## release_names.tar.gz
+## release_names.txt
+## release_names_18.txt
+## release_names_19.txt
+## sept_15.csv.gz
+## urls.txt
+## zip_example.zip</code></pre>
+</div>
+<div id="display-file-permissions-ownership-size-modification-date" class="section level4">
+<h4>Display file permissions, ownership, size &amp; modification date</h4>
+<pre class="bash"><code>ls -la</code></pre>
+<pre><code>## total 31108
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 .
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 ..
+## -rwxrwxrwx 1 aravind aravind       12 Mar  6 17:14 analysis.R
+## -rwxrwxrwx 1 aravind aravind      430 Mar  6 17:14 bash.R
+## -rwxrwxrwx 1 aravind aravind      145 Mar  6 17:14 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind    16242 Mar  6 17:14 bash.sh
+## -rwxrwxrwx 1 aravind aravind       35 Mar  6 17:14 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind       34 Mar  6 17:14 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind    39501 Mar  6 17:14 lorem-ipsum.txt
+## -rwxrwxrwx 1 aravind aravind     9291 Mar  6 17:14 main_project.zip
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myfiles
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 mypackage
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject1
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject2
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject3
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject4
+## -rwxrwxrwx 1 aravind aravind     1498 Mar  6 17:14 package_names.txt
+## -rwxrwxrwx 1 aravind aravind     1082 Mar  6 17:14 pkg_names.txt
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 r
+## -rwxrwxrwx 1 aravind aravind    10240 Mar  6 17:14 release_names.tar
+## -rwxrwxrwx 1 aravind aravind      632 Mar  6 17:14 release_names.tar.gz
+## -rwxrwxrwx 1 aravind aravind      546 Mar  6 17:14 release_names.txt
+## -rwxrwxrwx 1 aravind aravind       65 Mar  6 17:14 release_names_18.txt
+## -rwxrwxrwx 1 aravind aravind       53 Mar  6 17:14 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind 31754998 Mar  6 17:14 sept_15.csv.gz
+## -rwxrwxrwx 1 aravind aravind      157 Mar  6 17:14 urls.txt
+## -rwxrwxrwx 1 aravind aravind     4398 Mar  6 17:14 zip_example.zip</code></pre>
+</div>
+<div id="display-size-in-human-readable-format" class="section level4">
+<h4>Display size in human readable format</h4>
+<pre class="bash"><code>ls -lh</code></pre>
+<pre><code>## total 31M
+## -rwxrwxrwx 1 aravind aravind   12 Mar  6 17:14 analysis.R
+## -rwxrwxrwx 1 aravind aravind  430 Mar  6 17:14 bash.R
+## -rwxrwxrwx 1 aravind aravind  145 Mar  6 17:14 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind  16K Mar  6 17:14 bash.sh
+## -rwxrwxrwx 1 aravind aravind   35 Mar  6 17:14 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind   34 Mar  6 17:14 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind  39K Mar  6 17:14 lorem-ipsum.txt
+## -rwxrwxrwx 1 aravind aravind 9.1K Mar  6 17:14 main_project.zip
+## drwxrwxrwx 1 aravind aravind 4.0K Mar  6 17:14 myfiles
+## drwxrwxrwx 1 aravind aravind 4.0K Mar  6 17:14 mypackage
+## drwxrwxrwx 1 aravind aravind 4.0K Mar  6 17:14 myproject
+## drwxrwxrwx 1 aravind aravind 4.0K Mar  6 17:14 myproject1
+## drwxrwxrwx 1 aravind aravind 4.0K Mar  6 17:14 myproject2
+## drwxrwxrwx 1 aravind aravind 4.0K Mar  6 17:14 myproject3
+## drwxrwxrwx 1 aravind aravind 4.0K Mar  6 17:14 myproject4
+## -rwxrwxrwx 1 aravind aravind 1.5K Mar  6 17:14 package_names.txt
+## -rwxrwxrwx 1 aravind aravind 1.1K Mar  6 17:14 pkg_names.txt
+## drwxrwxrwx 1 aravind aravind 4.0K Mar  6 17:14 r
+## -rwxrwxrwx 1 aravind aravind  10K Mar  6 17:14 release_names.tar
+## -rwxrwxrwx 1 aravind aravind  632 Mar  6 17:14 release_names.tar.gz
+## -rwxrwxrwx 1 aravind aravind  546 Mar  6 17:14 release_names.txt
+## -rwxrwxrwx 1 aravind aravind   65 Mar  6 17:14 release_names_18.txt
+## -rwxrwxrwx 1 aravind aravind   53 Mar  6 17:14 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind  31M Mar  6 17:14 sept_15.csv.gz
+## -rwxrwxrwx 1 aravind aravind  157 Mar  6 17:14 urls.txt
+## -rwxrwxrwx 1 aravind aravind 4.3K Mar  6 17:14 zip_example.zip</code></pre>
+</div>
+<div id="sort-list-by-size" class="section level4">
+<h4>Sort list by size</h4>
+<pre class="bash"><code>ls -lS</code></pre>
+<pre><code>## total 31108
+## -rwxrwxrwx 1 aravind aravind 31754998 Mar  6 17:14 sept_15.csv.gz
+## -rwxrwxrwx 1 aravind aravind    39501 Mar  6 17:14 lorem-ipsum.txt
+## -rwxrwxrwx 1 aravind aravind    16242 Mar  6 17:14 bash.sh
+## -rwxrwxrwx 1 aravind aravind    10240 Mar  6 17:14 release_names.tar
+## -rwxrwxrwx 1 aravind aravind     9291 Mar  6 17:14 main_project.zip
+## -rwxrwxrwx 1 aravind aravind     4398 Mar  6 17:14 zip_example.zip
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myfiles
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 mypackage
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject1
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject2
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject3
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject4
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 r
+## -rwxrwxrwx 1 aravind aravind     1498 Mar  6 17:14 package_names.txt
+## -rwxrwxrwx 1 aravind aravind     1082 Mar  6 17:14 pkg_names.txt
+## -rwxrwxrwx 1 aravind aravind      632 Mar  6 17:14 release_names.tar.gz
+## -rwxrwxrwx 1 aravind aravind      546 Mar  6 17:14 release_names.txt
+## -rwxrwxrwx 1 aravind aravind      430 Mar  6 17:14 bash.R
+## -rwxrwxrwx 1 aravind aravind      157 Mar  6 17:14 urls.txt
+## -rwxrwxrwx 1 aravind aravind      145 Mar  6 17:14 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind       65 Mar  6 17:14 release_names_18.txt
+## -rwxrwxrwx 1 aravind aravind       53 Mar  6 17:14 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind       35 Mar  6 17:14 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind       34 Mar  6 17:14 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind       12 Mar  6 17:14 analysis.R</code></pre>
+</div>
+<div id="sort-list-by-modification-date" class="section level4">
+<h4>Sort list by modification date</h4>
+<pre class="bash"><code>ls -ltr</code></pre>
+<pre><code>## total 31108
+## -rwxrwxrwx 1 aravind aravind      546 Mar  6 17:14 release_names.txt
+## -rwxrwxrwx 1 aravind aravind    10240 Mar  6 17:14 release_names.tar
+## -rwxrwxrwx 1 aravind aravind     4398 Mar  6 17:14 zip_example.zip
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 r
+## -rwxrwxrwx 1 aravind aravind     9291 Mar  6 17:14 main_project.zip
+## -rwxrwxrwx 1 aravind aravind      632 Mar  6 17:14 release_names.tar.gz
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myfiles
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject3
+## -rwxrwxrwx 1 aravind aravind       53 Mar  6 17:14 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind       65 Mar  6 17:14 release_names_18.txt
+## -rwxrwxrwx 1 aravind aravind       34 Mar  6 17:14 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind       35 Mar  6 17:14 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind     1498 Mar  6 17:14 package_names.txt
+## -rwxrwxrwx 1 aravind aravind      157 Mar  6 17:14 urls.txt
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject1
+## -rwxrwxrwx 1 aravind aravind     1082 Mar  6 17:14 pkg_names.txt
+## -rwxrwxrwx 1 aravind aravind 31754998 Mar  6 17:14 sept_15.csv.gz
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 mypackage
+## -rwxrwxrwx 1 aravind aravind    16242 Mar  6 17:14 bash.sh
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject2
+## -rwxrwxrwx 1 aravind aravind      145 Mar  6 17:14 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind       12 Mar  6 17:14 analysis.R
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject
+## -rwxrwxrwx 1 aravind aravind      430 Mar  6 17:14 bash.R
+## -rwxrwxrwx 1 aravind aravind    39501 Mar  6 17:14 lorem-ipsum.txt
+## drwxrwxrwx 1 aravind aravind     4096 Mar  6 17:14 myproject4</code></pre>
+</div>
+</div>
+<div id="r-functions" class="section level3">
+<h3>R Functions</h3>
+<p>In R, <code>getwd()</code> will return the current working directory. You can use <code>here()</code> from the <a href="https://here.r-lib.org/">here</a> package as well. To change the current
+working directory, use <code>setwd()</code>. The <a href="https://fs.r-lib.org/index.html">fs</a> package provides useful functions for file operations.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Command
+</th>
+<th style="text-align:left;">
+R
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>pwd</code>
+</td>
+<td style="text-align:left;">
+<code>getwd()</code> / <code>here::here()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ls</code>
+</td>
+<td style="text-align:left;">
+<code>dir()</code> / <code>list.files()</code> / <code>list.dirs()</code> / <code>fs::dir_ls()</code> / <code>dir_info()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>cd</code>
+</td>
+<td style="text-align:left;">
+<code>setwd()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>mkdir</code>
+</td>
+<td style="text-align:left;">
+<code>dir.create()</code> / <code>fs::dir_create()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>rmdir</code>
+</td>
+<td style="text-align:left;">
+<code>fs::dir_delete()</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="feedback" class="section level2">
+<h2>Feedback</h2>
+<p>If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
+repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
+<!-- clean up folder structure -->
+</div>

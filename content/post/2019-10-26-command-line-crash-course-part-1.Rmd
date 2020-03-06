@@ -1,0 +1,326 @@
+---
+title: "Command Line - Introduction"
+author: Aravind Hebbali
+twitterImg: /img/cline_cover_image.png
+description: "Getting Started with the Command Line"
+date: '2019-10-26'
+slug: command-line-intro
+categories:
+  - bash
+tags:
+  - bash
+  - shell
+  - terminal
+  - cli
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libs, echo=FALSE, message=FALSE, warning=FALSE}
+options(kableExtra.html.bsTable = TRUE)
+library(knitr)
+library(kableExtra)
+library(magrittr)
+```
+
+```{r cover_image, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_cover_image.png")
+```
+
+In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
+We have created a [RStudio Cloud Project](https://rstudio.cloud/project/518720) to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R & RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on
+
+- exploring R release names
+- mapping shell commands to R functions
+- RStudio Terminal
+- executing shell commands from R using `system2()` or `processx::run()`
+- execute shell commands in RMarkdown
+- execute R scripts in the shell 
+
+If you want a deeper understanding of using command line for data science, we suggest you read [Data Science at the Command Line](https://www.datascienceatthecommandline.com/). [Software Carpentry](https://software-carpentry.org/) too has a lesson on [shell](https://swcarpentry.github.io/shell-novice/). We have listed more references at the end of the tutorial for the benefit of the readers.
+
+## Table of Contents
+
+- [Resources](#resources)
+- [Introduction](#intro)
+- [Navigating File System](#navigate)
+- [File Management](#filemanage)
+- [Input/Output](#inputoutput)
+- [Search & Regular Expression](#regex)
+- [Data Transfer](#datatransfer)
+- [File Compression](#compress)
+- [System Info](#sysinfo)
+- [Execute Shell Commands from R](#system2)
+- [Execute Shell Commands in RStudio](#shellrstudio)
+- [Execute Shell Commands in RMarkdown](#shellrmarkdown)
+- [Execute R Commands in Shell](#rinshell)
+- [Summary](#summary)
+- [References](#references)
+
+## Resources {#resources}
+
+Below are the links to all the resources related to this post:
+
+- <a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/518720" target="_blank">RStudio Cloud</a>
+
+You can try our **free online course** [**Command Line Basics for R Users**](https://rsquared-academy.thinkific.com/courses/command-line-basics-for-r-users) if you prefer to learn through self paced online courses or our [**ebook**](https://bash-intro.rsquaredacademy.com) if you like to read the tutorial in a book format.
+
+## Introduction {#intro}
+
+```{r cline_youtube_intro, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "62hgg26RCC0")
+```
+
+### What is Shell/Terminal?
+
+Shell is a text based application for viewing, handling & manipulating files. It
+takes in commands and passes them on to the operating system. It is also known
+as 
+
+- CLI (Command Line Interface)
+- Bash (Bourne Again Shell)
+- Terminal
+
+It is sufficient to know a handful of commands to get started with the shell.
+
+### Launch Terminal
+
+Although we will use the terminal in RStudio on [RStudio Cloud](https://rstudio.cloud/), we should still know how to launch the terminal in different operating systems.
+
+#### mac
+
+Applications -> Utility -> Terminal
+
+```{r launch_mac, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_mac-terminal.png")
+```
+
+#### Windows
+
+##### Option 1
+
+Go to the Start Menu or screen and enter `Command Prompt` in the search field.
+
+```{r launch_windows_1, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_windows-terminal-1.png")
+```
+
+##### Option 2
+
+Start Menu -> Windows System -> Command Prompt
+
+```{r launch_windows_2, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_windows-terminal-2.png")
+```
+
+##### Option 3
+
+Hold the Windows key and press the `R` key to get a `Run` window. Type `cmd` in the box and click on the `OK` button.
+
+```{r launch_windows_3, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_windows-terminal-3.png")
+```
+
+#### Linux
+
+- Applications -> Accessories -> Terminal
+- Applications -> System      -> Terminal
+
+```{r launch_liux, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_linux-terminal.png")
+```
+
+#### Windows Subsystem for Linux
+
+If you want to use bash on Windows, try the Windows subsystem for Linux. It only works on 64 bit Windows 10. Below are the steps to enable Windows subsystem fro Linux:
+
+##### Step 1 - Enable Developer Mode
+
+To enable Developer Mode open the Settings app and head to **Update & Security > For Developers**. Press the **Developer Mode** switch.
+
+```{r launch_wsl_1, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_wsl-1.png")
+```
+
+##### Step 2 - Enable Windows Subsystem for Linux
+
+To enable the Windows Subsystem for Linux (Beta), open the **Control Panel**, click **Programs and Features**, and click **Turn Windows Features On or Off** in left side bar under Programs and Features. Enable the **Windows Subsystem for Linux (Beta)** option in the list here and click OK. After you do, you'll be prompted to reboot your computer. Click **Restart Now** to reboot your computer and Windows 10 will install the new feature.
+
+```{r launch_wsl_2, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_wsl-2.png")
+```
+
+##### Step 3 - Install your Linux Distribution of Choice
+
+Open the Microsoft store and choose your favorite Linux distribution.
+
+```{r launch_wsl_3, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_wsl-3.png")
+```
+
+In the distro's page, click on "Get".
+
+```{r launch_wsl_4, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_wsl-4.png")
+```
+
+Launch the distro from the **Start Menu**.
+
+```{r launch_wsl_5, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_wsl-5.png")
+```
+
+You can learn more about the Windows Subsystem for Linux [here](https://docs.microsoft.com/en-us/windows/wsl/about).
+
+#### RStudio Terminal
+
+RStudio introduced the terminal with version 1.1.383. The terminal tab is next to the console tab. If it is not visible, use any of the below methods to launch it
+
+- Shift + Alt + T 
+- Tools -> Terminal -> New Terminal
+
+Note, the terminal depends on the underlying operating system. To learn more about the RStudio terminal, read this [article](https://support.rstudio.com/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal) or watch this [webinar](https://resources.rstudio.com/webinars/terminal-updates). In this book, we will use the RStudio terminal on [RStudio Cloud](https://rstudio.cloud/) to ensure that all users have access to Linux bash. You can try all the commands used in this book on your local system as well except in case of Windows users.
+
+```{r rstudio_terminal, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_rstudio-termina.png")
+```
+
+### Prompt
+
+As soon as you launch the terminal, you will see the hostname, machine name and
+the prompt. In case of mac & Linux users, the prompt is `$`. For Windows users, it is `>`.
+
+```{r table_prompt, echo=FALSE}
+cname   <- c("macOS", "Linux", "Windows")
+descrip <- c("$",
+             "$",
+             ">")
+data.frame(OS = cname, Prompt = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+```{r rstudio_terminal_prompt, echo=FALSE, fig.align="center", out.width="70%"}
+knitr::include_graphics("/img/cline_prompt-canva.png")
+```
+
+### Get Started
+
+To begin with, let us learn to display
+
+- basic information about the user
+- the current date & time 
+- the calendar 
+- and clear the screen.
+
+```{r table_get_started, echo=FALSE}
+cname   <- c("`whoami`", "`date`", "`cal`", "`clear`")
+descrip <- c("Who is the user?",
+             "Get date, time and timezone",
+             "Display calendar", 
+             "Clear the screen")
+data.frame(Command = cname, Description = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+`whoami` prints the effective user id i.e. the name of the user who runs the command. Use it to verify the user as which you are logged into the system.
+
+```{bash whoami}
+whoami
+```
+
+`date` will display or change the value of the system's time and date information.
+
+```{bash c2}
+date
+```
+
+`cal` will display a formatted calendar and `clear` will clear all text on the screen and display a new prompt. You can clear the screen by pressing `Ctrl + L` as well.
+
+```{bash cal, eval=FALSE}
+cal
+```
+
+In R, we can get the user information from `Sys.info()` or `whoami()` from the [whoami](https://cran.r-project.org/package=whoami) package. The current date & time are returned by `Sys.date()` & `Sys.time()`. To clear the R console, we use Ctrl + L.
+
+```{r r_get_started, echo=FALSE}
+cname   <- c("`whoami`", "`date`", "`cal`", "`clear`")
+descrip <- c("`Sys.info()` / `whoami::whoami()`",
+             "`Sys.date()` / `Sys.time()`",
+             "", 
+             "`Ctrl + L`")
+data.frame(Command = cname, R = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+### Help/Documentation
+
+Before we proceed further, let us learn to view the documentation/manual pages of the commands. 
+
+```{r table_help, echo=FALSE}
+cname   <- c("`man`", "`whatis`")
+descrip <- c("Display manual pages for a command",
+             "Single line description of a command")
+data.frame(Command = cname, Description = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+`man` is used to view the system's reference manual. Let us use it to view the documentation of the `whatis` command which we will use next. 
+
+```{bash man}
+man whatis
+```
+
+`whatis` displays short manual page descriptions (each manual page has a short description available within it). 
+
+```{bash whatis}
+whatis ls
+```
+
+You will find [tldr.sh](https://tldr.sh/) very useful while exploring new commands and there is a related R package, [tldrrr](https://github.com/kirillseva/tldrrr) as well.
+
+```{r tldrrr}
+# devtools::install_github("kirillseva/tldrrr")
+tldrrr::tldr("pwd")
+```
+
+<hr>
+
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/" target="_blank"><img src="/img/ad_courses.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+
+<hr>
+
+## Feedback
+
+If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source 
+repository</a> or reach out to us at support@rsquaredacademy.com.
+
+<!-- clean up folder structure -->
+ 
+```{r r99, echo=FALSE}
+system2("rm", c("-r", "J:/R/courses/course/content/post/cline"))
+```
+
+```{bash c99, echo=FALSE}
+cp -r /mnt/j/R/courses/live/command-line-basics/bash-tutorial /mnt/j/R/courses/course/content/post/cline
+``` 
+
+ 
