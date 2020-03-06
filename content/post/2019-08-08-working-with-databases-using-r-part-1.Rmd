@@ -4,7 +4,7 @@ author: Aravind Hebbali
 twitterImg: /img/dbi_cover_image.png
 description: "Learn to connect, explore and query database from R"
 date: '2019-08-08'
-slug: working-with-databases-using-r
+slug: connect-and-explore-database-r
 categories:
   - databases
 tags:

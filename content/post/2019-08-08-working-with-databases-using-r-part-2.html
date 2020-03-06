@@ -4,7 +4,7 @@ author: Aravind Hebbali
 twitterImg: /img/dbi_cover_image.png
 description: "Learn to connect, explore and query database from R"
 date: '2019-08-08'
-slug: working-with-databases-using-r
+slug: read-write-database-r
 categories:
   - databases
 tags:
@@ -306,16 +306,16 @@ DBI::dbWriteTable(con, &quot;trial_db&quot;, trial2_data, overwrite = TRUE)</cod
 <p>Let us query sone data from <code>trial_db</code> table to ensure that it has been overwritten.</p>
 <pre class="r"><code>DBI::dbGetQuery(con, &quot;select * from trial_db&quot;)</code></pre>
 <pre><code>##     x y
-## 1  56 k
-## 2  89 l
-## 3   3 m
-## 4  75 n
-## 5   5 o
-## 6  73 p
-## 7  48 q
-## 8  50 r
-## 9  27 s
-## 10 11 t</code></pre>
+## 1  92 k
+## 2  18 l
+## 3  24 m
+## 4  39 n
+## 5  48 o
+## 6  65 p
+## 7  84 q
+## 8  95 r
+## 9  20 s
+## 10 31 t</code></pre>
 </div>
 <div id="append-data" class="section level4">
 <h4>Append Data</h4>
@@ -330,26 +330,26 @@ DBI::dbWriteTable(con, &quot;trial_db&quot;, trial3_data, append = TRUE)</code><
 <p>Let us check if the data has been appended successfully by querying data from the <code>trial_db</code> table.</p>
 <pre class="r"><code>DBI::dbGetQuery(con, &quot;select * from trial_db&quot;)</code></pre>
 <pre><code>##     x y
-## 1  56 k
-## 2  89 l
-## 3   3 m
-## 4  75 n
-## 5   5 o
-## 6  73 p
-## 7  48 q
-## 8  50 r
-## 9  27 s
-## 10 11 t
-## 11 67 e
-## 12 63 f
-## 13 13 g
-## 14 23 h
-## 15 78 i
-## 16 32 j
-## 17 34 k
-## 18  4 l
-## 19 85 m
-## 20 48 n</code></pre>
+## 1  92 k
+## 2  18 l
+## 3  24 m
+## 4  39 n
+## 5  48 o
+## 6  65 p
+## 7  84 q
+## 8  95 r
+## 9  20 s
+## 10 31 t
+## 11 47 e
+## 12 39 f
+## 13 28 g
+## 14 41 h
+## 15  8 i
+## 16 40 j
+## 17 54 k
+## 18 75 l
+## 19  4 m
+## 20 83 n</code></pre>
 </div>
 <div id="insert-rows" class="section level4">
 <h4>Insert Rows</h4>
@@ -371,26 +371,26 @@ DBI::dbWriteTable(con, &quot;trial_db&quot;, trial3_data, append = TRUE)</code><
 <p>Let us check if the new row of data has been inserted into the <code>trial_db</code> table by querying data from the same table.</p>
 <pre class="r"><code>DBI::dbGetQuery(con, &quot;select * from trial_db&quot;)</code></pre>
 <pre><code>##     x y
-## 1  56 k
-## 2  89 l
-## 3   3 m
-## 4  75 n
-## 5   5 o
-## 6  73 p
-## 7  48 q
-## 8  50 r
-## 9  27 s
-## 10 11 t
-## 11 67 e
-## 12 63 f
-## 13 13 g
-## 14 23 h
-## 15 78 i
-## 16 32 j
-## 17 34 k
-## 18  4 l
-## 19 85 m
-## 20 48 n
+## 1  92 k
+## 2  18 l
+## 3  24 m
+## 4  39 n
+## 5  48 o
+## 6  65 p
+## 7  84 q
+## 8  95 r
+## 9  20 s
+## 10 31 t
+## 11 47 e
+## 12 39 f
+## 13 28 g
+## 14 41 h
+## 15  8 i
+## 16 40 j
+## 17 54 k
+## 18 75 l
+## 19  4 m
+## 20 83 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h</code></pre>
@@ -406,26 +406,26 @@ DBI::dbWriteTable(con, &quot;trial_db&quot;, trial3_data, append = TRUE)</code><
 <pre class="r"><code>DBI::dbGetQuery(con, &quot;select * from trial_db&quot;)</code></pre>
 <pre><code>## Warning: Closing open result set, pending rows</code></pre>
 <pre><code>##     x y
-## 1  56 k
-## 2  89 l
-## 3   3 m
-## 4  75 n
-## 5   5 o
-## 6  73 p
-## 7  48 q
-## 8  50 r
-## 9  27 s
-## 10 11 t
-## 11 67 e
-## 12 63 f
-## 13 13 g
-## 14 23 h
-## 15 78 i
-## 16 32 j
-## 17 34 k
-## 18  4 l
-## 19 85 m
-## 20 48 n
+## 1  92 k
+## 2  18 l
+## 3  24 m
+## 4  39 n
+## 5  48 o
+## 6  65 p
+## 7  84 q
+## 8  95 r
+## 9  20 s
+## 10 31 t
+## 11 47 e
+## 12 39 f
+## 13 28 g
+## 14 41 h
+## 15  8 i
+## 16 40 j
+## 17 54 k
+## 18 75 l
+## 19  4 m
+## 20 83 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h
