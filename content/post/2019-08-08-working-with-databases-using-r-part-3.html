@@ -1,0 +1,52 @@
+---
+title: "Using SQL in RStudio & knitr"
+author: Aravind Hebbali
+twitterImg: /img/dbi_cover_image.png
+description: "Learn to connect, explore and query database from R"
+date: '2019-08-08'
+slug: working-with-databases-using-r
+categories:
+  - databases
+tags:
+  - dbi
+---
+
+
+
+<p><img src="/img/dbi_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this tutorial, we will learn to use RStudio SQL script &amp; knitr SQL engine.</p>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this post:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a></li>
+</ul>
+<p>You can try our <strong>free online course</strong> <a href="https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r"><strong>Working with Databases using R</strong></a> if you prefer to learn through self paced online courses.</p>
+{{% youtube "bPlGPmjPFeU" %}}
+<p>If you do not have all the above packages installed, go ahead and install them. In the R script we are sharing with you, we have commented out the code for installing the packages. If you are using the RStudio Cloud project, we have already installed the packages in the project and you can just load them into the R session using <code>library()</code>.</p>
+<p>As and when we come to the specific sections where we are using these packages, they will be reintroduced and we will look at their documentation and explore the functions we will use.</p>
+</div>
+<div id="running-sql-scripts" class="section level2">
+<h2>Running SQL Scripts</h2>
+<p>Once you are connected to a database, you may want to run some SQL queries. So far, we have run the SQL queries in R using function from the DBI package. Using RStudio SQL scripts, we can execute plain SQL queries as shown below. In the first line, we specify the database connection <code>-- !preview conn=con</code> followed by SQL queries. The output can be viewed by clicking on the preview button. We have included a sample SQL script (dbi.sql) which you can open and execute in RStudio.</p>
+<p><img src="/img/dbi_running_sql_scripts.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="knitr-sql-engine" class="section level2">
+<h2>knitr SQL Engine</h2>
+<p>In addition to R, the knitr package can execute code chunks in a variety of languages including SQL. In the below image, we show how to execute SQL queries. First, we establish a DBIconnection to a database in a R code chunk which is then used in a SQL chunk via the <code>connection</code> option (<code>connection = con</code>). Check out the <code>dbi.Rmd</code> file in the resources section.</p>
+<p><img src="/img/dbi_knitr_sql_engine.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="your-turn" class="section level3">
+<h3>Your Turn</h3>
+<ul>
+<li>check the data type of <code>"NULL"</code></li>
+<li>use SQL script to select <code>duration</code>, <code>n_visit</code> from <code>trade</code> table
+where <code>device</code> has the value <code>tablet</code></li>
+<li>create a html report for the above sql query using the knitr SQL engine</li>
+</ul>
+</div>
+</div>

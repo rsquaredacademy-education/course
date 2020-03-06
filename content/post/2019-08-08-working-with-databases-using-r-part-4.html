@@ -1,0 +1,200 @@
+---
+title: "Query Database using dplyr"
+author: Aravind Hebbali
+twitterImg: /img/dbi_cover_image.png
+description: "Learn to connect, explore and query database from R"
+date: '2019-08-08'
+slug: working-with-databases-using-r
+categories:
+  - databases
+tags:
+  - dbi
+  - dbplyr
+  - dplyr
+---
+
+
+
+<p><img src="/img/dbi_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this tutorial, we will learn to query data from a database using dplyr.</p>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this post:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a></li>
+</ul>
+<p>You can try our <strong>free online course</strong> <a href="https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r"><strong>Working with Databases using R</strong></a> if you prefer to learn through self paced online courses.</p>
+{{% youtube "bPlGPmjPFeU" %}}
+</div>
+<div id="libraries" class="section level2">
+<h2>Libraries</h2>
+<p>Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this post.</p>
+<ul>
+<li><a href="http://r-dbi.github.io/DBI/">DBI</a> a database interface for R</li>
+<li><a href="https://dbplyr.tidyverse.org/">dbplyr</a> a dplyr backend for databases</li>
+<li><a href="https://dplyr.tidyverse.org/">dplyr</a> for querying data</li>
+</ul>
+<pre class="r"><code># install.packages(c(&quot;DBI&quot;, &quot;dbplyr&quot;, &quot;dplyr&quot;, &quot;dbplot&quot;, &quot;ggplot2&quot;, &quot;modeldb&quot;,
+# &quot;tidypredict&quot;, &quot;config&quot;))
+library(DBI)
+library(dbplyr)
+library(dplyr)</code></pre>
+<p>If you do not have all the above packages installed, go ahead and install them. In the R script we are sharing with you, we have commented out the code for installing the packages. If you are using the RStudio Cloud project, we have already installed the packages in the project and you can just load them into the R session using <code>library()</code>.</p>
+<p>As and when we come to the specific sections where we are using these packages, they will be reintroduced and we will look at their documentation and explore the functions we will use.</p>
+</div>
+<div id="data-transformation" class="section level2">
+<h2>Data Transformation</h2>
+<p>In this section, we will learn to query data from a database using dplyr. We will learn to:</p>
+<ul>
+<li>reference data</li>
+<li>query data using dplyr</li>
+<li>display query</li>
+<li>collect data</li>
+<li>simulate</li>
+</ul>
+<div id="reference-data" class="section level4">
+<h4>Reference Data</h4>
+<p>The first step is to reference the table in the database using <code>tbl()</code>. Since we want to use the <code>ecom</code> table from the database, we reference it as <code>ecom2</code> using <code>tbl()</code>.</p>
+<pre class="r"><code>ecom2 &lt;- dplyr::tbl(con, &quot;ecom&quot;)
+ecom2</code></pre>
+<pre><code>## # Source:   table&lt;ecom&gt; [?? x 11]
+## # Database: sqlite 3.29.0 [J:\R\courses\course\content\post\mydatabase.db]
+##       id referrer device bouncers n_visit n_pages duration country purchase
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   
+##  1     1 google   laptop true          10       1      693 Czech ~ false   
+##  2     2 yahoo    tablet true           9       1      459 Yemen   false   
+##  3     3 direct   laptop true           0       1      996 Brazil  false   
+##  4     4 bing     tablet false          3      18      468 China   true    
+##  5     5 yahoo    mobile true           9       1      955 Poland  false   
+##  6     6 yahoo    laptop false          5       5      135 South ~ false   
+##  7     7 yahoo    mobile true          10       1       75 Bangla~ false   
+##  8     8 direct   mobile true          10       1      908 Indone~ false   
+##  9     9 bing     mobile false          3      19      209 Nether~ false   
+## 10    10 google   mobile true           6       1      208 Czech ~ false   
+## # ... with more rows, and 2 more variables: order_items &lt;dbl&gt;,
+## #   order_value &lt;dbl&gt;</code></pre>
+<p>If you look at the output, <code>ecom2</code> displays a tibble but in the second line it also shows the database information as well. Let us now move on and calculate the average time on site by device type.</p>
+</div>
+<div id="query-data" class="section level4">
+<h4>Query Data</h4>
+<p>Let us compute the average time on site for different referrer groups when the visitor browses the site using a laptop. Now, instead of using SQL statement to extract the above information, we will use dplyr. This is especially useful if the user is not well versed in SQL. While dplyr can be used to query data, it is still advisable to learn the basics of SQL.</p>
+<pre class="r"><code>ecom2 %&gt;% 
+  dplyr::select(referrer, device, duration) %&gt;% 
+  dplyr::filter(device == &quot;laptop&quot;) %&gt;% 
+  dplyr::group_by(referrer) %&gt;% 
+  dplyr::summarise(avg_tos = mean(duration)) %&gt;% 
+  dplyr::arrange(avg_tos)</code></pre>
+<pre><code>## Warning: Missing values are always removed in SQL.
+## Use `mean(x, na.rm = TRUE)` to silence this warning
+## This warning is displayed only once per session.</code></pre>
+<pre><code>## # Source:     lazy query [?? x 2]
+## # Database:   sqlite 3.29.0 [J:\R\courses\course\content\post\mydatabase.db]
+## # Ordered by: avg_tos
+##   referrer avg_tos
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 direct      326.
+## 2 yahoo       331.
+## 3 social      362.
+## 4 bing        434.
+## 5 google      439.</code></pre>
+</div>
+<div id="display-query" class="section level4">
+<h4>Display Query</h4>
+<p>If you want to view the SQL translation of the dplyr code used in the previous example, use <code>show_query()</code>.</p>
+<pre class="r"><code>tos_query &lt;- 
+  ecom2 %&gt;% 
+  dplyr::select(referrer, device, duration) %&gt;% 
+  dplyr::filter(device == &quot;laptop&quot;) %&gt;% 
+  dplyr::group_by(referrer) %&gt;% 
+  dplyr::summarise(avg_tos = mean(duration)) %&gt;% 
+  dplyr::arrange(avg_tos)
+
+dplyr::show_query(tos_query)</code></pre>
+<pre><code>## &lt;SQL&gt;
+## SELECT `referrer`, AVG(`duration`) AS `avg_tos`
+## FROM (SELECT `referrer`, `device`, `duration`
+## FROM `ecom`)
+## WHERE (`device` = &#39;laptop&#39;)
+## GROUP BY `referrer`
+## ORDER BY `avg_tos`</code></pre>
+</div>
+<div id="collect-data" class="section level4">
+<h4>Collect Data</h4>
+<p>Now, some interesting facts. We will understand this using a different simple example. Let us read the <code>referrer</code> and <code>device</code> column from the <code>ecom</code> table in the database and store it in <code>result</code>.</p>
+<pre class="r"><code>result &lt;- 
+  ecom2 %&gt;%
+  dplyr::select(referrer, device) 
+
+result</code></pre>
+<pre><code>## # Source:   lazy query [?? x 2]
+## # Database: sqlite 3.29.0 [J:\R\courses\course\content\post\mydatabase.db]
+##    referrer device
+##    &lt;chr&gt;    &lt;chr&gt; 
+##  1 google   laptop
+##  2 yahoo    tablet
+##  3 direct   laptop
+##  4 bing     tablet
+##  5 yahoo    mobile
+##  6 yahoo    laptop
+##  7 yahoo    mobile
+##  8 direct   mobile
+##  9 bing     mobile
+## 10 google   mobile
+## # ... with more rows</code></pre>
+<p>When we print <code>result</code>, it displays the first 10 rows. In addition it shows the database information at the beginning as well as <code>... with more rows</code> at the bottom of the table but it does not exactly say how many more rows are there.
+Let us use <code>nrow()</code> to find the total number of rows in <code>result</code>.</p>
+<pre class="r"><code>nrow(result)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>No luck with <code>nrow()</code> either as it returns <code>NA</code> instead of the number of rows in <code>result</code>. Now, why does this happen? When working with databases, <strong>dplyr</strong> never pulls data into R unless you explicitly ask for it. In the previous example, it just displays the first 10 rows and has not read the entire table. The <code>ecom</code> table in the database has 1000 rows of data and ideally dplyr should have read all the rows of data. But it does not work like that and the reason is this statement at the beginning of the output: <code>Source:   lazy query [?? x 2]</code>. It does display the number of columns, <code>2</code>. In place of the number of columns there is <code>??</code>because it has not read the entire data from the <code>ecom</code> table.</p>
+<p>What do we do if we need the entire data? In such cases, we can use <code>collect()</code> as shown in the below example.</p>
+<pre class="r"><code>result %&gt;% 
+  dplyr::collect() </code></pre>
+<pre><code>## # A tibble: 1,000 x 2
+##    referrer device
+##    &lt;chr&gt;    &lt;chr&gt; 
+##  1 google   laptop
+##  2 yahoo    tablet
+##  3 direct   laptop
+##  4 bing     tablet
+##  5 yahoo    mobile
+##  6 yahoo    laptop
+##  7 yahoo    mobile
+##  8 direct   mobile
+##  9 bing     mobile
+## 10 google   mobile
+## # ... with 990 more rows</code></pre>
+<p>In the above output, dplyr has read the entire data from <code>ecom</code>. It show the number of rows and columns at the top and the number of rows not displayed (990) at the bottom. More importantly, it does not show any information about the database as the entire data from <code>ecom</code> has been read and is available in the R session.</p>
+<pre class="r"><code>result %&gt;% 
+  dplyr::collect() %&gt;% 
+  nrow()</code></pre>
+<pre><code>## [1] 1000</code></pre>
+<p>Even <code>nrow()</code> returns 1000 as the entire data has been read from the database. Unless and until required or explicitly asked for, the data is not pulled from the database. When you are playing around with or iterating or experimenting with R code, do not use <code>collect()</code>. Only when you have finalized the code for the information being extracted from the database, use <code>collect()</code> to read the complete output into the R session.</p>
+</div>
+<div id="simulate" class="section level4">
+<h4>Simulate</h4>
+<p><code>simulate_*()</code> functions from <a href="https://dbplyr.tidyverse.org/">dbplyr</a> are useful for testing SQL generation. In the below example, we want to generate the SQL for computing average time on site by referrer type for a MySQL database connection. The SQL generated is rendered to a SQL string by <code>sql_render()</code>. You can test SQL generation for a wide variety of databases using dbplyr.</p>
+<pre class="r"><code>ecom2 %&gt;% 
+  dplyr::group_by(referrer) %&gt;% 
+  dplyr::summarise(avg_tos = mean(duration))  %&gt;% 
+  dbplyr::sql_render(dbplyr::simulate_mysql())</code></pre>
+<pre><code>## &lt;SQL&gt; SELECT `referrer`, AVG(`duration`) AS `avg_tos`
+## FROM `ecom`
+## GROUP BY `referrer`</code></pre>
+</div>
+<div id="your-turn" class="section level3">
+<h3>Your Turn</h3>
+<ul>
+<li>use <code>tbl()</code> to reference <code>trade</code> table as <code>trade2</code></li>
+<li>use dplyr verbs to compute average duration for <code>device</code> from the <code>trade</code> table</li>
+<li>store the above query in a variable <code>tos_device</code></li>
+<li>use <code>show_query()</code> to display the underlying SQL query of <code>tos_device</code></li>
+<li>use <code>collect()</code> to retrieve data from <code>tos_device</code></li>
+<li>use <code>explain()</code> to display the underlying computation logic of <code>tos_device</code></li>
+</ul>
+</div>
+</div>

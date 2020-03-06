@@ -1,0 +1,119 @@
+---
+title: "Connect & Explore Database from R"
+author: Aravind Hebbali
+twitterImg: /img/dbi_cover_image.png
+description: "Learn to connect, explore and query database from R"
+date: '2019-08-08'
+slug: working-with-databases-using-r
+categories:
+  - databases
+tags:
+  - dbi
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r rfm_cover_image, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/dbi_cover_image.png")
+```
+
+## Introduction
+
+In this tutorial, we will learn to connect to & explore a database.
+
+## Resources
+
+Below are the links to all the resources related to this tutorial:
+
+- <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a>
+
+You can try our **free online course** [**Working with Databases using R**](https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r) if you prefer to learn through self paced online courses.
+
+```{r dbi_youtube_demo, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "bPlGPmjPFeU")
+```
+
+## Libraries
+
+Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this tutorial. 
+
+- [DBI](https://r-dbi.github.io/DBI/) a database interface for R 
+- [RSQLite](https://rsqlite.r-dbi.org/) driver for SQLite
+
+```{r load_libs, message=FALSE, warning=FALSE}
+# install.packages(c("DBI", "dbplyr", "dplyr", "dbplot", "ggplot2", "modeldb",
+# "tidypredict", "config"))
+library(DBI)
+```
+
+If you do not have all the above packages installed, go ahead and install them. In the R script we are sharing with you, we have commented out the code for installing the packages. If you are using the RStudio Cloud project, we have already installed the packages in the project and you can just load them into the R session using `library()`. 
+
+As and when we come to the specific sections where we are using these packages, they will be reintroduced and we will look at their documentation and explore the functions we will use.
+
+## Connect & Explore
+
+The first step is to successfully connect to a database. To begin with, we will keep things simple and connect to a local **SQLite** database, `mydatabase.db`. We will explore the database, list the tables present and the fields/columns in those tables. In the last section of this post, we will connect to a **MySQL** database hosted on AWS using RStudio connections tab and learn how to specify the host, port, username, password etc.
+
+#### Connect
+
+To connect to the database, we will use `dbConnect()` from the [DBI](http://r-dbi.github.io/DBI/) package which defines a common interface between R and database management systems. The first input is the database driver which in our case is `SQLite` and the second input is the name and location of the database. Since we are connecting to a local database, it is sufficient to specify the name and location of the database. The database connection is saved in `con` for further use in exploring and querying data. 
+
+```{r dbi_connect}
+con <- DBI::dbConnect(RSQLite::SQLite(), dbname = "mydatabase.db")
+con
+```
+
+If the database is present and the correct path to the database has been specified, R will not return any error. 
+
+#### Connection Summary
+
+Next, let us get a quick summary of the database connection using `summary()`. It shows `SQLiteConnection` under class and we can ignore the other details for the time being. Great! We have successfully connected to the database and now it is time to list the tables present in the database.
+
+```{r dbi_connection_summary}
+summary(con)
+```
+
+#### List Tables
+
+Now that we are connected to a database, let us list all the tables present in it using `dbListTables()`. 
+
+```{r list_tables}
+DBI::dbListTables(con)
+```
+
+There are 4 tables in the database and we will be using only the `ecom` and `trade` tables in our examples and practice questions. 
+
+#### List Fields
+
+Let us go ahead and list all the fields/colums in the `ecom` table since we will be using it in the following sections. To list all the fields (columns) in a table, use `dbListFields()`. It takes 2 inputs:
+
+- the database connection name (`con`)
+- name of the table (`ecom`) enclosed in single/double quotes
+
+```{r lite4}
+DBI::dbListFields(con, "ecom")
+```
+
+There are 11 columns in the `ecom` table. Let us take a look at the data dictionary to understand what these columns stand for:
+
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+Now that we know how to connect to a database and list the fields/columns, let us move on to the next section where we will learn how to query data from the tables present in the database.
+
+```{r dbi_disconnect, include=FALSE}
+DBI::dbDisconnect(con)
+```

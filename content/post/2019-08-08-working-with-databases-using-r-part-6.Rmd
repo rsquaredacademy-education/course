@@ -1,0 +1,193 @@
+---
+title: "Fit Models inside Database using modeldb"
+author: Aravind Hebbali
+twitterImg: /img/dbi_cover_image.png
+description: "Learn to connect, explore and query database from R"
+date: '2019-08-08'
+slug: working-with-databases-using-r
+categories:
+  - databases
+tags:
+  - modeldb
+  - tidypredict
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r rfm_cover_image, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/dbi_cover_image.png")
+```
+
+## Introduction
+
+In this tutorial, we will learn to model data with modeldb & tidypredict.
+
+## Resources
+
+Below are the links to all the resources related to this post:
+
+- <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a>
+
+You can try our **free online course** [**Working with Databases using R**](https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r) if you prefer to learn through self paced online courses.
+
+```{r dbi_youtube_demo, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "bPlGPmjPFeU")
+```
+
+## Libraries
+
+Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this post. 
+
+- [DBI](http://r-dbi.github.io/DBI/) a database interface for R 
+- [dbplyr](https://dbplyr.tidyverse.org/) a dplyr backend for databases
+- [dplyr](https://dplyr.tidyverse.org/) for querying data
+- [dbplot](https://edgararuiz.github.io/dbplot/) & [ggplot2](https://ggplot2.tidyverse.org/) for data visualization
+- [modeldb](https://tidymodels.github.io/modeldb/) & [tidypredict](https://tidymodels.github.io/tidypredict/) for modeling & prediction inside database
+
+```{r load_libs, message=FALSE, warning=FALSE}
+# install.packages(c("DBI", "dbplyr", "dplyr", "dbplot", "ggplot2", "modeldb",
+# "tidypredict", "config"))
+library(DBI)
+library(dbplyr)
+library(dplyr)
+library(dbplot)
+library(ggplot2)
+library(modeldb)
+library(tidypredict)
+library(config)
+```
+
+If you do not have all the above packages installed, go ahead and install them. In the R script we are sharing with you, we have commented out the code for installing the packages. If you are using the RStudio Cloud project, we have already installed the packages in the project and you can just load them into the R session using `library()`. 
+
+As and when we come to the specific sections where we are using these packages, they will be reintroduced and we will look at their documentation and explore the functions we will use.
+
+## Data Modeling
+
+In this section, we will explore fitting models and running predictions inside the database using the following packages:
+
+- [modeldb](https://tidymodels.github.io/modeldb/index.html)
+- [tidypredict](https://tidymodels.github.io/tidypredict/index.html)
+
+Let us start with fitting models inside database. The [modeldb](https://tidymodels.github.io/modeldb/index.html) package fits models inside database by using dplyr and dbplyr for SQL translation of the algorithms and currently supports linear regression and k-means clustering. 
+
+#### Simple Regression 
+
+Let us begin with a simple linear regression model. From the `ecom` table in the database, we want to regress `duration` on `n_visit`. As shown below, we first select the required fields using `select()` and pass the resulting data to `linear_regression_db()` from modeldb. We need to specify the dependent variable which in our case is `duration`. 
+
+```{r dbi_connect, include=FALSE}
+con <- DBI::dbConnect(RSQLite::SQLite(), dbname = "mydatabase.db")
+con
+ecom2 <- dplyr::tbl(con, "ecom")
+```
+
+```{r simple_regression}
+ecom2 %>% 
+  dplyr::select(duration, n_visit) %>% 
+  modeldb::linear_regression_db(duration)
+```
+
+Let us move on to a multiple regression example. In the below example, we want to regress `duration` on `n_visit` (number of visit) and `n_pages` (number of pages browsed).
+
+#### Multiple Regression 
+
+```{r multiple_regression}
+ecom2 %>% 
+  dplyr::select(duration, n_visit, n_pages) %>%
+  modeldb::linear_regression_db(duration)
+```
+
+#### Categorical Variables
+
+So how do we handle categorical variables? To handle categorical variables, use `add_dummy_variables()`. We need to specify the categorical variable and its values. It will create the dummy variables. 
+
+```{r categorical_variables}
+ecom2 %>% 
+  dplyr::select(duration, device) %>%
+  modeldb::add_dummy_variables(device, values = c("laptop", "mobile", "tablet")) %>%
+  modeldb::linear_regression_db(duration)
+```
+
+#### Full Example
+
+Below is a full example, where we have both continuous and categorical predictors. Whenever you have 3 or more predictors, use the `sample_size` or `auto_count` arguments. To know why, click [here](https://tidymodels.github.io/modeldb/reference/linear_regression_db.html)
+
+```{r full_example}
+# use sample size
+ecom2 %>% 
+  dplyr::select(duration, n_visit, n_pages, device) %>%
+  modeldb::add_dummy_variables(device, values = c("laptop", "mobile", "tablet")) %>%
+  modeldb::linear_regression_db(duration, sample_size = 1000)
+
+# use auto_count
+ecom2 %>% 
+  dplyr::select(duration, n_visit, n_pages, device) %>%
+  modeldb::add_dummy_variables(device, values = c("laptop", "mobile", "tablet")) %>%
+  modeldb::linear_regression_db(duration, auto_count = TRUE)
+```
+
+### Your Turn
+
+- regress `duration` on `n_pages` 
+- regress `duration` on `referrer`
+- and finally regress `duration` on `n_pages`, `n_visit` and `referrer`
+
+## Predict Inside Database
+
+[tidypredict](https://tidymodels.github.io/tidypredict/index.html) can return SQL statement that can be run inside the database. Let us first create a linear model in R using `lm()`
+
+```{r tp1}
+model <- lm(duration ~ device + referrer + n_visit + n_pages, data = ecom2)
+model
+```
+
+#### Fit
+
+To add the fitted values in a new column, use `tidypredict_to_column()`. In the below example, we use `model` to compute the fitted values and add it as a new column. 
+
+```{r tp4}
+ecom2 %>% 
+  tidypredict::tidypredict_to_column(model) %>% 
+  dplyr::select(duration, fit)
+```
+
+`tidypredict_fit()` returns a Tidy Eval formula that can be used inside a dplyr command.
+
+```{r tp3}
+tidypredict::tidypredict_fit(model)
+```
+
+Let us use the above R code to calculate fitted values using `mutate()` from dplyr.
+
+```{r tp3a}
+ecom2 %>%
+  dplyr::mutate(
+    fit = 441.450192491919 + (ifelse(device == "mobile", 1, 0) *
+      -30.9522074131866) + (ifelse(device == "tablet", 1,
+      0) * -14.4972018107797) + (ifelse(referrer == "direct",
+      1, 0) * -8.98035001912995) + (ifelse(referrer == "google",
+      1, 0) * -10.038005625893) + (ifelse(referrer == "social",
+      1, 0) * -19.8411767075006) + (ifelse(referrer == "yahoo",
+      1, 0) * -32.0969778768984) + (n_visit * -1.4325653130794) +
+      (n_pages * -8.29825840984566)
+    ) %>%
+  dplyr::select(duration, fit)
+```
+
+The SQL translation of the above step can be viewed using `tidypredict_sql()`.
+
+```{r tp2}
+tidypredict::tidypredict_sql(model, con)
+```
+
+## Close Connection
+
+It is a good practice to close connection to a database when you no longer need to read/write data from/to it. Use `dbDisconnect()` to close the database connection.
+
+```{r disconnect}
+DBI::dbDisconnect(con)
+```
+

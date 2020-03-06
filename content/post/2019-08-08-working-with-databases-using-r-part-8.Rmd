@@ -1,0 +1,186 @@
+---
+title: "Handling Database Credentials"
+author: Aravind Hebbali
+twitterImg: /img/dbi_cover_image.png
+description: "Learn to connect, explore and query database from R"
+date: '2019-08-08'
+slug: working-with-databases-using-r
+categories:
+  - databases
+tags:
+  - config
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r rfm_cover_image, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/dbi_cover_image.png")
+```
+
+## Introduction
+
+In this tutorial, we will learn to handle database credentials.
+
+## Resources
+
+Below are the links to all the resources related to this post:
+
+- <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a>
+
+You can try our **free online course** [**Working with Databases using R**](https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r) if you prefer to learn through self paced online courses.
+
+```{r dbi_youtube_demo, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "bPlGPmjPFeU")
+```
+
+## Libraries
+
+Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this post. 
+
+- [DBI](http://r-dbi.github.io/DBI/) a database interface for R 
+- [config](https://cran.r-project.org/package=config) for handling credentials
+
+```{r load_libs, message=FALSE, warning=FALSE}
+# install.packages(c("DBI", "dbplyr", "dplyr", "dbplot", "ggplot2", "modeldb",
+# "tidypredict", "config"))
+library(DBI)
+library(config)
+```
+
+If you do not have all the above packages installed, go ahead and install them. In the R script we are sharing with you, we have commented out the code for installing the packages. If you are using the RStudio Cloud project, we have already installed the packages in the project and you can just load them into the R session using `library()`. 
+
+As and when we come to the specific sections where we are using these packages, they will be reintroduced and we will look at their documentation and explore the functions we will use.
+
+## Handling Credentials
+
+Handling database credentials is one of the most important part of working with
+databases in R. In this section, we will look at the different options for 
+securely storing and accessing credentials. After connecting to the database, we
+will list the tables in the database (just to check that the connection is 
+working) and then disconnect.
+
+## rstudioapi
+
+You can prompt the user to enter the database credentials using RStudio IDE. `askForPassword()` will show a popup box that masks what is typed.
+
+```{r cred_2, eval=FALSE}
+db_con <- DBI::dbConnect(drv      = RMySQL::MySQL(), 
+                         username = rstudioapi::askForPassword("Database Username"),
+                         password = rstudioapi::askForPassword("Database Password"),
+                         host     = "mysql-ecom.cowqoftkc0gy.us-east-2.rds.amazonaws.com", 
+                         port     = 3306, 
+                         dbname   = "mysql_test")
+```
+
+```{r dbi_ask_credentials, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/dbi_ask_credentials.png")
+```
+
+
+#### .Renviron
+
+The second method is store the credentials as environment variables. This can
+be achieved using `Sys.setenv()` or using .Renviron file. The credentials can then be retrieved using `Sys.getenv()` as shown in the below example:
+
+```{r cred_3, eval=FALSE}
+db_con <- DBI::dbConnect(drv      = RMySQL::MySQL(), 
+                         username = Sys.getenv("db_uid"), 
+                         password = Sys.getenv("db_pwd"), 
+                         host     = "mysql-ecom.cowqoftkc0gy.us-east-2.rds.amazonaws.com", 
+                         port     = 3306, 
+                         dbname   = "mysql_test")
+
+# list tables in the database
+DBI::dbListTables(db_con)
+DBI::dbDisconnect(db_con)
+```
+
+In RStudio, create a new file and save it as .Renviron. In this file, define the
+credentials as shown below:
+
+```{r renv_cred, eval=FALSE}
+userid = "username"
+pwd    = "password"
+```
+
+Save the file in the home directory of your project and restart R. Why should you restart R? .Renviron is processed only at the beginning of an R session. If you try to access the credentials using `Sys.getenv()` without restarting R, the credentials will not be retrieved and you will see an error if you try to connect to the database. After restarting R, use `Sys.getenv()` to retrieve the
+credentials while opening a new connection to the database. We have added the `.Renviron` file used to store credentials in the resources section of the learning management system as well as in the GitHub repo.
+
+#### options
+
+The database credentials can be recorded as a global option in R. There are two ways to do this:
+
+- use `options()`
+- use an R file
+
+Below is the code that records credentials using `options()`:
+
+```{r options_example}
+options(db_userid   = "user_id")
+options(db_password = "pass_word")
+```
+
+The above code can be stored in a R file which can then be sourced before opening a new connection to the database. The credentials can be retrieved using `getOptions()`. We have added the `options.R` file used to store credentials to the database in the resources section of the learning management system as well as in the GitHub repo.
+
+```{r cred_4, eval=FALSE}
+source("options.R")
+db_con <- DBI::dbConnect(drv      = RMySQL::MySQL(), 
+                         username = getOption("db_userid"), 
+                         password = getOption("db_password"), 
+                         host     = "mysql-ecom.cowqoftkc0gy.us-east-2.rds.amazonaws.com", 
+                         port     = 3306, 
+                         dbname   = "mysql_test")
+
+# list tables in the database
+DBI::dbListTables(db_con)
+DBI::dbDisconnect(db_con)
+```
+
+#### config
+
+The [config](https://github.com/rstudio/config) package allows you to manage environment specific configuration values. Configurations are defined using a YAML text file and are read by default from a file named config.yml in the current working directory. Store the database connection details such as driver, username, password, host, port, database name etc. in a YAML file and read it using `get()`. We have added the `config.yml` file used to store the credentials in the resources section of the learning management system as well as in the GitHub repo.
+
+```{r cred_5, eval=FALSE}
+# read configurations
+md <- config::get("mysql-dev")
+
+# test
+md$port
+md$dbname
+
+# connect
+db_con <- DBI::dbConnect(drv      = RMySQL::MySQL(), 
+                         username = md$username,
+                         password = md$password,
+                         host     = md$host, 
+                         port     = md$port, 
+                         dbname   = md$dbname)
+
+# list tables in the database
+DBI::dbListTables(db_con)
+DBI::dbDisconnect(db_con)
+```
+
+
+#### keyring
+
+The [keyring](https://github.com/r-lib/keyring#readme) package provides platform independent API to access the operating systems credential store. We leave it to the reader to explore the keyring package for storing and accessing credentials safely.
+
+## dbx
+
+[dbx](https://github.com/ankane/dbx) is another interesting package built on top
+of DBI for both research and production environments and we hope to explore it 
+in a separate post in the coming days. 
+
+## Summary
+
+- [DBI](http://r-dbi.github.io/DBI/) to connect and interact with databases
+- [dplyr](https://dplyr.tidyverse.org/index.html) and [dbplyr](https://dbplyr.tidyverse.org/index.html) for data transformation
+- [dbplot](https://edgararuiz.github.io/dbplot/index.html) for data visualization
+- [modeldb](https://tidymodels.github.io/modeldb/) and [tidypredict](https://tidymodels.github.io/tidypredict/) for data modeling
+- [config](https://github.com/rstudio/config), [keyring](https://github.com/r-lib/keyring), .Renviron and `options()` to handle credentials
+- always close the database connection

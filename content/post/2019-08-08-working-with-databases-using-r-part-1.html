@@ -1,0 +1,99 @@
+---
+title: "Connect & Explore Database from R"
+author: Aravind Hebbali
+twitterImg: /img/dbi_cover_image.png
+description: "Learn to connect, explore and query database from R"
+date: '2019-08-08'
+slug: working-with-databases-using-r
+categories:
+  - databases
+tags:
+  - dbi
+---
+
+
+
+<p><img src="/img/dbi_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this tutorial, we will learn to connect to &amp; explore a database.</p>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a></li>
+</ul>
+<p>You can try our <strong>free online course</strong> <a href="https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r"><strong>Working with Databases using R</strong></a> if you prefer to learn through self paced online courses.</p>
+{{% youtube "bPlGPmjPFeU" %}}
+</div>
+<div id="libraries" class="section level2">
+<h2>Libraries</h2>
+<p>Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this tutorial.</p>
+<ul>
+<li><a href="https://r-dbi.github.io/DBI/">DBI</a> a database interface for R</li>
+<li><a href="https://rsqlite.r-dbi.org/">RSQLite</a> driver for SQLite</li>
+</ul>
+<pre class="r"><code># install.packages(c(&quot;DBI&quot;, &quot;dbplyr&quot;, &quot;dplyr&quot;, &quot;dbplot&quot;, &quot;ggplot2&quot;, &quot;modeldb&quot;,
+# &quot;tidypredict&quot;, &quot;config&quot;))
+library(DBI)</code></pre>
+<p>If you do not have all the above packages installed, go ahead and install them. In the R script we are sharing with you, we have commented out the code for installing the packages. If you are using the RStudio Cloud project, we have already installed the packages in the project and you can just load them into the R session using <code>library()</code>.</p>
+<p>As and when we come to the specific sections where we are using these packages, they will be reintroduced and we will look at their documentation and explore the functions we will use.</p>
+</div>
+<div id="connect-explore" class="section level2">
+<h2>Connect &amp; Explore</h2>
+<p>The first step is to successfully connect to a database. To begin with, we will keep things simple and connect to a local <strong>SQLite</strong> database, <code>mydatabase.db</code>. We will explore the database, list the tables present and the fields/columns in those tables. In the last section of this post, we will connect to a <strong>MySQL</strong> database hosted on AWS using RStudio connections tab and learn how to specify the host, port, username, password etc.</p>
+<div id="connect" class="section level4">
+<h4>Connect</h4>
+<p>To connect to the database, we will use <code>dbConnect()</code> from the <a href="http://r-dbi.github.io/DBI/">DBI</a> package which defines a common interface between R and database management systems. The first input is the database driver which in our case is <code>SQLite</code> and the second input is the name and location of the database. Since we are connecting to a local database, it is sufficient to specify the name and location of the database. The database connection is saved in <code>con</code> for further use in exploring and querying data.</p>
+<pre class="r"><code>con &lt;- DBI::dbConnect(RSQLite::SQLite(), dbname = &quot;mydatabase.db&quot;)
+con</code></pre>
+<pre><code>## &lt;SQLiteConnection&gt;
+##   Path: J:\R\courses\course\content\post\mydatabase.db
+##   Extensions: TRUE</code></pre>
+<p>If the database is present and the correct path to the database has been specified, R will not return any error.</p>
+</div>
+<div id="connection-summary" class="section level4">
+<h4>Connection Summary</h4>
+<p>Next, let us get a quick summary of the database connection using <code>summary()</code>. It shows <code>SQLiteConnection</code> under class and we can ignore the other details for the time being. Great! We have successfully connected to the database and now it is time to list the tables present in the database.</p>
+<pre class="r"><code>summary(con)</code></pre>
+<pre><code>##           Length            Class             Mode 
+##                1 SQLiteConnection               S4</code></pre>
+</div>
+<div id="list-tables" class="section level4">
+<h4>List Tables</h4>
+<p>Now that we are connected to a database, let us list all the tables present in it using <code>dbListTables()</code>.</p>
+<pre class="r"><code>DBI::dbListTables(con)</code></pre>
+<pre><code>## [1] &quot;COMPANY&quot;    &quot;DEPARTMENT&quot; &quot;ecom&quot;       &quot;trade&quot;</code></pre>
+<p>There are 4 tables in the database and we will be using only the <code>ecom</code> and <code>trade</code> tables in our examples and practice questions.</p>
+</div>
+<div id="list-fields" class="section level4">
+<h4>List Fields</h4>
+<p>Let us go ahead and list all the fields/colums in the <code>ecom</code> table since we will be using it in the following sections. To list all the fields (columns) in a table, use <code>dbListFields()</code>. It takes 2 inputs:</p>
+<ul>
+<li>the database connection name (<code>con</code>)</li>
+<li>name of the table (<code>ecom</code>) enclosed in single/double quotes</li>
+</ul>
+<pre class="r"><code>DBI::dbListFields(con, &quot;ecom&quot;)</code></pre>
+<pre><code>##  [1] &quot;id&quot;          &quot;referrer&quot;    &quot;device&quot;      &quot;bouncers&quot;    &quot;n_visit&quot;    
+##  [6] &quot;n_pages&quot;     &quot;duration&quot;    &quot;country&quot;     &quot;purchase&quot;    &quot;order_items&quot;
+## [11] &quot;order_value&quot;</code></pre>
+<p>There are 11 columns in the <code>ecom</code> table. Let us take a look at the data dictionary to understand what these columns stand for:</p>
+<ul>
+<li>id: row id</li>
+<li>referrer: referrer website/search engine</li>
+<li>os: operating system</li>
+<li>browser: browser</li>
+<li>device: device used to visit the website</li>
+<li>n_pages: number of pages visited</li>
+<li>duration: time spent on the website (in seconds)</li>
+<li>repeat: frequency of visits</li>
+<li>country: country of origin</li>
+<li>purchase: whether visitor purchased</li>
+<li>order_value: order value of visitor (in dollars)</li>
+</ul>
+<p>Now that we know how to connect to a database and list the fields/columns, let us move on to the next section where we will learn how to query data from the tables present in the database.</p>
+</div>
+</div>
