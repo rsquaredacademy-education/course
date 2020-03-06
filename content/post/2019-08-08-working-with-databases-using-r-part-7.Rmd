@@ -1,5 +1,5 @@
 ---
-title: "Explore RStudio Connections Pane"
+title: "Databases & R - Explore RStudio Connections Pane"
 author: Aravind Hebbali
 twitterImg: /img/dbi_cover_image.png
 description: "Learn to connect, explore and query database from R"

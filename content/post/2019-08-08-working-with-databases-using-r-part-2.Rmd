@@ -1,5 +1,5 @@
 ---
-title: "Read & Write to a Database from R"
+title: "Databases & R - Read & Write to a Database from R"
 author: Aravind Hebbali
 twitterImg: /img/dbi_cover_image.png
 description: "Learn to connect, explore and query database from R"

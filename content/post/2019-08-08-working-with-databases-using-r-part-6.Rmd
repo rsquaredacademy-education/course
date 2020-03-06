@@ -1,5 +1,5 @@
 ---
-title: "Fit Models inside Database using modeldb"
+title: "Databases & R - Fit Models inside Database using modeldb"
 author: Aravind Hebbali
 twitterImg: /img/dbi_cover_image.png
 description: "Learn to connect, explore and query database from R"

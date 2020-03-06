@@ -1,5 +1,5 @@
 ---
-title: "Visualize Data using dbplot"
+title: "Databases & R - Visualize Data using dbplot"
 author: Aravind Hebbali
 twitterImg: /img/dbi_cover_image.png
 description: "Learn to connect, explore and query database from R"
