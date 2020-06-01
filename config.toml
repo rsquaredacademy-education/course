@@ -1,4 +1,4 @@
-baseurl = "https://tutorial.rsquaredacademy.com/"
+baseurl = "https://learn.rsquaredacademy.com/"
 languageCode = "en-us"
 title = "Rsquared Academy - Learn Data Science"
 theme = "hugo-lithium-theme"
