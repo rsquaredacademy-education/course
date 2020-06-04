@@ -3,7 +3,7 @@ title: "Command Line - Navigating File System"
 author: Aravind Hebbali
 twitterImg: /img/cline_cover_image.png
 description: "Getting Started with the Command Line"
-date: '2019-10-'
+date: '2019-10-18'
 slug: command-line-navigating-file-system
 categories:
   - bash
