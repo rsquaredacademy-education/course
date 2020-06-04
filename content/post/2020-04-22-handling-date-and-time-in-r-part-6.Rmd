@@ -1,0 +1,216 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-22'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pkg_load, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(magrittr)
+library(lubridate)
+library(rversions)
+library(readr)
+library(dplyr)
+```
+
+```{r cover_image, echo=FALSE, fig.align="center", out.width="80%"}
+knitr::include_graphics("/img/handling-date-and-time-in-r.png")
+```
+
+## Resources {#resources}
+
+Below are the links to all the resources related to this tutorial:
+
+- <a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a>
+- <a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a>
+
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
+```
+
+## Parse Date & Time {#parse}
+
+```{r cline_youtube_parse, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "FqWb-OS6wu4")
+```
+
+While creating date-time objects, we specified different formats using the 
+conversion specification but most often you will not create date/time and
+instead deal with data that comes your way from a database or API or 
+colleague/collaborator. In such cases, we need to be able to parse date/time 
+from the data provided to us. In this section, we will focus on parsing 
+date/time from character data. Both base R and the lubridate package offer 
+functions to parse date and time and we will explore a few of them in this 
+section. We will initially use functions from base R and later on explore those
+from lubridate which will give us an opportunity to compare and contrast. It 
+will also allow us to choose the functions based on the data we are dealing 
+with.
+
+`strptime()` will convert character data to `POSIXlt`. You will use this when
+converting from character data to date/time. On the other hand, if you want to
+convert date/time to character data, use any of the following:
+
+- `strftime()`
+- `format()`
+- `as.character()`
+
+The above functions will convert `POSIXct/POSIXlt` to character. Let us start
+with a simple example. The data we have been supplied has date/time as 
+character data and in the format `YYYYMMDD` i.e. nothing separates the year, 
+month and date from each other. We will use `strptime()` to convert this to an
+object of class `POSIXlt`.
+
+```{r strptime_1}
+rel_date <- strptime("20191212", format = "%Y%m%d")
+class(rel_date)
+```
+
+If you have a basic knowledge of conversion specifications, you can use 
+`strptime()` to convert character data to `POSIXlt`. Let us quickly explore the
+functions to convert date/time to character data before moving on to the 
+functions from lubridate.
+
+```{r}
+rel_date_strf <- strftime(rel_date)
+class(rel_date_strf)
+
+rel_date_format <- format(rel_date)
+class(rel_date_format)
+
+rel_date_char <- as.character(rel_date)
+class(rel_date_char)
+```
+
+As you can see, all the 3 functions converted date/time to character. Time to 
+move on and explore the lubridate package. We will start with an example in 
+which the release date is formatted in 3 different ways but they have one thing 
+in common i.e. the order in which the components appear. In all the 3 formats, 
+the year is followed by the month and then the date.
+
+To parse the release date, we will use `parse_date_time()` from lubridate which 
+parses the input into `POSIXct` objects.
+
+```{r parse_date_time}
+release_date <- c("19-12-12", "20191212", "19-12 12")
+parse_date_time(release_date, "ymd")
+parse_date_time(release_date, "y m d")
+parse_date_time(release_date, "%y%m%d")
+```
+
+Try to use `strptime()` in the above example and see what happens. Now, let us 
+look at another data set. 
+
+```{r parse_date_time_multiple}
+release_date <- c("19-07-05", "2019-07-05", "05-07-2019")
+```
+
+What happens in the below case? The same date appears in multiple formats. How 
+do we parse them? `parse_date_time()` allows us to specify mutiple date-time 
+formats. Let us first map the dates to their formats.
+
+```{r table_formats_pdt, echo=FALSE}
+cname   <- c("19-07-05", "2019-07-05", "05-07-2019")
+descrip <- c("`ymd`", "`ymd`", "`dmy`")
+data.frame(Date = cname, Specification = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+The above specifications can be supplied as a character vector.
+
+```{r parse_date_2}
+parse_date_time(release_date, c("ymd", "ymd", "dmy"))
+```
+
+Great! We have used both `strptime()` and `parse_date_time()` now. Can you tell 
+what differentiates `parse_date_time()` when compared to `strptime()`? We 
+summarize it in the points below:
+
+- no need to include `%` prefix or separator
+- specify several date/time formats
+
+There are other helper functions that can be used to 
+
+- parse dates with only year, month, day components
+- parse dates with year, month, day, hour, minute, seconds components
+- parse dates with only hour, minute, second components
+
+and are explored in the below examples.
+
+```{r parse_ymd}
+# year/month/date
+ymd("2019-12-12")
+
+# year/month/date
+ymd("19/12/12")
+
+# date/month/year
+dmy(121219)
+
+# year/month/date/hour/minute/second
+ymd_hms(191212080503)
+
+# hour/minute/second
+hms("8, 5, 3")
+
+# hour/minute/second
+hms("08:05:03")
+
+# minute/second
+ms("5,3")
+
+# hour/minute
+hm("8, 5")
+```
+
+Note, in a couple of cases where the components are not separated by `/`, `-` or 
+space, we have not enclosed the values in quotes. 
+
+### Your Turn
+
+Below, we have specified `July 5th, 2019` in different ways. Parse the dates using `strptime()` or `parse_date_time()` or any other helper function.
+
+- `July-05-19`
+- `JUL-05-19`
+- `05.07.19`
+- `5-July 2019`
+- `July 5th, 2019`
+- `July 05, 2019`
+- `2019-July- 05`
+- `05/07/2019`
+- `07/05/2019`
+- `7/5/2019`
+- `07/5/19`
+- `2019-07-05`
+
+*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could 
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.
+
+We welcome your comments. You can email to let us know what you did or did not 
+like about our blog as well as what we can do to make our post better.*
+
+**Email: support@rsquaredacademy.com**

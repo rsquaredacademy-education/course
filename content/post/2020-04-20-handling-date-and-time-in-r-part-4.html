@@ -1,0 +1,130 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-20'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+
+
+<p><img src="/img/handling-date-and-time-in-r.png" width="80%" style="display: block; margin: auto;" /></p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a></li>
+<li><a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a></li>
+</ul>
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+</div>
+<div id="timezones" class="section level2">
+<h2>Time Zones &amp; Daylight Savings</h2>
+{{% youtube "Sz-Zf0s9Ubg" %}}
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p><img src="/img/lub_timezones.jpg" width="70%" style="display: block; margin: auto;" /></p>
+<p>In the previous section, <code>POSIXlt</code> stored date/time components as a list. Among
+the different components it returned were</p>
+<ul>
+<li><code>gmtoff</code></li>
+<li><code>zone</code></li>
+</ul>
+<p><code>gmtoff</code> is offset in seconds from GMT i.e. difference in hours and minutes from
+UTC. Wait.. What do UTC and GMT stand for?</p>
+<ul>
+<li>Coordinated Universal Time (UTC)</li>
+<li>Greenwich Meridian Time (GMT)</li>
+</ul>
+<p>Since we are talking about UTC, GMT etc., let us spend a little time on
+understanding the basics of time zones and daylight savings.</p>
+</div>
+<div id="time-zones" class="section level3">
+<h3>Time Zones</h3>
+<p>Timezones exist because different parts of the Earth receive sun light at
+different times. If there was a single timezone, noon or morning would mean
+different things in different parts of the world. The timezones are based on
+Earth’s rotation. The Earth moves ~15 degrees every 60 minutes i.e. 360 degrees
+in 24 hours. The planet is divided into 24 timezones, each 15 degrees of
+longitude width.</p>
+<p>Now, you have heard of Greenwich Meridian Time (GMT) right? We just saw GMT off
+set in <code>POSIXlt</code> and you would have come across it in other time formats as
+well. For example, India timezone is given as GMT +5:30. Let us explore GMT in a
+little more detail. Greenwich is a suburb of London and the time at Greenwich
+is <strong>G</strong>reenwich <strong>M</strong>ean <strong>T</strong>ime. As you move West from Greenwich, every 15
+degree section is one hour earlier than GMT and every 15 degree section to the
+East is an hour later.</p>
+<p>Alright! What is <strong>UTC</strong> then? <strong>C</strong>oordinated <strong>U</strong>niversal <strong>T</strong>ime (UTC) ,
+on the other hand, is the time standard commonly used across the world. Even
+though they share the same current time, <strong>GMT</strong> is a <strong>timezone</strong> while
+<strong>UTC</strong> is a <strong>time standard</strong>.</p>
+<p>So how do we check the timezone in R? When you run <code>Sys.timezone()</code>, you should
+be able to see the timezone you are in.</p>
+<pre class="r"><code>Sys.timezone()</code></pre>
+<pre><code>## [1] &quot;Asia/Calcutta&quot;</code></pre>
+<p>If you do not see the timezone, use <code>Sys.getenv()</code> to get the value of the
+<strong>TZ</strong> environment variable.</p>
+<pre class="r"><code>Sys.getenv(&quot;TZ&quot;)</code></pre>
+<pre><code>## [1] &quot;&quot;</code></pre>
+<p>If nothing is returned, it means we have to set the timezone. Use <code>Sys.setenv()</code>
+to set the timezone as shown below. The author resides in India and hence the
+timezone is set to <code>Asia/Calcutta</code>. You need to set the timezone in which you
+reside or work.</p>
+<pre class="r"><code>Sys.setenv(TZ = &quot;Asia/Calcutta&quot;)</code></pre>
+<p>Another way to get the timezone is through <code>tz()</code> from the lubridate package.</p>
+<pre class="r"><code>lubridate::tz(Sys.time())</code></pre>
+<pre><code>## [1] &quot;&quot;</code></pre>
+<p>If you want to view the time in a different timezone, use <code>with_tz()</code>. Let us
+look at the current time in <strong>UTC</strong> instead of <strong>Indian Standard Time</strong>.</p>
+<pre class="r"><code>lubridate::with_tz(Sys.time(), &quot;UTC&quot;)</code></pre>
+<pre><code>## [1] &quot;2020-06-04 10:34:35 UTC&quot;</code></pre>
+</div>
+<div id="daylight-savings" class="section level3">
+<h3>Daylight Savings</h3>
+<p><img src="/img/lub_daylight_savings.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Daylight savings also known as</p>
+<ul>
+<li>daylight saving time</li>
+<li>daylight savings time</li>
+<li>daylight time</li>
+<li>summer time</li>
+</ul>
+<p>is the practice of advancing clocks during summer months so that darkness falls
+later each day according to the clock. In other words</p>
+<ul>
+<li>advance clock by one hour in spring (spring forward)</li>
+<li>retard clocks by one hour in autumn (fall back)</li>
+</ul>
+<p>In R, the <code>dst()</code> function is an indicator for daylight savings. It returns
+<code>TRUE</code> if daylight saving is in force, <code>FALSE</code> if not and <code>NA</code> if unknown.</p>
+<pre class="r"><code>Sys.Date()</code></pre>
+<pre><code>## [1] &quot;2020-06-04&quot;</code></pre>
+<pre class="r"><code>dst(Sys.Date()) </code></pre>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+<div id="your-turn" class="section level3">
+<h3>Your Turn</h3>
+<ul>
+<li>check the timezone you live in</li>
+<li>check if daylight savings in on</li>
+<li>check the current time in <strong>UTC</strong> or a different time zone</li>
+</ul>
+<p>*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.</p>
+<p>We welcome your comments. You can email to let us know what you did or did not
+like about our blog as well as what we can do to make our post better.*</p>
+<p><strong>Email: <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a></strong></p>
+</div>
+</div>

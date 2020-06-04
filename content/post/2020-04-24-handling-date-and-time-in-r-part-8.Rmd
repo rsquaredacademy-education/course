@@ -1,0 +1,258 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-24'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pkg_load, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(magrittr)
+library(lubridate)
+library(rversions)
+library(readr)
+library(dplyr)
+```
+
+```{r cover_image, echo=FALSE, fig.align="center", out.width="80%"}
+knitr::include_graphics("/img/handling-date-and-time-in-r.png")
+```
+
+## Resources {#resources}
+
+Below are the links to all the resources related to this tutorial:
+
+- <a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a>
+- <a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a>
+
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
+```
+
+## Create, Update & Verify {#createupdate}
+
+```{r cline_youtube_verify, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "agGDD-xbtDo")
+```
+
+In the second section, we learnt to create date-time objects using `as.Date()`, 
+`as.POSIXct()` etc. In this section, we will explore a few other functions that 
+will allow us to do the same
+
+- `make_date()`
+- `make_datetime()`
+
+### Create
+
+To create date without time components, use `make_date()` and specify the 
+following:
+
+- year
+- month
+- date
+
+We need to specify all the components in numbers i.e. we cannot use `Dec` or 
+`December` for the month. It has to be `12`.
+
+```{r make_date}
+make_date(year  = 2019,
+          month = 12,
+          day   = 12)
+```
+
+When you need to include time components, use `make_datetime()`.
+
+```{r make_datetime}
+make_datetime(year  = 2019,
+              month = 12,
+              day   = 12,
+              hour  = 08,
+              min   = 05,
+              sec   = 03,
+              tz    = "UTC")
+```
+
+### Update
+
+Let us look at another scenario. You have a date-time object and want to change 
+one of its components i.e. any of the following
+
+- year
+- month
+- date
+
+Instead of creating another date-time object, you can change any of the 
+components using `update()`. In the below example, we will start with the date 
+of release of R version 3.6.1 and using `update()`, we will change it to
+`2019-12-12`.
+
+```{r update}
+prev_release <- ymd("2019-07-05")
+prev_release %>% 
+  update(year  = 2019,
+         month = 12,
+         mday  = 12)
+```
+
+### Date Sequence
+
+So far we have created a single date-time instance. How about creating a 
+sequence of dates? We can do that using `seq.Date()`. We need to specify the 
+from date as the bare minimum input. If the end date is not specified, it will 
+create the sequence uptil the current date.
+
+The interval of the sequence can be specified in any of the following units:
+
+- day
+- week
+- month
+- quarter
+- year
+
+We can add the following to the interval units
+
+- integer
+- `+` / `-` (increment or decrement)
+
+Using the integer, we can specify multiples of the units mentioned and using the 
+sign, we can specify whether to increment or decrement.
+
+The below table displays the main arguments used in `seq.Date()`:
+
+```{r table_seq_date, echo=FALSE}
+cname   <- c("`from`", "`by`", "`to`", "`length.out`", "`along.with`")
+descrip <- c("Starting date of the sequence", "End date of the sequence", 
+             "Date increment of the sequence", "Length of the sequence",
+             "Use length of this value as length of sequence")
+data.frame(Function = cname, Description = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+In the first example, we will create a sequence of dates from `2010-01-01` to 
+`2019-12-31`. The unit of increment should be a year i.e. the difference
+between the dates in the sequence should be 1 year, specified using the `by` 
+argument.
+
+```{r seq_date_1}
+seq.Date(from = as.Date("2010-01-01"), to = as.Date("2019-12-31"), by = "year")
+```
+
+In the next example, we change the unit of increment to a quarter i.e. the 
+difference between the dates in the sequence should be a quarter or 3 months.
+
+```{r seq_date_2}
+seq.Date(from = as.Date("2009-12-12"), to = as.Date("2019-12-12"), by = "quarter")
+```
+
+We will now create a sequence of dates but instead of specifying the unit of 
+increment, we specify the number of dates in the sequence i.e. the length of the
+sequence. We do this using the `length.out` argument which specifies the desired
+length of the sequence. We want the sequence to have 10 dates including the
+start and end date, and hence we supply the value `10` for the `length.out` 
+argument.
+
+```{r seq_date_3}
+seq.Date(from = as.Date("2010-01-01"), to = as.Date("2019-12-31"), length.out = 10)
+```
+
+In all of the previous examples, we have specified both the start and the end
+date. Let us look at a few examples where we create a sequence of dates where 
+we only specify the start date. In the below example, we want to create a 
+sequence of dates starting from `2010-01-01`. The unit of increment should be 1
+year i.e. the difference between the dates in the sequence should be 1 year and
+the length of the sequence should be `10` i.e. the number of dates including the
+start date should be `10`.
+
+```{r seq_date_4}
+seq.Date(from = as.Date("2010-01-01"), by = "year", length.out = 10)
+```
+
+The unit of increment can include multiples and `+/-` sign i.e. it can be an
+unit of increment or decrement. In the next example, we can increment the dates
+in the sequence by `2` i.e. the difference between the dates should be `2`
+instead of `1`. This is achieved by specifying the unit of increment (multiple)
+first followed by a space and then the unit. In our example, it is `2 year`. As
+you can see, the sequence now goes all the way till `2028` and the gap between 
+the dates is 2 years.
+
+```{r seq_date_5}
+seq.Date(from = as.Date("2010-01-01"), by = "2 year", length.out = 10)
+```
+
+Let us say instead of increment we want to decrement the dates i.e. the sequence 
+of dates will go backwards as shown in the next example. We achieve this by 
+using the `-` sign along with the unit of decrement. The sequence of dates in 
+next example starts from `2010` and goes back upto `1992` and the difference 
+between the dates in 2 years.
+
+```{r seq_date_6}
+seq.Date(from = as.Date("2010-01-01"), by = "-2 year", length.out = 10)
+```
+
+In the last example, we will explore the `along.with` argument. Here we have 
+supplied a vector which is a sequence of numbers from 1 to 10. The length of 
+this vector is 10 and the same length is used as the length of the sequence i.e. 
+the length of value supplied to `along.with` is also the length of the sequence.
+
+```{r seq_date_7}
+seq.Date(from = as.Date("2010-01-01"), by = "-2 year", along.with = 1:10)
+```
+
+### Verify Type
+
+How do you check if the data is a date-time object? You can do that using any 
+of the following from the lubridate package.
+
+- `is.Date()`
+- `is.POSIXct()`
+- `is.POSIXlt()`
+
+```{r check_release_date_type, echo=FALSE}
+release_date <- ymd_hms("2019-12-12 08:05:03")
+```
+
+```{r check_type}
+is.Date(release_date)
+is.POSIXct(release_date)
+is.POSIXlt(release_date)
+```
+
+### Your Turn
+
+- R 2.0.0 was released on `2004-10-04 14:24:38`. Create this date using both
+`make_date()` and `make_datetime()`
+
+- R 3.0.0 was released on `2013-04-03 07:12:36`. Update the date created in the
+previous step to the above using `update()`
+
+*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could 
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.
+
+We welcome your comments. You can email to let us know what you did or did not 
+like about our blog as well as what we can do to make our post better.*
+
+**Email: support@rsquaredacademy.com**

@@ -1,0 +1,362 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-25'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+
+
+<p><img src="/img/handling-date-and-time-in-r.png" width="80%" style="display: block; margin: auto;" /></p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a></li>
+<li><a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a></li>
+</ul>
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+</div>
+<div id="intervals-duration-period" class="section level2">
+<h2>Intervals, Duration &amp; Period</h2>
+{{% youtube "8LW7vSx4cew" %}}
+<p>In this section, we will learn about</p>
+<ul>
+<li>intervals</li>
+<li>duration</li>
+<li>and period</li>
+</ul>
+<div id="intervals" class="section level3">
+<h3>Interval</h3>
+<p>An interval is a timespan defined by two date-times. Let us represent the length
+of the course using <code>interval</code>.</p>
+<p><br></p>
+<p><img src="/img/course_interval.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<pre class="r"><code>course_start    &lt;- as_date(&#39;2017-04-12&#39;)
+course_end      &lt;- as_date(&#39;2017-04-21&#39;)
+interval(course_start, course_end)</code></pre>
+<pre><code>## [1] 2017-04-12 UTC--2017-04-21 UTC</code></pre>
+<p>If you observe carefully, the interval is represented by the course start and
+end dates. We will learn how to use intervals in the case study.</p>
+<div id="overlapping-intervals" class="section level4">
+<h4>Overlapping Intervals</h4>
+<p>Let us say you are planning a vacation and want to check if the vacation
+dates overlap with the course dates. You can do this by:</p>
+<ul>
+<li>creating vacation and course intervals</li>
+<li>use <code>int_overlaps()</code> to check if two intervals overlap. It returns <code>TRUE</code>
+if the intervals overlap else <code>FALSE</code>.</li>
+</ul>
+<p>Let us use the vacation start and end dates to create <code>vacation_interval</code>
+and then check if it overlaps with <code>course_interval</code>.</p>
+<p><br></p>
+<p><img src="/img/interval_overlap.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<pre class="r"><code>vacation_start    &lt;- as_date(&#39;2017-04-19&#39;)
+vacation_end      &lt;- as_date(&#39;2017-04-25&#39;)
+course_interval   &lt;- interval(course_start, course_end)
+vacation_interval &lt;- interval(vacation_start, vacation_end)
+int_overlaps(course_interval, vacation_interval)
+## [1] TRUE</code></pre>
+</div>
+<div id="how-many-invoices-were-settled-within-due-date" class="section level4">
+<h4>How many invoices were settled within due date?</h4>
+<p>Let us use intervals to count the number of invoices that were settled within
+the due date. To do this, we will:</p>
+<ul>
+<li>create an interval for the invoice and due date</li>
+<li>create a new column <code>due_next</code> by incrementing the due date by 1 day</li>
+<li>another interval for <code>due_next</code> and the payment date</li>
+<li>if the intervals overlap, the payment was made within the due date</li>
+</ul>
+<pre class="r"><code>transact %&gt;%
+  mutate(
+    inv_due_interval = interval(Invoice, Due),
+    due_next         = Due + days(1),
+    due_pay_interval = interval(due_next, Payment),
+    overlaps         = int_overlaps(inv_due_interval, due_pay_interval)
+  ) %&gt;%
+  select(Invoice, Due, Payment, overlaps)</code></pre>
+<pre><code>## # A tibble: 2,466 x 4
+##    Invoice    Due        Payment    overlaps
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;lgl&gt;   
+##  1 2013-01-02 2013-02-01 2013-01-15 TRUE    
+##  2 2013-01-26 2013-02-25 2013-03-03 FALSE   
+##  3 2013-07-03 2013-08-02 2013-07-08 TRUE    
+##  4 2013-02-10 2013-03-12 2013-03-17 FALSE   
+##  5 2012-10-25 2012-11-24 2012-11-28 FALSE   
+##  6 2012-01-27 2012-02-26 2012-02-22 TRUE    
+##  7 2013-08-13 2013-09-12 2013-09-09 TRUE    
+##  8 2012-12-16 2013-01-15 2013-01-12 TRUE    
+##  9 2012-05-14 2012-06-13 2012-07-01 FALSE   
+## 10 2013-07-01 2013-07-31 2013-07-26 TRUE    
+## # ... with 2,456 more rows</code></pre>
+<p>Below we show another method to count the number of invoices paid within the
+due date. Instead of using <code>days</code> to change the due date, we use <code>int_shift</code>
+to shift it by 1 day.</p>
+<pre class="r"><code>transact %&gt;%
+  mutate(
+    inv_due_interval = interval(Invoice, Due),
+    due_pay_interval = interval(Due, Payment),  
+    due_pay_next     = int_shift(due_pay_interval, by = days(1)),
+    overlaps         = int_overlaps(inv_due_interval, due_pay_next)
+  ) %&gt;%
+  select(Invoice, Due, Payment, overlaps)</code></pre>
+<pre><code>## # A tibble: 2,466 x 4
+##    Invoice    Due        Payment    overlaps
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;lgl&gt;   
+##  1 2013-01-02 2013-02-01 2013-01-15 TRUE    
+##  2 2013-01-26 2013-02-25 2013-03-03 FALSE   
+##  3 2013-07-03 2013-08-02 2013-07-08 TRUE    
+##  4 2013-02-10 2013-03-12 2013-03-17 FALSE   
+##  5 2012-10-25 2012-11-24 2012-11-28 FALSE   
+##  6 2012-01-27 2012-02-26 2012-02-22 TRUE    
+##  7 2013-08-13 2013-09-12 2013-09-09 TRUE    
+##  8 2012-12-16 2013-01-15 2013-01-12 TRUE    
+##  9 2012-05-14 2012-06-13 2012-07-01 FALSE   
+## 10 2013-07-01 2013-07-31 2013-07-26 TRUE    
+## # ... with 2,456 more rows</code></pre>
+<p>You might be thinking why we incremented the due date by a day before creating
+the interval between the due day and the payment day. If we do not increment,
+both the intervals will share a common date i.e. the due date and they will
+always overlap as shown below:</p>
+<pre class="r"><code>transact %&gt;%
+  mutate(
+    inv_due_interval = interval(Invoice, Due),
+    due_pay_interval = interval(Due, Payment),
+    overlaps         = int_overlaps(inv_due_interval, due_pay_interval)
+  ) %&gt;%
+  select(Invoice, Due, Payment, overlaps)</code></pre>
+<pre><code>## # A tibble: 2,466 x 4
+##    Invoice    Due        Payment    overlaps
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;lgl&gt;   
+##  1 2013-01-02 2013-02-01 2013-01-15 TRUE    
+##  2 2013-01-26 2013-02-25 2013-03-03 TRUE    
+##  3 2013-07-03 2013-08-02 2013-07-08 TRUE    
+##  4 2013-02-10 2013-03-12 2013-03-17 TRUE    
+##  5 2012-10-25 2012-11-24 2012-11-28 TRUE    
+##  6 2012-01-27 2012-02-26 2012-02-22 TRUE    
+##  7 2013-08-13 2013-09-12 2013-09-09 TRUE    
+##  8 2012-12-16 2013-01-15 2013-01-12 TRUE    
+##  9 2012-05-14 2012-06-13 2012-07-01 TRUE    
+## 10 2013-07-01 2013-07-31 2013-07-26 TRUE    
+## # ... with 2,456 more rows</code></pre>
+</div>
+<div id="shift-interval" class="section level4">
+<h4>Shift Interval</h4>
+<p>Intervals can be shifted too. In the below example, we shift the course
+interval by:</p>
+<ul>
+<li>1 day</li>
+<li>3 weeks</li>
+<li>1 year</li>
+</ul>
+<p><br></p>
+<p><img src="/img/shift_interval.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<pre class="r"><code>course_interval &lt;- interval(course_start, course_end)
+
+# shift course_interval by 1 day 
+int_shift(course_interval, by = days(1))
+## [1] 2017-04-13 UTC--2017-04-22 UTC
+
+# shift course_interval by 3 weeks
+int_shift(course_interval, by = weeks(3))
+## [1] 2017-05-03 UTC--2017-05-12 UTC
+
+# shift course_interval by 1 year
+int_shift(course_interval, by = years(1))
+## [1] 2018-04-12 UTC--2018-04-21 UTC</code></pre>
+</div>
+</div>
+<div id="within" class="section level3">
+<h3>Within</h3>
+<p>Let us assume that we have to attend a conference in April 2017. Does it
+clash with the course? We can answer this using <code>%within%</code> which will
+return <code>TRUE</code> if a date falls within an interval.</p>
+<p><br></p>
+<p><img src="/img/within.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<pre class="r"><code>conference &lt;- as_date(&#39;2017-04-15&#39;)
+conference %within% course_interval
+## [1] TRUE</code></pre>
+<div id="how-many-invoices-were-settled-within-due-date-1" class="section level4">
+<h4>How many invoices were settled within due date?</h4>
+<p>Let us use <code>%within%</code> to count the number of invoices that were settled within
+the due date. We will do this by:</p>
+<ul>
+<li>creating an interval for the invoice and due date</li>
+<li>check if the payment date falls within the above interval</li>
+</ul>
+<pre class="r"><code>transact %&gt;%
+  mutate(
+    inv_due_interval = interval(Invoice, Due),
+    overlaps         = Payment %within% inv_due_interval
+  ) %&gt;%
+  select(Due, Payment, overlaps)</code></pre>
+<pre><code>## # A tibble: 2,466 x 3
+##    Due        Payment    overlaps
+##    &lt;date&gt;     &lt;date&gt;     &lt;lgl&gt;   
+##  1 2013-02-01 2013-01-15 TRUE    
+##  2 2013-02-25 2013-03-03 FALSE   
+##  3 2013-08-02 2013-07-08 TRUE    
+##  4 2013-03-12 2013-03-17 FALSE   
+##  5 2012-11-24 2012-11-28 FALSE   
+##  6 2012-02-26 2012-02-22 TRUE    
+##  7 2013-09-12 2013-09-09 TRUE    
+##  8 2013-01-15 2013-01-12 TRUE    
+##  9 2012-06-13 2012-07-01 FALSE   
+## 10 2013-07-31 2013-07-26 TRUE    
+## # ... with 2,456 more rows</code></pre>
+</div>
+</div>
+<div id="duration" class="section level3">
+<h3>Duration</h3>
+<p>Duration is timespan measured in seconds. To create a duration object, use
+<code>duration()</code>. The timespan can be anything from seconds to years but it will be
+represented as seconds. Let us begin by creating a duration object where the timespan is in seconds.</p>
+<pre class="r"><code>duration(50, &quot;seconds&quot;)</code></pre>
+<pre><code>## [1] &quot;50s&quot;</code></pre>
+<p>Another way to specify the above timespan is shown below:</p>
+<pre class="r"><code>duration(second = 50)</code></pre>
+<pre><code>## [1] &quot;50s&quot;</code></pre>
+<p>As you can see, the output is same in both the cases. Let us increase the timespan to 60 seconds and see what happens.</p>
+<pre class="r"><code>duration(second = 60)</code></pre>
+<pre><code>## [1] &quot;60s (~1 minutes)&quot;</code></pre>
+<p>Although the timespan is primarily measured in seconds, it also shows <code>~1 minutes</code> in the brackets. As the length of the timespan increases i.e. the number becomes large, it is represented using larger units such as hours and days. In the below examples, as the number of seconds increases, you can observe larger units being used to represent the timespan.</p>
+<pre class="r"><code># minutes
+duration(minute = 50)</code></pre>
+<pre><code>## [1] &quot;3000s (~50 minutes)&quot;</code></pre>
+<pre class="r"><code>duration(minute = 60)</code></pre>
+<pre><code>## [1] &quot;3600s (~1 hours)&quot;</code></pre>
+<pre class="r"><code># hours
+duration(hour = 23)</code></pre>
+<pre><code>## [1] &quot;82800s (~23 hours)&quot;</code></pre>
+<pre class="r"><code>duration(hour = 24)</code></pre>
+<pre><code>## [1] &quot;86400s (~1 days)&quot;</code></pre>
+<p>The following helper functions can be used to create duration objects as well.</p>
+<pre class="r"><code># default
+dseconds()</code></pre>
+<pre><code>## [1] &quot;1s&quot;</code></pre>
+<pre class="r"><code>dminutes()</code></pre>
+<pre><code>## [1] &quot;60s (~1 minutes)&quot;</code></pre>
+<pre class="r"><code># seconds
+duration(second = 59)</code></pre>
+<pre><code>## [1] &quot;59s&quot;</code></pre>
+<pre class="r"><code>dseconds(59)</code></pre>
+<pre><code>## [1] &quot;59s&quot;</code></pre>
+<pre class="r"><code># minutes
+duration(minute = 50)</code></pre>
+<pre><code>## [1] &quot;3000s (~50 minutes)&quot;</code></pre>
+<pre class="r"><code>dminutes(50)</code></pre>
+<pre><code>## [1] &quot;3000s (~50 minutes)&quot;</code></pre>
+<pre class="r"><code># hours
+duration(hour = 36)</code></pre>
+<pre><code>## [1] &quot;129600s (~1.5 days)&quot;</code></pre>
+<pre class="r"><code>dhours(36)</code></pre>
+<pre><code>## [1] &quot;129600s (~1.5 days)&quot;</code></pre>
+<pre class="r"><code># weeks
+duration(week = 56)</code></pre>
+<pre><code>## [1] &quot;33868800s (~1.07 years)&quot;</code></pre>
+<pre class="r"><code>dweeks(56)</code></pre>
+<pre><code>## [1] &quot;33868800s (~1.07 years)&quot;</code></pre>
+<p>Let us use the above helper functions to get the course length in different units.</p>
+<p><img src="/img/convert.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<pre class="r"><code># course length in seconds 
+course_interval / dseconds()
+## [1] 777600
+
+# course length in minutes
+course_interval / dminutes()
+## [1] 12960
+
+# course length in hours
+course_interval / dhours()
+## [1] 216
+
+# course length in weeks
+course_interval / dweeks()
+## [1] 1.285714
+
+# course length in years
+course_interval / dyears()
+## [1] 0.02464066</code></pre>
+</div>
+<div id="period" class="section level3">
+<h3>Period</h3>
+<p>A <code>period</code> is a timespan defined in units such as years, months, and days. In
+the below examples, we use <code>period()</code> to represent timespan using different
+units.</p>
+<pre class="r"><code># second
+period(5, &quot;second&quot;)</code></pre>
+<pre><code>## [1] &quot;5S&quot;</code></pre>
+<pre class="r"><code>period(second = 5)</code></pre>
+<pre><code>## [1] &quot;5S&quot;</code></pre>
+<pre class="r"><code># minute &amp; second
+period(c(3, 5), c(&quot;minute&quot;, &quot;second&quot;))</code></pre>
+<pre><code>## [1] &quot;3M 5S&quot;</code></pre>
+<pre class="r"><code>period(minute = 3, second = 5)</code></pre>
+<pre><code>## [1] &quot;3M 5S&quot;</code></pre>
+<pre class="r"><code># hour, minte &amp; second
+period(c(1, 3, 5), c(&quot;hour&quot;, &quot;minute&quot;, &quot;second&quot;))</code></pre>
+<pre><code>## [1] &quot;1H 3M 5S&quot;</code></pre>
+<pre class="r"><code>period(hour = 1, minute = 3, second = 5)</code></pre>
+<pre><code>## [1] &quot;1H 3M 5S&quot;</code></pre>
+<pre class="r"><code># day, hour, minute &amp; second
+period(c(3, 1, 3, 5), c(&quot;day&quot;, &quot;hour&quot;, &quot;minute&quot;, &quot;second&quot;))</code></pre>
+<pre><code>## [1] &quot;3d 1H 3M 5S&quot;</code></pre>
+<pre class="r"><code>period(day = 3, hour = 1, minute = 3, second = 5)</code></pre>
+<pre><code>## [1] &quot;3d 1H 3M 5S&quot;</code></pre>
+<p><br></p>
+<p><img src="/img/as_period.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p>Let us get the course length in different units using <code>as.period()</code>.</p>
+<pre class="r"><code># course length in second
+as.period(course_interval, unit = &quot;seconds&quot;)
+## [1] &quot;777600S&quot;
+
+# course length in hours and minutes
+as.period(course_interval, unit = &quot;minutes&quot;)
+## [1] &quot;12960M 0S&quot;
+
+# course length in hours, minutes and seconds
+as.period(course_interval, unit = &quot;hours&quot;)
+## [1] &quot;216H 0M 0S&quot;</code></pre>
+<p><code>time_length()</code> computes the exact length of a timespan i.e. <code>duration</code>, <code>interval</code> or <code>period</code>. Let us use <code>time_length()</code> to compute the length of the
+course in different units.</p>
+<p><br></p>
+<p><img src="/img/time_length.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<pre class="r"><code># course length in seconds
+time_length(course_interval, unit = &quot;seconds&quot;)
+## [1] 777600
+
+# course length in minutes
+time_length(course_interval, unit = &quot;minutes&quot;)
+## [1] 12960
+
+# course length in hours
+time_length(course_interval, unit = &quot;hours&quot;)
+## [1] 216</code></pre>
+<p>*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.</p>
+<p>We welcome your comments. You can email to let us know what you did or did not
+like about our blog as well as what we can do to make our post better.*</p>
+<p><strong>Email: <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a></strong></p>
+</div>
+</div>

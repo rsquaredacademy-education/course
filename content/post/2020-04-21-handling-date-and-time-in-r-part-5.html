@@ -1,0 +1,570 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-21'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<p><img src="/img/handling-date-and-time-in-r.png" width="80%" style="display: block; margin: auto;" /></p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a></li>
+<li><a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a></li>
+</ul>
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+</div>
+<div id="formats" class="section level2">
+<h2>Date &amp; Time Formats</h2>
+{{% youtube "BdHTrItYKJw" %}}
+<p>After the timezones and daylight savings detour, let us get back on path and
+explore another important aspect, date &amp; time formats. Although it is a good
+practice to adher to ISO 8601 format, not all date/time data will comply with
+it. In real world, date/time data may come in all types of weird formats. Below
+is a sample</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Format
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+December 12, 2019
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12th Dec, 2019
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dec 12th, 19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12-Dec-19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019 December
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12.12.19
+</td>
+</tr>
+</tbody>
+</table>
+<p>When the data is not in the default ISO 8601 format, we need to explicitly
+specify the format in R. We do this using conversion specifications. A
+conversion specification is introduced by %, usually followed by a single
+letter or O or E and then a single letter.</p>
+<div id="conversion-specifications" class="section level3">
+<h3>Conversion Specifications</h3>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Specification
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Example
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>%d</code>
+</td>
+<td style="text-align:left;">
+Day of the month (decimal number)
+</td>
+<td style="text-align:left;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%m</code>
+</td>
+<td style="text-align:left;">
+Month (decimal number)
+</td>
+<td style="text-align:left;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%b</code>
+</td>
+<td style="text-align:left;">
+Month (abbreviated)
+</td>
+<td style="text-align:left;">
+Dec
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%B</code>
+</td>
+<td style="text-align:left;">
+Month (full name)
+</td>
+<td style="text-align:left;">
+December
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%y</code>
+</td>
+<td style="text-align:left;">
+Year (2 digit)
+</td>
+<td style="text-align:left;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%Y</code>
+</td>
+<td style="text-align:left;">
+Year (4 digit)
+</td>
+<td style="text-align:left;">
+2019
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+%H
+</td>
+<td style="text-align:left;">
+Hour
+</td>
+<td style="text-align:left;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+%M
+</td>
+<td style="text-align:left;">
+Minute
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+%S
+</td>
+<td style="text-align:left;">
+Second
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<p>Time to work through a few examples. Let us say you are dealing with dates in
+the format <code>19/12/12</code>. In this format, the year comes first followed by month
+and the date; each separated by a slash (<code>/</code>). The year consists of only 2
+digits i.e. it does not include the century. Let us now map each component of
+the date to the conversion specification table shown at the beginning.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Specification
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:left;">
+<code>%y</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+<code>%m</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+<code>%d</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Using the format argument, we will specify the conversion specification as a character vector
+i.e. enclosed in quotes.</p>
+<pre class="r"><code>as.Date(&quot;19/12/12&quot;, format = &quot;%y/%m/%d&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12&quot;</code></pre>
+<p>Another way in which the release data can be written is <code>2019-Dec-12</code>. We still
+have the year followed by the month and the date but there are a few changes
+here:</p>
+<ul>
+<li>the components are separated by a <code>-</code> instead of <code>/</code></li>
+<li>year has 4 digits i.e. includes the century</li>
+<li>the month is specified using abbreviation instead of digits</li>
+</ul>
+<p>Let us map the components to the format table:</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Specification
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2019
+</td>
+<td style="text-align:left;">
+<code>%Y</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dec
+</td>
+<td style="text-align:left;">
+<code>%b</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+<code>%d</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Let us specify the format for the date using the above mapping.</p>
+<pre class="r"><code>as.Date(&quot;2019-Dec-12&quot;, format = &quot;%Y-%b-%d&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12&quot;</code></pre>
+<p>In both the above examples, we have not dealt with time components. Let us
+include the release time of R 3.6.2 in the next one i.e. 
+<code>19/12/12 08:05:03</code>.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Specification
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:left;">
+<code>%y</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+<code>%m</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+<code>%d</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+08
+</td>
+<td style="text-align:left;">
+<code>%H</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05
+</td>
+<td style="text-align:left;">
+<code>%M</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+03
+</td>
+<td style="text-align:left;">
+<code>%S</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Since we are dealing with time, we will use <code>as.POSIXct()</code> instead of
+<code>as.Date()</code>.</p>
+<pre class="r"><code>as.POSIXct(&quot;19/12/12 08:05:03&quot;, tz = &quot;UTC&quot;, format = &quot;%y/%m/%d %H:%M:%S&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 08:05:03 UTC&quot;</code></pre>
+<p>In the below table, we look at some of the most widely used conversion
+specifications. You can learn more about these specifications by running
+<code>?strptime</code> or <code>help(strptime)</code>.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Specification
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>%a</code>
+</td>
+<td style="text-align:left;">
+Abbreviated weekday
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%A</code>
+</td>
+<td style="text-align:left;">
+Full weekday
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%C</code>
+</td>
+<td style="text-align:left;">
+Century (00-99)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%D</code>
+</td>
+<td style="text-align:left;">
+Same as <code>%m/%d/%y</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%e</code>
+</td>
+<td style="text-align:left;">
+Day of month [1 - 31]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%F</code>
+</td>
+<td style="text-align:left;">
+Same as <code>%Y-%m-%d</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%h</code>
+</td>
+<td style="text-align:left;">
+Same as <code>%b</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%I</code>
+</td>
+<td style="text-align:left;">
+Hours as decimal [01 - 12]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%j</code>
+</td>
+<td style="text-align:left;">
+Day of year [001 - 366]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%R</code>
+</td>
+<td style="text-align:left;">
+Same as <code>%H:%M</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%t</code>
+</td>
+<td style="text-align:left;">
+Tab
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%T</code>
+</td>
+<td style="text-align:left;">
+Same as <code>%H:%M:%S</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%u</code>
+</td>
+<td style="text-align:left;">
+Weekday <a href="Monday%20is%201">1 - 7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%U</code>
+</td>
+<td style="text-align:left;">
+Week of year [00 - 53]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%V</code>
+</td>
+<td style="text-align:left;">
+Week of year [01 - 53]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%w</code>
+</td>
+<td style="text-align:left;">
+Weekday <a href="sunday%20is%200">0 - 6</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>%W</code>
+</td>
+<td style="text-align:left;">
+Week of year [00 - 53]
+</td>
+</tr>
+</tbody>
+</table>
+<p>We have included a lot of practice questions for you to explore the different
+date/time formats. The solutions are available in the Learning Management System
+as well as in our GitHub repo. Try them and let us know if you have any doubts.</p>
+</div>
+<div id="guess-format" class="section level3">
+<h3>Guess Format</h3>
+<p><code>guess_formats()</code> from lubridate is a very useful function. It will guess the
+date/time format if you specify the order in which year, month, date, hour,
+minute and second appear.</p>
+<pre class="r"><code>release_date_formats &lt;- c(&quot;December 12th 2019&quot;,
+                        &quot;Dec 12th 19&quot;,
+                        &quot;dec 12 2019&quot;)
+
+guess_formats(release_date_formats, 
+              orders = &quot;mdy&quot;, 
+              print_matches = TRUE)</code></pre>
+<pre><code>##                           Omdy          mdy         
+## [1,] &quot;December 12th 2019&quot; &quot;%Om %dth %Y&quot; &quot;%B %dth %Y&quot;
+## [2,] &quot;Dec 12th 19&quot;        &quot;%Om %dth %y&quot; &quot;%b %dth %y&quot;
+## [3,] &quot;dec 12 2019&quot;        &quot;%Om %d %Y&quot;   &quot;%b %d %Y&quot;</code></pre>
+<pre><code>##          Omdy          Omdy          Omdy           mdy           mdy 
+## &quot;%Om %dth %Y&quot; &quot;%Om %dth %y&quot;   &quot;%Om %d %Y&quot;  &quot;%B %dth %Y&quot;  &quot;%b %dth %y&quot; 
+##           mdy 
+##    &quot;%b %d %Y&quot;</code></pre>
+</div>
+<div id="your-turn" class="section level3">
+<h3>Your Turn</h3>
+<p>Below, we have specified <code>July 5th, 2019</code> in different ways. Create the date using <code>as.Date()</code> while specifying the correct format for each of them.</p>
+<ul>
+<li><code>05.07.19</code></li>
+<li><code>5-July 2019</code></li>
+<li><code>July 5th, 2019</code></li>
+<li><code>July 05, 2019</code></li>
+<li><code>2019-July- 05</code></li>
+<li><code>05/07/2019</code></li>
+<li><code>07/05/2019</code></li>
+<li><code>7/5/2019</code></li>
+<li><code>07/5/19</code></li>
+<li><code>2019-07-05</code></li>
+</ul>
+<p>*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.</p>
+<p>We welcome your comments. You can email to let us know what you did or did not
+like about our blog as well as what we can do to make our post better.*</p>
+<p><strong>Email: <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a></strong></p>
+</div>
+</div>

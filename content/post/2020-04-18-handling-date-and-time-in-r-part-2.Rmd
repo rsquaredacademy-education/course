@@ -1,0 +1,360 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-18'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pkg_load, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(magrittr)
+library(lubridate)
+library(rversions)
+library(readr)
+library(dplyr)
+```
+
+```{r cover_image, echo=FALSE, fig.align="center", out.width="80%"}
+knitr::include_graphics("/img/handling-date-and-time-in-r.png")
+```
+
+## Resources {#resources}
+
+Below are the links to all the resources related to this tutorial:
+
+- <a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a>
+- <a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a>
+
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
+```
+
+## Date & Time Classes {#classes}
+
+```{r cline_youtube_classes, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "IEX49t8sSgw")
+```
+
+In this section, we will look at two things. First, how to create date/time
+data in R, and second, how to convert other data types to date/time. Let us 
+begin by creating the release date of R 3.6.2.
+
+```{r date_manual}
+release_date <- 2019-12-12
+release_date
+```
+
+Okay! Why do we see `1995` when we call the date? What is happening here? Let us 
+quickly check the data type of `release_date`.
+
+```{r date_type}
+class(release_date)
+```
+
+The data type is `numeric` i.e. R has subtracted `12` twice from `2019` to 
+return `1995`. Clearly, the above method is not the right way to store 
+date/time. Let us see if we can get some hints from the built-in R functions we 
+used in the previous section. If you observe the output, all of them returned 
+date/time wrapped in quotes. Hmmm... let us wrap our date in quotes and see what 
+happens.
+
+```{r date_wrap}
+release_date <- "2019-12-12"
+release_date
+```
+
+Alright, now R does not do any arithmetic and returns the date as we specified. 
+Great! Is this the right format to store date/time then? No. Why? What is the problem 
+if date/time is saved as character/string? The problem is the nature or type of 
+operations done on date/time are different when compared to string/character, 
+number or logical values.
+
+- how do we add/subtract dates?
+- how do we extract components such as year, month, day etc.
+
+To answer the above questions, we will first check the data type of `Sys.Date()` 
+and `now()`.
+
+```{r check_date_type}
+class(Sys.Date())
+class(lubridate::now())
+class(release_date)
+```
+
+As you can see from the above output, there are 3 different classes for storing
+date/time in R 
+
+- `Date`
+- `POSIXct`
+- `POSIXlt`
+
+Let us explore each of the above classes one by one.
+
+### Date
+
+#### Introduction
+
+The `Date` class represents calendar dates. Let us go back to `Sys.Date()`. If 
+you check the class of `Sys.Date()`, it is `Date`. Internally, this date is a 
+number i.e. an integer. The `unclass()` function will show how dates are stored 
+internally.
+
+```{r unclass_sys_date}
+Sys.Date()
+unclass(Sys.Date())
+```
+
+What does this integer represent? Why has R stored the date as an integer? 
+In R, dates are represented as the number of days since `1970-01-01`. All the dates in R are 
+internally stored in this way. Before we explore this concept further, let us 
+learn to create `Date` objects in R. We will continue to use the release date
+of R 3.6.2, `2019-12-12`.
+
+Until now, we have stored the above date as character/string but now we will use 
+`as.Date()` to save it as a `Date` object. `as.Date()` is the easiest and 
+simplest way to create dates in R.
+
+```{r release_as_date}
+release_date <- as.Date("2019-12-12")
+release_date
+```
+
+The `as_date()` function from the lubridate package is similar to `as.Date()`.
+
+```{r release_date_lubridate}
+release_date <- lubridate::as_date("2019-12-12")
+release_date
+```
+
+If you look at the difference between `release_date` and `1970-01-01`, it will 
+be the same as `unclass(release_date)`.
+
+```{r release_date_unclass}
+release_date - as.Date("1970-01-01")
+unclass(release_date)
+```
+
+Let us come back to `1970-01-01` i.e. the origin for dates in R. 
+
+```{r origin}
+lubridate::origin
+```
+
+From the previous examples, we know that dates are internally stored as number
+of days since `1970-01-01`. How about dates older than the origin? How are they
+stored? Let us look at that briefly.
+
+```{r older_than_origin}
+unclass(as.Date("1963-08-28"))
+```
+
+Dates older than the origin are stored as negative integers. For those who are 
+not aware, Martin Luther King, Jr. delivered his famous **I Have a Dream** 
+speech on `1963-08-28`. Let us move on and learn how to convert numbers into 
+dates.
+
+#### Convert Numeric
+
+The `as.Date()` function can be used to convert any of the following to a `Date` 
+object
+
+- character/string
+- number
+- factor (categorical/qualitative)
+
+We have explored how to convert strings to date. How about converting numbers to 
+date? Sure, we can create date from numbers by specifying the origin and number 
+of days since it. 
+
+```{r release_date_origin}
+as.Date(18242, origin = "1970-01-01")
+```
+
+The origin can be changed to another date (while changing the number as well.)
+
+```{r release_date_diff_origin}
+as.Date(7285, origin = "2000-01-01")
+```
+
+### ISO 8601 
+
+```{r img1lub, fig.align='center', echo=FALSE, out.width="70%"}
+knitr::include_graphics('/img/iso.png')
+```
+
+If you have carefully observed, the format in which we have been specifying the 
+dates as well as of those returned by functions such as `Sys.Date()` or 
+`Sys.time()` is the same i.e. `YYYY-MM-DD`. It includes
+
+- the year including the century
+- the month
+- the date
+
+The month and date separated by `-`. This default format used in R is the ISO 
+8601 standard for date/time. ISO 8601 is the internationally accepted way to 
+represent dates and times and uses the 24 hour clock system. Let us create the 
+release date using another function `ISOdate()`.
+
+```{r iso_date}
+ISOdate(year  = 2019,
+        month = 12,
+        day   = 12,
+        hour  = 8,
+        min   = 5, 
+        sec   = 3,
+        tz    = "UTC")
+```
+
+We will look at all the different weird ways in which date/time are specified in 
+the real world in the [Date & Time Formats] section. For the time being, let us 
+continue exploring date/time classes in R. The next class we are going to look 
+at is `POSIXct/POSIXlt`.
+
+### POSIX
+
+You might be wondering what is this POSIX thing? POSIX stands for **P**ortable 
+**O**perating **S**ystem **I**nterface. It is a family of standards specified for 
+maintaining compatibility between different operating systems. Before we 
+learn to create POSIX objects, let us look at `now()` from lubridate.
+
+```{r now_class}
+class(lubridate::now())
+```
+
+`now()` returns current date/time as a POSIXct object. Let us look at its
+internal representation using `unclass()`
+
+```{r now_unclass}
+unclass(lubridate::now())
+```
+
+The output you see is the number of seconds since January 1, 1970.
+
+#### POSIXct
+
+`POSIXct` represents the number of seconds since the beginning of 1970 (UTC) and 
+`ct` stands for calendar time.  To store date/time as `POSIXct` objects, use 
+`as.POSIXct()`. Let us now store the release date of R 3.6.2 as `POSIXct` as shown 
+below
+
+```{r release_date_posixct}
+release_date <- as.POSIXct("2019-12-12 08:05:03")
+class(release_date)
+unclass(release_date) 
+```
+
+#### POSIXlt
+
+`POSIXlt` represents the following information in a list
+
+- seconds
+- minutes
+- hour
+- day of the month
+- month
+- year
+- day of week
+- day of year
+- daylight saving time flag
+- time zone
+- offset in seconds from GMT
+
+The `lt` in `POSIXlt` stands for local time. Use `as.POSIXlt()` to store 
+date/time as `POSIXlt` objects. Let us store the release date as a `POSIXlt` 
+object as shown below
+
+```{r release_date_posixlt_1}
+release_date <- as.POSIXlt("2019-12-12 08:05:03")
+release_date
+```
+
+As we said earlier, `POSIXlt` stores date/time components in a list and these 
+can be extracted. Let us look at the date/time components returned by `POSIXlt` 
+using `unclass()`.
+
+```{r release_date_posixlt_2}
+release_date <- as.POSIXlt("2019-12-12 08:05:03")
+unclass(release_date)
+```
+
+Use `unlist()` if you want the components returned as a `vector`.
+
+```{r release_date_posixlt_3}
+release_date <- as.POSIXlt("2019-12-12 08:05:03")
+unlist(release_date)
+```
+
+To extract specific components, use `$`. 
+
+```{r release_date_posixlt_4}
+release_date <- as.POSIXlt("2019-12-12 08:05:03")
+release_date$hour
+release_date$mon
+release_date$zone
+```
+
+Now, let us look at the components returned by `POSIXlt`. Some of them are 
+intuitive
+
+```{r table_posixlt_1, echo=FALSE}
+cname   <- c("`sec`", "`min`", "`hour`", "`mon`", "`zone`", "`wday`", "`mday`", "`year`", "`yday`", "`isdst`", "`gmtoff`")
+descrip <- c("Second", "Minute", "Hour of the day", "Month of the year (0-11",
+             "Timezone", "Day of week", "Day of month","Years since 1900", 
+             "Day of year", "Daylight saving flag", 
+             "Offset is seconds from GMT")
+data.frame(Component = cname, Description = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+Great! We will end this section with a few tips/suggestions on when to use 
+`Date` or `POSIXct/POSIXlt`. 
+
+- use `Date` when there is no time component
+- use `POSIX` when dealing with time and timezones
+- use `POSIXlt` when you want to access/extract the different components
+
+### Your Turn
+
+R 1.0.0 was released on `2000-02-29 08:55:23 UTC`. Save it as 
+
+- `Date` using character 
+- `Date` using origin and number
+- `POSIXct`
+- `POSIXlt` and extract 
+    - month day
+    - day of year
+    - month
+    - zone
+- ISODate
+
+*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could 
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.
+
+We welcome your comments. You can email to let us know what you did or did not 
+like about our blog as well as what we can do to make our post better.*
+
+**Email: support@rsquaredacademy.com**

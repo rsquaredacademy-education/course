@@ -1,0 +1,496 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-23'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<p><img src="/img/handling-date-and-time-in-r.png" width="80%" style="display: block; margin: auto;" /></p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a></li>
+<li><a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a></li>
+</ul>
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+</div>
+<div id="components" class="section level2">
+<h2>Date &amp; Time Components</h2>
+{{% youtube "88iUo0Z06ZI" %}}
+<p>In the second section, we discussed the downside of saving date/time as
+character/string in R. One of the points we discussed was that we can’t extract
+components such as year, month, day etc. In this section, we will learn to
+extract date/time components such as</p>
+<ul>
+<li>year</li>
+<li>month</li>
+<li>date</li>
+<li>week</li>
+<li>day</li>
+<li>quarter</li>
+<li>semester</li>
+<li>hour</li>
+<li>minute</li>
+<li>second</li>
+<li>timezone</li>
+</ul>
+<p><img src="/img/day_week_month.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>The below table outlines the functions we will explore in the first part of this
+section.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>year()</code>
+</td>
+<td style="text-align:left;">
+Get year
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>month()</code>
+</td>
+<td style="text-align:left;">
+Get month (number)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>month(label = TRUE)</code>
+</td>
+<td style="text-align:left;">
+Get month (abbreviated name)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>month(abbr = FALSE)</code>
+</td>
+<td style="text-align:left;">
+Get month (full name)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>months()</code>
+</td>
+<td style="text-align:left;">
+Get month
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>week()</code>
+</td>
+<td style="text-align:left;">
+Get week
+</td>
+</tr>
+</tbody>
+</table>
+<div id="year" class="section level3">
+<h3>Year</h3>
+<pre class="r"><code>release_date &lt;- ymd_hms(&quot;2019-12-12 08:05:03&quot;)
+year(release_date) </code></pre>
+<pre><code>## [1] 2019</code></pre>
+</div>
+<div id="month" class="section level3">
+<h3>Month</h3>
+<p><code>month()</code> will return the month as a number i.e. <code>12</code> for December.</p>
+<pre class="r"><code>month(release_date)</code></pre>
+<pre><code>## [1] 12</code></pre>
+<p>Instead, if you want the name of the month , use the <code>label</code> argument and set it
+to <code>TRUE</code>. Now it returns <code>Dec</code> instead of <code>12</code>.</p>
+<pre class="r"><code>month(release_date, label = TRUE)</code></pre>
+<pre><code>## [1] Dec
+## 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec</code></pre>
+<p>But this is the abbreviated name and not the full name. How do we get the full
+name of the month? Set the <code>abbr</code> argument to <code>FALSE</code>.</p>
+<pre class="r"><code>month(release_date, label = TRUE, abbr  = FALSE)</code></pre>
+<pre><code>## [1] December
+## 12 Levels: January &lt; February &lt; March &lt; April &lt; May &lt; June &lt; ... &lt; December</code></pre>
+<p>Ah! now we can see the full name of the month. <code>months()</code> from base R will
+return the full name of the month by default. If you want the abbreviated name,
+use the <code>abbreviate</code> argument and set it to <code>TRUE</code>.</p>
+<pre class="r"><code>months(release_date)</code></pre>
+<pre><code>## [1] &quot;December&quot;</code></pre>
+</div>
+<div id="week" class="section level3">
+<h3>Week</h3>
+<p><code>week()</code> returns the number of complete 7 day periods between the date and 1st
+January plus one.</p>
+<pre class="r"><code>week(release_date)</code></pre>
+<pre><code>## [1] 50</code></pre>
+</div>
+<div id="day" class="section level3">
+<h3>Day</h3>
+<p>Use <code>day()</code> to extract the date component. There are other variations such as</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>day</code>
+</td>
+<td style="text-align:left;">
+Get day
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>mday()</code>
+</td>
+<td style="text-align:left;">
+Day of the month
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wday()</code>
+</td>
+<td style="text-align:left;">
+Day of the week
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>qday()</code>
+</td>
+<td style="text-align:left;">
+Day of quarter
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>yday()</code>
+</td>
+<td style="text-align:left;">
+Day of year
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>weekdays()</code>
+</td>
+<td style="text-align:left;">
+Day of week
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>days_in_month()</code>
+</td>
+<td style="text-align:left;">
+Days in the month
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>day(release_date)</code></pre>
+<pre><code>## [1] 12</code></pre>
+<pre class="r"><code>mday(release_date)                 </code></pre>
+<pre><code>## [1] 12</code></pre>
+<pre class="r"><code>qday(release_date)                 </code></pre>
+<pre><code>## [1] 73</code></pre>
+<pre class="r"><code>yday(release_date)                 </code></pre>
+<pre><code>## [1] 346</code></pre>
+<p><code>wday</code> can return</p>
+<ul>
+<li>a number</li>
+<li>abbreviation of the weekday</li>
+<li>full name of the weekday</li>
+</ul>
+<pre class="r"><code>wday(release_date)  </code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>wday(release_date, label = TRUE)</code></pre>
+<pre><code>## [1] Thu
+## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre>
+<pre class="r"><code>wday(release_date, label = TRUE, abbr  = FALSE)  </code></pre>
+<pre><code>## [1] Thursday
+## 7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
+<p><code>weekdays()</code> from base R also returns the day of the week (the name and not
+the number). If you want the abbreviated name, use the <code>abbreviate</code> argument.</p>
+<pre class="r"><code>weekdays(release_date)</code></pre>
+<pre><code>## [1] &quot;Thursday&quot;</code></pre>
+<pre class="r"><code>weekdays(release_date, abbreviate = TRUE)</code></pre>
+<pre><code>## [1] &quot;Thu&quot;</code></pre>
+</div>
+<div id="days-in-month" class="section level3">
+<h3>Days in Month</h3>
+<p>If you want to know the number of days in the month, use <code>days_in_month()</code>.
+In our example, the month is December and it has 31 days.</p>
+<pre class="r"><code>days_in_month(release_date)</code></pre>
+<pre><code>## Dec 
+##  31</code></pre>
+</div>
+<div id="hour-minute-seconds" class="section level3">
+<h3>Hour, Minute &amp; Seconds</h3>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>hour()</code>
+</td>
+<td style="text-align:left;">
+Get hour
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>minute()</code>
+</td>
+<td style="text-align:left;">
+Get minute
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>second()</code>
+</td>
+<td style="text-align:left;">
+Get second
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>seconds()</code>
+</td>
+<td style="text-align:left;">
+Number of seconds since <code>1970-01-01</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>So far we have been looking at date components. Now, let us look at time
+components.</p>
+<pre class="r"><code>hour(release_date)</code></pre>
+<pre><code>## [1] 8</code></pre>
+<pre class="r"><code>minute(release_date)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>second(release_date)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p><code>seconds()</code> returns the number of seconds since <code>1970-01-01</code>.</p>
+<pre class="r"><code>seconds(release_date)</code></pre>
+<pre><code>## [1] &quot;1576137903S&quot;</code></pre>
+</div>
+<div id="quarter-semester" class="section level3">
+<h3>Quarter &amp; Semester</h3>
+<p><img src="/img/quarter_semester.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><code>quarter()</code> will return the quarter from the date. December is in the 4th
+quarter and hence it returns 4.</p>
+<pre class="r"><code>quarter(release_date)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>If you want the year along with the quarter, set the <code>with_year</code> argument to
+<code>TRUE</code>.</p>
+<pre class="r"><code>quarter(release_date, with_year = TRUE)</code></pre>
+<pre><code>## [1] 2019.4</code></pre>
+<p>In India, the fiscal starts in April and December falls in the 3rd quarter. How
+can we accommodate this change? The <code>fiscal_start</code> argument allows us to set the
+month in which the fiscal begins. We will set it to 4 for April. Now it returns
+3 instead of 4.</p>
+<pre class="r"><code>quarter(release_date, fiscal_start = 4)    </code></pre>
+<pre><code>## [1] 3</code></pre>
+<p><code>quarters()</code> from base R also returns the quarter.</p>
+<pre class="r"><code>quarters(release_date)</code></pre>
+<pre><code>## [1] &quot;Q4&quot;</code></pre>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>quarter()</code>
+</td>
+<td style="text-align:left;">
+Get quarter
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>quarter(with_year = TRUE)</code>
+</td>
+<td style="text-align:left;">
+Quarter with year
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>quarter(fiscal_start = 4)</code>
+</td>
+<td style="text-align:left;">
+Fiscal starts in April
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>quarters()</code>
+</td>
+<td style="text-align:left;">
+Get quarter
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>semester()</code>
+</td>
+<td style="text-align:left;">
+Get semester
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="case-study" class="section level3">
+<h3>Case Study</h3>
+<div id="extract-date-month-year-from-due-date" class="section level4">
+<h4>Extract Date, Month &amp; Year from Due Date</h4>
+<p>Let us now extract the date, month and year from the <code>Due</code> column.</p>
+<pre class="r"><code>transact %&gt;%
+  mutate(
+    due_day   = day(Due),
+    due_month = month(Due),
+    due_year  = year(Due)
+  )</code></pre>
+<pre><code>## # A tibble: 2,466 x 6
+##    Invoice    Due        Payment    due_day due_month due_year
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;       &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 2013-01-02 2013-02-01 2013-01-15       1         2     2013
+##  2 2013-01-26 2013-02-25 2013-03-03      25         2     2013
+##  3 2013-07-03 2013-08-02 2013-07-08       2         8     2013
+##  4 2013-02-10 2013-03-12 2013-03-17      12         3     2013
+##  5 2012-10-25 2012-11-24 2012-11-28      24        11     2012
+##  6 2012-01-27 2012-02-26 2012-02-22      26         2     2012
+##  7 2013-08-13 2013-09-12 2013-09-09      12         9     2013
+##  8 2012-12-16 2013-01-15 2013-01-12      15         1     2013
+##  9 2012-05-14 2012-06-13 2012-07-01      13         6     2012
+## 10 2013-07-01 2013-07-31 2013-07-26      31         7     2013
+## # ... with 2,456 more rows</code></pre>
+</div>
+<div id="data-sanitization" class="section level4">
+<h4>Data Sanitization</h4>
+<p>Let us do some data sanitization. If the due day happens to be February 29,
+let us ensure that the due year is a leap year. Below are the steps to check
+if the due year is a leap year:</p>
+<ul>
+<li>we will extract the following from the due date:
+<ul>
+<li>day</li>
+<li>month</li>
+<li>year</li>
+</ul></li>
+<li>we will then create a new column <code>is_leap</code> which will have be set to <code>TRUE</code> if
+the year is a leap year else it will be set to <code>FALSE</code></li>
+<li>filter all the payments due on 29th Feb</li>
+<li>select the following columns:
+<ul>
+<li><code>Due</code></li>
+<li><code>is_leap</code></li>
+</ul></li>
+</ul>
+<pre class="r"><code>transact %&gt;%
+  mutate(
+    due_day   = day(Due),
+    due_month = month(Due),
+    due_year  = year(Due),
+    is_leap   = leap_year(due_year)
+  ) %&gt;%
+  filter(due_month == 2 &amp; due_day == 29) %&gt;%
+  select(Due, is_leap) </code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   Due        is_leap
+##   &lt;date&gt;     &lt;lgl&gt;  
+## 1 2012-02-29 TRUE   
+## 2 2012-02-29 TRUE   
+## 3 2012-02-29 TRUE   
+## 4 2012-02-29 TRUE</code></pre>
+</div>
+<div id="invoices-distribution-by-quarter" class="section level4">
+<h4>Invoices Distribution by Quarter</h4>
+<p>Let us count the invoices due for each quarter.</p>
+<pre class="r"><code>transact %&gt;%
+  mutate(
+    quarter_due = quarter(Due)
+  ) %&gt;%
+  count(quarter_due)</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   quarter_due     n
+## *       &lt;int&gt; &lt;int&gt;
+## 1           1   521
+## 2           2   661
+## 3           3   618
+## 4           4   666</code></pre>
+</div>
+</div>
+<div id="your-turn" class="section level3">
+<h3>Your Turn</h3>
+<p>Get the R release dates using <code>r_versions()</code> from the <strong>rversions</strong> package and
+tabulate the following</p>
+<ul>
+<li>year</li>
+<li>month with label</li>
+<li>weekday with label</li>
+<li>hour</li>
+<li>and quarter</li>
+</ul>
+<p>*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.</p>
+<p>We welcome your comments. You can email to let us know what you did or did not
+like about our blog as well as what we can do to make our post better.*</p>
+<p><strong>Email: <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a></strong></p>
+</div>
+</div>

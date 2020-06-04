@@ -1,0 +1,201 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-22'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<p><img src="/img/handling-date-and-time-in-r.png" width="80%" style="display: block; margin: auto;" /></p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a></li>
+<li><a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a></li>
+</ul>
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+</div>
+<div id="parse" class="section level2">
+<h2>Parse Date &amp; Time</h2>
+{{% youtube "FqWb-OS6wu4" %}}
+<p>While creating date-time objects, we specified different formats using the
+conversion specification but most often you will not create date/time and
+instead deal with data that comes your way from a database or API or
+colleague/collaborator. In such cases, we need to be able to parse date/time
+from the data provided to us. In this section, we will focus on parsing
+date/time from character data. Both base R and the lubridate package offer
+functions to parse date and time and we will explore a few of them in this
+section. We will initially use functions from base R and later on explore those
+from lubridate which will give us an opportunity to compare and contrast. It
+will also allow us to choose the functions based on the data we are dealing
+with.</p>
+<p><code>strptime()</code> will convert character data to <code>POSIXlt</code>. You will use this when
+converting from character data to date/time. On the other hand, if you want to
+convert date/time to character data, use any of the following:</p>
+<ul>
+<li><code>strftime()</code></li>
+<li><code>format()</code></li>
+<li><code>as.character()</code></li>
+</ul>
+<p>The above functions will convert <code>POSIXct/POSIXlt</code> to character. Let us start
+with a simple example. The data we have been supplied has date/time as
+character data and in the format <code>YYYYMMDD</code> i.e. nothing separates the year,
+month and date from each other. We will use <code>strptime()</code> to convert this to an
+object of class <code>POSIXlt</code>.</p>
+<pre class="r"><code>rel_date &lt;- strptime(&quot;20191212&quot;, format = &quot;%Y%m%d&quot;)
+class(rel_date)</code></pre>
+<pre><code>## [1] &quot;POSIXlt&quot; &quot;POSIXt&quot;</code></pre>
+<p>If you have a basic knowledge of conversion specifications, you can use
+<code>strptime()</code> to convert character data to <code>POSIXlt</code>. Let us quickly explore the
+functions to convert date/time to character data before moving on to the
+functions from lubridate.</p>
+<pre class="r"><code>rel_date_strf &lt;- strftime(rel_date)
+class(rel_date_strf)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>rel_date_format &lt;- format(rel_date)
+class(rel_date_format)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>rel_date_char &lt;- as.character(rel_date)
+class(rel_date_char)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>As you can see, all the 3 functions converted date/time to character. Time to
+move on and explore the lubridate package. We will start with an example in
+which the release date is formatted in 3 different ways but they have one thing
+in common i.e. the order in which the components appear. In all the 3 formats,
+the year is followed by the month and then the date.</p>
+<p>To parse the release date, we will use <code>parse_date_time()</code> from lubridate which
+parses the input into <code>POSIXct</code> objects.</p>
+<pre class="r"><code>release_date &lt;- c(&quot;19-12-12&quot;, &quot;20191212&quot;, &quot;19-12 12&quot;)
+parse_date_time(release_date, &quot;ymd&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 UTC&quot; &quot;2019-12-12 UTC&quot; &quot;2019-12-12 UTC&quot;</code></pre>
+<pre class="r"><code>parse_date_time(release_date, &quot;y m d&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 UTC&quot; &quot;2019-12-12 UTC&quot; &quot;2019-12-12 UTC&quot;</code></pre>
+<pre class="r"><code>parse_date_time(release_date, &quot;%y%m%d&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 UTC&quot; &quot;2019-12-12 UTC&quot; &quot;2019-12-12 UTC&quot;</code></pre>
+<p>Try to use <code>strptime()</code> in the above example and see what happens. Now, let us
+look at another data set.</p>
+<pre class="r"><code>release_date &lt;- c(&quot;19-07-05&quot;, &quot;2019-07-05&quot;, &quot;05-07-2019&quot;)</code></pre>
+<p>What happens in the below case? The same date appears in multiple formats. How
+do we parse them? <code>parse_date_time()</code> allows us to specify mutiple date-time
+formats. Let us first map the dates to their formats.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Specification
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+19-07-05
+</td>
+<td style="text-align:left;">
+<code>ymd</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019-07-05
+</td>
+<td style="text-align:left;">
+<code>ymd</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05-07-2019
+</td>
+<td style="text-align:left;">
+<code>dmy</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The above specifications can be supplied as a character vector.</p>
+<pre class="r"><code>parse_date_time(release_date, c(&quot;ymd&quot;, &quot;ymd&quot;, &quot;dmy&quot;))</code></pre>
+<pre><code>## [1] &quot;2019-07-05 UTC&quot; &quot;2019-07-05 UTC&quot; &quot;2019-07-05 UTC&quot;</code></pre>
+<p>Great! We have used both <code>strptime()</code> and <code>parse_date_time()</code> now. Can you tell
+what differentiates <code>parse_date_time()</code> when compared to <code>strptime()</code>? We
+summarize it in the points below:</p>
+<ul>
+<li>no need to include <code>%</code> prefix or separator</li>
+<li>specify several date/time formats</li>
+</ul>
+<p>There are other helper functions that can be used to</p>
+<ul>
+<li>parse dates with only year, month, day components</li>
+<li>parse dates with year, month, day, hour, minute, seconds components</li>
+<li>parse dates with only hour, minute, second components</li>
+</ul>
+<p>and are explored in the below examples.</p>
+<pre class="r"><code># year/month/date
+ymd(&quot;2019-12-12&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12&quot;</code></pre>
+<pre class="r"><code># year/month/date
+ymd(&quot;19/12/12&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12&quot;</code></pre>
+<pre class="r"><code># date/month/year
+dmy(121219)</code></pre>
+<pre><code>## [1] &quot;2019-12-12&quot;</code></pre>
+<pre class="r"><code># year/month/date/hour/minute/second
+ymd_hms(191212080503)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 08:05:03 UTC&quot;</code></pre>
+<pre class="r"><code># hour/minute/second
+hms(&quot;8, 5, 3&quot;)</code></pre>
+<pre><code>## [1] &quot;8H 5M 3S&quot;</code></pre>
+<pre class="r"><code># hour/minute/second
+hms(&quot;08:05:03&quot;)</code></pre>
+<pre><code>## [1] &quot;8H 5M 3S&quot;</code></pre>
+<pre class="r"><code># minute/second
+ms(&quot;5,3&quot;)</code></pre>
+<pre><code>## [1] &quot;5M 3S&quot;</code></pre>
+<pre class="r"><code># hour/minute
+hm(&quot;8, 5&quot;)</code></pre>
+<pre><code>## [1] &quot;8H 5M 0S&quot;</code></pre>
+<p>Note, in a couple of cases where the components are not separated by <code>/</code>, <code>-</code> or
+space, we have not enclosed the values in quotes.</p>
+<div id="your-turn" class="section level3">
+<h3>Your Turn</h3>
+<p>Below, we have specified <code>July 5th, 2019</code> in different ways. Parse the dates using <code>strptime()</code> or <code>parse_date_time()</code> or any other helper function.</p>
+<ul>
+<li><code>July-05-19</code></li>
+<li><code>JUL-05-19</code></li>
+<li><code>05.07.19</code></li>
+<li><code>5-July 2019</code></li>
+<li><code>July 5th, 2019</code></li>
+<li><code>July 05, 2019</code></li>
+<li><code>2019-July- 05</code></li>
+<li><code>05/07/2019</code></li>
+<li><code>07/05/2019</code></li>
+<li><code>7/5/2019</code></li>
+<li><code>07/5/19</code></li>
+<li><code>2019-07-05</code></li>
+</ul>
+<p>*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.</p>
+<p>We welcome your comments. You can email to let us know what you did or did not
+like about our blog as well as what we can do to make our post better.*</p>
+<p><strong>Email: <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a></strong></p>
+</div>
+</div>

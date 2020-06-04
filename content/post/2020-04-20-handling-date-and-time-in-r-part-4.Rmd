@@ -1,0 +1,177 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-20'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pkg_load, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(magrittr)
+library(lubridate)
+library(rversions)
+library(readr)
+library(dplyr)
+```
+
+```{r cover_image, echo=FALSE, fig.align="center", out.width="80%"}
+knitr::include_graphics("/img/handling-date-and-time-in-r.png")
+```
+
+## Resources {#resources}
+
+Below are the links to all the resources related to this tutorial:
+
+- <a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a>
+- <a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a>
+
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
+```
+
+## Time Zones & Daylight Savings {#timezones}
+
+```{r cline_youtube_timezones, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "Sz-Zf0s9Ubg")
+```
+
+### Introduction
+
+```{r img_timezones, fig.align='center', out.width="70%", echo=FALSE}
+knitr::include_graphics('/img/lub_timezones.jpg')
+```
+
+In the previous section, `POSIXlt` stored date/time components as a list. Among 
+the different components it returned were
+
+- `gmtoff`
+- `zone`
+
+`gmtoff` is offset in seconds from GMT i.e. difference in hours and minutes from 
+UTC. Wait.. What do UTC and GMT stand for?
+
+- Coordinated Universal Time (UTC)
+- Greenwich Meridian Time (GMT)
+
+Since we are talking about UTC, GMT etc., let us spend a little time on 
+understanding the basics of time zones and daylight savings.
+
+### Time Zones
+
+Timezones exist because different parts of the Earth receive sun light at 
+different times. If there was a single timezone, noon or morning would mean 
+different things in different parts of the world. The timezones are based on 
+Earth's rotation. The Earth moves ~15 degrees every 60 minutes i.e. 360 degrees 
+in 24 hours. The planet is divided into 24 timezones, each 15 degrees of 
+longitude width. 
+
+Now, you have heard of Greenwich Meridian Time (GMT) right? We just saw GMT off 
+set in `POSIXlt` and you would have come across it in other time formats as 
+well. For example, India timezone is given as GMT +5:30. Let us explore GMT in a 
+little more detail. Greenwich is a suburb of London and the time at Greenwich 
+is **G**reenwich **M**ean **T**ime. As you move West from Greenwich, every 15 
+degree section is one hour earlier than GMT and every 15 degree section to the 
+East is an hour later. 
+
+Alright! What is **UTC** then? **C**oordinated **U**niversal **T**ime (UTC) , 
+on the other hand, is the time standard commonly used across the world. Even 
+though they share the same current time, **GMT** is a **timezone** while 
+**UTC** is a **time standard**.
+
+So how do we check the timezone in R? When you run `Sys.timezone()`, you should 
+be able to see the timezone you are in. 
+
+```{r sys_time_zones}
+Sys.timezone()
+```
+
+If you do not see the timezone, use `Sys.getenv()` to get the value of the 
+**TZ** environment variable.
+
+```{r get_time_zone}
+Sys.getenv("TZ")
+```
+
+If nothing is returned, it means we have to set the timezone. Use `Sys.setenv()` 
+to set the timezone as shown below. The author resides in India and hence the 
+timezone is set to `Asia/Calcutta`. You need to set the timezone in which you 
+reside or work.
+
+```{r set_time_zone}
+Sys.setenv(TZ = "Asia/Calcutta")
+```
+
+Another way to get the timezone is through `tz()` from the lubridate package.
+
+```{r tz_release_date}
+lubridate::tz(Sys.time())
+```
+
+If you want to view the time in a different timezone, use `with_tz()`. Let us 
+look at the current time in **UTC** instead of **Indian Standard Time**.
+
+```{r with_tz}
+lubridate::with_tz(Sys.time(), "UTC")
+```
+
+### Daylight Savings
+
+```{r img_daylight, fig.align='center', out.width="70%", echo=FALSE}
+knitr::include_graphics('/img/lub_daylight_savings.png')
+```
+
+Daylight savings also known as 
+
+- daylight saving time
+- daylight savings time
+- daylight time
+- summer time
+
+is the practice of advancing clocks during summer months so that darkness falls 
+later each day according to the clock. In other words
+
+- advance clock by one hour in spring (spring forward)
+- retard clocks by one hour in autumn (fall back)
+
+In R, the `dst()` function is an indicator for daylight savings. It returns 
+`TRUE` if daylight saving is in force, `FALSE` if not and `NA` if unknown.
+
+```{r dst}
+Sys.Date()
+dst(Sys.Date()) 
+```
+
+### Your Turn
+
+- check the timezone you live in
+- check if daylight savings in on
+- check the current time in **UTC** or a different time zone 
+
+*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could 
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.
+
+We welcome your comments. You can email to let us know what you did or did not 
+like about our blog as well as what we can do to make our post better.*
+
+**Email: support@rsquaredacademy.com**

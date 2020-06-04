@@ -1,0 +1,111 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-26'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+
+
+<p><img src="/img/handling-date-and-time-in-r.png" width="80%" style="display: block; margin: auto;" /></p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a></li>
+<li><a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a></li>
+</ul>
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+</div>
+<div id="others" class="section level2">
+<h2>Round &amp; Rollback</h2>
+{{% youtube "ZI1s6XQgCbo" %}}
+<p>In this section, we will learn to round date/time to the nearest unit and roll
+back dates.</p>
+<div id="rounding-dates" class="section level3">
+<h3>Rounding Dates</h3>
+<p>We will explore functions for rounding dates</p>
+<ul>
+<li>to the nearest value using <code>round_dates()</code></li>
+<li>down using <code>floor_date()</code></li>
+<li>up using <code>ceiling_date()</code></li>
+</ul>
+<p>The unit for rounding can be any of the following:</p>
+<ul>
+<li>second</li>
+<li>minute</li>
+<li>hour</li>
+<li>day</li>
+<li>week</li>
+<li>month</li>
+<li>bimonth</li>
+<li>quarter</li>
+<li>season</li>
+<li>halfyear</li>
+<li>and year</li>
+</ul>
+<p>We will look at a few examples using <code>round_date()</code> and you will then practice
+using the other two functions.</p>
+<pre class="r"><code># minute
+round_date(release_date, unit = &quot;minute&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 08:05:00 UTC&quot;</code></pre>
+<pre class="r"><code>round_date(release_date, unit = &quot;mins&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 08:05:00 UTC&quot;</code></pre>
+<pre class="r"><code>round_date(release_date, unit = &quot;5 mins&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 08:05:00 UTC&quot;</code></pre>
+<pre class="r"><code># hour
+round_date(release_date, unit = &quot;hour&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 08:00:00 UTC&quot;</code></pre>
+<pre class="r"><code># day
+round_date(release_date, unit = &quot;day&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-12-12 UTC&quot;</code></pre>
+</div>
+<div id="rollback" class="section level3">
+<h3>Rollback</h3>
+<p>Use <code>rollback()</code> if you want to change the date to the last day of the previous
+month or the first day of the month.</p>
+<pre class="r"><code>rollback(release_date)</code></pre>
+<pre><code>## [1] &quot;2019-11-30 08:05:03 UTC&quot;</code></pre>
+<p>To change the date to the first day of the month, use the <code>roll_to_first</code>
+argument and set it to <code>TRUE</code>.</p>
+<pre class="r"><code>rollback(release_date, roll_to_first = TRUE)</code></pre>
+<pre><code>## [1] &quot;2019-12-01 08:05:03 UTC&quot;</code></pre>
+</div>
+<div id="your-turn" class="section level3">
+<h3>Your Turn</h3>
+<ul>
+<li>round up R release dates to hours</li>
+<li>round down R release dates to minutes</li>
+<li>rollback R release dates to the beginning of the month</li>
+</ul>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>Readings &amp; References</h2>
+<ul>
+<li><a href="https://lubridate.tidyverse.org/" class="uri">https://lubridate.tidyverse.org/</a></li>
+<li><a href="https://r4ds.had.co.nz/dates-and-times.html" class="uri">https://r4ds.had.co.nz/dates-and-times.html</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Daylight_saving_time" class="uri">https://en.wikipedia.org/wiki/Daylight_saving_time</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Time_zone" class="uri">https://en.wikipedia.org/wiki/Time_zone</a></li>
+<li><a href="https://www.worldtimebuddy.com/" class="uri">https://www.worldtimebuddy.com/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/POSIX" class="uri">https://en.wikipedia.org/wiki/POSIX</a></li>
+</ul>
+<p>*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.</p>
+<p>We welcome your comments. You can email to let us know what you did or did not
+like about our blog as well as what we can do to make our post better.*</p>
+<p><strong>Email: <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a></strong></p>
+</div>

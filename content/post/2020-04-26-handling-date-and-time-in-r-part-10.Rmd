@@ -1,0 +1,141 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-26'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pkg_load, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(magrittr)
+library(lubridate)
+library(rversions)
+library(readr)
+library(dplyr)
+```
+
+```{r cover_image, echo=FALSE, fig.align="center", out.width="80%"}
+knitr::include_graphics("/img/handling-date-and-time-in-r.png")
+```
+
+## Resources {#resources}
+
+Below are the links to all the resources related to this tutorial:
+
+- <a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a>
+- <a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a>
+
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
+```
+
+## Round & Rollback  {#others}
+
+```{r cline_youtube_others, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "ZI1s6XQgCbo")
+```
+
+In this section, we will learn to round date/time to the nearest unit and roll 
+back dates. 
+
+### Rounding Dates
+
+We will explore functions for rounding dates
+
+- to the nearest value using `round_dates()`
+- down using `floor_date()`
+- up using `ceiling_date()`
+
+The unit for rounding can be any of the following:
+
+- second
+- minute
+- hour
+- day
+- week
+- month
+- bimonth
+- quarter
+- season
+- halfyear
+- and year
+
+We will look at a few examples using `round_date()` and you will then practice 
+using the other two functions.
+
+```{r round_release_date, echo=FALSE}
+release_date <- ymd_hms("2019-12-12 08:05:03")
+```
+
+```{r round_dates}
+# minute
+round_date(release_date, unit = "minute")
+round_date(release_date, unit = "mins")
+round_date(release_date, unit = "5 mins")
+
+# hour
+round_date(release_date, unit = "hour")
+
+# day
+round_date(release_date, unit = "day")
+```
+
+### Rollback 
+
+Use `rollback()` if you want to change the date to the last day of the previous 
+month or the first day of the month.
+
+```{r rollback_1}
+rollback(release_date)
+```
+
+To change the date to the first day of the month, use the `roll_to_first` 
+argument and set it to `TRUE`.
+
+```{r rollback_2}
+rollback(release_date, roll_to_first = TRUE)
+```
+
+### Your Turn
+
+- round up R release dates to hours
+- round down R release dates to minutes
+- rollback R release dates to the beginning of the month
+
+## Readings & References {#references}
+
+- https://lubridate.tidyverse.org/
+- https://r4ds.had.co.nz/dates-and-times.html
+- https://en.wikipedia.org/wiki/Daylight_saving_time
+- https://en.wikipedia.org/wiki/Time_zone
+- https://www.worldtimebuddy.com/
+- https://en.wikipedia.org/wiki/POSIX
+
+*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could 
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.
+
+We welcome your comments. You can email to let us know what you did or did not 
+like about our blog as well as what we can do to make our post better.*
+
+**Email: support@rsquaredacademy.com**

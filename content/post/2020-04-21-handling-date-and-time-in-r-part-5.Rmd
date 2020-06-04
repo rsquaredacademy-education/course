@@ -1,0 +1,243 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-21'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pkg_load, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(magrittr)
+library(lubridate)
+library(rversions)
+library(readr)
+library(dplyr)
+```
+
+```{r cover_image, echo=FALSE, fig.align="center", out.width="80%"}
+knitr::include_graphics("/img/handling-date-and-time-in-r.png")
+```
+
+## Resources {#resources}
+
+Below are the links to all the resources related to this tutorial:
+
+- <a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a>
+- <a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a>
+
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
+```
+
+## Date & Time Formats {#formats}
+
+```{r cline_youtube_formats, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "BdHTrItYKJw")
+```
+
+After the timezones and daylight savings detour, let us get back on path and 
+explore another important aspect, date & time formats. Although it is a good 
+practice to adher to ISO 8601 format, not all date/time data will comply with 
+it. In real world, date/time data may come in all types of weird formats. Below
+is a sample
+
+```{r table_formats_sample, echo=FALSE}
+cname   <- c("December 12, 2019", "12th Dec, 2019", "Dec 12th, 19", "12-Dec-19",
+             "2019 December", "12.12.19") 
+data.frame(Format = cname) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+When the data is not in the default ISO 8601 format, we need to explicitly 
+specify the format in R. We do this using conversion specifications. A 
+conversion specification is introduced by %, usually followed by a single 
+letter or O or E and then a single letter. 
+
+### Conversion Specifications
+
+```{r table_formats_1, echo=FALSE}
+cname   <- c("`%d`", "`%m`", "`%b`", "`%B`", "`%y`", "`%Y`", "%H", "%M", "%S")
+descrip <- c("Day of the month (decimal number)",
+             "Month (decimal number)",
+             "Month (abbreviated)",
+             "Month (full name)",
+             "Year (2 digit)",
+             "Year (4 digit)",
+             "Hour",
+             "Minute",
+             "Second")
+example <- c(12, 12, "Dec", "December", 19, 2019, 08, 05, 03)
+data.frame(Specification = cname, Description = descrip, Example = example) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+Time to work through a few examples. Let us say you are dealing with dates in 
+the format `19/12/12`. In this format, the year comes first followed by month 
+and the date; each separated by a slash (`/`). The year consists of only 2 
+digits i.e. it does not include the century. Let us now map each component of 
+the date to the conversion specification table shown at the beginning.
+
+```{r table_formats_ex_1, echo=FALSE}
+cname   <- c("19", "12", "12")
+descrip <- c("`%y`", "`%m`", "`%d`")
+data.frame(Date = cname, Specification = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+Using the format argument, we will specify the conversion specification as a character vector
+i.e. enclosed in quotes.
+
+```{r format_examples_1}
+as.Date("19/12/12", format = "%y/%m/%d")
+```
+
+Another way in which the release data can be written is `2019-Dec-12`. We still 
+have the year followed by the month and the date but there are a few changes 
+here:
+
+- the components are separated by a `-` instead of `/`
+- year has 4 digits i.e. includes the century
+- the month is specified using abbreviation instead of digits
+
+Let us map the components to the format table:
+
+```{r table_formats_ex_2, echo=FALSE}
+cname   <- c("2019", "Dec", "12")
+descrip <- c("`%Y`", "`%b`", "`%d`")
+data.frame(Date = cname, Specification = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+Let us specify the format for the date using the above mapping.
+
+```{r format_examples_2}
+as.Date("2019-Dec-12", format = "%Y-%b-%d")
+```
+
+In both the above examples, we have not dealt with time components. Let us 
+include the release time of R 3.6.2 in the next one i.e. 
+`19/12/12 08:05:03`.
+
+```{r table_formats_ex_3, echo=FALSE}
+cname   <- c("19", "12", "12", "08", "05", "03")
+descrip <- c("`%y`", "`%m`", "`%d`", "`%H`", "`%M`", "`%S`")
+data.frame(Date = cname, Specification = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+Since we are dealing with time, we will use `as.POSIXct()` instead of 
+`as.Date()`.
+
+```{r format_examples_3}
+as.POSIXct("19/12/12 08:05:03", tz = "UTC", format = "%y/%m/%d %H:%M:%S")
+```
+
+In the below table, we look at some of the most widely used conversion 
+specifications. You can learn more about these specifications by running 
+`?strptime` or `help(strptime)`.
+
+```{r table_formats_2, echo=FALSE}
+cname   <- c("`%a`", "`%A`", "`%C`", "`%D`", "`%e`", "`%F`", "`%h`", "`%I`", "`%j`",
+             "`%R`", "`%t`", "`%T`", "`%u`", "`%U`", "`%V`", "`%w`", "`%W`")
+descrip <- c("Abbreviated weekday",
+             "Full weekday",
+             "Century (00-99)",
+             "Same as `%m/%d/%y`",
+             "Day of month [1 - 31]",
+             "Same as `%Y-%m-%d`",
+             "Same as `%b`",
+             "Hours as decimal [01 - 12]",
+             "Day of year [001 - 366]",
+             "Same as `%H:%M`",
+             "Tab",
+             "Same as `%H:%M:%S`",
+             "Weekday [1 - 7](Monday is 1)",
+             "Week of year [00 - 53]",
+             "Week of year [01 - 53]",
+             "Weekday [0 - 6](sunday is 0)",
+             "Week of year [00 - 53]")
+data.frame(Specification = cname, Description = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+We have included a lot of practice questions for you to explore the different 
+date/time formats. The solutions are available in the Learning Management System 
+as well as in our GitHub repo. Try them and let us know if you have any doubts.
+
+### Guess Format
+
+`guess_formats()` from lubridate is a very useful function. It will guess the 
+date/time format if you specify the order in which year, month, date, hour, 
+minute and second appear.
+
+```{r guess_formats}
+release_date_formats <- c("December 12th 2019",
+                        "Dec 12th 19",
+                        "dec 12 2019")
+
+guess_formats(release_date_formats, 
+              orders = "mdy", 
+              print_matches = TRUE)
+```
+
+### Your Turn
+
+Below, we have specified `July 5th, 2019` in different ways. Create the date using `as.Date()` while specifying the correct format for each of them.
+
+- `05.07.19`
+- `5-July 2019`
+- `July 5th, 2019`
+- `July 05, 2019`
+- `2019-July- 05`
+- `05/07/2019`
+- `07/05/2019`
+- `7/5/2019`
+- `07/5/19`
+- `2019-07-05`
+
+*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could 
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.
+
+We welcome your comments. You can email to let us know what you did or did not 
+like about our blog as well as what we can do to make our post better.*
+
+**Email: support@rsquaredacademy.com**

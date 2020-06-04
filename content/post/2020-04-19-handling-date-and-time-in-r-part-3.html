@@ -1,0 +1,132 @@
+---
+title: "A Comprehensive Introduction to Handling Date & Time in R"
+author: Aravind Hebbali
+twitterImg: /img/handling-date-and-time-in-r.png
+description: "Learn to handle date & time in R"
+date: '2020-04-19'
+slug: handling-date-and-time-in-r
+categories:
+  - data-wrangling
+tags:
+  - lubridate
+  - datetime
+---
+
+
+
+<p><img src="/img/handling-date-and-time-in-r.png" width="80%" style="display: block; margin: auto;" /></p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/handling-date-and-time-in-r.pdf" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud Project</a></li>
+<li><a href="https://wrangle-r.rsquaredacademy.com/lubridate.html" target="_blank">ebook</a></li>
+</ul>
+<p align="center">
+<a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-R" target="_blank"><img src="/img/lubirdate-blog-course-ad.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
+</p>
+</div>
+<div id="arithmetic" class="section level2">
+<h2>Date Arithmetic</h2>
+{{% youtube "iNzv8Ezpjw0" %}}
+<p>Time to do some arithmetic with the dates. Let us calculate the length of a
+course you have enrolled for (Become a Rock Star Data Scientist in 10 Days) by subtracting the course start date from the course end date.</p>
+<p><br></p>
+<p><img src="/img/course_duration.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<pre class="r"><code>course_start    &lt;- as_date(&#39;2017-04-12&#39;)
+course_end      &lt;- as_date(&#39;2017-04-21&#39;)
+course_duration &lt;- course_end - course_start
+course_duration
+## Time difference of 9 days</code></pre>
+<div id="shift-date" class="section level3">
+<h3>Shift Date</h3>
+<p>Time to shift the course dates. We can shift a date by days, weeks or months. Let us shift the course start date by:</p>
+<ul>
+<li>2 days</li>
+<li>3 weeks</li>
+<li>1 year</li>
+</ul>
+<p><br></p>
+<p><img src="/img/shift_dates.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<pre class="r"><code>course_start + days(2)
+## [1] &quot;2017-04-14&quot;
+course_start + weeks(3)
+## [1] &quot;2017-05-03&quot;
+course_start + years(1)
+## [1] &quot;2018-04-12&quot;</code></pre>
+</div>
+<div id="case-study" class="section level3">
+<h3>Case Study</h3>
+<div id="compute-days-to-settle-invoice" class="section level4">
+<h4>Compute days to settle invoice</h4>
+<p>Let us estimate the number of days to settle the invoice by subtracting the
+date of invoice from the date of payment.</p>
+<pre class="r"><code>transact %&gt;%
+  mutate(
+    days_to_pay = Payment - Invoice
+  )</code></pre>
+<pre><code>## # A tibble: 2,466 x 4
+##    Invoice    Due        Payment    days_to_pay
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;drtn&gt;     
+##  1 2013-01-02 2013-02-01 2013-01-15 13 days    
+##  2 2013-01-26 2013-02-25 2013-03-03 36 days    
+##  3 2013-07-03 2013-08-02 2013-07-08  5 days    
+##  4 2013-02-10 2013-03-12 2013-03-17 35 days    
+##  5 2012-10-25 2012-11-24 2012-11-28 34 days    
+##  6 2012-01-27 2012-02-26 2012-02-22 26 days    
+##  7 2013-08-13 2013-09-12 2013-09-09 27 days    
+##  8 2012-12-16 2013-01-15 2013-01-12 27 days    
+##  9 2012-05-14 2012-06-13 2012-07-01 48 days    
+## 10 2013-07-01 2013-07-31 2013-07-26 25 days    
+## # ... with 2,456 more rows</code></pre>
+</div>
+<div id="compute-days-over-due" class="section level4">
+<h4>Compute days over due</h4>
+<p>How many of the invoices were settled post the due date? We can find this by:</p>
+<ul>
+<li>subtracting the due date from the payment date</li>
+<li>counting the number of rows where delay &gt; 0</li>
+</ul>
+<pre class="r"><code>transact %&gt;%
+  mutate(
+    delay = Payment - Due
+  ) %&gt;%
+  filter(delay &gt; 0) %&gt;% 
+  count(delay)</code></pre>
+<pre><code>## # A tibble: 36 x 2
+##    delay       n
+##  * &lt;drtn&gt;  &lt;int&gt;
+##  1  1 days    61
+##  2  2 days    65
+##  3  3 days    51
+##  4  4 days    62
+##  5  5 days    69
+##  6  6 days    56
+##  7  7 days    55
+##  8  8 days    49
+##  9  9 days    38
+## 10 10 days    33
+## # ... with 26 more rows</code></pre>
+</div>
+</div>
+<div id="your-turn" class="section level3">
+<h3>Your Turn</h3>
+<ul>
+<li>compute the length of a vacation which begins on <code>2020-04-19</code> and ends on <code>2020-04-25</code></li>
+<li>recompute the length of the vacation after shifting the vacation start and end date by <code>10</code> days and <code>2</code> weeks</li>
+<li>compute the days to settle invoice and days overdue from the <code>receivables.csv</code> data set</li>
+<li>compute the length of employment (only for those employees who have been terminated) from the <code>hr-data.csv</code> data set (use date of hire and termination)</li>
+</ul>
+<p>*As the reader of this blog, you are our most important critic and commentator.
+We value your opinion and want to know what we are doing right, what we could
+do better, what areas you would like to see us publish in, and any other words
+of wisdom you are willing to pass our way.</p>
+<p>We welcome your comments. You can email to let us know what you did or did not
+like about our blog as well as what we can do to make our post better.*</p>
+<p><strong>Email: <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a></strong></p>
+</div>
+</div>
