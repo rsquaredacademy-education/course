@@ -1,5 +1,5 @@
 ---
-title: "A Comprehensive Introduction to Handling Date & Time in R"
+title: "Date & Time in R - Date & Time Classes"
 author: Aravind Hebbali
 twitterImg: /img/handling-date-and-time-in-r.png
 description: "Learn to handle date & time in R"
@@ -180,7 +180,7 @@ learn to create POSIX objects, let us look at <code>now()</code> from lubridate.
 <p><code>now()</code> returns current date/time as a POSIXct object. Let us look at its
 internal representation using <code>unclass()</code></p>
 <pre class="r"><code>unclass(lubridate::now())</code></pre>
-<pre><code>## [1] 1591266821
+<pre><code>## [1] 1591267927
 ## attr(,&quot;tzone&quot;)
 ## [1] &quot;&quot;</code></pre>
 <p>The output you see is the number of seconds since January 1, 1970.</p>

@@ -1,5 +1,5 @@
 ---
-title: "A Comprehensive Introduction to Handling Date & Time in R"
+title: "Date & Time in R - Round & Rollback"
 author: Aravind Hebbali
 twitterImg: /img/handling-date-and-time-in-r.png
 description: "Learn to handle date & time in R"

@@ -1,5 +1,5 @@
 ---
-title: "A Comprehensive Introduction to Handling Date & Time in R"
+title: "Date & Time in R - Introduction"
 author: Aravind Hebbali
 twitterImg: /img/handling-date-and-time-in-r.png
 description: "Learn to handle date & time in R"
@@ -73,11 +73,11 @@ concepts we learn. Happy learning!</p>
 <h3>Time</h3>
 <p><code>Sys.time()</code> and <code>now()</code> return the date, time and the timezone. In <code>now()</code>, we can specify the timezone using the <code>tzone</code> argument.</p>
 <pre class="r"><code>Sys.time()</code></pre>
-<pre><code>## [1] &quot;2020-06-04 16:02:29 IST&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-04 16:21:40 IST&quot;</code></pre>
 <pre class="r"><code>lubridate::now()</code></pre>
-<pre><code>## [1] &quot;2020-06-04 16:02:29 IST&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-04 16:21:40 IST&quot;</code></pre>
 <pre class="r"><code>lubridate::now(tzone = &quot;UTC&quot;)</code></pre>
-<pre><code>## [1] &quot;2020-06-04 10:32:29 UTC&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-04 10:51:40 UTC&quot;</code></pre>
 </div>
 <div id="am-or-pm" class="section level3">
 <h3>AM or PM?</h3>
