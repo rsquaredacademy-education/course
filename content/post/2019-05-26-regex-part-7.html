@@ -1,0 +1,108 @@
+---
+title: "Regular Expressions - Character Classes"
+author: Aravind Hebbali
+twitterImg: /img/regex_cover_image.png
+description: "Beginners guide to regular expressions in R"
+date: '2019-05-26'
+slug: regular-expression-character-classes
+categories:
+  - regex
+tags:
+  - regex
+---
+
+
+
+<p><img src="/img/regex_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>library(dplyr)
+library(readr)</code></pre>
+<pre><code>##  [1] &quot;devtools&quot;   &quot;rlang&quot;      &quot;dplyr&quot;      &quot;Rcpp&quot;       &quot;tibble&quot;    
+##  [6] &quot;ggplot2&quot;    &quot;glue&quot;       &quot;pillar&quot;     &quot;cli&quot;        &quot;data.table&quot;</code></pre>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this post, we will learn about using regular expressions in R. While it is
+aimed at absolute beginners, we hope experienced users will find it useful as
+well. The post is broadly divided into 3 sections. In the first section, we
+will introduce the pattern matching functions such as <code>grep</code>, <code>grepl</code> etc. in
+base R as we will be using them in the rest of the post. Once the reader is
+comfortable with the above mentioned pattern matching functions, we will
+learn about regular expressions while exploring the names of R packages by
+probing the following:</p>
+<ul>
+<li>how many package names include the letter <code>r</code>?</li>
+<li>how many package names begin or end with the letter <code>r</code>?</li>
+<li>how many package names include the words <code>data</code> or <code>plot</code>?</li>
+</ul>
+<p>In the final section, we will go through 4 case studies including simple email
+validation. If you plan to try the case studies, please do not skip any of the
+topics in the second section.</p>
+</div>
+<div id="character-classes" class="section level2">
+<h2>Character Classes</h2>
+<p><img src="/img/regex_character_classes.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>A set of characters enclosed in a square bracket (<code>[]</code>). The regular expression
+will match only those characters enclosed in the brackets and it matches only a
+single character. The order of the characters inside the brackets do not matter
+and a hyphen can be used to specify a range of charcters. For example, [0-9]
+will match a single digit between 0 and 9. Similarly, [a-z] will match a single
+letter between a to z. You can specify more than one range as well. [a-z0-9A-Z]
+will match a alphanumeric character while ignoring the case. A caret <strong>^</strong> after
+the opening bracket negates the character class. For example, [^0-9] will match
+a single character that is not a digit.</p>
+<p><img src="/img/regex_character_class_numbers.png" width="100%" style="display: block; margin: auto;" />
+Let us go through a few examples to understand character classes in more detail.</p>
+<pre class="r"><code># package names that include vowels
+grep(x = top_downloads, pattern = &quot;[aeiou]&quot;, value = TRUE)</code></pre>
+<pre><code>## [1] &quot;devtools&quot;   &quot;rlang&quot;      &quot;tibble&quot;     &quot;ggplot2&quot;    &quot;glue&quot;      
+## [6] &quot;pillar&quot;     &quot;cli&quot;        &quot;data.table&quot;</code></pre>
+<pre class="r"><code># package names that include a number
+grep(x = r_packages, pattern = &quot;[0-9]&quot;, value = TRUE)[1:50]</code></pre>
+<pre><code>##  [1] &quot;A3&quot;              &quot;ABCp2&quot;           &quot;abf2&quot;            &quot;Ac3net&quot;         
+##  [5] &quot;acm4r&quot;           &quot;ade4&quot;            &quot;ade4TkGUI&quot;       &quot;AdvDif4&quot;        
+##  [9] &quot;ALA4R&quot;           &quot;alphashape3d&quot;    &quot;alr3&quot;            &quot;alr4&quot;           
+## [13] &quot;ANN2&quot;            &quot;aods3&quot;           &quot;aplore3&quot;         &quot;APML0&quot;          
+## [17] &quot;aprean3&quot;         &quot;AR1seg&quot;          &quot;arena2r&quot;         &quot;arf3DS4&quot;        
+## [21] &quot;argon2&quot;          &quot;ARTP2&quot;           &quot;aster2&quot;          &quot;auth0&quot;          
+## [25] &quot;aws.ec2metadata&quot; &quot;aws.s3&quot;          &quot;B2Z&quot;             &quot;b6e6rl&quot;         
+## [29] &quot;base2grob&quot;       &quot;base64&quot;          &quot;base64enc&quot;       &quot;base64url&quot;      
+## [33] &quot;BaTFLED3D&quot;       &quot;BayClone2&quot;       &quot;BayesS5&quot;         &quot;bc3net&quot;         
+## [37] &quot;BCC1997&quot;         &quot;BDP2&quot;            &quot;BEQI2&quot;           &quot;BHH2&quot;           
+## [41] &quot;bikeshare14&quot;     &quot;bio3d&quot;           &quot;biomod2&quot;         &quot;Bios2cor&quot;       
+## [45] &quot;bios2mds&quot;        &quot;biostat3&quot;        &quot;bipartiteD3&quot;     &quot;bit64&quot;          
+## [49] &quot;Bolstad2&quot;        &quot;BradleyTerry2&quot;</code></pre>
+<pre class="r"><code># package names that begin with a number
+grep(x = r_packages, pattern = &quot;^[0-9]&quot;, value = TRUE)</code></pre>
+<pre><code>## character(0)</code></pre>
+<pre class="r"><code># package names that end with a number
+grep(x = r_packages, pattern = &quot;[0-9]$&quot;, value = TRUE)[1:50]</code></pre>
+<pre><code>##  [1] &quot;A3&quot;                &quot;ABCp2&quot;             &quot;abf2&quot;             
+##  [4] &quot;ade4&quot;              &quot;AdvDif4&quot;           &quot;alr3&quot;             
+##  [7] &quot;alr4&quot;              &quot;ANN2&quot;              &quot;aods3&quot;            
+## [10] &quot;aplore3&quot;           &quot;APML0&quot;             &quot;aprean3&quot;          
+## [13] &quot;arf3DS4&quot;           &quot;argon2&quot;            &quot;ARTP2&quot;            
+## [16] &quot;aster2&quot;            &quot;auth0&quot;             &quot;aws.s3&quot;           
+## [19] &quot;base64&quot;            &quot;BayClone2&quot;         &quot;BayesS5&quot;          
+## [22] &quot;BCC1997&quot;           &quot;BDP2&quot;              &quot;BEQI2&quot;            
+## [25] &quot;BHH2&quot;              &quot;bikeshare14&quot;       &quot;biomod2&quot;          
+## [28] &quot;biostat3&quot;          &quot;bipartiteD3&quot;       &quot;bit64&quot;            
+## [31] &quot;Bolstad2&quot;          &quot;BradleyTerry2&quot;     &quot;brglm2&quot;           
+## [34] &quot;bridger2&quot;          &quot;c060&quot;              &quot;c212&quot;             
+## [37] &quot;c3&quot;                &quot;C443&quot;              &quot;C50&quot;              
+## [40] &quot;cAIC4&quot;             &quot;CARE1&quot;             &quot;CB2&quot;              
+## [43] &quot;cec2013&quot;           &quot;Census2016&quot;        &quot;Chaos01&quot;          
+## [46] &quot;choroplethrAdmin1&quot; &quot;cld2&quot;              &quot;cld3&quot;             
+## [49] &quot;clogitL1&quot;          &quot;CLONETv2&quot;</code></pre>
+<pre class="r"><code># package names with only upper case letters
+grep(x = r_packages, pattern = &quot;^[A-Z][A-Z]{1, }[A-Z]$&quot;, value = TRUE)[1:50]</code></pre>
+<pre><code>##  [1] &quot;ABPS&quot;    &quot;ACA&quot;     &quot;ACCLMA&quot;  &quot;ACD&quot;     &quot;ACNE&quot;    &quot;ACSWR&quot;   &quot;ACTCD&quot;  
+##  [8] &quot;ADCT&quot;    &quot;ADDT&quot;    &quot;ADMM&quot;    &quot;ADPF&quot;    &quot;AER&quot;     &quot;AFM&quot;     &quot;AGD&quot;    
+## [15] &quot;AHR&quot;     &quot;AID&quot;     &quot;AIG&quot;     &quot;AIM&quot;     &quot;ALS&quot;     &quot;ALSCPC&quot;  &quot;ALSM&quot;   
+## [22] &quot;AMCP&quot;    &quot;AMGET&quot;   &quot;AMIAS&quot;   &quot;AMOEBA&quot;  &quot;AMORE&quot;   &quot;AMR&quot;     &quot;ANOM&quot;   
+## [29] &quot;APSIM&quot;   &quot;ARHT&quot;    &quot;AROC&quot;    &quot;ART&quot;     &quot;ARTIVA&quot;  &quot;ARTP&quot;    &quot;ASIP&quot;   
+## [36] &quot;ASSA&quot;    &quot;AST&quot;     &quot;ATE&quot;     &quot;ATR&quot;     &quot;AUC&quot;     &quot;AUCRF&quot;   &quot;AWR&quot;    
+## [43] &quot;BACA&quot;    &quot;BACCO&quot;   &quot;BACCT&quot;   &quot;BALCONY&quot; &quot;BALD&quot;    &quot;BALLI&quot;   &quot;BAMBI&quot;  
+## [50] &quot;BANOVA&quot;</code></pre>
+<p>If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
+or reach out to us at <a href="mailto:feedback@rsquaredacademy.com" class="email">feedback@rsquaredacademy.com</a>.</p>
+</div>

@@ -1,0 +1,93 @@
+---
+title: "Regular Expressions - Metacharacters"
+author: Aravind Hebbali
+twitterImg: /img/regex_cover_image.png
+description: "Beginners guide to regular expressions in R"
+date: '2019-05-23'
+slug: regular-expression-metacharacters
+categories:
+  - regex
+tags:
+  - regex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r regex_cover_image, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/regex_cover_image.png")
+```
+
+```{r install, eval=TRUE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(readr)
+```
+
+
+## Introduction
+
+In this post, we will learn about using regular expressions in R. While it is 
+aimed at absolute beginners, we hope experienced users will find it useful as 
+well. The post is broadly divided into 3 sections. In the first section, we 
+will introduce the pattern matching functions such as `grep`, `grepl` etc. in 
+base R as we will be using them in the rest of the post. Once the reader is 
+comfortable with the above mentioned pattern matching functions, we will 
+learn about regular expressions while exploring the names of R packages by 
+probing the following:
+
+- how many package names include the letter `r`?
+- how many package names begin or end with the letter `r`?
+- how many package names include the words `data` or `plot`?
+
+In the final section, we will go through 4 case studies including simple email
+validation. If you plan to try the case studies, please do not skip any of the
+topics in the second section. 
+
+## Meta Characters
+
+Meta characters are a special set of characters not captured by regular 
+expressions i.e. if these special characters are present in a string, regular
+expressions will not detect them. In order to be detected, they must be 
+prefixed by double backslash (\\). The below table displays the metacharacters:
+
+```{r meta_characters, echo=FALSE, fig.align="center", out.width="50%"}
+knitr::include_graphics("/img/regex_meta_characters.png")
+```
+
+Now that we know the meta characters, let us look at some examples. In the first
+example, we want to detect package names separated by a dot.
+
+```{r read_data, echo=FALSE, message=FALSE}
+read_csv("package_names.csv") %>%
+  pull(1) -> r_packages 
+```
+
+
+```{r meta_1}
+grep(x = r_packages, pattern = ".", value = TRUE)[1:60]
+```
+
+If you look at the output, it includes names of even those package names which
+are not separated by dot. Why is this happening? A dot is special character in 
+regular expressions. It is also known as wildcard character i.e. it is used to 
+match any character other than `\n` (new line). Now let us try to escape it 
+using the double backslash (`\\`).
+
+```{r meta_2}
+grep(x = r_packages, pattern = "\\.", value = TRUE)[1:50]
+```
+
+When we use `\\.`, it matches the dot. Feel free to play around with other
+special characters mentioned in the table but ensure that you use a different
+data set.
+
+<hr>
+
+<a href="https://apps.rsquaredacademy.com/" target="_blank"><img src="/img/ad_apps.png" width="100%" alt="apps ad" style="text-decoration: none;"></a>
+
+<hr>
+
+If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
+or reach out to us at feedback@rsquaredacademy.com.

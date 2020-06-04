@@ -1,0 +1,123 @@
+---
+title: "Databases & R - Explore RStudio Connections Pane"
+author: Aravind Hebbali
+twitterImg: /img/dbi_cover_image.png
+description: "Learn to connect, explore and query database from R"
+date: '2019-08-07'
+slug: rstudio-connections-pane
+categories:
+  - databases
+tags:
+  - dbi
+  - RStudio
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r rfm_cover_image, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/dbi_cover_image.png")
+```
+
+## Introduction
+
+In this tutorial, we will explore RStudio connections pane.
+
+## Resources
+
+Below are the links to all the resources related to this post:
+
+- <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a>
+
+You can try our **free online course** [**Working with Databases using R**](https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r) if you prefer to learn through self paced online courses.
+
+```{r dbi_youtube_demo, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "bPlGPmjPFeU")
+```
+
+If you do not have all the above packages installed, go ahead and install them. In the R script we are sharing with you, we have commented out the code for installing the packages. If you are using the RStudio Cloud project, we have already installed the packages in the project and you can just load them into the R session using `library()`. 
+
+As and when we come to the specific sections where we are using these packages, they will be reintroduced and we will look at their documentation and explore the functions we will use.
+
+## RStudio Connections Pane
+
+In this section, we will learn to connect and explore databases using RStudio connections pane. We will connect to a MySQL database hosted on AWS. For security reasons, the database will be deleted after this post has been published and you will not be able to reproduce the results from this section onwards. Now, in the below images we show how to add and explore a new connection. **The Connections Pane is available only in RStudio 1.1 and later.**
+
+#### Step 1: Click on New Connection 
+
+In the Connections Pane, click on the `New Connection` button.
+
+```{r dbi_connect_1, echo=FALSE, fig.align="center", out.width="60%"}
+knitr::include_graphics("/img/dbi_connection_edited_1.png")
+```
+
+#### Step 2: Connect to a Data Source
+
+Once you click on `New Connection`, RStudio will display the exisiting data sources. If you do not see the driver for the database you want to connect to, install the driver and check again. Visit https://db.rstudio.com/best-practices/drivers/ for more information about setting up ODBC drivers.
+
+```{r dbi_connect_2, echo=FALSE, fig.align="center", out.width="60%"}
+knitr::include_graphics("/img/dbi_connection_edited_2.png")
+```
+
+#### Step 3: Supply Database Connection Parameters
+
+If the database driver is already present, click on it to create a new 
+connection. Specify the database parameters in the text box as shown in the below image. Visit https://www.connectionstrings.com/ to learn how to specify the connection strings for different databases.
+
+```{r dbi_connect_3, echo=FALSE, fig.align="center", out.width="60%"}
+knitr::include_graphics("/img/dbi_connection_edited_3.png")
+```
+
+Once you specify the database parameters, the R code will be automatically updated by RStudio as shown below.
+
+```{r dbi_connect_4, echo=FALSE, fig.align="center", out.width="60%"}
+knitr::include_graphics("/img/dbi_connection_edited_4.png")
+```
+
+#### Step 4: Test Connection
+
+After specifying the database connection parameters, we can test if the connection works by clicking on `Test`.
+
+```{r dbi_connect_5, echo=FALSE, fig.align="center", out.width="60%"}
+knitr::include_graphics("/img/dbi_connection_edited_5.png")
+```
+
+If RStudio is able to connect to the database, it will show a success message as shown below.
+
+```{r dbi_connect_test_pass, echo=FALSE, fig.align="center", out.width="60%"}
+knitr::include_graphics("/img/dbi_connection_pane_5.png")
+```
+
+#### Step 5: Connect Options
+
+After testing the connection, you can choose to connect from 
+
+- the console 
+- R script
+- or a notebook. 
+
+You can copy the R code to the clipboard as well. Depending on where you intend to use the connection i.e. interactive session, R script or notebook, choose the appropriate option.
+
+```{r dbi_connect_6, echo=FALSE, fig.align="center", out.width="60%"}
+knitr::include_graphics("/img/dbi_connection_edited_6.png")
+```
+
+#### Step 6: Open New Connection
+
+Click on `OK` button to open a new connection to the database.
+
+```{r dbi_connect_7, echo=FALSE, fig.align="center", out.width="60%"}
+knitr::include_graphics("/img/dbi_connection_edited_7.png")
+```
+
+##### Step 7: Explore Database
+
+You can explore the database from the `Connections` tab. View the tables in the database, explore the fields in a table, open a SQL script to run queries or close the connection if you don't need it any longer.
+
+```{r dbi_connect_8, echo=FALSE, fig.align="center", out.width="50%"}
+knitr::include_graphics("/img/dbi_connection_edited_8.png")
+```
+

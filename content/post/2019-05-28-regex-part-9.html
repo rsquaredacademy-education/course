@@ -1,0 +1,96 @@
+---
+title: "Regular Expressions - Summary"
+author: Aravind Hebbali
+twitterImg: /img/regex_cover_image.png
+description: "Beginners guide to regular expressions in R"
+date: '2019-05-28'
+slug: regular-expression-summary
+categories:
+  - regex
+tags:
+  - regex
+---
+
+
+
+<p><img src="/img/regex_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>library(dplyr)
+library(readr)</code></pre>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this post, we will learn about using regular expressions in R. While it is
+aimed at absolute beginners, we hope experienced users will find it useful as
+well. The post is broadly divided into 3 sections. In the first section, we
+will introduce the pattern matching functions such as <code>grep</code>, <code>grepl</code> etc. in
+base R as we will be using them in the rest of the post. Once the reader is
+comfortable with the above mentioned pattern matching functions, we will
+learn about regular expressions while exploring the names of R packages by
+probing the following:</p>
+<ul>
+<li>how many package names include the letter <code>r</code>?</li>
+<li>how many package names begin or end with the letter <code>r</code>?</li>
+<li>how many package names include the words <code>data</code> or <code>plot</code>?</li>
+</ul>
+<p>In the final section, we will go through 4 case studies including simple email
+validation. If you plan to try the case studies, please do not skip any of the
+topics in the second section.</p>
+</div>
+<div id="rstudio-addin" class="section level2">
+<h2>RStudio Addin</h2>
+<p><a href="https://www.garrickadenbuie.com/" target="_blank">Garrick Aden-Buie</a>
+has created a wonderful RStudio addin, <a href="https://www.garrickadenbuie.com/project/regexplain/" target="_blank">RegExplain</a>
+and you will find it very useful while learning and building regular expressions.</p>
+</div>
+<div id="other-applications" class="section level2">
+<h2>Other Applications</h2>
+<ul>
+<li>R variable names</li>
+<li>R file names and extensions</li>
+<li>password validation</li>
+<li>camelcase</li>
+<li>currency format</li>
+<li>date of birth</li>
+<li>date validation</li>
+<li>decimal number</li>
+<li>full name / first name</li>
+<li>html tags</li>
+<li>https url</li>
+<li>phone number</li>
+<li>ip address</li>
+<li>month name</li>
+</ul>
+</div>
+<div id="what-we-have-not-covered" class="section level2">
+<h2>What we have not covered?</h2>
+<p>While we have covered a lot, the below topics have been left out:</p>
+<ul>
+<li>flags</li>
+<li>grouping and capturing</li>
+<li>back references</li>
+<li>look ahead and look behind</li>
+</ul>
+<p>You may want to explore them to up your regular expressions game.</p>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<ul>
+<li>a regular expression is a special text for identifying a pattern</li>
+<li>it can be used to search, replace, validate and extract strings matching a
+given pattern</li>
+<li>use cases include email and password validation, search and replace in text
+editors, html tags validation, web scraping etc.</li>
+</ul>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<ul>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf</a></li>
+<li><a href="https://stringr.tidyverse.org/articles/regular-expressions.html" class="uri">https://stringr.tidyverse.org/articles/regular-expressions.html</a></li>
+<li><a href="https://r4ds.had.co.nz/strings.html" class="uri">https://r4ds.had.co.nz/strings.html</a></li>
+<li><a href="https://github.com/rstudio/cheatsheets/blob/master/strings.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/master/strings.pdf</a></li>
+<li><a href="https://www.garrickadenbuie.com/project/regexplain/" class="uri">https://www.garrickadenbuie.com/project/regexplain/</a></li>
+</ul>
+<p>If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
+or reach out to us at <a href="mailto:feedback@rsquaredacademy.com" class="email">feedback@rsquaredacademy.com</a>.</p>
+</div>

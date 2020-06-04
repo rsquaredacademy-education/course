@@ -1,0 +1,84 @@
+---
+title: "Databases & R - Explore RStudio Connections Pane"
+author: Aravind Hebbali
+twitterImg: /img/dbi_cover_image.png
+description: "Learn to connect, explore and query database from R"
+date: '2019-08-07'
+slug: rstudio-connections-pane
+categories:
+  - databases
+tags:
+  - dbi
+  - RStudio
+---
+
+
+
+<p><img src="/img/dbi_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this tutorial, we will explore RStudio connections pane.</p>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this post:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a></li>
+</ul>
+<p>You can try our <strong>free online course</strong> <a href="https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r"><strong>Working with Databases using R</strong></a> if you prefer to learn through self paced online courses.</p>
+{{% youtube "bPlGPmjPFeU" %}}
+<p>If you do not have all the above packages installed, go ahead and install them. In the R script we are sharing with you, we have commented out the code for installing the packages. If you are using the RStudio Cloud project, we have already installed the packages in the project and you can just load them into the R session using <code>library()</code>.</p>
+<p>As and when we come to the specific sections where we are using these packages, they will be reintroduced and we will look at their documentation and explore the functions we will use.</p>
+</div>
+<div id="rstudio-connections-pane" class="section level2">
+<h2>RStudio Connections Pane</h2>
+<p>In this section, we will learn to connect and explore databases using RStudio connections pane. We will connect to a MySQL database hosted on AWS. For security reasons, the database will be deleted after this post has been published and you will not be able to reproduce the results from this section onwards. Now, in the below images we show how to add and explore a new connection. <strong>The Connections Pane is available only in RStudio 1.1 and later.</strong></p>
+<div id="step-1-click-on-new-connection" class="section level4">
+<h4>Step 1: Click on New Connection</h4>
+<p>In the Connections Pane, click on the <code>New Connection</code> button.</p>
+<p><img src="/img/dbi_connection_edited_1.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="step-2-connect-to-a-data-source" class="section level4">
+<h4>Step 2: Connect to a Data Source</h4>
+<p>Once you click on <code>New Connection</code>, RStudio will display the exisiting data sources. If you do not see the driver for the database you want to connect to, install the driver and check again. Visit <a href="https://db.rstudio.com/best-practices/drivers/" class="uri">https://db.rstudio.com/best-practices/drivers/</a> for more information about setting up ODBC drivers.</p>
+<p><img src="/img/dbi_connection_edited_2.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="step-3-supply-database-connection-parameters" class="section level4">
+<h4>Step 3: Supply Database Connection Parameters</h4>
+<p>If the database driver is already present, click on it to create a new
+connection. Specify the database parameters in the text box as shown in the below image. Visit <a href="https://www.connectionstrings.com/" class="uri">https://www.connectionstrings.com/</a> to learn how to specify the connection strings for different databases.</p>
+<p><img src="/img/dbi_connection_edited_3.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>Once you specify the database parameters, the R code will be automatically updated by RStudio as shown below.</p>
+<p><img src="/img/dbi_connection_edited_4.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="step-4-test-connection" class="section level4">
+<h4>Step 4: Test Connection</h4>
+<p>After specifying the database connection parameters, we can test if the connection works by clicking on <code>Test</code>.</p>
+<p><img src="/img/dbi_connection_edited_5.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>If RStudio is able to connect to the database, it will show a success message as shown below.</p>
+<p><img src="/img/dbi_connection_pane_5.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="step-5-connect-options" class="section level4">
+<h4>Step 5: Connect Options</h4>
+<p>After testing the connection, you can choose to connect from</p>
+<ul>
+<li>the console</li>
+<li>R script</li>
+<li>or a notebook.</li>
+</ul>
+<p>You can copy the R code to the clipboard as well. Depending on where you intend to use the connection i.e. interactive session, R script or notebook, choose the appropriate option.</p>
+<p><img src="/img/dbi_connection_edited_6.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="step-6-open-new-connection" class="section level4">
+<h4>Step 6: Open New Connection</h4>
+<p>Click on <code>OK</code> button to open a new connection to the database.</p>
+<p><img src="/img/dbi_connection_edited_7.png" width="60%" style="display: block; margin: auto;" /></p>
+<div id="step-7-explore-database" class="section level5">
+<h5>Step 7: Explore Database</h5>
+<p>You can explore the database from the <code>Connections</code> tab. View the tables in the database, explore the fields in a table, open a SQL script to run queries or close the connection if you don’t need it any longer.</p>
+<p><img src="/img/dbi_connection_edited_8.png" width="50%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>

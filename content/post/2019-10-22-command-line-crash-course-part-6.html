@@ -1,0 +1,467 @@
+---
+title: "Command Line - Data Transfer"
+author: Aravind Hebbali
+twitterImg: /img/cline_cover_image.png
+description: "Getting Started with the Command Line"
+date: '2019-10-22'
+slug: command-line-data-transfer
+categories:
+  - bash
+tags:
+  - bash
+  - shell
+  - terminal
+  - cli
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/bsTable/bootstrapTable.min.css" rel="stylesheet" />
+
+
+<p><img src="/img/cline_cover_image.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
+We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud Project</a> to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R &amp; RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on</p>
+<ul>
+<li>exploring R release names</li>
+<li>mapping shell commands to R functions</li>
+<li>RStudio Terminal</li>
+<li>executing shell commands from R using <code>system2()</code> or <code>processx::run()</code></li>
+<li>execute shell commands in RMarkdown</li>
+<li>execute R scripts in the shell</li>
+</ul>
+<p>If you want a deeper understanding of using command line for data science, we suggest you read <a href="https://www.datascienceatthecommandline.com/">Data Science at the Command Line</a>. <a href="https://software-carpentry.org/">Software Carpentry</a> too has a lesson on <a href="https://swcarpentry.github.io/shell-novice/">shell</a>. We have listed more references at the end of the tutorial for the benefit of the readers.</p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this post:</p>
+<ul>
+<li><a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/518720" target="_blank">RStudio Cloud</a></li>
+</ul>
+<p>You can try our <strong>free online course</strong> <a href="https://rsquared-academy.thinkific.com/courses/command-line-basics-for-r-users"><strong>Command Line Basics for R Users</strong></a> if you prefer to learn through self paced online courses or our <a href="https://bash-intro.rsquaredacademy.com"><strong>ebook</strong></a> if you like to read the tutorial in a book format.</p>
+</div>
+<div id="datatransfer" class="section level2">
+<h2>Data Transfer &amp; Network</h2>
+{{% youtube "06QPodqmAO0" %}}
+<p>In this section, we will explore commands that will allow us to download files
+from the internet.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Command
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>wget</code>
+</td>
+<td style="text-align:left;">
+Download files from the web
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>curl</code>
+</td>
+<td style="text-align:left;">
+Transfer data from or to a server
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>hostname</code>
+</td>
+<td style="text-align:left;">
+Name of the current host
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ping</code>
+</td>
+<td style="text-align:left;">
+Ping a remote host
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>nslookup</code>
+</td>
+<td style="text-align:left;">
+Name server details
+</td>
+</tr>
+</tbody>
+</table>
+<p>We have not executed the commands in this ebook as downloading multiple files from the internet will take a lot of time or result in errors but we have checked all the commands offline to ensure that they work.</p>
+<div id="wget" class="section level3">
+<h3>wget</h3>
+<p>The <code>wget</code> command will download contents of a URL and files from the internet.
+Using additional options, we can</p>
+<ul>
+<li>download contents/files to a file</li>
+<li>continue incomplete downloads</li>
+<li>download multiple files</li>
+<li>limit download speed and number of retries</li>
+</ul>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Command
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>wget url</code>
+</td>
+<td style="text-align:left;">
+Download contents of a url
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget -o file url</code>
+</td>
+<td style="text-align:left;">
+Download contents of url to a file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget -c</code>
+</td>
+<td style="text-align:left;">
+Continue an incomplete download
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget -P folder_name -i urls.txt</code>
+</td>
+<td style="text-align:left;">
+Download all urls stored in a text file to a specific directory
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget --limit-rate</code>
+</td>
+<td style="text-align:left;">
+Limit download speed
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget --tries</code>
+</td>
+<td style="text-align:left;">
+Limit number of retries
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget --quiet</code>
+</td>
+<td style="text-align:left;">
+Turn off output
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget --no-verbose</code>
+</td>
+<td style="text-align:left;">
+Print basic information
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget --progress-dot</code>
+</td>
+<td style="text-align:left;">
+Change progress bar type to dot
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget --timestamping</code>
+</td>
+<td style="text-align:left;">
+Check if the timestamp of the file has changed before downloading
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>wget --wait</code>
+</td>
+<td style="text-align:left;">
+Wait between retrievals
+</td>
+</tr>
+</tbody>
+</table>
+<div id="download-url" class="section level4">
+<h4>Download URL</h4>
+<p>Let us first use <code>wget</code> to download contents of a URL. Note, we are not downloading file as such but just the content of the URL. We will use the URL of the home page of <a href="https://www.r-project.org/">R</a> project.</p>
+<pre class="bash"><code>wget https://www.r-project.org/</code></pre>
+<p>If you look at the list of files, you can see a new file, <code>index.html</code> which we just downloaded using <code>wget</code>. Downloading contents this way will lead to confusion if we are dealing with multiple URLs. Let us learn to save the contents to a file (we can specify the name of the file which should help avoid confusion.)</p>
+</div>
+<div id="specify-filename" class="section level4">
+<h4>Specify Filename</h4>
+<p>In this example, we download contents from the same URL and in addition specify the name of the file in which the content must be saved. Here we save it in a new file, <code>rhomepage.html</code> using the <code>-o</code> option followed by the filename.</p>
+<pre class="bash"><code>wget -o rhomepage.html https://www.r-project.org/</code></pre>
+</div>
+<div id="download-file" class="section level4">
+<h4>Download File</h4>
+<p>How about downloading a file instead of a URL? In this example, we will download a logfile from the <a href="http://cran-logs.rstudio.com/">RStudio CRAN</a> mirror. It contains the details of R downloads and individual package downloads. If you are a package developer and would want to know the countries in which your packages are downloaded, you will find this useful. We will download the file for 29th September and save it as <code>sep_29.csv.gz</code>.</p>
+<pre class="bash"><code>wget -o sep_29.csv.gz http://cran-logs.rstudio.com/2019/2019-09-29.csv.gz</code></pre>
+</div>
+<div id="download-multiple-urls" class="section level4">
+<h4>Download Multiple URLs</h4>
+<p>How do we download multiple URLs? One way is to specify the URLs one after the other separated by a space or save all URLs in a file and read them one by one. In the below example, we have saved multiple URLs in the file <code>urls.txt</code>.</p>
+<pre class="bash"><code>cat urls.txt</code></pre>
+<pre><code>## http://cran-logs.rstudio.com/2019/2019-09-26.csv.gz
+## http://cran-logs.rstudio.com/2019/2019-09-27.csv.gz
+## http://cran-logs.rstudio.com/2019/2019-09-28.csv.gz</code></pre>
+<p>We will download all the above URLs and save them in a new folder <code>downloads</code>. The <code>-i</code> indicates that the URLs must be read from a file (local or external). The <code>-P</code> option allows us to specify the directory into which all the files will be downloaded.</p>
+<pre class="bash"><code>wget -P downloads -i urls.txt     </code></pre>
+</div>
+<div id="quiet" class="section level4">
+<h4>Quiet</h4>
+<p>The <code>--quiet</code> option will turn off <code>wget</code> output. It will not show any of the following details:</p>
+<ul>
+<li>name of the file being saved</li>
+<li>file size</li>
+<li>download speed</li>
+<li>eta etc.</li>
+</ul>
+<pre class="bash"><code>wget –-quiet http://cran-logs.rstudio.com/2019/2019-10-06.csv.gz</code></pre>
+</div>
+<div id="no-verbose" class="section level4">
+<h4>No Verbose</h4>
+<p>Using the <code>-nv</code> or <code>--no-verbose</code> option, we can turn off verbose without being completely quiet (as we did in the previous example). Any error messages and basic information will still be printed.</p>
+<pre class="bash"><code>wget –-no-verbose http://cran-logs.rstudio.com/2019/2019-10-13.csv.gz    </code></pre>
+</div>
+<div id="check-timestamp" class="section level4">
+<h4>Check Timestamp</h4>
+<p>Let us say we have already downloaded a file from a URL. The file is updated from time to time and we intend to keep the local copy updated as well. Using the <code>--timestamping</code> option, the local file will have timestamp matching the remote file; if the remote file is not newer (not updated), no download will occur i.e. if the timestamp of the remote file has not changed it will not be downloaded. This is very useful in case of large files where you do not want to download them unless they have been updated.</p>
+<pre class="bash"><code>wget –-timestamping http://cran-logs.rstudio.com/2019/2019-10-13.csv.gz</code></pre>
+</div>
+</div>
+<div id="curl" class="section level3">
+<h3>curl</h3>
+<p>The <code>curl</code> command will transfer data from or to a server. We will only look at
+downloading files from the internet.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Command
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>curl url</code>
+</td>
+<td style="text-align:left;">
+Download contents of a url
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>curl url -o file</code>
+</td>
+<td style="text-align:left;">
+Download contents of url to a file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>curl url &amp;gt; file</code>
+</td>
+<td style="text-align:left;">
+Download contents of url to a file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>curl -s</code>
+</td>
+<td style="text-align:left;">
+Download in silent or quiet mode
+</td>
+</tr>
+</tbody>
+</table>
+<div id="download-url-1" class="section level4">
+<h4>Download URL</h4>
+<p>Let us download the home page of the <a href="https://www.r-project.org/">R</a> project using <code>curl</code>.</p>
+<pre class="bash"><code>curl https://www.r-project.org/</code></pre>
+</div>
+<div id="specify-file" class="section level4">
+<h4>Specify File</h4>
+<p>Let us download another log file from the <a href="http://cran-logs.rstudio.com/">RStudio CRAN</a> mirror and save it into a file using the <code>-o</code> option.</p>
+<pre class="bash"><code>curl http://cran-logs.rstudio.com/2019/2019-09-08.csv.gz -o sept_08.csv.gz </code></pre>
+<p>Another way to save a downloaded file is to use <code>&gt;</code> followed by the name of the file as shown in the below example.</p>
+<pre class="bash"><code>curl http://cran-logs.rstudio.com/2019/2019-09-01.csv.gz &gt; sep_01.csv.gz</code></pre>
+</div>
+<div id="download-silently" class="section level4">
+<h4>Download Silently</h4>
+<p>The <code>-s</code> option will allow you to download files silently. It will mute <code>curl</code> and will not display progress meter or error messages.</p>
+<pre class="bash"><code>curl http://cran-logs.rstudio.com/2019/2019-09-01.csv.gz -o sept_01.csv.gz -s</code></pre>
+</div>
+</div>
+<div id="r-functions" class="section level3">
+<h3>R Functions</h3>
+<p>In R, we can use <code>download.file()</code> to download files from the internet. The following packages offer functionalities that you will find useful.</p>
+<ul>
+<li><a href="https://cran.r-project.org/package=curl">curl</a></li>
+<li><a href="https://cran.r-project.org/package=R.utils">R.utils</a></li>
+<li><a href="https://cran.r-project.org/package=pingr">pingr</a></li>
+</ul>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Command
+</th>
+<th style="text-align:left;">
+R
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>wget</code>
+</td>
+<td style="text-align:left;">
+<code>download.file()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>curl</code>
+</td>
+<td style="text-align:left;">
+<code>curl::curl_download()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>hostname</code>
+</td>
+<td style="text-align:left;">
+<code>R.utils::getHostname.System()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>ping</code>
+</td>
+<td style="text-align:left;">
+<code>pingr::ping()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>nslookup</code>
+</td>
+<td style="text-align:left;">
+<code>curl::nslookup()</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="sudo" class="section level2">
+<h2>sudo</h2>
+<p>sudo <strong>S</strong>uper <strong>U</strong>ser <strong>DO</strong> is a prefix of commands that only superuser or root users are allowed to run. It is similar to <strong>run as administrator</strong> option in Windows. It is used to install, update and remove software. We will use it in the next section to install &amp; update packages. If you are using RStudio Cloud, you will not be able to run <strong>sudo</strong> (users do not have root privileges).</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Command
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>dpkg --list</code>
+</td>
+<td style="text-align:left;">
+List installed packages
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>sudo apt-get update</code>
+</td>
+<td style="text-align:left;">
+Update packages
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>sudo apt-get install</code>
+</td>
+<td style="text-align:left;">
+Install packages
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>sudo apt-get remove</code>
+</td>
+<td style="text-align:left;">
+Remove packages (retain configuration, plugins and settings
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>sudo apt-get purge</code>
+</td>
+<td style="text-align:left;">
+Remove packages including personalized settings
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>sudo apt-get autoremove</code>
+</td>
+<td style="text-align:left;">
+Remove any dependencies no longer in use
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="feedback" class="section level2">
+<h2>Feedback</h2>
+<p>If you see mistakes or want to suggest changes, please create an issue on the
+<a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
+repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
+<!-- clean up folder structure -->
+</div>

@@ -1,0 +1,178 @@
+---
+title: "Databases & R - Query Database using dplyr"
+author: Aravind Hebbali
+twitterImg: /img/dbi_cover_image.png
+description: "Learn to connect, explore and query database from R"
+date: '2019-08-04'
+slug: query-database-using-dplyr
+categories:
+  - databases
+tags:
+  - dbi
+  - dbplyr
+  - dplyr
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r rfm_cover_image, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("/img/dbi_cover_image.png")
+```
+
+## Introduction
+
+In this tutorial, we will learn to query data from a database using dplyr.
+
+## Resources
+
+Below are the links to all the resources related to this post:
+
+- <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a>
+
+You can try our **free online course** [**Working with Databases using R**](https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r) if you prefer to learn through self paced online courses.
+
+```{r dbi_youtube_demo, eval=TRUE, echo=FALSE}
+blogdown::shortcode("youtube", "bPlGPmjPFeU")
+```
+
+## Libraries
+
+Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this post. 
+
+- [DBI](http://r-dbi.github.io/DBI/) a database interface for R 
+- [dbplyr](https://dbplyr.tidyverse.org/) a dplyr backend for databases
+- [dplyr](https://dplyr.tidyverse.org/) for querying data
+
+```{r load_libs, message=FALSE, warning=FALSE}
+# install.packages(c("DBI", "dbplyr", "dplyr", "dbplot", "ggplot2", "modeldb",
+# "tidypredict", "config"))
+library(DBI)
+library(dbplyr)
+library(dplyr)
+```
+
+If you do not have all the above packages installed, go ahead and install them. In the R script we are sharing with you, we have commented out the code for installing the packages. If you are using the RStudio Cloud project, we have already installed the packages in the project and you can just load them into the R session using `library()`. 
+
+As and when we come to the specific sections where we are using these packages, they will be reintroduced and we will look at their documentation and explore the functions we will use.
+
+## Data Transformation
+
+In this section, we will learn to query data from a database using dplyr. We will learn to:
+
+- reference data
+- query data using dplyr 
+- display query
+- collect data
+- simulate
+
+#### Reference Data
+
+The first step is to reference the table in the database using `tbl()`. Since we want to use the `ecom` table from the database, we reference it as `ecom2` using `tbl()`. 
+
+```{r dbi_connect, include=FALSE}
+con <- DBI::dbConnect(RSQLite::SQLite(), dbname = "mydatabase.db")
+con
+```
+
+```{r dbply3}
+ecom2 <- dplyr::tbl(con, "ecom")
+ecom2
+```
+
+If you look at the output, `ecom2` displays a tibble but in the second line it also shows the database information as well. Let us now move on and calculate the average time on site by device type. 
+
+#### Query Data
+
+Let us compute the average time on site for different referrer groups when the visitor browses the site using a laptop. Now, instead of using SQL statement to extract the above information, we will use dplyr. This is especially useful if the user is not well versed in SQL. While dplyr can be used to query data, it is still advisable to learn the basics of SQL.
+
+```{r dbply4}
+ecom2 %>% 
+  dplyr::select(referrer, device, duration) %>% 
+  dplyr::filter(device == "laptop") %>% 
+  dplyr::group_by(referrer) %>% 
+  dplyr::summarise(avg_tos = mean(duration)) %>% 
+  dplyr::arrange(avg_tos)
+```
+
+#### Display Query
+
+If you want to view the SQL translation of the dplyr code used in the previous example, use `show_query()`.
+
+```{r dbply7}
+tos_query <- 
+  ecom2 %>% 
+  dplyr::select(referrer, device, duration) %>% 
+  dplyr::filter(device == "laptop") %>% 
+  dplyr::group_by(referrer) %>% 
+  dplyr::summarise(avg_tos = mean(duration)) %>% 
+  dplyr::arrange(avg_tos)
+
+dplyr::show_query(tos_query)
+```
+
+#### Collect Data
+
+Now, some interesting facts. We will understand this using a different simple example. Let us read the `referrer` and `device` column from the `ecom` table in the database and store it in `result`.
+
+```{r dbply9}
+result <- 
+  ecom2 %>%
+  dplyr::select(referrer, device) 
+
+result
+```
+
+When we print `result`, it displays the first 10 rows. In addition it shows the database information at the beginning as well as `... with more rows` at the bottom of the table but it does not exactly say how many more rows are there.
+Let us use `nrow()` to find the total number of rows in `result`.
+
+```{r dbply9a}
+nrow(result)
+```
+
+No luck with `nrow()` either as it returns `NA` instead of the number of rows in `result`. Now, why does this happen? When working with databases, **dplyr** never pulls data into R unless you explicitly ask for it. In the previous example, it just displays the first 10 rows and has not read the entire table. The `ecom` table in the database has 1000 rows of data and ideally dplyr should have read all the rows of data. But it does not work like that and the reason is this statement at the beginning of the output: `Source:   lazy query [?? x 2]`. It does display the number of columns, `2`. In place of the number of columns there is `??`because it has not read the entire data from the `ecom` table. 
+
+What do we do if we need the entire data? In such cases, we can use `collect()` as shown in the below example. 
+
+```{r dbply9b}
+result %>% 
+  dplyr::collect() 
+```
+
+In the above output, dplyr has read the entire data from `ecom`. It show the number of rows and columns at the top and the number of rows not displayed (990) at the bottom. More importantly, it does not show any information about the database as the entire data from `ecom` has been read and is available in the R session. 
+
+```{r dbply9c}
+result %>% 
+  dplyr::collect() %>% 
+  nrow()
+```
+
+Even `nrow()` returns 1000 as the entire data has been read from the database. Unless and until required or explicitly asked for, the data is not pulled from the database. When you are playing around with or iterating or experimenting with R code, do not use `collect()`. Only when you have finalized the code for the information being extracted from the database, use `collect()` to read the complete output into the R session.
+
+
+#### Simulate
+
+`simulate_*()` functions from [dbplyr](https://dbplyr.tidyverse.org/) are useful for testing SQL generation. In the below example, we want to generate the SQL for computing average time on site by referrer type for a MySQL database connection. The SQL generated is rendered to a SQL string by `sql_render()`. You can test SQL generation for a wide variety of databases using dbplyr.
+
+```{r dbply_simulate}
+ecom2 %>% 
+  dplyr::group_by(referrer) %>% 
+  dplyr::summarise(avg_tos = mean(duration))  %>% 
+  dbplyr::sql_render(dbplyr::simulate_mysql())
+```
+
+### Your Turn
+
+- use `tbl()` to reference `trade` table as `trade2`
+- use dplyr verbs to compute average duration for `device` from the `trade` table
+- store the above query in a variable `tos_device` 
+- use `show_query()` to display the underlying SQL query of `tos_device`
+- use `collect()` to retrieve data from `tos_device`
+- use `explain()` to display the underlying computation logic of `tos_device`
+
+```{r dbi_disconnect, include=FALSE}
+DBI::dbDisconnect(con)
+```
