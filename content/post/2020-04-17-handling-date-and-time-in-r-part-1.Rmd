@@ -30,7 +30,7 @@ library(dplyr)
 knitr::include_graphics("/img/handling-date-and-time-in-r.png")
 ```
 
-In this tutorial, we will learn to handle date & time in R. We will start off by learning how
+In this new series [Handling Date & Time in R](https://tutorials.rsquaredacademy.com/date-time/index.html), we will learn to handle date & time in R. We will start off by learning how
 to **get current date & time** before moving on to understand **how R handles date/time internally**
 and the different classes such as `Date` & `POSIXct/lt`. We will spend some time 
 exploring **time zones, daylight savings and ISO 8001 standard** for representing date/time.
@@ -39,24 +39,8 @@ We will look at all the **weird formats in which date/time come in real world** 
 columns while reading external data into R**. We will learn to **extract and update different date/time 
 components** such as year, month, day, hour, minute etc., **create sequence of dates** in different ways 
 and explore intervals, durations and period. We will end the tutorial by learning how to **round/rollback 
-dates**. Throughout the tutorial, we will also **work through a case study** to better understand the 
+dates**. Throughout the series, we will also **work through a case study** to better understand the 
 concepts we learn. Happy learning!
-
-## Table of Contents
-
-- [Resources](#resources)
-- [Introduction](#intro)
-- [Case Study](#casestudy)
-- [Date & Time Classes](#classes)
-- [Date Arithmetic](#arithmetic)
-- [Timezones & Daylight Savings](#timezones)
-- [Date & Time Formats](#formats)
-- [Parse/Read Date & Time](#parse)
-- [Date & Time Components](#components)
-- [Create, Update & Verify](#createupdate)
-- [Intervals, Durations & Period](#intervals)
-- [Round & Rollback](#others)
-- [References](#references)
 
 ## Resources {#resources}
 

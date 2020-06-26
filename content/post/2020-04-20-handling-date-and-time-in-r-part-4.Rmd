@@ -30,6 +30,10 @@ library(dplyr)
 knitr::include_graphics("/img/handling-date-and-time-in-r.png")
 ```
 
+## Introduction
+
+This is the fourth tutorial in the series [Handling Date & Time in R](https://tutorials.rsquaredacademy.com/date-time/index.html). In this tutorial, we will learn about timezones and daylight savings.
+
 ## Resources {#resources}
 
 Below are the links to all the resources related to this tutorial:

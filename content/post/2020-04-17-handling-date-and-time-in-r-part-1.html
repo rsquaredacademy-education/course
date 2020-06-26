@@ -16,7 +16,7 @@ tags:
 
 
 <p><img src="/img/handling-date-and-time-in-r.png" width="80%" style="display: block; margin: auto;" /></p>
-<p>In this tutorial, we will learn to handle date &amp; time in R. We will start off by learning how
+<p>In this new series <a href="https://tutorials.rsquaredacademy.com/date-time/index.html">Handling Date &amp; Time in R</a>, we will learn to handle date &amp; time in R. We will start off by learning how
 to <strong>get current date &amp; time</strong> before moving on to understand <strong>how R handles date/time internally</strong>
 and the different classes such as <code>Date</code> &amp; <code>POSIXct/lt</code>. We will spend some time
 exploring <strong>time zones, daylight savings and ISO 8001 standard</strong> for representing date/time.
@@ -25,26 +25,8 @@ We will look at all the <strong>weird formats in which date/time come in real wo
 columns while reading external data into R</strong>. We will learn to <strong>extract and update different date/time
 components</strong> such as year, month, day, hour, minute etc., <strong>create sequence of dates</strong> in different ways
 and explore intervals, durations and period. We will end the tutorial by learning how to <strong>round/rollback
-dates</strong>. Throughout the tutorial, we will also <strong>work through a case study</strong> to better understand the
+dates</strong>. Throughout the series, we will also <strong>work through a case study</strong> to better understand the
 concepts we learn. Happy learning!</p>
-<div id="table-of-contents" class="section level2">
-<h2>Table of Contents</h2>
-<ul>
-<li><a href="#resources">Resources</a></li>
-<li><a href="#intro">Introduction</a></li>
-<li><a href="#casestudy">Case Study</a></li>
-<li><a href="#classes">Date &amp; Time Classes</a></li>
-<li><a href="#arithmetic">Date Arithmetic</a></li>
-<li><a href="#timezones">Timezones &amp; Daylight Savings</a></li>
-<li><a href="#formats">Date &amp; Time Formats</a></li>
-<li><a href="#parse">Parse/Read Date &amp; Time</a></li>
-<li><a href="#components">Date &amp; Time Components</a></li>
-<li><a href="#createupdate">Create, Update &amp; Verify</a></li>
-<li><a href="#intervals">Intervals, Durations &amp; Period</a></li>
-<li><a href="#others">Round &amp; Rollback</a></li>
-<li><a href="#references">References</a></li>
-</ul>
-</div>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
 <p>Below are the links to all the resources related to this tutorial:</p>
@@ -65,19 +47,19 @@ concepts we learn. Happy learning!</p>
 <h3>Date</h3>
 <p>Let us begin by looking at the current date and time. <code>Sys.Date()</code> and <code>today()</code> will return the current date.</p>
 <pre class="r"><code>Sys.Date()</code></pre>
-<pre><code>## [1] &quot;2020-06-04&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-26&quot;</code></pre>
 <pre class="r"><code>lubridate::today()</code></pre>
-<pre><code>## [1] &quot;2020-06-04&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-26&quot;</code></pre>
 </div>
 <div id="time" class="section level3">
 <h3>Time</h3>
 <p><code>Sys.time()</code> and <code>now()</code> return the date, time and the timezone. In <code>now()</code>, we can specify the timezone using the <code>tzone</code> argument.</p>
 <pre class="r"><code>Sys.time()</code></pre>
-<pre><code>## [1] &quot;2020-06-04 16:21:40 IST&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-26 16:03:45 IST&quot;</code></pre>
 <pre class="r"><code>lubridate::now()</code></pre>
-<pre><code>## [1] &quot;2020-06-04 16:21:40 IST&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-26 16:03:45 IST&quot;</code></pre>
 <pre class="r"><code>lubridate::now(tzone = &quot;UTC&quot;)</code></pre>
-<pre><code>## [1] &quot;2020-06-04 10:51:40 UTC&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-26 10:33:45 UTC&quot;</code></pre>
 </div>
 <div id="am-or-pm" class="section level3">
 <h3>AM or PM?</h3>
@@ -91,7 +73,7 @@ concepts we learn. Happy learning!</p>
 <h3>Leap Year</h3>
 <p>We can also check if the current year is a leap year using <code>leap_year()</code>.</p>
 <pre class="r"><code>Sys.Date()</code></pre>
-<pre><code>## [1] &quot;2020-06-04&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-26&quot;</code></pre>
 <pre class="r"><code>lubridate::leap_year(Sys.Date())</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>

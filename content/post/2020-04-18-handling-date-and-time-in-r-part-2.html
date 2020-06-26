@@ -16,6 +16,10 @@ tags:
 
 
 <p><img src="/img/handling-date-and-time-in-r.png" width="80%" style="display: block; margin: auto;" /></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This is the second tutorial in the series <a href="https://tutorials.rsquaredacademy.com/date-time/index.html">Handling Date &amp; Time in R</a>. In this tutorial, we will learn about date and time classes in R.</p>
+</div>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
 <p>Below are the links to all the resources related to this tutorial:</p>
@@ -78,16 +82,16 @@ date/time in R</p>
 <p>Let us explore each of the above classes one by one.</p>
 <div id="date" class="section level3">
 <h3>Date</h3>
-<div id="introduction" class="section level4">
+<div id="introduction-1" class="section level4">
 <h4>Introduction</h4>
 <p>The <code>Date</code> class represents calendar dates. Let us go back to <code>Sys.Date()</code>. If
 you check the class of <code>Sys.Date()</code>, it is <code>Date</code>. Internally, this date is a
 number i.e. an integer. The <code>unclass()</code> function will show how dates are stored
 internally.</p>
 <pre class="r"><code>Sys.Date()</code></pre>
-<pre><code>## [1] &quot;2020-06-04&quot;</code></pre>
+<pre><code>## [1] &quot;2020-06-26&quot;</code></pre>
 <pre class="r"><code>unclass(Sys.Date())</code></pre>
-<pre><code>## [1] 18417</code></pre>
+<pre><code>## [1] 18439</code></pre>
 <p>What does this integer represent? Why has R stored the date as an integer?
 In R, dates are represented as the number of days since <code>1970-01-01</code>. All the dates in R are
 internally stored in this way. Before we explore this concept further, let us
@@ -180,7 +184,7 @@ learn to create POSIX objects, let us look at <code>now()</code> from lubridate.
 <p><code>now()</code> returns current date/time as a POSIXct object. Let us look at its
 internal representation using <code>unclass()</code></p>
 <pre class="r"><code>unclass(lubridate::now())</code></pre>
-<pre><code>## [1] 1591267927
+<pre><code>## [1] 1593167657
 ## attr(,&quot;tzone&quot;)
 ## [1] &quot;&quot;</code></pre>
 <p>The output you see is the number of seconds since January 1, 1970.</p>
