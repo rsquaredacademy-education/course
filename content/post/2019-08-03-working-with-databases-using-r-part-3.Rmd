@@ -21,11 +21,11 @@ knitr::include_graphics("/img/dbi_cover_image.png")
 
 ## Introduction
 
-In this tutorial, we will learn to use RStudio SQL script & knitr SQL engine.
+This is the third tutorial in the series [R & Databases](https://tutorials.rsquaredacademy.com/databases/index.html). In this tutorial, we will learn to use RStudio SQL script & knitr SQL engine.
 
 ## Resources
 
-Below are the links to all the resources related to this post:
+Below are the links to all the resources related to this tutorial:
 
 - <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>

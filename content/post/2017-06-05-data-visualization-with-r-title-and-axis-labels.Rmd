@@ -14,7 +14,7 @@ tags:
 
 ### Introduction
 
-This is the second tutorial of the series **Data Visualization With R**. In the previous tutorial, we explored the `plot()` function and observed the different types of plots it generated. In this tutorial, we will learn how to add:
+This is the second tutorial of the series [Data Visualization With R](https://tutorials.rsquaredacademy.com/data-visualization/index.html). In the previous tutorial, we explored the `plot()` function and observed the different types of plots it generated. In this tutorial, we will learn how to add:
 
 - Title
 - Subtitle

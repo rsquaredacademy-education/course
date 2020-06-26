@@ -12,7 +12,7 @@ tags:
 
 ## Introduction
 
-In the previous [tutorial](https://blog.aravindhebbali.com/2017/12/25/data-wrangling-with-dplyr-part-2/), 
+In the previous [tutorial](https://learn.rsquaredacademy.com/2018/09/04/data-wrangling-with-dplyr-part-2/), 
 we learnt to combine tables using dplyr. In this tutorial, we will explore a set of 
 helper functions in order to:
 

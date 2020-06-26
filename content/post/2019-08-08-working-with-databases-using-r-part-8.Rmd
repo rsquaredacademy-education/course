@@ -21,11 +21,11 @@ knitr::include_graphics("/img/dbi_cover_image.png")
 
 ## Introduction
 
-In this tutorial, we will learn to handle database credentials.
+This is the last tutorial in the series [R & Databases](https://tutorials.rsquaredacademy.com/databases/index.html). In this tutorial, we will learn to handle database credentials.
 
 ## Resources
 
-Below are the links to all the resources related to this post:
+Below are the links to all the resources related to this tutorial:
 
 - <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
@@ -39,7 +39,7 @@ blogdown::shortcode("youtube", "bPlGPmjPFeU")
 
 ## Libraries
 
-Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this post. 
+Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this tutorial. 
 
 - [DBI](http://r-dbi.github.io/DBI/) a database interface for R 
 - [config](https://cran.r-project.org/package=config) for handling credentials
@@ -174,7 +174,7 @@ The [keyring](https://github.com/r-lib/keyring#readme) package provides platform
 
 [dbx](https://github.com/ankane/dbx) is another interesting package built on top
 of DBI for both research and production environments and we hope to explore it 
-in a separate post in the coming days. 
+in a separate tutorial in the coming days. 
 
 ## Summary
 

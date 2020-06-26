@@ -22,11 +22,11 @@ knitr::include_graphics("/img/dbi_cover_image.png")
 
 ## Introduction
 
-In this tutorial, we will explore RStudio connections pane.
+This is the seventh tutorial in the series [R & Databases](https://tutorials.rsquaredacademy.com/databases/index.html). In this tutorial, we will explore RStudio connections pane.
 
 ## Resources
 
-Below are the links to all the resources related to this post:
+Below are the links to all the resources related to this tutorial:
 
 - <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
@@ -44,7 +44,7 @@ As and when we come to the specific sections where we are using these packages, 
 
 ## RStudio Connections Pane
 
-In this section, we will learn to connect and explore databases using RStudio connections pane. We will connect to a MySQL database hosted on AWS. For security reasons, the database will be deleted after this post has been published and you will not be able to reproduce the results from this section onwards. Now, in the below images we show how to add and explore a new connection. **The Connections Pane is available only in RStudio 1.1 and later.**
+In this section, we will learn to connect and explore databases using RStudio connections pane. We will connect to a MySQL database hosted on AWS. For security reasons, the database will be deleted after this tutorial has been published and you will not be able to reproduce the results from this section onwards. Now, in the below images we show how to add and explore a new connection. **The Connections Pane is available only in RStudio 1.1 and later.**
 
 #### Step 1: Click on New Connection 
 

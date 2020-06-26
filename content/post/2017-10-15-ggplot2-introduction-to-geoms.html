@@ -16,8 +16,8 @@ tags:
 
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
-<p>This is the third tutorial in the series <strong>Elegant Data Visualization with
-ggplot2</strong>. In the previous tutorial, we learnt how to create plots using the
+<p>This is the third tutorial in the series <a href="https://tutorials.rsquaredacademy.com/data-visualization/index.html">Elegant Data Visualization with
+ggplot2</a>. In the previous tutorial, we learnt how to create plots using the
 <code>qplot()</code> function. In this tutorial, we will create some of the most routinely
 used plots to explore data using the <code>geom_*</code> functions.</p>
 <p><br></p>
@@ -118,6 +118,7 @@ line, which can be <code>lm</code> or <code>loess</code>. You also need to indic
 confidence interval must be displayed using the <code>se</code> argument.</p>
 <pre class="r"><code>ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_smooth(method = &#39;lm&#39;, se = TRUE)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2017-10-15-ggplot2-introduction-to-geoms_files/figure-html/geoms6-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </div>
@@ -126,6 +127,7 @@ confidence interval must be displayed using the <code>se</code> argument.</p>
 <p>Here we use the <code>'loess'</code> method to fit the regression line.</p>
 <pre class="r"><code>ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_smooth(method = &#39;loess&#39;, se = FALSE)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2017-10-15-ggplot2-introduction-to-geoms_files/figure-html/geoms7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </div>

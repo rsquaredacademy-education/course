@@ -15,7 +15,7 @@ tags:
 
 <hr>
 
-This is the 14th tutorial in the series **Elegant Data Visualization with ggplot2**. 
+This is the 14th tutorial in the series [Elegant Data Visualization with ggplot2](https://tutorials.rsquaredacademy.com/data-visualization/index.html). 
 In the previous tutorial, we learnt how to modify the legend of plots when 
 aesthetics are mapped to variables. In this tutorial, we will continue to explore 
 different ways to modify/customize the legend of plots.

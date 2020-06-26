@@ -21,7 +21,18 @@ knitr::include_graphics("/img/dbi_cover_image.png")
 
 ## Introduction
 
-In this tutorial, we will learn to connect to & explore a database.
+In a previous <a href="https://learn.rsquaredacademy.com/quick-guide-r-sqlite/" target="_blank">tutorial</a>, we had briefly looked at connecting to databases from R and using dplyr for querying data. In this new series, we will focus on the following:
+
+- connect to & explore database
+- read & write data
+- use RStudio SQL script & knitr SQL engine
+- query data using dplyr
+- visualize data with dbplot
+- modeling data with modeldb & tidypredict
+- explore RStudio connections pane
+- handling credentials
+
+In the first tutorial in the series [R & Databases](https://tutorials.rsquaredacademy.com/databases/index.html), we will learn to connect to & explore a database.
 
 ## Resources
 
@@ -56,7 +67,7 @@ As and when we come to the specific sections where we are using these packages, 
 
 ## Connect & Explore
 
-The first step is to successfully connect to a database. To begin with, we will keep things simple and connect to a local **SQLite** database, `mydatabase.db`. We will explore the database, list the tables present and the fields/columns in those tables. In the last section of this post, we will connect to a **MySQL** database hosted on AWS using RStudio connections tab and learn how to specify the host, port, username, password etc.
+The first step is to successfully connect to a database. To begin with, we will keep things simple and connect to a local **SQLite** database, `mydatabase.db`. We will explore the database, list the tables present and the fields/columns in those tables. In the last section of this tutorial, we will connect to a **MySQL** database hosted on AWS using RStudio connections tab and learn how to specify the host, port, username, password etc.
 
 #### Connect
 

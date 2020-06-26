@@ -14,8 +14,8 @@ tags:
 
 ### Introduction
 
-This is the ninth tutorial in the series **Elegant Data Visualization with 
-ggplot2**. In the previous tutorial, we learnt to build line charts. In this tutorial, 
+This is the ninth tutorial in the series [Elegant Data Visualization with 
+ggplot2](https://tutorials.rsquaredacademy.com/data-visualization/index.html). In the previous tutorial, we learnt to build line charts. In this tutorial, 
 we will learn to:
 
 - build 

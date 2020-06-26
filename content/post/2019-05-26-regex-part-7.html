@@ -20,22 +20,16 @@ library(readr)</code></pre>
 ##  [6] &quot;ggplot2&quot;    &quot;glue&quot;       &quot;pillar&quot;     &quot;cli&quot;        &quot;data.table&quot;</code></pre>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>In this post, we will learn about using regular expressions in R. While it is
-aimed at absolute beginners, we hope experienced users will find it useful as
-well. The post is broadly divided into 3 sections. In the first section, we
-will introduce the pattern matching functions such as <code>grep</code>, <code>grepl</code> etc. in
-base R as we will be using them in the rest of the post. Once the reader is
-comfortable with the above mentioned pattern matching functions, we will
-learn about regular expressions while exploring the names of R packages by
-probing the following:</p>
+<p>This is the seventh tutorial in the series <a href="https://tutorials.rsquaredacademy.com/regex/index.html">Demystifying Regular Expressions in R</a>. In this tutorial, we will learn about character classes.</p>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
 <ul>
-<li>how many package names include the letter <code>r</code>?</li>
-<li>how many package names begin or end with the letter <code>r</code>?</li>
-<li>how many package names include the words <code>data</code> or <code>plot</code>?</li>
+<li><a href="https://slides.rsquaredacademy.com/regex/regex.html" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/regular-expressions-in-r" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/356612" target="_blank">RStudio Cloud</a></li>
 </ul>
-<p>In the final section, we will go through 4 case studies including simple email
-validation. If you plan to try the case studies, please do not skip any of the
-topics in the second section.</p>
 </div>
 <div id="character-classes" class="section level2">
 <h2>Character Classes</h2>
@@ -102,6 +96,10 @@ grep(x = r_packages, pattern = &quot;^[A-Z][A-Z]{1, }[A-Z]$&quot;, value = TRUE)
 ## [36] &quot;ASSA&quot;    &quot;AST&quot;     &quot;ATE&quot;     &quot;ATR&quot;     &quot;AUC&quot;     &quot;AUCRF&quot;   &quot;AWR&quot;    
 ## [43] &quot;BACA&quot;    &quot;BACCO&quot;   &quot;BACCT&quot;   &quot;BALCONY&quot; &quot;BALD&quot;    &quot;BALLI&quot;   &quot;BAMBI&quot;  
 ## [50] &quot;BANOVA&quot;</code></pre>
+</div>
+<div id="up-next.." class="section level2">
+<h2>Up Next..</h2>
+<p>In the next tutorial, we will work through the case studies.</p>
 <p>If you see mistakes or want to suggest changes, please create an issue on the
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
 or reach out to us at <a href="mailto:feedback@rsquaredacademy.com" class="email">feedback@rsquaredacademy.com</a>.</p>

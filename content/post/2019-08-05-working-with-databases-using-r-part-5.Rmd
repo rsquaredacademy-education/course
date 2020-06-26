@@ -22,11 +22,11 @@ knitr::include_graphics("/img/dbi_cover_image.png")
 
 ## Introduction
 
-In this tutorial, we will learn to visualize data with dbplot.
+This is the fifth tutorial in the series [R & Databases](https://tutorials.rsquaredacademy.com/databases/index.html). In this tutorial, we will learn to visualize data with dbplot.
 
 ## Resources
 
-Below are the links to all the resources related to this post:
+Below are the links to all the resources related to this tutorial:
 
 - <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
@@ -40,7 +40,7 @@ blogdown::shortcode("youtube", "bPlGPmjPFeU")
 
 ## Libraries
 
-Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this post. 
+Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this tutorial. 
 
 - [DBI](http://r-dbi.github.io/DBI/) a database interface for R 
 - [dbplyr](https://dbplyr.tidyverse.org/) a dplyr backend for databases

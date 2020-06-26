@@ -21,11 +21,12 @@ knitr::include_graphics("/img/regex_cover_image.png")
 
 ## Introduction
 
-In this post, we will learn about using regular expressions in R. While it is 
+This is the first tutorial in the series [Demystifying Regular Expressions in R](https://tutorials.rsquaredacademy.com/regex/index.html).
+In this series, we will learn about using regular expressions in R. While it is 
 aimed at absolute beginners, we hope experienced users will find it useful as 
-well. The post is broadly divided into 3 sections. In the first section, we 
+well. The series is broadly divided into 3 sections. In the first section, we 
 will introduce the pattern matching functions such as `grep`, `grepl` etc. in 
-base R as we will be using them in the rest of the post. Once the reader is 
+base R as we will be using them in the rest of the tutorial. Once the reader is 
 comfortable with the above mentioned pattern matching functions, we will 
 learn about regular expressions while exploring the names of R packages by 
 probing the following:
@@ -85,21 +86,15 @@ The below steps offer advice on the best way to learn or use regular expressions
 
 ## Resources
 
-Below are the links to all the resources related to this post:
+Below are the links to all the resources related to this tutorial:
 
 - <a href="https://slides.rsquaredacademy.com/regex/regex.html" target="_blank">Slides</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/regular-expressions-in-r" target="_blank">Code & Data</a>
 - <a href="https://rstudio.cloud/project/356612" target="_blank">RStudio Cloud</a>
 
-<hr>
-
-<a href="https://www.rsquaredacademy.com/" target="_blank"><img src="/img/ad.png" width="100%" alt="course ad" style="text-decoration: none;"></a>
-
-<hr>
-
 ## Libraries
 
-We will use the following libraries in this post:
+We will use the following libraries in this tutorial:
 
 ```{r install, eval=TRUE, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -108,7 +103,7 @@ library(readr)
 
 ## Data
 
-We will use two data sets in this post. The first one is a list of all R 
+We will use two data sets in this tutorial. The first one is a list of all R 
 packages on CRAN and is present in the `package_names.csv` file, and the
 second one, `top_downloads`, is the most downloaded packages from the 
 <a href="https://cran.rstudio.com/" target="_blank">RStudio CRAN mirror</a> 
@@ -131,6 +126,11 @@ top_downloads <- c("devtools", "rlang", "dplyr", "Rcpp", "tibble",
 top_downloads
 ```
 
+## Up Next..
+
+In the next tutorial, we will explore pattern matching.
+
 If you see mistakes or want to suggest changes, please create an issue on the
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
 or reach out to us at feedback@rsquaredacademy.com.
+

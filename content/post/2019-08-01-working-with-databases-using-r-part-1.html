@@ -16,7 +16,18 @@ tags:
 <p><img src="/img/dbi_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>In this tutorial, we will learn to connect to &amp; explore a database.</p>
+<p>In a previous <a href="https://learn.rsquaredacademy.com/quick-guide-r-sqlite/" target="_blank">tutorial</a>, we had briefly looked at connecting to databases from R and using dplyr for querying data. In this new series, we will focus on the following:</p>
+<ul>
+<li>connect to &amp; explore database</li>
+<li>read &amp; write data</li>
+<li>use RStudio SQL script &amp; knitr SQL engine</li>
+<li>query data using dplyr</li>
+<li>visualize data with dbplot</li>
+<li>modeling data with modeldb &amp; tidypredict</li>
+<li>explore RStudio connections pane</li>
+<li>handling credentials</li>
+</ul>
+<p>In the first tutorial in the series <a href="https://tutorials.rsquaredacademy.com/databases/index.html">R &amp; Databases</a>, we will learn to connect to &amp; explore a database.</p>
 </div>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
@@ -44,7 +55,7 @@ library(DBI)</code></pre>
 </div>
 <div id="connect-explore" class="section level2">
 <h2>Connect &amp; Explore</h2>
-<p>The first step is to successfully connect to a database. To begin with, we will keep things simple and connect to a local <strong>SQLite</strong> database, <code>mydatabase.db</code>. We will explore the database, list the tables present and the fields/columns in those tables. In the last section of this post, we will connect to a <strong>MySQL</strong> database hosted on AWS using RStudio connections tab and learn how to specify the host, port, username, password etc.</p>
+<p>The first step is to successfully connect to a database. To begin with, we will keep things simple and connect to a local <strong>SQLite</strong> database, <code>mydatabase.db</code>. We will explore the database, list the tables present and the fields/columns in those tables. In the last section of this tutorial, we will connect to a <strong>MySQL</strong> database hosted on AWS using RStudio connections tab and learn how to specify the host, port, username, password etc.</p>
 <div id="connect" class="section level4">
 <h4>Connect</h4>
 <p>To connect to the database, we will use <code>dbConnect()</code> from the <a href="http://r-dbi.github.io/DBI/">DBI</a> package which defines a common interface between R and database management systems. The first input is the database driver which in our case is <code>SQLite</code> and the second input is the name and location of the database. Since we are connecting to a local database, it is sufficient to specify the name and location of the database. The database connection is saved in <code>con</code> for further use in exploring and querying data.</p>

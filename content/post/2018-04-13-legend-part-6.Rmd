@@ -16,7 +16,7 @@ tags:
 
 <hr>
 
-This is the 18th tutorial in the series **Elegant Data Visualization with ggplot2**. 
+This is the 18th tutorial in the series [Elegant Data Visualization with ggplot2](https://tutorials.rsquaredacademy.com/data-visualization/index.html). 
 In the previous tutorial, we learnt how to modify the legend of plot when `alpha` 
 is mapped to a categorical variable. In this tutorial, we will learn to modify legend
 

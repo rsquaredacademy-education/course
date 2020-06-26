@@ -13,8 +13,8 @@ tags:
 
 ### Introduction
 
-This is the 13th tutorial in the series **Elegant Data Visualization with 
-ggplot2**. In the previos tutorial, we learnt how to modify the axis of plots. In 
+This is the 13th tutorial in the series [Elegant Data Visualization with 
+ggplot2](https://tutorials.rsquaredacademy.com/data-visualization/index.html). In the previos tutorial, we learnt how to modify the axis of plots. In 
 this tutorial, we will focus on modifying the appearance of legend of plots when 
 the aesthetics are mapped to variables. Specifically, we will learn to modify 
 the following when `color` is mapped to categorical variables:

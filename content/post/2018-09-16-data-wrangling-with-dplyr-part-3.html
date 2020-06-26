@@ -14,7 +14,7 @@ tags:
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>In the previous <a href="https://blog.aravindhebbali.com/2017/12/25/data-wrangling-with-dplyr-part-2/">tutorial</a>,
+<p>In the previous <a href="https://learn.rsquaredacademy.com/2018/09/04/data-wrangling-with-dplyr-part-2/">tutorial</a>,
 we learnt to combine tables using dplyr. In this tutorial, we will explore a set of
 helper functions in order to:</p>
 <ul>
@@ -146,7 +146,7 @@ of traffic.</p>
   tally()</code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##   referrer     n
-##   &lt;fct&gt;    &lt;int&gt;
+## * &lt;fct&gt;    &lt;int&gt;
 ## 1 bing       194
 ## 2 direct     191
 ## 3 social     200
@@ -208,16 +208,16 @@ number of observations.</p>
 <pre><code>## # A tibble: 700 x 7
 ##    referrer device bouncers n_visit n_pages duration purchase
 ##    &lt;fct&gt;    &lt;fct&gt;  &lt;lgl&gt;      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;   
-##  1 yahoo    laptop FALSE          5       8      136 FALSE   
-##  2 google   mobile TRUE           6       1      208 FALSE   
-##  3 bing     tablet TRUE           0       1      697 FALSE   
-##  4 google   tablet FALSE          1       5       75 FALSE   
-##  5 yahoo    laptop FALSE         10      18      180 FALSE   
-##  6 direct   laptop FALSE          1      14      364 TRUE    
-##  7 yahoo    laptop FALSE          7       6      150 FALSE   
-##  8 direct   tablet TRUE           5       1      811 FALSE   
-##  9 social   mobile TRUE          10       1      432 FALSE   
-## 10 yahoo    mobile TRUE           9       1      871 FALSE   
+##  1 google   mobile FALSE          5      15      150 FALSE   
+##  2 google   tablet FALSE         10       8      200 FALSE   
+##  3 direct   laptop FALSE          1      19      399 TRUE    
+##  4 yahoo    tablet TRUE           2       1      652 FALSE   
+##  5 yahoo    mobile TRUE           3       1      151 FALSE   
+##  6 yahoo    mobile FALSE          0      13      351 TRUE    
+##  7 google   mobile FALSE          8       2       44 FALSE   
+##  8 social   mobile FALSE          9      19      304 TRUE    
+##  9 direct   laptop FALSE          4       5       65 FALSE   
+## 10 direct   laptop TRUE           2       1      212 FALSE   
 ## # ... with 690 more rows</code></pre>
 <p>We can combine the sampling functions with other dplyr functions as shown below
 where we sample observation after grouping them according to the source of
@@ -229,32 +229,32 @@ traffic.</p>
 ## # Groups:   referrer [5]
 ##    referrer device bouncers n_visit n_pages duration purchase
 ##    &lt;fct&gt;    &lt;fct&gt;  &lt;lgl&gt;      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;   
-##  1 bing     tablet FALSE          0      14      280 FALSE   
-##  2 bing     tablet FALSE          6      16      176 FALSE   
-##  3 bing     tablet FALSE          4      15      435 TRUE    
-##  4 bing     mobile FALSE          3      19      209 FALSE   
-##  5 bing     tablet FALSE          1      17      170 FALSE   
-##  6 bing     laptop TRUE           3       1      682 FALSE   
-##  7 bing     mobile TRUE           5       1      751 FALSE   
-##  8 bing     mobile TRUE           6       1      604 FALSE   
-##  9 bing     mobile TRUE           6       1      966 FALSE   
-## 10 bing     laptop FALSE         10      16      304 FALSE   
+##  1 bing     laptop TRUE           3       1      396 FALSE   
+##  2 bing     laptop FALSE          5      18      234 FALSE   
+##  3 bing     mobile TRUE          10       1       98 FALSE   
+##  4 bing     mobile FALSE          0       7      196 FALSE   
+##  5 bing     mobile FALSE          4       2       46 FALSE   
+##  6 bing     laptop TRUE           7       1      811 FALSE   
+##  7 bing     mobile TRUE           5       1      541 FALSE   
+##  8 bing     laptop FALSE          0       1       21 FALSE   
+##  9 bing     laptop TRUE           8       1      484 FALSE   
+## 10 bing     tablet TRUE           5       1      831 FALSE   
 ## # ... with 490 more rows</code></pre>
 <p><code>sample_frac()</code> allows a specific percentage of observations.</p>
 <pre class="r"><code>sample_frac(ecom, size = 0.7)</code></pre>
 <pre><code>## # A tibble: 700 x 7
 ##    referrer device bouncers n_visit n_pages duration purchase
 ##    &lt;fct&gt;    &lt;fct&gt;  &lt;lgl&gt;      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;   
-##  1 direct   tablet TRUE           6       1       54 FALSE   
-##  2 google   laptop TRUE           9       1      126 FALSE   
-##  3 bing     tablet TRUE           4       1      493 FALSE   
-##  4 yahoo    laptop TRUE           1       1      991 FALSE   
-##  5 social   tablet TRUE           4       1      392 FALSE   
-##  6 yahoo    mobile FALSE          6       1       21 FALSE   
-##  7 yahoo    mobile FALSE          5       8       80 FALSE   
-##  8 direct   mobile FALSE          9      14      406 TRUE    
-##  9 google   mobile TRUE           4       1      425 FALSE   
-## 10 google   laptop TRUE           6       1      369 FALSE   
+##  1 yahoo    tablet TRUE           0       1      800 FALSE   
+##  2 google   tablet FALSE          6      17      476 FALSE   
+##  3 social   tablet TRUE           2       1      795 FALSE   
+##  4 social   laptop FALSE          1      20      420 TRUE    
+##  5 direct   laptop TRUE           0       1       93 FALSE   
+##  6 direct   laptop FALSE          4       2       44 FALSE   
+##  7 direct   mobile FALSE          1      13      390 TRUE    
+##  8 direct   mobile FALSE         10       3       33 FALSE   
+##  9 direct   laptop TRUE           3       1      768 FALSE   
+## 10 yahoo    mobile FALSE          5       8       80 FALSE   
 ## # ... with 690 more rows</code></pre>
 </div>
 <div id="data-extraction" class="section level2">
@@ -272,17 +272,17 @@ using <code>head</code> in addition to limit the output printed.</p>
 <p><img src="/img/pull_1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><br></p>
 <pre class="r"><code>pull(ecom_mini, device)</code></pre>
-<pre><code>##  [1] mobile tablet laptop laptop laptop tablet laptop mobile laptop mobile
+<pre><code>##  [1] tablet tablet laptop mobile tablet tablet tablet laptop laptop mobile
 ## Levels: laptop tablet mobile</code></pre>
 <p>Let us extract the first column from <code>ecom</code> using column position instead of
 name.</p>
 <pre class="r"><code>pull(ecom_mini, 1) </code></pre>
-<pre><code>##  [1] yahoo  bing   direct google yahoo  google google google google direct
+<pre><code>##  [1] bing   direct bing   yahoo  direct direct bing   direct direct yahoo 
 ## Levels: bing direct social yahoo google</code></pre>
 <p>You can use <code>-</code> before the column position to indicate the position in reverse.
 The below example extracts data from the last column.</p>
 <pre class="r"><code>pull(ecom_mini, -1) </code></pre>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE</code></pre>
+<pre><code>##  [1]  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
 <p>Let us now look at extracting rows using <code>slice()</code>. In the below example, we
 extract data starting from the 5th row and upto the 15th row.</p>
 <p><br></p>
@@ -321,9 +321,9 @@ and 15.</p>
 ecom_sample %&gt;%
   pull(n_pages) %&gt;%
   between(5, 15) </code></pre>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE
-## [13]  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE
-## [25] FALSE FALSE  TRUE FALSE  TRUE  TRUE</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+## [13] FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE
+## [25]  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
 </div>
 <div id="case-when" class="section level2">
 <h2>Case When</h2>

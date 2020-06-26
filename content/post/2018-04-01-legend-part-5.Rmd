@@ -15,7 +15,7 @@ tags:
 
 <hr>
 
-This is the 17th tutorial in the series **Elegant Data Visualization with ggplot2**. 
+This is the 17th tutorial in the series [Elegant Data Visualization with ggplot2](https://tutorials.rsquaredacademy.com/data-visualization/index.html). 
 In the previous tutorial, we learnt how to modify the legend of plot when `size` is 
 mapped to continuous variable. In this tutorial, we will learn to modify the 
 following using `scale_alpha_continuous()` when `alpha` or transparency is 

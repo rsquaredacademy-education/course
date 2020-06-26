@@ -15,7 +15,7 @@ tags:
 
 <hr>
 
-This is the 19th tutorial in the series **Elegant Data Visualization with ggplot2**. 
+This is the 19th tutorial in the series [Elegant Data Visualization with ggplot2](https://tutorials.rsquaredacademy.com/data-visualization/index.html). 
 In the previous tutorial, we learnt to modify the title, label and bar of a legend. 
 In this tutorial, we will learn about faceting i.e. combining plots.
 

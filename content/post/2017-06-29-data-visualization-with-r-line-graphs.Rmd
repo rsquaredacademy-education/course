@@ -14,7 +14,7 @@ tags:
 
 ### Introduction
 
-This is the fourth tutorial in the series **Data Visualization With R**. In the previous tutorial, we learnt how to build scatter plots. In this tutorial, we will build line graphs. To be more specific we will learn to 
+This is the fourth tutorial in the series [Data Visualization With R](https://tutorials.rsquaredacademy.com/data-visualization/index.html). In the previous tutorial, we learnt how to build scatter plots. In this tutorial, we will build line graphs. To be more specific we will learn to 
 
 - create line plots
 - add color to lines

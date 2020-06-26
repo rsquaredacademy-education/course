@@ -15,7 +15,7 @@ tags:
 
 <hr>
 
-This is the last tutorial in the series **Elegant Data Visualization with ggplot2**. 
+This is the last tutorial in the series [Elegant Data Visualization with ggplot2](https://tutorials.rsquaredacademy.com/data-visualization/index.html). 
 In the previous tutorial, we learnt to combine multiple plots. In this tutorial, we 
 will learn to modify the appearance of all non data components of the plot such 
 as:

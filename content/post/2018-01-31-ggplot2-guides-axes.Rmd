@@ -13,8 +13,8 @@ tags:
 
 ### Introduction
 
-This is the twelfth tutorial in the series **Elegant Data Visualization with 
-ggplot2**. In the previous tutorial, we learnt to build histograms. Now that we 
+This is the twelfth tutorial in the series [Elegant Data Visualization with 
+ggplot2](https://tutorials.rsquaredacademy.com/data-visualization/index.html). In the previous tutorial, we learnt to build histograms. Now that we 
 have learnt to build different plots, let us look at different ways to modify 
 the axis. Along the way, we will also explore the `scale_*()` family of functions.
 

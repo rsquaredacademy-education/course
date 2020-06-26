@@ -16,11 +16,11 @@ tags:
 <p><img src="/img/dbi_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>In this tutorial, we will learn to read &amp; write data to a database from R.</p>
+<p>This is the second tutorial in the series <a href="https://tutorials.rsquaredacademy.com/databases/index.html">R &amp; Databases</a>. In this tutorial, we will learn to read &amp; write data to a database from R.</p>
 </div>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
-<p>Below are the links to all the resources related to this post:</p>
+<p>Below are the links to all the resources related to this tutorial:</p>
 <ul>
 <li><a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a></li>
 <li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
@@ -31,7 +31,7 @@ tags:
 </div>
 <div id="libraries" class="section level2">
 <h2>Libraries</h2>
-<p>Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this post.</p>
+<p>Before we connect to and explore the local SQLite database, let us take a look at the R packages we will use in this tutorial.</p>
 <ul>
 <li><a href="http://r-dbi.github.io/DBI/">DBI</a> a database interface for R</li>
 <li><a href="https://rsqlite.r-dbi.org/">RSQLite</a> driver for SQLite</li>
@@ -306,16 +306,16 @@ DBI::dbWriteTable(con, &quot;trial_db&quot;, trial2_data, overwrite = TRUE)</cod
 <p>Let us query sone data from <code>trial_db</code> table to ensure that it has been overwritten.</p>
 <pre class="r"><code>DBI::dbGetQuery(con, &quot;select * from trial_db&quot;)</code></pre>
 <pre><code>##     x y
-## 1  28 k
-## 2  66 l
-## 3  83 m
-## 4  39 n
-## 5  16 o
-## 6  15 p
-## 7  43 q
-## 8  44 r
-## 9  62 s
-## 10 34 t</code></pre>
+## 1  96 k
+## 2  53 l
+## 3  90 m
+## 4  29 n
+## 5  99 o
+## 6  86 p
+## 7  20 q
+## 8   6 r
+## 9  21 s
+## 10 61 t</code></pre>
 </div>
 <div id="append-data" class="section level4">
 <h4>Append Data</h4>
@@ -330,26 +330,26 @@ DBI::dbWriteTable(con, &quot;trial_db&quot;, trial3_data, append = TRUE)</code><
 <p>Let us check if the data has been appended successfully by querying data from the <code>trial_db</code> table.</p>
 <pre class="r"><code>DBI::dbGetQuery(con, &quot;select * from trial_db&quot;)</code></pre>
 <pre><code>##     x y
-## 1  28 k
-## 2  66 l
-## 3  83 m
-## 4  39 n
-## 5  16 o
-## 6  15 p
-## 7  43 q
-## 8  44 r
-## 9  62 s
-## 10 34 t
-## 11 46 e
-## 12 99 f
-## 13 51 g
-## 14 90 h
-## 15 84 i
-## 16 49 j
-## 17 25 k
-## 18 17 l
-## 19 95 m
-## 20  3 n</code></pre>
+## 1  96 k
+## 2  53 l
+## 3  90 m
+## 4  29 n
+## 5  99 o
+## 6  86 p
+## 7  20 q
+## 8   6 r
+## 9  21 s
+## 10 61 t
+## 11 13 e
+## 12 93 f
+## 13 15 g
+## 14 76 h
+## 15 97 i
+## 16 56 j
+## 17 17 k
+## 18 23 l
+## 19 46 m
+## 20 26 n</code></pre>
 </div>
 <div id="insert-rows" class="section level4">
 <h4>Insert Rows</h4>
@@ -371,26 +371,26 @@ DBI::dbWriteTable(con, &quot;trial_db&quot;, trial3_data, append = TRUE)</code><
 <p>Let us check if the new row of data has been inserted into the <code>trial_db</code> table by querying data from the same table.</p>
 <pre class="r"><code>DBI::dbGetQuery(con, &quot;select * from trial_db&quot;)</code></pre>
 <pre><code>##     x y
-## 1  28 k
-## 2  66 l
-## 3  83 m
-## 4  39 n
-## 5  16 o
-## 6  15 p
-## 7  43 q
-## 8  44 r
-## 9  62 s
-## 10 34 t
-## 11 46 e
-## 12 99 f
-## 13 51 g
-## 14 90 h
-## 15 84 i
-## 16 49 j
-## 17 25 k
-## 18 17 l
-## 19 95 m
-## 20  3 n
+## 1  96 k
+## 2  53 l
+## 3  90 m
+## 4  29 n
+## 5  99 o
+## 6  86 p
+## 7  20 q
+## 8   6 r
+## 9  21 s
+## 10 61 t
+## 11 13 e
+## 12 93 f
+## 13 15 g
+## 14 76 h
+## 15 97 i
+## 16 56 j
+## 17 17 k
+## 18 23 l
+## 19 46 m
+## 20 26 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h</code></pre>
@@ -406,26 +406,26 @@ DBI::dbWriteTable(con, &quot;trial_db&quot;, trial3_data, append = TRUE)</code><
 <pre class="r"><code>DBI::dbGetQuery(con, &quot;select * from trial_db&quot;)</code></pre>
 <pre><code>## Warning: Closing open result set, pending rows</code></pre>
 <pre><code>##     x y
-## 1  28 k
-## 2  66 l
-## 3  83 m
-## 4  39 n
-## 5  16 o
-## 6  15 p
-## 7  43 q
-## 8  44 r
-## 9  62 s
-## 10 34 t
-## 11 46 e
-## 12 99 f
-## 13 51 g
-## 14 90 h
-## 15 84 i
-## 16 49 j
-## 17 25 k
-## 18 17 l
-## 19 95 m
-## 20  3 n
+## 1  96 k
+## 2  53 l
+## 3  90 m
+## 4  29 n
+## 5  99 o
+## 6  86 p
+## 7  20 q
+## 8   6 r
+## 9  21 s
+## 10 61 t
+## 11 13 e
+## 12 93 f
+## 13 15 g
+## 14 76 h
+## 15 97 i
+## 16 56 j
+## 17 17 k
+## 18 23 l
+## 19 46 m
+## 20 26 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h

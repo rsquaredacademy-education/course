@@ -14,7 +14,7 @@ tags:
 
 ### Introduction
 
-This is the first tutorial of the series **Data Visualization With R**. The objective of the series is to provide a gentle introduction to working with base graphics in R. We will come up with a similar series using [ggplot2](https://ggplot2.tidyverse.org/index.html) shortly. 
+This is the first tutorial of the series [Data Visualization With R](https://tutorials.rsquaredacademy.com/data-visualization/index.html). The objective of the series is to provide a gentle introduction to working with base graphics in R. We will come up with a similar series using [ggplot2](https://ggplot2.tidyverse.org/index.html) shortly. 
 
 - what is data visualization
 - why visualize data

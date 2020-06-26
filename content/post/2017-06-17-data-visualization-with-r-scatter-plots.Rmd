@@ -14,7 +14,7 @@ tags:
 
 ### Introduction
 
-This is the third tutorial in the series **Data Visualization With R**. In the previous tutorial, we learned how to add title, subtitle and axis labels. We also learned how to modify the range of the axis. In this tutorial, we will learn how to create scatter plots. 
+This is the third tutorial in the series [Data Visualization With R](https://tutorials.rsquaredacademy.com/data-visualization/index.html). In the previous tutorial, we learned how to add title, subtitle and axis labels. We also learned how to modify the range of the axis. In this tutorial, we will learn how to create scatter plots. 
 - adding color to the points
 - modify shape of the points
 - modify size of the points

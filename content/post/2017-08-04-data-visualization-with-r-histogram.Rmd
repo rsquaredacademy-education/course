@@ -15,7 +15,7 @@ tags:
 
 ### Introduction
 
-This is the seventh tutorial in the series **Data Visualization With R**. In the previous tutorial, we learnt about box and whisker plots. In this tutorial, we will learn to:
+This is the seventh tutorial in the series [Data Visualization With R](https://tutorials.rsquaredacademy.com/data-visualization/index.html). In the previous tutorial, we learnt about box and whisker plots. In this tutorial, we will learn to:
 
 - create a bare bones histogram
 - specify the number of bins/intervals

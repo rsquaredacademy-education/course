@@ -15,7 +15,7 @@ slug: data-visualization-with-r-legends
 
 ### Introduction
 
-This is the eighth tutorial in the series **Data Visualisation With R**. In the previous tutorial, we learnt to build histograms. In this tutorial, we will learn how to:
+This is the eighth tutorial in the series [Data Visualisation With R](https://tutorials.rsquaredacademy.com/data-visualization/index.html). In the previous tutorial, we learnt to build histograms. In this tutorial, we will learn how to:
 
 - position the legend within the plot
 - modify the layout using `ncol` and `horiz` arguments

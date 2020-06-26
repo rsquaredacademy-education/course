@@ -16,28 +16,22 @@ tags:
 <p><img src="/img/regex_cover_image.png" width="100%" style="display: block; margin: auto;" /></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>In this post, we will learn about using regular expressions in R. While it is
-aimed at absolute beginners, we hope experienced users will find it useful as
-well. The post is broadly divided into 3 sections. In the first section, we
-will introduce the pattern matching functions such as <code>grep</code>, <code>grepl</code> etc. in
-base R as we will be using them in the rest of the post. Once the reader is
-comfortable with the above mentioned pattern matching functions, we will
-learn about regular expressions while exploring the names of R packages by
-probing the following:</p>
+<p>This is the second tutorial in the series <a href="https://tutorials.rsquaredacademy.com/regex/index.html">Demystifying Regular Expressions in R</a>. In this tutorial, we will learn about pattern matching.</p>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>Below are the links to all the resources related to this tutorial:</p>
 <ul>
-<li>how many package names include the letter <code>r</code>?</li>
-<li>how many package names begin or end with the letter <code>r</code>?</li>
-<li>how many package names include the words <code>data</code> or <code>plot</code>?</li>
+<li><a href="https://slides.rsquaredacademy.com/regex/regex.html" target="_blank">Slides</a></li>
+<li><a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/regular-expressions-in-r" target="_blank">Code &amp; Data</a></li>
+<li><a href="https://rstudio.cloud/project/356612" target="_blank">RStudio Cloud</a></li>
 </ul>
-<p>In the final section, we will go through 4 case studies including simple email
-validation. If you plan to try the case studies, please do not skip any of the
-topics in the second section.</p>
 </div>
 <div id="pattern-matching-functions" class="section level2">
 <h2>Pattern Matching Functions</h2>
 <p>Before we get into the nitty gritty of regular expressions, let us explore a
 few functions from base R for pattern matching. We will learn about using
-regular expressions with the stringr package in an upcoming post.</p>
+regular expressions with the stringr package in an upcoming tutorial.</p>
 <p><img src="/img/regex_base_functions.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>library(dplyr)
 library(readr)</code></pre>
@@ -218,6 +212,10 @@ all the <code>s</code> are replaced by <code>r</code>. Compare the below output 
 <p><img src="/img/regex_gsub_canva.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>gsub(x = rr_pkgs, pattern = &quot;r&quot;, replacement = &quot;s&quot;)</code></pre>
 <pre><code>## [1] &quot;pusss&quot; &quot;olsss&quot; &quot;bloss&quot;</code></pre>
+</div>
+<div id="up-next.." class="section level2">
+<h2>Up Next..</h2>
+<p>In the next tutorial, we will explore anchors.</p>
 <p>If you see mistakes or want to suggest changes, please create an issue on the
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
 or reach out to us at <a href="mailto:feedback@rsquaredacademy.com" class="email">feedback@rsquaredacademy.com</a>.</p>

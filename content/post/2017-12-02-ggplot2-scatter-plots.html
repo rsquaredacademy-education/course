@@ -16,8 +16,8 @@ tags:
 
 <div id="introduction" class="section level3">
 <h3>Introduction</h3>
-<p>This is the fifth tutorial in the series <strong>Elegant Data Visualization with
-ggplot2</strong>. In the previous tutorial, we learnt about text annotations. In this
+<p>This is the fifth tutorial in the series <a href="https://tutorials.rsquaredacademy.com/data-visualization/index.html">Elegant Data Visualization with
+ggplot2</a>. In the previous tutorial, we learnt about text annotations. In this
 tutorial, we will:</p>
 <ul>
 <li>build scatter plots</li>
@@ -175,6 +175,7 @@ technique by supplying the value <code>'lm'</code> to the <code>method</code> ar
 <pre class="r"><code>ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = &#39;jitter&#39;) +
   geom_smooth(method = &#39;lm&#39;, se = FALSE)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2017-12-02-ggplot2-scatter-plots_files/figure-html/aes12-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </div>
@@ -208,6 +209,7 @@ if set to <code>TRUE</code>.</p>
 <pre class="r"><code>ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = &#39;jitter&#39;) +
   geom_smooth(method = &#39;lm&#39;, se = TRUE)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2017-12-02-ggplot2-scatter-plots_files/figure-html/aes13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </div>
@@ -218,6 +220,7 @@ squares method to fit the regression line.</p>
 <pre class="r"><code>ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = &#39;jitter&#39;) +
   geom_smooth(method = &#39;loess&#39;, se = FALSE)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="/post/2017-12-02-ggplot2-scatter-plots_files/figure-html/aes14-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </div>

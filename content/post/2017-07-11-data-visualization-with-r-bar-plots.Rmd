@@ -16,7 +16,7 @@ tags:
 
 
 
-This is the fifth tutorial in the series **Data Visualization With R**. In the previous tutorial, we learnt how to build line graphs. In this tutorial, we will visualize categorical data using univariate and bivariate bar plots.
+This is the fifth tutorial in the series [Data Visualization With R](https://tutorials.rsquaredacademy.com/data-visualization/index.html). In the previous tutorial, we learnt how to build line graphs. In this tutorial, we will visualize categorical data using univariate and bivariate bar plots.
 
 - create 
     - simple bar plot

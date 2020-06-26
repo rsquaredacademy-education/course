@@ -21,28 +21,21 @@ knitr::include_graphics("/img/regex_cover_image.png")
 
 ## Introduction
 
-In this post, we will learn about using regular expressions in R. While it is 
-aimed at absolute beginners, we hope experienced users will find it useful as 
-well. The post is broadly divided into 3 sections. In the first section, we 
-will introduce the pattern matching functions such as `grep`, `grepl` etc. in 
-base R as we will be using them in the rest of the post. Once the reader is 
-comfortable with the above mentioned pattern matching functions, we will 
-learn about regular expressions while exploring the names of R packages by 
-probing the following:
+This is the second tutorial in the series [Demystifying Regular Expressions in R](https://tutorials.rsquaredacademy.com/regex/index.html). In this tutorial, we will learn about pattern matching.
 
-- how many package names include the letter `r`?
-- how many package names begin or end with the letter `r`?
-- how many package names include the words `data` or `plot`?
+## Resources
 
-In the final section, we will go through 4 case studies including simple email
-validation. If you plan to try the case studies, please do not skip any of the
-topics in the second section. 
+Below are the links to all the resources related to this tutorial:
+
+- <a href="https://slides.rsquaredacademy.com/regex/regex.html" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/regular-expressions-in-r" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/356612" target="_blank">RStudio Cloud</a>
 
 ## Pattern Matching Functions
 
 Before we get into the nitty gritty of regular expressions, let us explore a
 few functions from base R for pattern matching. We will learn about using
-regular expressions with the stringr package in an upcoming post.
+regular expressions with the stringr package in an upcoming tutorial.
 
 ```{r regex_base_functions, echo=FALSE, fig.align="center", out.width="100%"}
 knitr::include_graphics("/img/regex_base_functions.png")
@@ -52,7 +45,6 @@ knitr::include_graphics("/img/regex_base_functions.png")
 library(dplyr)
 library(readr)
 ```
-
 
 ## grep
 
@@ -222,6 +214,10 @@ knitr::include_graphics("/img/regex_gsub_canva.png")
 ```{r gsub_code}
 gsub(x = rr_pkgs, pattern = "r", replacement = "s")
 ```
+
+## Up Next..
+
+In the next tutorial, we will explore anchors.
 
 If you see mistakes or want to suggest changes, please create an issue on the
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source repository</a>
