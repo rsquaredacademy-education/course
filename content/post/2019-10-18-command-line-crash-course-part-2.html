@@ -19,26 +19,15 @@ tags:
 
 
 <p><img src="/img/cline_cover_image.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
-We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud Project</a> to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R &amp; RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on</p>
-<ul>
-<li>exploring R release names</li>
-<li>mapping shell commands to R functions</li>
-<li>RStudio Terminal</li>
-<li>executing shell commands from R using <code>system2()</code> or <code>processx::run()</code></li>
-<li>execute shell commands in RMarkdown</li>
-<li>execute R scripts in the shell</li>
-</ul>
-<p>If you want a deeper understanding of using command line for data science, we suggest you read <a href="https://www.datascienceatthecommandline.com/">Data Science at the Command Line</a>. <a href="https://software-carpentry.org/">Software Carpentry</a> too has a lesson on <a href="https://swcarpentry.github.io/shell-novice/">shell</a>. We have listed more references at the end of the tutorial for the benefit of the readers.</p>
+<p>This is the second tutorial in the series <a href="https://tutorials.rsquaredacademy.com/command-line/index.html">Command Line Basics for R Users</a>. In this tutorial, we will learn to navigate file systems</p>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
-<p>Below are the links to all the resources related to this post:</p>
+<p>Below are the links to all the resources related to this tutorial:</p>
 <ul>
 <li><a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a></li>
 <li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
 <li><a href="https://rstudio.cloud/project/518720" target="_blank">RStudio Cloud</a></li>
 </ul>
-<p>You can try our <strong>free online course</strong> <a href="https://rsquared-academy.thinkific.com/courses/command-line-basics-for-r-users"><strong>Command Line Basics for R Users</strong></a> if you prefer to learn through self paced online courses or our <a href="https://bash-intro.rsquaredacademy.com"><strong>ebook</strong></a> if you like to read the tutorial in a book format.</p>
 </div>
 <div id="navigate" class="section level2">
 <h2>Navigating File System</h2>
@@ -116,6 +105,7 @@ Remove/delete directory
 <p>With no options, it will list the files and directories in the current directory, sorted alphabetically.</p>
 <pre class="bash"><code>ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
 ## bash.html
@@ -150,6 +140,7 @@ pwd</code></pre>
 <pre class="bash"><code>mkdir rfiles
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
 ## bash.html
@@ -181,6 +172,7 @@ ls</code></pre>
 <pre class="bash"><code>rmdir rfiles
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
 ## bash.html
@@ -371,33 +363,34 @@ Long format list sorted by modification date
 <h4>List files one per line</h4>
 <pre class="bash"><code>ls -l</code></pre>
 <pre><code>## total 31108
-## -rwxrwxrwx 1 aravind aravind       12 Jun  4 14:22 analysis.R
-## -rwxrwxrwx 1 aravind aravind      430 Jun  4 14:22 bash.R
-## -rwxrwxrwx 1 aravind aravind      145 Jun  4 14:22 bash.Rmd
-## -rwxrwxrwx 1 aravind aravind      574 Jun  4 14:23 bash.html
-## -rwxrwxrwx 1 aravind aravind    16242 Jun  4 14:22 bash.sh
-## -rwxrwxrwx 1 aravind aravind       35 Jun  4 14:22 imports_blorr.txt
-## -rwxrwxrwx 1 aravind aravind       34 Jun  4 14:22 imports_olsrr.txt
-## -rwxrwxrwx 1 aravind aravind    39501 Jun  4 14:22 lorem-ipsum.txt
-## -rwxrwxrwx 1 aravind aravind     9291 Jun  4 14:22 main_project.zip
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myfiles
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 mypackage
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject1
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject2
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject3
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject4
-## -rwxrwxrwx 1 aravind aravind     1498 Jun  4 14:22 package_names.txt
-## -rwxrwxrwx 1 aravind aravind     1082 Jun  4 14:22 pkg_names.txt
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 r
-## -rwxrwxrwx 1 aravind aravind    10240 Jun  4 14:22 release_names.tar
-## -rwxrwxrwx 1 aravind aravind      632 Jun  4 14:22 release_names.tar.gz
-## -rwxrwxrwx 1 aravind aravind      546 Jun  4 14:22 release_names.txt
-## -rwxrwxrwx 1 aravind aravind       65 Jun  4 14:22 release_names_18.txt
-## -rwxrwxrwx 1 aravind aravind       53 Jun  4 14:22 release_names_19.txt
-## -rwxrwxrwx 1 aravind aravind 31754998 Jun  4 14:22 sept_15.csv.gz
-## -rwxrwxrwx 1 aravind aravind      157 Jun  4 14:22 urls.txt
-## -rwxrwxrwx 1 aravind aravind     4398 Jun  4 14:22 zip_example.zip</code></pre>
+## -rwxrwxrwx 1 aravind aravind       12 Jun  4 15:08 analysis.R
+## drwxrwxrwx 1 aravind aravind     4096 Jun 27 15:03 bash-tutorial
+## -rwxrwxrwx 1 aravind aravind      430 Jun  4 15:08 bash.R
+## -rwxrwxrwx 1 aravind aravind      145 Jun  4 15:08 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind      574 Jun  4 15:09 bash.html
+## -rwxrwxrwx 1 aravind aravind    16242 Jun  4 15:08 bash.sh
+## -rwxrwxrwx 1 aravind aravind       35 Jun  4 15:08 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind       34 Jun  4 15:08 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind    39501 Jun  4 15:08 lorem-ipsum.txt
+## -rwxrwxrwx 1 aravind aravind     9291 Jun  4 15:08 main_project.zip
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myfiles
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 mypackage
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject1
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject2
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject3
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject4
+## -rwxrwxrwx 1 aravind aravind     1498 Jun  4 15:08 package_names.txt
+## -rwxrwxrwx 1 aravind aravind     1082 Jun  4 15:08 pkg_names.txt
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 r
+## -rwxrwxrwx 1 aravind aravind    10240 Jun  4 15:08 release_names.tar
+## -rwxrwxrwx 1 aravind aravind      632 Jun  4 15:08 release_names.tar.gz
+## -rwxrwxrwx 1 aravind aravind      546 Jun  4 15:08 release_names.txt
+## -rwxrwxrwx 1 aravind aravind       65 Jun  4 15:08 release_names_18.txt
+## -rwxrwxrwx 1 aravind aravind       53 Jun  4 15:08 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind 31754998 Jun  4 15:08 sept_15.csv.gz
+## -rwxrwxrwx 1 aravind aravind      157 Jun  4 15:08 urls.txt
+## -rwxrwxrwx 1 aravind aravind     4398 Jun  4 15:08 zip_example.zip</code></pre>
 </div>
 <div id="list-all-files-including-hidden-files" class="section level4">
 <h4>List all files including hidden files</h4>
@@ -405,6 +398,7 @@ Long format list sorted by modification date
 <pre><code>## .
 ## ..
 ## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
 ## bash.html
@@ -436,131 +430,135 @@ Long format list sorted by modification date
 <h4>Display file permissions, ownership, size &amp; modification date</h4>
 <pre class="bash"><code>ls -la</code></pre>
 <pre><code>## total 31108
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:55 .
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:55 ..
-## -rwxrwxrwx 1 aravind aravind       12 Jun  4 14:22 analysis.R
-## -rwxrwxrwx 1 aravind aravind      430 Jun  4 14:22 bash.R
-## -rwxrwxrwx 1 aravind aravind      145 Jun  4 14:22 bash.Rmd
-## -rwxrwxrwx 1 aravind aravind      574 Jun  4 14:23 bash.html
-## -rwxrwxrwx 1 aravind aravind    16242 Jun  4 14:22 bash.sh
-## -rwxrwxrwx 1 aravind aravind       35 Jun  4 14:22 imports_blorr.txt
-## -rwxrwxrwx 1 aravind aravind       34 Jun  4 14:22 imports_olsrr.txt
-## -rwxrwxrwx 1 aravind aravind    39501 Jun  4 14:22 lorem-ipsum.txt
-## -rwxrwxrwx 1 aravind aravind     9291 Jun  4 14:22 main_project.zip
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myfiles
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 mypackage
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject1
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject2
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject3
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject4
-## -rwxrwxrwx 1 aravind aravind     1498 Jun  4 14:22 package_names.txt
-## -rwxrwxrwx 1 aravind aravind     1082 Jun  4 14:22 pkg_names.txt
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 r
-## -rwxrwxrwx 1 aravind aravind    10240 Jun  4 14:22 release_names.tar
-## -rwxrwxrwx 1 aravind aravind      632 Jun  4 14:22 release_names.tar.gz
-## -rwxrwxrwx 1 aravind aravind      546 Jun  4 14:22 release_names.txt
-## -rwxrwxrwx 1 aravind aravind       65 Jun  4 14:22 release_names_18.txt
-## -rwxrwxrwx 1 aravind aravind       53 Jun  4 14:22 release_names_19.txt
-## -rwxrwxrwx 1 aravind aravind 31754998 Jun  4 14:22 sept_15.csv.gz
-## -rwxrwxrwx 1 aravind aravind      157 Jun  4 14:22 urls.txt
-## -rwxrwxrwx 1 aravind aravind     4398 Jun  4 14:22 zip_example.zip</code></pre>
+## drwxrwxrwx 1 aravind aravind     4096 Jun 27 15:04 .
+## drwxrwxrwx 1 aravind aravind     4096 Jun 27 15:03 ..
+## -rwxrwxrwx 1 aravind aravind       12 Jun  4 15:08 analysis.R
+## drwxrwxrwx 1 aravind aravind     4096 Jun 27 15:03 bash-tutorial
+## -rwxrwxrwx 1 aravind aravind      430 Jun  4 15:08 bash.R
+## -rwxrwxrwx 1 aravind aravind      145 Jun  4 15:08 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind      574 Jun  4 15:09 bash.html
+## -rwxrwxrwx 1 aravind aravind    16242 Jun  4 15:08 bash.sh
+## -rwxrwxrwx 1 aravind aravind       35 Jun  4 15:08 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind       34 Jun  4 15:08 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind    39501 Jun  4 15:08 lorem-ipsum.txt
+## -rwxrwxrwx 1 aravind aravind     9291 Jun  4 15:08 main_project.zip
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myfiles
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 mypackage
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject1
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject2
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject3
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject4
+## -rwxrwxrwx 1 aravind aravind     1498 Jun  4 15:08 package_names.txt
+## -rwxrwxrwx 1 aravind aravind     1082 Jun  4 15:08 pkg_names.txt
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 r
+## -rwxrwxrwx 1 aravind aravind    10240 Jun  4 15:08 release_names.tar
+## -rwxrwxrwx 1 aravind aravind      632 Jun  4 15:08 release_names.tar.gz
+## -rwxrwxrwx 1 aravind aravind      546 Jun  4 15:08 release_names.txt
+## -rwxrwxrwx 1 aravind aravind       65 Jun  4 15:08 release_names_18.txt
+## -rwxrwxrwx 1 aravind aravind       53 Jun  4 15:08 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind 31754998 Jun  4 15:08 sept_15.csv.gz
+## -rwxrwxrwx 1 aravind aravind      157 Jun  4 15:08 urls.txt
+## -rwxrwxrwx 1 aravind aravind     4398 Jun  4 15:08 zip_example.zip</code></pre>
 </div>
 <div id="display-size-in-human-readable-format" class="section level4">
 <h4>Display size in human readable format</h4>
 <pre class="bash"><code>ls -lh</code></pre>
 <pre><code>## total 31M
-## -rwxrwxrwx 1 aravind aravind   12 Jun  4 14:22 analysis.R
-## -rwxrwxrwx 1 aravind aravind  430 Jun  4 14:22 bash.R
-## -rwxrwxrwx 1 aravind aravind  145 Jun  4 14:22 bash.Rmd
-## -rwxrwxrwx 1 aravind aravind  574 Jun  4 14:23 bash.html
-## -rwxrwxrwx 1 aravind aravind  16K Jun  4 14:22 bash.sh
-## -rwxrwxrwx 1 aravind aravind   35 Jun  4 14:22 imports_blorr.txt
-## -rwxrwxrwx 1 aravind aravind   34 Jun  4 14:22 imports_olsrr.txt
-## -rwxrwxrwx 1 aravind aravind  39K Jun  4 14:22 lorem-ipsum.txt
-## -rwxrwxrwx 1 aravind aravind 9.1K Jun  4 14:22 main_project.zip
-## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 14:22 myfiles
-## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 14:22 mypackage
-## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 14:22 myproject
-## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 14:22 myproject1
-## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 14:22 myproject2
-## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 14:22 myproject3
-## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 14:22 myproject4
-## -rwxrwxrwx 1 aravind aravind 1.5K Jun  4 14:22 package_names.txt
-## -rwxrwxrwx 1 aravind aravind 1.1K Jun  4 14:22 pkg_names.txt
-## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 14:22 r
-## -rwxrwxrwx 1 aravind aravind  10K Jun  4 14:22 release_names.tar
-## -rwxrwxrwx 1 aravind aravind  632 Jun  4 14:22 release_names.tar.gz
-## -rwxrwxrwx 1 aravind aravind  546 Jun  4 14:22 release_names.txt
-## -rwxrwxrwx 1 aravind aravind   65 Jun  4 14:22 release_names_18.txt
-## -rwxrwxrwx 1 aravind aravind   53 Jun  4 14:22 release_names_19.txt
-## -rwxrwxrwx 1 aravind aravind  31M Jun  4 14:22 sept_15.csv.gz
-## -rwxrwxrwx 1 aravind aravind  157 Jun  4 14:22 urls.txt
-## -rwxrwxrwx 1 aravind aravind 4.3K Jun  4 14:22 zip_example.zip</code></pre>
+## -rwxrwxrwx 1 aravind aravind   12 Jun  4 15:08 analysis.R
+## drwxrwxrwx 1 aravind aravind 4.0K Jun 27 15:03 bash-tutorial
+## -rwxrwxrwx 1 aravind aravind  430 Jun  4 15:08 bash.R
+## -rwxrwxrwx 1 aravind aravind  145 Jun  4 15:08 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind  574 Jun  4 15:09 bash.html
+## -rwxrwxrwx 1 aravind aravind  16K Jun  4 15:08 bash.sh
+## -rwxrwxrwx 1 aravind aravind   35 Jun  4 15:08 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind   34 Jun  4 15:08 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind  39K Jun  4 15:08 lorem-ipsum.txt
+## -rwxrwxrwx 1 aravind aravind 9.1K Jun  4 15:08 main_project.zip
+## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 15:08 myfiles
+## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 15:08 mypackage
+## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 15:08 myproject
+## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 15:08 myproject1
+## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 15:08 myproject2
+## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 15:08 myproject3
+## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 15:08 myproject4
+## -rwxrwxrwx 1 aravind aravind 1.5K Jun  4 15:08 package_names.txt
+## -rwxrwxrwx 1 aravind aravind 1.1K Jun  4 15:08 pkg_names.txt
+## drwxrwxrwx 1 aravind aravind 4.0K Jun  4 15:08 r
+## -rwxrwxrwx 1 aravind aravind  10K Jun  4 15:08 release_names.tar
+## -rwxrwxrwx 1 aravind aravind  632 Jun  4 15:08 release_names.tar.gz
+## -rwxrwxrwx 1 aravind aravind  546 Jun  4 15:08 release_names.txt
+## -rwxrwxrwx 1 aravind aravind   65 Jun  4 15:08 release_names_18.txt
+## -rwxrwxrwx 1 aravind aravind   53 Jun  4 15:08 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind  31M Jun  4 15:08 sept_15.csv.gz
+## -rwxrwxrwx 1 aravind aravind  157 Jun  4 15:08 urls.txt
+## -rwxrwxrwx 1 aravind aravind 4.3K Jun  4 15:08 zip_example.zip</code></pre>
 </div>
 <div id="sort-list-by-size" class="section level4">
 <h4>Sort list by size</h4>
 <pre class="bash"><code>ls -lS</code></pre>
 <pre><code>## total 31108
-## -rwxrwxrwx 1 aravind aravind 31754998 Jun  4 14:22 sept_15.csv.gz
-## -rwxrwxrwx 1 aravind aravind    39501 Jun  4 14:22 lorem-ipsum.txt
-## -rwxrwxrwx 1 aravind aravind    16242 Jun  4 14:22 bash.sh
-## -rwxrwxrwx 1 aravind aravind    10240 Jun  4 14:22 release_names.tar
-## -rwxrwxrwx 1 aravind aravind     9291 Jun  4 14:22 main_project.zip
-## -rwxrwxrwx 1 aravind aravind     4398 Jun  4 14:22 zip_example.zip
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myfiles
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 mypackage
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject1
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject2
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject3
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject4
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 r
-## -rwxrwxrwx 1 aravind aravind     1498 Jun  4 14:22 package_names.txt
-## -rwxrwxrwx 1 aravind aravind     1082 Jun  4 14:22 pkg_names.txt
-## -rwxrwxrwx 1 aravind aravind      632 Jun  4 14:22 release_names.tar.gz
-## -rwxrwxrwx 1 aravind aravind      574 Jun  4 14:23 bash.html
-## -rwxrwxrwx 1 aravind aravind      546 Jun  4 14:22 release_names.txt
-## -rwxrwxrwx 1 aravind aravind      430 Jun  4 14:22 bash.R
-## -rwxrwxrwx 1 aravind aravind      157 Jun  4 14:22 urls.txt
-## -rwxrwxrwx 1 aravind aravind      145 Jun  4 14:22 bash.Rmd
-## -rwxrwxrwx 1 aravind aravind       65 Jun  4 14:22 release_names_18.txt
-## -rwxrwxrwx 1 aravind aravind       53 Jun  4 14:22 release_names_19.txt
-## -rwxrwxrwx 1 aravind aravind       35 Jun  4 14:22 imports_blorr.txt
-## -rwxrwxrwx 1 aravind aravind       34 Jun  4 14:22 imports_olsrr.txt
-## -rwxrwxrwx 1 aravind aravind       12 Jun  4 14:22 analysis.R</code></pre>
+## -rwxrwxrwx 1 aravind aravind 31754998 Jun  4 15:08 sept_15.csv.gz
+## -rwxrwxrwx 1 aravind aravind    39501 Jun  4 15:08 lorem-ipsum.txt
+## -rwxrwxrwx 1 aravind aravind    16242 Jun  4 15:08 bash.sh
+## -rwxrwxrwx 1 aravind aravind    10240 Jun  4 15:08 release_names.tar
+## -rwxrwxrwx 1 aravind aravind     9291 Jun  4 15:08 main_project.zip
+## -rwxrwxrwx 1 aravind aravind     4398 Jun  4 15:08 zip_example.zip
+## drwxrwxrwx 1 aravind aravind     4096 Jun 27 15:03 bash-tutorial
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myfiles
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 mypackage
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject1
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject2
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject3
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject4
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 r
+## -rwxrwxrwx 1 aravind aravind     1498 Jun  4 15:08 package_names.txt
+## -rwxrwxrwx 1 aravind aravind     1082 Jun  4 15:08 pkg_names.txt
+## -rwxrwxrwx 1 aravind aravind      632 Jun  4 15:08 release_names.tar.gz
+## -rwxrwxrwx 1 aravind aravind      574 Jun  4 15:09 bash.html
+## -rwxrwxrwx 1 aravind aravind      546 Jun  4 15:08 release_names.txt
+## -rwxrwxrwx 1 aravind aravind      430 Jun  4 15:08 bash.R
+## -rwxrwxrwx 1 aravind aravind      157 Jun  4 15:08 urls.txt
+## -rwxrwxrwx 1 aravind aravind      145 Jun  4 15:08 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind       65 Jun  4 15:08 release_names_18.txt
+## -rwxrwxrwx 1 aravind aravind       53 Jun  4 15:08 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind       35 Jun  4 15:08 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind       34 Jun  4 15:08 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind       12 Jun  4 15:08 analysis.R</code></pre>
 </div>
 <div id="sort-list-by-modification-date" class="section level4">
 <h4>Sort list by modification date</h4>
 <pre class="bash"><code>ls -ltr</code></pre>
 <pre><code>## total 31108
-## -rwxrwxrwx 1 aravind aravind      546 Jun  4 14:22 release_names.txt
-## -rwxrwxrwx 1 aravind aravind    10240 Jun  4 14:22 release_names.tar
-## -rwxrwxrwx 1 aravind aravind     4398 Jun  4 14:22 zip_example.zip
-## -rwxrwxrwx 1 aravind aravind     9291 Jun  4 14:22 main_project.zip
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 r
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myfiles
-## -rwxrwxrwx 1 aravind aravind      632 Jun  4 14:22 release_names.tar.gz
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject3
-## -rwxrwxrwx 1 aravind aravind       35 Jun  4 14:22 imports_blorr.txt
-## -rwxrwxrwx 1 aravind aravind       65 Jun  4 14:22 release_names_18.txt
-## -rwxrwxrwx 1 aravind aravind       53 Jun  4 14:22 release_names_19.txt
-## -rwxrwxrwx 1 aravind aravind       34 Jun  4 14:22 imports_olsrr.txt
-## -rwxrwxrwx 1 aravind aravind     1498 Jun  4 14:22 package_names.txt
-## -rwxrwxrwx 1 aravind aravind      157 Jun  4 14:22 urls.txt
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject1
-## -rwxrwxrwx 1 aravind aravind     1082 Jun  4 14:22 pkg_names.txt
-## -rwxrwxrwx 1 aravind aravind 31754998 Jun  4 14:22 sept_15.csv.gz
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 mypackage
-## -rwxrwxrwx 1 aravind aravind    16242 Jun  4 14:22 bash.sh
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject2
-## -rwxrwxrwx 1 aravind aravind       12 Jun  4 14:22 analysis.R
-## -rwxrwxrwx 1 aravind aravind      145 Jun  4 14:22 bash.Rmd
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject
-## -rwxrwxrwx 1 aravind aravind      430 Jun  4 14:22 bash.R
-## -rwxrwxrwx 1 aravind aravind    39501 Jun  4 14:22 lorem-ipsum.txt
-## drwxrwxrwx 1 aravind aravind     4096 Jun  4 14:22 myproject4
-## -rwxrwxrwx 1 aravind aravind      574 Jun  4 14:23 bash.html</code></pre>
+## -rwxrwxrwx 1 aravind aravind      546 Jun  4 15:08 release_names.txt
+## -rwxrwxrwx 1 aravind aravind    10240 Jun  4 15:08 release_names.tar
+## -rwxrwxrwx 1 aravind aravind     4398 Jun  4 15:08 zip_example.zip
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 r
+## -rwxrwxrwx 1 aravind aravind     9291 Jun  4 15:08 main_project.zip
+## -rwxrwxrwx 1 aravind aravind      632 Jun  4 15:08 release_names.tar.gz
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myfiles
+## -rwxrwxrwx 1 aravind aravind       53 Jun  4 15:08 release_names_19.txt
+## -rwxrwxrwx 1 aravind aravind       65 Jun  4 15:08 release_names_18.txt
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject3
+## -rwxrwxrwx 1 aravind aravind       35 Jun  4 15:08 imports_blorr.txt
+## -rwxrwxrwx 1 aravind aravind       34 Jun  4 15:08 imports_olsrr.txt
+## -rwxrwxrwx 1 aravind aravind      157 Jun  4 15:08 urls.txt
+## -rwxrwxrwx 1 aravind aravind     1498 Jun  4 15:08 package_names.txt
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject1
+## -rwxrwxrwx 1 aravind aravind     1082 Jun  4 15:08 pkg_names.txt
+## -rwxrwxrwx 1 aravind aravind 31754998 Jun  4 15:08 sept_15.csv.gz
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 mypackage
+## -rwxrwxrwx 1 aravind aravind    16242 Jun  4 15:08 bash.sh
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject2
+## -rwxrwxrwx 1 aravind aravind      145 Jun  4 15:08 bash.Rmd
+## -rwxrwxrwx 1 aravind aravind       12 Jun  4 15:08 analysis.R
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject
+## -rwxrwxrwx 1 aravind aravind    39501 Jun  4 15:08 lorem-ipsum.txt
+## -rwxrwxrwx 1 aravind aravind      430 Jun  4 15:08 bash.R
+## drwxrwxrwx 1 aravind aravind     4096 Jun  4 15:08 myproject4
+## -rwxrwxrwx 1 aravind aravind      574 Jun  4 15:09 bash.html
+## drwxrwxrwx 1 aravind aravind     4096 Jun 27 15:03 bash-tutorial</code></pre>
 </div>
 </div>
 <div id="r-functions" class="section level3">
@@ -629,4 +627,6 @@ R
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
 repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
 <!-- clean up folder structure -->
+<pre><code>## Warning in system2(&quot;rm&quot;, c(&quot;-r&quot;, &quot;J:/R/courses/course/content/post/cline&quot;)):
+## &#39;&quot;rm&quot;&#39; not found</code></pre>
 </div>

@@ -19,20 +19,10 @@ tags:
 
 
 <p><img src="/img/cline_cover_image.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
-We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud Project</a> to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R &amp; RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on</p>
-<ul>
-<li>exploring R release names</li>
-<li>mapping shell commands to R functions</li>
-<li>RStudio Terminal</li>
-<li>executing shell commands from R using <code>system2()</code> or <code>processx::run()</code></li>
-<li>execute shell commands in RMarkdown</li>
-<li>execute R scripts in the shell</li>
-</ul>
-<p>If you want a deeper understanding of using command line for data science, we suggest you read <a href="https://www.datascienceatthecommandline.com/">Data Science at the Command Line</a>. <a href="https://software-carpentry.org/">Software Carpentry</a> too has a lesson on <a href="https://swcarpentry.github.io/shell-novice/">shell</a>. We have listed more references at the end of the tutorial for the benefit of the readers.</p>
+<p>This is the third tutorial in the series <a href="https://tutorials.rsquaredacademy.com/command-line/index.html">Command Line Basics for R Users</a>. In this tutorial, we will learn about file management.</p>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
-<p>Below are the links to all the resources related to this post:</p>
+<p>Below are the links to all the resources related to this tutorial:</p>
 <ul>
 <li><a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a></li>
 <li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
@@ -117,8 +107,10 @@ Compare files
 <pre class="bash"><code>touch myanalysis.R
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -155,8 +147,10 @@ ls</code></pre>
 <pre class="bash"><code>cp release_names.txt release_names_2.txt
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -196,8 +190,10 @@ ls</code></pre>
 <pre class="bash"><code>cp -r r r2
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -295,8 +291,10 @@ Move files in verbose mode
 <p>Use <code>ls</code> to verfiy if the file has been moved. As you can see, <code>release_names_2.txt</code> is not present in the current working directory.</p>
 <pre class="bash"><code>ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -517,8 +515,10 @@ Remove files in verbose mode, printing a message for each removed file
 <pre class="bash"><code>rm myanalysis.R
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -551,8 +551,10 @@ ls</code></pre>
 <pre class="bash"><code>rm -r myproject1
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -584,8 +586,10 @@ ls</code></pre>
 <pre class="bash"><code>rm -rf myproject2
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -708,91 +712,30 @@ Compare directories; show the names of files that differ
 </ul>
 <p>We will use the <code>-w</code> option to ignore white spaces while comparing the files.</p>
 <pre class="bash"><code>diff -w imports_olsrr.txt imports_blorr.txt</code></pre>
-<pre><code>## 1a2
-## &gt; caret
-## 3d3
-## &lt; cli
-## 4a5
-## &gt; cli</code></pre>
 <p>Let us interpret the results. <code>4a5</code> indicates <strong>after line 4 in file 1, add line 5 from file 2</strong> to make both the files identical i.e. add <code>caret</code> which is line 5 in <code>imports_blorr.txt</code> after line 4 in <code>imports_olsrr.txt</code> which will make both the files identical.</p>
 <p>Let us change the file order and see the instructions from <code>diff</code>.</p>
 <pre class="bash"><code>diff -w imports_blorr.txt imports_olsrr.txt</code></pre>
-<pre><code>## 2d1
-## &lt; caret
-## 4d2
-## &lt; clisymbols
-## 5a4
-## &gt; clisymbols</code></pre>
 <p><code>5d4</code> indicates <strong>delete line 5 from file 1 to match both the files at line4</strong> i.e. delete <code>caret</code> which is line 5 in <code>imports_blorr.txt</code> to make both the files identical.</p>
 </div>
 <div id="side-by-side" class="section level4">
 <h4>Side By Side</h4>
 <p>To view the differences between the files side by side, use the <code>-y</code> option.</p>
 <pre class="bash"><code>diff -y imports_olsrr.txt imports_blorr.txt</code></pre>
-<pre><code>## car 
-                                  | car
-## checkmate
-                                  | caret
-## cli
-                                  | checkmate
-## clisymbols
-                                  | clisymbols
-##                                &gt; cli</code></pre>
 </div>
 <div id="unified-format" class="section level4">
 <h4>Unified Format</h4>
 <p>To view the differences between the files in a unified format, use the <code>-u</code> option.</p>
 <pre class="bash"><code>diff -u imports_olsrr.txt imports_blorr.txt</code></pre>
-<pre><code>## --- imports_olsrr.txt    2019-09-20 13:36:03.000000000 +0530
-## +++ imports_blorr.txt    2019-09-20 13:36:35.000000000 +0530
-## @@ -1,4 +1,5 @@
-## -car 
-## -checkmate
-## -cli
-## -clisymbols
-## +car
-## +caret
-## +checkmate
-## +clisymbols
-## +cli</code></pre>
 </div>
 <div id="compare-recursively" class="section level4">
 <h4>Compare Recursively</h4>
 <p>To compare recursively, use the <code>-r</code> option. Let us compare the <code>mypackage</code> and <code>myproject</code> folders.</p>
 <pre class="bash"><code>diff -r mypackage myproject</code></pre>
-<pre><code>## Only in mypackage: .Rbuildignore
-## Only in mypackage: DESCRIPTION
-## Only in mypackage: LICENSE
-## Only in mypackage: NAMESPACE
-## Only in mypackage: NEWS.md
-## Only in mypackage: R
-## Only in myproject/data: processed
-## Only in myproject/data: raw
-## Only in mypackage: docs
-## Only in mypackage: man
-## Only in myproject: output
-## Only in myproject: run_analysis.R
-## Only in mypackage: tests
-## Only in mypackage: vignettes</code></pre>
 </div>
 <div id="file-details" class="section level4">
 <h4>File Details</h4>
 <p>To compare directories and view the names of files that differ, use the <code>-rq</code> option. In the below example, we look at the names of files that differ in <code>mypackage</code> and <code>myproject</code> folders.</p>
 <pre class="bash"><code>diff -rq mypackage myproject</code></pre>
-<pre><code>## Only in mypackage: .Rbuildignore
-## Only in mypackage: DESCRIPTION
-## Only in mypackage: LICENSE
-## Only in mypackage: NAMESPACE
-## Only in mypackage: NEWS.md
-## Only in mypackage: R
-## Only in myproject/data: processed
-## Only in myproject/data: raw
-## Only in mypackage: docs
-## Only in mypackage: man
-## Only in myproject: output
-## Only in myproject: run_analysis.R
-## Only in mypackage: tests
-## Only in mypackage: vignettes</code></pre>
 </div>
 </div>
 <div id="r-functions" class="section level3">
@@ -859,4 +802,6 @@ R
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
 repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
 <!-- clean up folder structure -->
+<pre><code>## Warning in system2(&quot;rm&quot;, c(&quot;-r&quot;, &quot;J:/R/courses/course/content/post/cline&quot;)):
+## &#39;&quot;rm&quot;&#39; not found</code></pre>
 </div>

@@ -19,8 +19,8 @@ tags:
 
 
 <p><img src="/img/cline_cover_image.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
-We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud Project</a> to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R &amp; RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on</p>
+<p>In this series, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
+We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud Project</a> to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R &amp; RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the series will also focus on</p>
 <ul>
 <li>exploring R release names</li>
 <li>mapping shell commands to R functions</li>
@@ -29,27 +29,7 @@ We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud P
 <li>execute shell commands in RMarkdown</li>
 <li>execute R scripts in the shell</li>
 </ul>
-<p>If you want a deeper understanding of using command line for data science, we suggest you read <a href="https://www.datascienceatthecommandline.com/">Data Science at the Command Line</a>. <a href="https://software-carpentry.org/">Software Carpentry</a> too has a lesson on <a href="https://swcarpentry.github.io/shell-novice/">shell</a>. We have listed more references at the end of the tutorial for the benefit of the readers.</p>
-<div id="table-of-contents" class="section level2">
-<h2>Table of Contents</h2>
-<ul>
-<li><a href="#resources">Resources</a></li>
-<li><a href="#intro">Introduction</a></li>
-<li><a href="#navigate">Navigating File System</a></li>
-<li><a href="#filemanage">File Management</a></li>
-<li><a href="#inputoutput">Input/Output</a></li>
-<li><a href="#regex">Search &amp; Regular Expression</a></li>
-<li><a href="#datatransfer">Data Transfer</a></li>
-<li><a href="#compress">File Compression</a></li>
-<li><a href="#sysinfo">System Info</a></li>
-<li><a href="#system2">Execute Shell Commands from R</a></li>
-<li><a href="#shellrstudio">Execute Shell Commands in RStudio</a></li>
-<li><a href="#shellrmarkdown">Execute Shell Commands in RMarkdown</a></li>
-<li><a href="#rinshell">Execute R Commands in Shell</a></li>
-<li><a href="#summary">Summary</a></li>
-<li><a href="#references">References</a></li>
-</ul>
-</div>
+<p>If you want a deeper understanding of using command line for data science, we suggest you read <a href="https://www.datascienceatthecommandline.com/">Data Science at the Command Line</a>. <a href="https://software-carpentry.org/">Software Carpentry</a> too has a lesson on <a href="https://swcarpentry.github.io/shell-novice/">shell</a>. We have listed more references at the end of the series for the benefit of the readers.</p>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
 <p>Below are the links to all the resources related to this post:</p>
@@ -248,7 +228,7 @@ Clear the screen
 <pre><code>## aravind</code></pre>
 <p><code>date</code> will display or change the value of the system’s time and date information.</p>
 <pre class="bash"><code>date</code></pre>
-<pre><code>## Thu Jun  4 14:05:52 IST 2020</code></pre>
+<pre><code>## Sat Jun 27 15:03:35 IST 2020</code></pre>
 <p><code>cal</code> will display a formatted calendar and <code>clear</code> will clear all text on the screen and display a new prompt. You can clear the screen by pressing <code>Ctrl + L</code> as well.</p>
 <pre class="bash"><code>cal</code></pre>
 <p>In R, we can get the user information from <code>Sys.info()</code> or <code>whoami()</code> from the <a href="https://cran.r-project.org/package=whoami">whoami</a> package. The current date &amp; time are returned by <code>Sys.date()</code> &amp; <code>Sys.time()</code>. To clear the R console, we use Ctrl + L.</p>
@@ -434,11 +414,6 @@ tldrrr::tldr(&quot;pwd&quot;)</code></pre>
 ## â€¢ Print the current directory, and resolve all symlinks (i.e. show the &quot;physical&quot; path): 
 ##  
 ##   pwd -P</code></pre>
-<hr>
-<p align="center">
-<a href="https://rsquared-academy.thinkific.com/" target="_blank"><img src="/img/ad_courses.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
-</p>
-<hr>
 </div>
 </div>
 <div id="feedback" class="section level2">
@@ -447,4 +422,6 @@ tldrrr::tldr(&quot;pwd&quot;)</code></pre>
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
 repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
 <!-- clean up folder structure -->
+<pre><code>## Warning in system2(&quot;rm&quot;, c(&quot;-r&quot;, &quot;J:/R/courses/course/content/post/cline&quot;)):
+## &#39;&quot;rm&quot;&#39; not found</code></pre>
 </div>

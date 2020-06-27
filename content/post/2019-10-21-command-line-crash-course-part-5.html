@@ -19,20 +19,10 @@ tags:
 
 
 <p><img src="/img/cline_cover_image.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
-We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud Project</a> to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R &amp; RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on</p>
-<ul>
-<li>exploring R release names</li>
-<li>mapping shell commands to R functions</li>
-<li>RStudio Terminal</li>
-<li>executing shell commands from R using <code>system2()</code> or <code>processx::run()</code></li>
-<li>execute shell commands in RMarkdown</li>
-<li>execute R scripts in the shell</li>
-</ul>
-<p>If you want a deeper understanding of using command line for data science, we suggest you read <a href="https://www.datascienceatthecommandline.com/">Data Science at the Command Line</a>. <a href="https://software-carpentry.org/">Software Carpentry</a> too has a lesson on <a href="https://swcarpentry.github.io/shell-novice/">shell</a>. We have listed more references at the end of the tutorial for the benefit of the readers.</p>
+<p>This is the fifth tutorial in the series <a href="https://tutorials.rsquaredacademy.com/command-line/index.html">Command Line Basics for R Users</a>. In this tutorial, we will learn about search and regular expressions.</p>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
-<p>Below are the links to all the resources related to this post:</p>
+<p>Below are the links to all the resources related to this tutorial:</p>
 <ul>
 <li><a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a></li>
 <li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
@@ -499,29 +489,37 @@ Find directories matching a given name, in case-sensitive mode
 <h4>Search Recursively</h4>
 <p>Let us use <code>find</code> to search for the file <code>release_names.txt</code> recursively. The <code>-name</code> option is used to specify the name of the file we are searching.</p>
 <pre class="bash"><code>find -name release_names.txt</code></pre>
-<pre><code>## ./myfiles/release_names.txt
-## ./release_names.txt</code></pre>
+<pre><code>## ./bash-tutorial/myfiles/release_names.txt
+## ./bash-tutorial/release_names.txt
+## ./release_names.txt
+## ./r_releases/release_names.txt</code></pre>
 <p>There are two files with the name <code>release_names.txt</code> present in the current working directory and in <code>r_releases</code> directory.</p>
 </div>
 <div id="search-by-extension" class="section level4">
 <h4>Search by Extension</h4>
 <p>Let us search for all files with <code>.txt</code> extension in the <code>r_releases</code> folder.</p>
 <pre class="bash"><code>find r_releases -name &#39;*.txt&#39;</code></pre>
-<pre><code>## r_releases/release_names.txt</code></pre>
+<pre><code>## mkdir: cannot create directory â€˜r_releasesâ€™: File exists
+## r_releases/release_names.txt
+## r_releases/release_names_2.txt
+## r_releases/release_names_3.txt</code></pre>
 <p>There are 3 files with the <code>.txt</code> extension in <code>r_releases</code> folder.</p>
 </div>
 <div id="case-insensitive-mode" class="section level4">
 <h4>Case-insensitive Mode</h4>
 <p>Search for all folders with the name <code>R</code> or <code>r</code>. Here we use the <code>-iname</code> option to ignore case while searching. The <code>-type</code> option is used to specify whether we are searching for files or folders. Since we are searching for folder/directory, we use it along with <code>d</code> i.e. directory to indicate that we are searching for directories and not files.</p>
 <pre class="bash"><code>find -type d -iname R</code></pre>
-<pre><code>## ./mypackage/R
+<pre><code>## ./bash-tutorial/mypackage/R
+## ./bash-tutorial/r
+## ./mypackage/R
 ## ./r</code></pre>
 </div>
 <div id="case-sensitive-mode" class="section level4">
 <h4>Case-sensitive Mode</h4>
 <p>Search for all folders with the name <code>r</code>. It should exclude any folder with the name <code>R</code>.</p>
 <pre class="bash"><code>find -type d -name r</code></pre>
-<pre><code>## ./r</code></pre>
+<pre><code>## ./bash-tutorial/r
+## ./r</code></pre>
 </div>
 </div>
 </div>
@@ -531,4 +529,6 @@ Find directories matching a given name, in case-sensitive mode
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
 repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
 <!-- clean up folder structure -->
+<pre><code>## Warning in system2(&quot;rm&quot;, c(&quot;-r&quot;, &quot;J:/R/courses/course/content/post/cline&quot;)):
+## &#39;&quot;rm&quot;&#39; not found</code></pre>
 </div>

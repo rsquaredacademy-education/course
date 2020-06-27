@@ -29,8 +29,8 @@ library(magrittr)
 knitr::include_graphics("/img/cline_cover_image.png")
 ```
 
-In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
-We have created a [RStudio Cloud Project](https://rstudio.cloud/project/518720) to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R & RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on
+In this series, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
+We have created a [RStudio Cloud Project](https://rstudio.cloud/project/518720) to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R & RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the series will also focus on
 
 - exploring R release names
 - mapping shell commands to R functions
@@ -39,25 +39,7 @@ We have created a [RStudio Cloud Project](https://rstudio.cloud/project/518720) 
 - execute shell commands in RMarkdown
 - execute R scripts in the shell 
 
-If you want a deeper understanding of using command line for data science, we suggest you read [Data Science at the Command Line](https://www.datascienceatthecommandline.com/). [Software Carpentry](https://software-carpentry.org/) too has a lesson on [shell](https://swcarpentry.github.io/shell-novice/). We have listed more references at the end of the tutorial for the benefit of the readers.
-
-## Table of Contents
-
-- [Resources](#resources)
-- [Introduction](#intro)
-- [Navigating File System](#navigate)
-- [File Management](#filemanage)
-- [Input/Output](#inputoutput)
-- [Search & Regular Expression](#regex)
-- [Data Transfer](#datatransfer)
-- [File Compression](#compress)
-- [System Info](#sysinfo)
-- [Execute Shell Commands from R](#system2)
-- [Execute Shell Commands in RStudio](#shellrstudio)
-- [Execute Shell Commands in RMarkdown](#shellrmarkdown)
-- [Execute R Commands in Shell](#rinshell)
-- [Summary](#summary)
-- [References](#references)
+If you want a deeper understanding of using command line for data science, we suggest you read [Data Science at the Command Line](https://www.datascienceatthecommandline.com/). [Software Carpentry](https://software-carpentry.org/) too has a lesson on [shell](https://swcarpentry.github.io/shell-novice/). We have listed more references at the end of the series for the benefit of the readers.
 
 ## Resources {#resources}
 
@@ -298,14 +280,6 @@ You will find [tldr.sh](https://tldr.sh/) very useful while exploring new comman
 # devtools::install_github("kirillseva/tldrrr")
 tldrrr::tldr("pwd")
 ```
-
-<hr>
-
-<p align="center">
-<a href="https://rsquared-academy.thinkific.com/" target="_blank"><img src="/img/ad_courses.png" width="100%" alt="new courses ad" style="text-decoration: none;"></a>
-</p>
-
-<hr>
 
 ## Feedback
 

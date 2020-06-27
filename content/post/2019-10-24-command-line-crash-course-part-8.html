@@ -19,20 +19,10 @@ tags:
 
 
 <p><img src="/img/cline_cover_image.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
-We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud Project</a> to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R &amp; RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on</p>
-<ul>
-<li>exploring R release names</li>
-<li>mapping shell commands to R functions</li>
-<li>RStudio Terminal</li>
-<li>executing shell commands from R using <code>system2()</code> or <code>processx::run()</code></li>
-<li>execute shell commands in RMarkdown</li>
-<li>execute R scripts in the shell</li>
-</ul>
-<p>If you want a deeper understanding of using command line for data science, we suggest you read <a href="https://www.datascienceatthecommandline.com/">Data Science at the Command Line</a>. <a href="https://software-carpentry.org/">Software Carpentry</a> too has a lesson on <a href="https://swcarpentry.github.io/shell-novice/">shell</a>. We have listed more references at the end of the tutorial for the benefit of the readers.</p>
+<p>This is the eighth tutorial in the series <a href="https://tutorials.rsquaredacademy.com/command-line/index.html">Command Line Basics for R Users</a>. In this tutorial, we will learn to view system information.</p>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
-<p>Below are the links to all the resources related to this post:</p>
+<p>Below are the links to all the resources related to this tutorial:</p>
 <ul>
 <li><a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a></li>
 <li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
@@ -183,26 +173,26 @@ Print all available information system
 <h4>Display free, used, swap memory in the system</h4>
 <pre class="bash"><code>free</code></pre>
 <pre><code>##               total        used        free      shared  buff/cache   available
-## Mem:        3621900     2668548      724000       17720      229352      819620
-## Swap:      11010048      552196    10457852</code></pre>
+## Mem:        3621900     2690072      702476       17720      229352      798096
+## Swap:      11010048      291592    10718456</code></pre>
 </div>
 <div id="display-file-system-disk-space-usage" class="section level4">
 <h4>Display file system disk space usage</h4>
 <pre class="bash"><code>df</code></pre>
 <pre><code>## Filesystem     1K-blocks      Used Available Use% Mounted on
-## rootfs         188482144 138994144  49488000  74% /
-## none           188482144 138994144  49488000  74% /dev
-## none           188482144 138994144  49488000  74% /run
-## none           188482144 138994144  49488000  74% /run/lock
-## none           188482144 138994144  49488000  74% /run/shm
-## none           188482144 138994144  49488000  74% /run/user
-## cgroup         188482144 138994144  49488000  74% /sys/fs/cgroup
-## C:\            188482144 138994144  49488000  74% /mnt/c
+## rootfs         188482144 113973988  74508156  61% /
+## none           188482144 113973988  74508156  61% /dev
+## none           188482144 113973988  74508156  61% /run
+## none           188482144 113973988  74508156  61% /run/lock
+## none           188482144 113973988  74508156  61% /run/shm
+## none           188482144 113973988  74508156  61% /run/user
+## cgroup         188482144 113973988  74508156  61% /sys/fs/cgroup
+## C:\            188482144 113973988  74508156  61% /mnt/c
 ## D:\             18660348  17154308   1506040  92% /mnt/d
 ## F:\              3196924    231756   2965168   8% /mnt/f
-## G:\             86383612  24561220  61822392  29% /mnt/g
-## H:\             86383612  14755988  71627624  18% /mnt/h
-## J:\             83185660  18636932  64548728  23% /mnt/j</code></pre>
+## G:\             86383612  24564056  61819556  29% /mnt/g
+## H:\             86383612  14755968  71627644  18% /mnt/h
+## J:\             83185660  19339564  63846096  24% /mnt/j</code></pre>
 </div>
 </div>
 <div id="others" class="section level3">
@@ -371,4 +361,6 @@ R
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
 repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
 <!-- clean up folder structure -->
+<pre><code>## Warning in system2(&quot;rm&quot;, c(&quot;-r&quot;, &quot;J:/R/courses/course/content/post/cline&quot;)):
+## &#39;&quot;rm&quot;&#39; not found</code></pre>
 </div>

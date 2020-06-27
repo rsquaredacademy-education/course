@@ -29,21 +29,11 @@ library(magrittr)
 knitr::include_graphics("/img/cline_cover_image.png")
 ```
 
-In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
-We have created a [RStudio Cloud Project](https://rstudio.cloud/project/518720) to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R & RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on
-
-- exploring R release names
-- mapping shell commands to R functions
-- RStudio Terminal
-- executing shell commands from R using `system2()` or `processx::run()`
-- execute shell commands in RMarkdown
-- execute R scripts in the shell 
-
-If you want a deeper understanding of using command line for data science, we suggest you read [Data Science at the Command Line](https://www.datascienceatthecommandline.com/). [Software Carpentry](https://software-carpentry.org/) too has a lesson on [shell](https://swcarpentry.github.io/shell-novice/). We have listed more references at the end of the tutorial for the benefit of the readers.
+This is the seventh tutorial in the series [Command Line Basics for R Users](https://tutorials.rsquaredacademy.com/command-line/index.html). In this tutorial, we will learn about file compression.
 
 ## Resources {#resources}
 
-Below are the links to all the resources related to this post:
+Below are the links to all the resources related to this tutorial:
 
 - <a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
@@ -250,7 +240,7 @@ Using `unzip`, let us now extract files and folders from `zip_example.zip`.
 unzip zip_example.zip
 ```
 
-```{bash c95b, echo=FALSE}
+```{bash c95b, echo=FALSE, eval=FALSE}
 cd cline
 unzip zip_example.zip
 ```
@@ -261,7 +251,7 @@ Using the `-d` option, we can extract the contents of `zip_example.zip` to a spe
 unzip zip_example.zip –d myexamples
 ```
 
-```{r unzip_d, echo=FALSE}
+```{r unzip_d, echo=FALSE, eval=FALSE}
 system2("unzip", c("zip_example.zip", "-d", "examples"), TRUE)
 ```
 

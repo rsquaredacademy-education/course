@@ -29,21 +29,11 @@ library(magrittr)
 knitr::include_graphics("/img/cline_cover_image.png")
 ```
 
-In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
-We have created a [RStudio Cloud Project](https://rstudio.cloud/project/518720) to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R & RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on
-
-- exploring R release names
-- mapping shell commands to R functions
-- RStudio Terminal
-- executing shell commands from R using `system2()` or `processx::run()`
-- execute shell commands in RMarkdown
-- execute R scripts in the shell 
-
-If you want a deeper understanding of using command line for data science, we suggest you read [Data Science at the Command Line](https://www.datascienceatthecommandline.com/). [Software Carpentry](https://software-carpentry.org/) too has a lesson on [shell](https://swcarpentry.github.io/shell-novice/). We have listed more references at the end of the tutorial for the benefit of the readers.
+This is the third tutorial in the series [Command Line Basics for R Users](https://tutorials.rsquaredacademy.com/command-line/index.html). In this tutorial, we will learn about file management.
 
 ## Resources {#resources}
 
-Below are the links to all the resources related to this post:
+Below are the links to all the resources related to this tutorial:
 
 - <a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
@@ -428,7 +418,7 @@ We will use the `-w` option to ignore white spaces while comparing the files.
 diff -w imports_olsrr.txt imports_blorr.txt
 ```
 
-```{r r30, echo=FALSE}
+```{r r30, echo=FALSE, eval=FALSE}
 suppressWarnings(cat(system2('diff', c("-w", "imports_olsrr.txt", "imports_blorr.txt"), TRUE), sep = "\n"))
 ```
 
@@ -440,7 +430,7 @@ Let us change the file order and see the instructions from `diff`.
 diff -w imports_blorr.txt imports_olsrr.txt
 ```
 
-```{r r30a, echo=FALSE}
+```{r r30a, echo=FALSE, eval=FALSE}
 suppressWarnings(cat(system2('diff', c("-w", "imports_blorr.txt", "imports_olsrr.txt"), TRUE), sep = "\n"))
 ```
 
@@ -454,7 +444,7 @@ To view the differences between the files side by side, use the `-y` option.
 diff -y imports_olsrr.txt imports_blorr.txt
 ```
 
-```{r r31, echo=FALSE}
+```{r r31, echo=FALSE, eval=FALSE}
 suppressWarnings(cat(system2('diff', c("-y", "imports_olsrr.txt", "imports_blorr.txt"), TRUE), sep = "\n"))
 ```
 
@@ -466,7 +456,7 @@ To view the differences between the files in a unified format, use the `-u` opti
 diff -u imports_olsrr.txt imports_blorr.txt
 ```
 
-```{r r32, echo=FALSE}
+```{r r32, echo=FALSE, eval=FALSE}
 suppressWarnings(cat(system2('diff', c("-u", "imports_olsrr.txt", "imports_blorr.txt"), TRUE), sep = "\n"))
 ```
 
@@ -478,7 +468,7 @@ To compare recursively, use the `-r ` option. Let us compare the `mypackage` and
 diff -r mypackage myproject
 ```
 
-```{r r82, echo=FALSE}
+```{r r82, echo=FALSE, eval=FALSE}
 suppressWarnings(cat(system2('diff', c("-r", "mypackage", "myproject"), TRUE), sep = "\n"))
 ```
 
@@ -490,7 +480,7 @@ To compare directories and view the names of files that differ, use the `-rq` op
 diff -rq mypackage myproject
 ```
 
-```{r r83, echo=FALSE}
+```{r r83, echo=FALSE, eval=FALSE}
 suppressWarnings(cat(system2('diff', c("-rq", "mypackage", "myproject"), TRUE), sep = "\n"))
 ```
 

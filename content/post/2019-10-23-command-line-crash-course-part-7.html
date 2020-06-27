@@ -19,20 +19,10 @@ tags:
 
 
 <p><img src="/img/cline_cover_image.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>In this tutorial, you will be introduced to the command line. We have selected a set of commands we think will be useful in general to a wide range of audience.
-We have created a <a href="https://rstudio.cloud/project/518720">RStudio Cloud Project</a> to ensure that all readers are using the same environment while going through the tutorial. Our goal was to ensure that after completing this tutorial, readers should be able to use the shell for version control, managing cloud services (like deploying your own shiny server etc.), execute commands in R &amp; RMarkdown and execute R scripts in the shell. Apart from learning shell commands, the tutorial will also focus on</p>
-<ul>
-<li>exploring R release names</li>
-<li>mapping shell commands to R functions</li>
-<li>RStudio Terminal</li>
-<li>executing shell commands from R using <code>system2()</code> or <code>processx::run()</code></li>
-<li>execute shell commands in RMarkdown</li>
-<li>execute R scripts in the shell</li>
-</ul>
-<p>If you want a deeper understanding of using command line for data science, we suggest you read <a href="https://www.datascienceatthecommandline.com/">Data Science at the Command Line</a>. <a href="https://software-carpentry.org/">Software Carpentry</a> too has a lesson on <a href="https://swcarpentry.github.io/shell-novice/">shell</a>. We have listed more references at the end of the tutorial for the benefit of the readers.</p>
+<p>This is the seventh tutorial in the series <a href="https://tutorials.rsquaredacademy.com/command-line/index.html">Command Line Basics for R Users</a>. In this tutorial, we will learn about file compression.</p>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
-<p>Below are the links to all the resources related to this post:</p>
+<p>Below are the links to all the resources related to this tutorial:</p>
 <ul>
 <li><a href="https://slides.rsquaredacademy.com/github/shell.pdf" target="_blank">Slides</a></li>
 <li><a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code &amp; Data</a></li>
@@ -157,8 +147,10 @@ ls</code></pre>
 ## release_names_18.txt
 ## release_names_19.txt
 ## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -167,17 +159,18 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
-## myproject1
-## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
 ## pkg_names.txt
 ## r
+## r2
+## r_releases
 ## release_names.tar
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
 ## sept_15.csv.gz
 ## urls.txt
@@ -284,8 +277,10 @@ List contents of a zip file
 <pre class="bash"><code>gzip release_names.txt
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -294,18 +289,19 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
-## myproject1
-## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
 ## pkg_names.tar
 ## pkg_names.txt
 ## r
+## r2
+## r_releases
 ## release_names.tar
 ## release_names.tar.gz
 ## release_names.txt.gz
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
 ## sept_15.csv.gz
 ## urls.txt
@@ -317,8 +313,10 @@ ls</code></pre>
 <pre class="bash"><code>gzip -d sept_15.csv.gz
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -327,18 +325,19 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
-## myproject1
-## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
 ## pkg_names.tar
 ## pkg_names.txt
 ## r
+## r2
+## r_releases
 ## release_names.tar
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
 ## sept_15.csv
 ## urls.txt
@@ -350,8 +349,10 @@ ls</code></pre>
 <pre class="bash"><code>gzip -c release_names.txt &gt; releases.txt.gz
 ls</code></pre>
 <pre><code>## analysis.R
+## bash-tutorial
 ## bash.R
 ## bash.Rmd
+## bash.html
 ## bash.sh
 ## imports_blorr.txt
 ## imports_olsrr.txt
@@ -360,18 +361,19 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
-## myproject1
-## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
 ## pkg_names.tar
 ## pkg_names.txt
 ## r
+## r2
+## r_releases
 ## release_names.tar
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
 ## releases.txt.gz
 ## sept_15.csv
@@ -430,16 +432,8 @@ ls</code></pre>
 <h4>Extract</h4>
 <p>Using <code>unzip</code>, let us now extract files and folders from <code>zip_example.zip</code>.</p>
 <pre class="bash"><code>unzip zip_example.zip</code></pre>
-<pre><code>## Archive:  zip_example.zip
-##    creating: zip_example/
-##   inflating: zip_example/bash.sh     
-##   inflating: zip_example/pkg_names.txt</code></pre>
 <p>Using the <code>-d</code> option, we can extract the contents of <code>zip_example.zip</code> to a specific folder. In the below example, we extract it to a new folder <code>examples</code>.</p>
 <pre class="bash"><code>unzip zip_example.zip –d myexamples</code></pre>
-<pre><code>## [1] &quot;Archive:  zip_example.zip&quot;                        
-## [2] &quot;   creating: examples/zip_example/&quot;               
-## [3] &quot;  inflating: examples/zip_example/bash.sh  &quot;      
-## [4] &quot;  inflating: examples/zip_example/pkg_names.txt  &quot;</code></pre>
 </div>
 <div id="compress-2" class="section level4">
 <h4>Compress</h4>
@@ -648,4 +642,6 @@ R
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
 repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
 <!-- clean up folder structure -->
+<pre><code>## Warning in system2(&quot;rm&quot;, c(&quot;-r&quot;, &quot;J:/R/courses/course/content/post/cline&quot;)):
+## &#39;&quot;rm&quot;&#39; not found</code></pre>
 </div>
