@@ -120,18 +120,26 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject1
 ## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
+## pkg_names.tar
 ## pkg_names.txt
 ## r
+## r2
+## r_releases
 ## release_names.tar
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
+## releases.txt.gz
+## sept_15.csv
 ## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
@@ -160,19 +168,27 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject1
 ## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
+## pkg_names.tar
 ## pkg_names.txt
 ## r
+## r2
+## r_releases
 ## release_names.tar
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
 ## release_names_2.txt
+## releases.txt.gz
+## sept_15.csv
 ## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
@@ -180,9 +196,12 @@ ls</code></pre>
 <h4>Copy files into different folder</h4>
 <p>To copy a file into a different directory/folder, we need to specify the name of the destination folder. If the copied file should have a different name, then we need to specify the new name of the file as well. Let us copy the <code>release_names.txt</code> file into the <code>r_releases</code> folder (we will retain the same name for the file as we are copying it into a different folder).</p>
 <pre class="bash"><code>cp release_names.txt r_releases/release_names.txt</code></pre>
+<pre><code>## mkdir: cannot create directory â€˜r_releasesâ€™: File exists</code></pre>
 <p>Let us check if the file has been copied by listing the files in the <code>r_releases</code> folder using <code>ls</code>.</p>
 <pre class="bash"><code>ls r_releases</code></pre>
-<pre><code>## release_names.txt</code></pre>
+<pre><code>## release_names.txt
+## release_names_2.txt
+## release_names_3.txt</code></pre>
 </div>
 <div id="copy-folders" class="section level4">
 <h4>Copy folders</h4>
@@ -203,11 +222,14 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject1
 ## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
+## pkg_names.tar
 ## pkg_names.txt
 ## r
 ## r2
@@ -216,9 +238,12 @@ ls</code></pre>
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
 ## release_names_2.txt
 ## release_names_3.txt
+## releases.txt.gz
+## sept_15.csv
 ## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
@@ -304,11 +329,14 @@ Move files in verbose mode
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject1
 ## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
+## pkg_names.tar
 ## pkg_names.txt
 ## r
 ## r2
@@ -317,15 +345,19 @@ Move files in verbose mode
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
 ## release_names_3.txt
+## releases.txt.gz
+## sept_15.csv
 ## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
 <p>Let us check if <code>release_names_2.txt</code> is present in the <code>r_releases</code> folder. Great! We have successfully moved the file into a different folder.</p>
 <pre class="bash"><code>ls r_releases</code></pre>
 <pre><code>## release_names.txt
-## release_names_2.txt</code></pre>
+## release_names_2.txt
+## release_names_3.txt</code></pre>
 <div id="move-files-in-verbose-mode" class="section level4">
 <h4>Move files in verbose mode</h4>
 <p>To view the details of the files being moved/renamed, use the <code>-v</code> option. In the below example, we move the <code>release_names_3.txt</code> file into the <code>r_releases</code> folder using <code>mv</code>.</p>
@@ -527,11 +559,14 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject1
 ## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
+## pkg_names.tar
 ## pkg_names.txt
 ## r
 ## r2
@@ -540,7 +575,10 @@ ls</code></pre>
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
+## releases.txt.gz
+## sept_15.csv
 ## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
@@ -563,10 +601,13 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject2
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
+## pkg_names.tar
 ## pkg_names.txt
 ## r
 ## r2
@@ -575,7 +616,10 @@ ls</code></pre>
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
+## releases.txt.gz
+## sept_15.csv
 ## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
@@ -598,9 +642,12 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
+## pkg_names.tar
 ## pkg_names.txt
 ## r
 ## r2
@@ -609,7 +656,10 @@ ls</code></pre>
 ## release_names.tar.gz
 ## release_names.txt
 ## release_names_18.txt
+## release_names_18_19.txt
 ## release_names_19.txt
+## releases.txt.gz
+## sept_15.csv
 ## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
@@ -802,6 +852,4 @@ R
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
 repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
 <!-- clean up folder structure -->
-<pre><code>## Warning in system2(&quot;rm&quot;, c(&quot;-r&quot;, &quot;J:/R/courses/course/content/post/cline&quot;)):
-## &#39;&quot;rm&quot;&#39; not found</code></pre>
 </div>

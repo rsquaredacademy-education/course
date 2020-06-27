@@ -512,14 +512,16 @@ Find directories matching a given name, in case-sensitive mode
 <pre><code>## ./bash-tutorial/mypackage/R
 ## ./bash-tutorial/r
 ## ./mypackage/R
-## ./r</code></pre>
+## ./r
+## ./r2/r</code></pre>
 </div>
 <div id="case-sensitive-mode" class="section level4">
 <h4>Case-sensitive Mode</h4>
 <p>Search for all folders with the name <code>r</code>. It should exclude any folder with the name <code>R</code>.</p>
 <pre class="bash"><code>find -type d -name r</code></pre>
 <pre><code>## ./bash-tutorial/r
-## ./r</code></pre>
+## ./r
+## ./r2/r</code></pre>
 </div>
 </div>
 </div>
@@ -529,6 +531,4 @@ Find directories matching a given name, in case-sensitive mode
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
 repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
 <!-- clean up folder structure -->
-<pre><code>## Warning in system2(&quot;rm&quot;, c(&quot;-r&quot;, &quot;J:/R/courses/course/content/post/cline&quot;)):
-## &#39;&quot;rm&quot;&#39; not found</code></pre>
 </div>

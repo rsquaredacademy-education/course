@@ -159,9 +159,12 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
+## pkg_names.tar
 ## pkg_names.txt
 ## r
 ## r2
@@ -172,6 +175,8 @@ ls</code></pre>
 ## release_names_18.txt
 ## release_names_18_19.txt
 ## release_names_19.txt
+## releases.txt.gz
+## sept_15.csv
 ## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
@@ -289,9 +294,11 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
 ## pkg_names.tar
 ## pkg_names.txt
 ## r
@@ -303,6 +310,8 @@ ls</code></pre>
 ## release_names_18.txt
 ## release_names_18_19.txt
 ## release_names_19.txt
+## releases.txt.gz
+## sept_15.csv
 ## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
@@ -312,7 +321,8 @@ ls</code></pre>
 <p>Use the <code>-d</code> option with <code>gzip</code> to decompress a file. In the below example, we decompress the <code>sept_15.csv.gz</code> file (downloaded using <code>wget</code> or <code>curl</code> earlier). You can also use <code>gunzip</code> for the same result.</p>
 <pre class="bash"><code>gzip -d sept_15.csv.gz
 ls</code></pre>
-<pre><code>## analysis.R
+<pre><code>## gzip: sept_15.csv already exists;    not overwritten
+## analysis.R
 ## bash-tutorial
 ## bash.R
 ## bash.Rmd
@@ -325,9 +335,11 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
 ## pkg_names.tar
 ## pkg_names.txt
 ## r
@@ -339,7 +351,9 @@ ls</code></pre>
 ## release_names_18.txt
 ## release_names_18_19.txt
 ## release_names_19.txt
+## releases.txt.gz
 ## sept_15.csv
+## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
 </div>
@@ -361,9 +375,11 @@ ls</code></pre>
 ## myfiles
 ## mypackage
 ## myproject
+## myproject.zip
 ## myproject3
 ## myproject4
 ## package_names.txt
+## packproj.zip
 ## pkg_names.tar
 ## pkg_names.txt
 ## r
@@ -377,6 +393,7 @@ ls</code></pre>
 ## release_names_19.txt
 ## releases.txt.gz
 ## sept_15.csv
+## sept_15.csv.gz
 ## urls.txt
 ## zip_example.zip</code></pre>
 </div>
@@ -440,48 +457,48 @@ ls</code></pre>
 <p>Use the <code>-r</code> option along with <code>zip</code> to create a ZIP archive. In the below example, we create a ZIP archive of <code>myproject</code> folder.</p>
 <pre class="bash"><code>zip -r myproject.zip myproject
 ls</code></pre>
-<pre><code>##   adding: myproject/ (stored 0%)
-##   adding: myproject/.gitignore (stored 0%)
-##   adding: myproject/data/ (stored 0%)
-##   adding: myproject/data/processed/ (stored 0%)
-##   adding: myproject/data/raw/ (stored 0%)
-##   adding: myproject/output/ (stored 0%)
-##   adding: myproject/README.md (stored 0%)
-##   adding: myproject/run_analysis.R (stored 0%)
-##   adding: myproject/src/ (stored 0%)</code></pre>
+<pre><code>## updating: myproject/ (stored 0%)
+## updating: myproject/.gitignore (stored 0%)
+## updating: myproject/data/ (stored 0%)
+## updating: myproject/data/processed/ (stored 0%)
+## updating: myproject/data/raw/ (stored 0%)
+## updating: myproject/output/ (stored 0%)
+## updating: myproject/README.md (stored 0%)
+## updating: myproject/run_analysis.R (stored 0%)
+## updating: myproject/src/ (stored 0%)</code></pre>
 <p>We can compress multiple directories using <code>zip</code>. The names of the directories must be separated by a space as shown in the below example where we compress <code>myproject</code> and <code>mypackage</code> into a single ZIP archive.</p>
 <pre class="bash"><code>zip -r packproj.zip myproject mypackage
 ls</code></pre>
-<pre><code>##   adding: myproject/ (stored 0%)
-##   adding: myproject/.gitignore (stored 0%)
-##   adding: myproject/data/ (stored 0%)
-##   adding: myproject/data/processed/ (stored 0%)
-##   adding: myproject/data/raw/ (stored 0%)
-##   adding: myproject/output/ (stored 0%)
-##   adding: myproject/README.md (stored 0%)
-##   adding: myproject/run_analysis.R (stored 0%)
-##   adding: myproject/src/ (stored 0%)
-##   adding: mypackage/ (stored 0%)
-##   adding: mypackage/.gitignore (stored 0%)
-##   adding: mypackage/.Rbuildignore (stored 0%)
-##   adding: mypackage/data/ (stored 0%)
-##   adding: mypackage/DESCRIPTION (stored 0%)
-##   adding: mypackage/docs/ (stored 0%)
-##   adding: mypackage/LICENSE (stored 0%)
-##   adding: mypackage/man/ (stored 0%)
-##   adding: mypackage/NAMESPACE (stored 0%)
-##   adding: mypackage/NEWS.md (stored 0%)
-##   adding: mypackage/R/ (stored 0%)
-##   adding: mypackage/README.md (stored 0%)
-##   adding: mypackage/src/ (stored 0%)
-##   adding: mypackage/tests/ (stored 0%)
-##   adding: mypackage/vignettes/ (stored 0%)</code></pre>
+<pre><code>## updating: myproject/ (stored 0%)
+## updating: myproject/.gitignore (stored 0%)
+## updating: myproject/data/ (stored 0%)
+## updating: myproject/data/processed/ (stored 0%)
+## updating: myproject/data/raw/ (stored 0%)
+## updating: myproject/output/ (stored 0%)
+## updating: myproject/README.md (stored 0%)
+## updating: myproject/run_analysis.R (stored 0%)
+## updating: myproject/src/ (stored 0%)
+## updating: mypackage/ (stored 0%)
+## updating: mypackage/.gitignore (stored 0%)
+## updating: mypackage/.Rbuildignore (stored 0%)
+## updating: mypackage/data/ (stored 0%)
+## updating: mypackage/DESCRIPTION (stored 0%)
+## updating: mypackage/docs/ (stored 0%)
+## updating: mypackage/LICENSE (stored 0%)
+## updating: mypackage/man/ (stored 0%)
+## updating: mypackage/NAMESPACE (stored 0%)
+## updating: mypackage/NEWS.md (stored 0%)
+## updating: mypackage/R/ (stored 0%)
+## updating: mypackage/README.md (stored 0%)
+## updating: mypackage/src/ (stored 0%)
+## updating: mypackage/tests/ (stored 0%)
+## updating: mypackage/vignettes/ (stored 0%)</code></pre>
 </div>
 <div id="add-1" class="section level4">
 <h4>Add</h4>
 <p>To add a new file/folder to an existing archive, specify the name of the archive followed by the name of the file or the folder. In the below example, we add the <code>bash.sh</code> file to the <code>myproject.zip</code> archive created in a previous step.</p>
 <pre class="bash"><code>zip myproject.zip bash.sh</code></pre>
-<pre><code>##   adding: bash.sh (deflated 78%)</code></pre>
+<pre><code>## updating: bash.sh (deflated 78%)</code></pre>
 </div>
 </div>
 <div id="r-functions" class="section level3">
@@ -642,6 +659,4 @@ R
 <a href="https://github.com/rsquaredacademy-infra/blog" target="_blank">source
 repository</a> or reach out to us at <a href="mailto:support@rsquaredacademy.com" class="email">support@rsquaredacademy.com</a>.</p>
 <!-- clean up folder structure -->
-<pre><code>## Warning in system2(&quot;rm&quot;, c(&quot;-r&quot;, &quot;J:/R/courses/course/content/post/cline&quot;)):
-## &#39;&quot;rm&quot;&#39; not found</code></pre>
 </div>
